@@ -17,6 +17,8 @@
     "formik": "^2.2.9",
     "init": "^0.1.2",
     "js-cookie": "^3.0.1",
+    "mobx": "^6.5.0",
+    "mobx-react-lite": "^3.3.0",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
