@@ -13,6 +13,7 @@
     "@types/axios": "^0.14.0",
     "@types/classnames": "^2.3.1",
     "@types/lodash": "^4.14.181",
+    "@types/query-string": "^6.3.0",
     "dayjs": "^1.11.0",
     "formik": "^2.2.9",
     "init": "^0.1.2",
