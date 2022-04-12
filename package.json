@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
+    "@types/axios": "^0.14.0",
+    "@types/classnames": "^2.3.1",
+    "dayjs": "^1.11.0",
     "init": "^0.1.2",
     "next": "12.1.4",
     "react": "18.0.0",
