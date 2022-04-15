@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { LoginPage } from "../../features/login/pages/login.page";
+import { LoginPage } from "../../features/auth/pages/login.page";
 
 const LoginRoute: NextPage = () => {
   return <LoginPage />;
