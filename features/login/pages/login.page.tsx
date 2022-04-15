@@ -23,7 +23,7 @@ export const LoginPage = () => {
           >
             <i className="fa-solid fa-angle-left"></i>
             <p className="button">back</p>
-          </div>
+          </div> 
           <div className="w-1/2 mobile:hidden laptop:block">
             <img src="/images/login_graphic.svg" className="w-full" />
           </div>
