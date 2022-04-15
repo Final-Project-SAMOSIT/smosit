@@ -1,8 +1,10 @@
+const colors = require("tailwindcss/colors");
 module.exports = {
   mode: "jit",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./features/**/*.{js,ts,jsx,tsx}",
+    "./core/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -21,7 +23,12 @@ module.exports = {
           40: "#3B586A",
         },
         error: "#EF4923",
+        ...colors,
       },
+    },
+    screens: {
+      mobile: "320px",
+      laptop: "1280px",
     },
   },
   plugins: [],

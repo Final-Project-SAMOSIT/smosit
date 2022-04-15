@@ -6,7 +6,6 @@ function MyApp({ Component, pageProps }: any) {
   return (
     <Fragment>
       <Component {...pageProps} />
-      <i className="far fa-address-book"></i>
     </Fragment>
   );
 }
