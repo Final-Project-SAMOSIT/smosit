@@ -19,6 +19,8 @@ class LoginContext {
   submit() {
     console.log("username");
     console.log("password");
+    console.log(this.username);
+    console.log(this.password);
   }
 }
 export const loginContext = createContext(new LoginContext());
