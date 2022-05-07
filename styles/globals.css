@@ -7,6 +7,10 @@
   src: url("../public/fonts/NotoSans-Regular.ttf");
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .heading1 {
   font-size: 48px;
   font-weight: 400;
@@ -37,6 +41,13 @@
   font-weight: 400;
 }
 
+.heading6 {
+  font-family: "Noto Sans";
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
 .subtitle {
   font-family: "Noto Sans";
   font-size: 18px;
@@ -60,4 +71,20 @@
   font-family: "Noto Sans";
   font-size: 16px;
   font-weight: 300;
+}
+
+.topic {
+  font-family: "Noto Sans";
+  font-size: 30px;
+  font-weight: 500;
+}
+.topic2 {
+  font-family: "Noto Sans";
+  font-size: 24px;
+  font-weight: 600;
+}
+.title {
+  font-family: "Noto Sans";
+  font-size: 36px;
+  font-weight: 600;
 }

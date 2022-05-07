@@ -18,7 +18,10 @@ export const Button = (props: ButtonProps) => {
       onClick={(e) => props.onClick(e)}
       disabled={props.disabled}
       className="button flex items-center justify-center rounded-[10px] border border-black h-full min-h-[52px] focus:outline-none text-black bg-white hover:bg-black transition-all duration-150 hover:text-white"
-      style={{ width: props.width ? `${props.width}px` : "100%" }}
+      style={{
+        width: props.width ? `${props.width}px` : "100%",
+        height: props.height ? `${props.height}px` : "auto",
+      }}
     >
       {props.title}
     </button>
