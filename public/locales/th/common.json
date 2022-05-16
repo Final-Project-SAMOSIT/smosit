@@ -3,5 +3,7 @@
     "navbar_feature_home_about": "เกี่ยวกับ",
     "navbar_feature_home_vote": "โหวต",
     "navbar_feature_home_petition": "ยื่นคำร้อง",
-    "navbar_feature_home_project": "ฟอร์มโครงการ"
+    "navbar_feature_home_project": "ฟอร์มโครงการ",
+    "navbar_login_button": "เข้าสู่ระบบ",
+    "navbar_logout_button": "ออกจากระบบ"
 }

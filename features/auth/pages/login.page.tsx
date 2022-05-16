@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Observer } from "mobx-react-lite";
 import { TextInput } from "../../../core/components/input/text_input.component";
 import { Button } from "../../../core/components/input/button.component";
 import { Router, useRouter } from "next/router";
+import { AuthContext } from "../../../core/context/auth.context";
 
 export const LoginPage = () => {
   //---------------------
   //   ROUTER
   //---------------------
   const router = useRouter();
+
+  //---------------------
+  //   CONTEXT
+  //---------------------
+  const context = useContext(AuthContext);
 
   //---------------------
   //   RENDER
@@ -23,7 +29,7 @@ export const LoginPage = () => {
           >
             <i className="fa-solid fa-angle-left"></i>
             <p className="button">back</p>
-          </div> 
+          </div>
           <div className="w-1/2 mobile:hidden laptop:block">
             <img src="/images/login_graphic.svg" className="w-full" />
           </div>
@@ -34,7 +40,7 @@ export const LoginPage = () => {
             <TextInput title="Password" />
             <Button
               title="login"
-              onClick={() => null}
+              onClick={() => context.login()}
               height={70}
               width={137}
             />

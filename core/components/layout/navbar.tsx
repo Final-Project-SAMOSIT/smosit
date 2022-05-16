@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import _ from "lodash";
 import classNames from "classnames";
 import { Button } from "../input/button.component";
 import { useTranslation } from "next-i18next";
+import { AuthContext } from "../../context/auth.context";
 
 export const Navbar = () => {
   //---------------------
@@ -24,16 +25,14 @@ export const Navbar = () => {
   ];
 
   //---------------------
+  //   CONTEXT
+  //---------------------
+  const authContext = useContext(AuthContext);
+
+  //---------------------
   //   ROUTER
   //---------------------
   const router = useRouter();
-
-  //---------------------
-  //   EFFECT
-  //---------------------
-  useEffect(() => {
-    console.log(i18n.language);
-  }, [i18n.language]);
 
   //---------------------
   //   RENDER
@@ -97,11 +96,23 @@ export const Navbar = () => {
                 </p>
               </div>
               <div>
-                <Button
-                  onClick={() => null}
-                  title="LOG OUT"
-                  width={137}
-                ></Button>
+                {authContext.mockIsLogin ? (
+                  <Button
+                    onClick={() => {
+                      authContext.logout();
+                    }}
+                    title={t("navbar_logout_button")}
+                    width={137}
+                  ></Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      router.push("/login");
+                    }}
+                    title={t("navbar_login_button")}
+                    width={137}
+                  ></Button>
+                )}
               </div>
             </div>
           </div>

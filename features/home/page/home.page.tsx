@@ -73,7 +73,7 @@ export const HomePage = () => {
 
             <div className="flex space-x-[41px] h-max">
               {_.map(features, (feature) => (
-                <div className="h-full">
+                <div className="h-full" key={`${feature.topic}`}>
                   <FeatureCard
                     title={feature.topic}
                     description={feature.description}
