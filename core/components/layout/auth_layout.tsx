@@ -17,7 +17,7 @@ export const AuthLayout = (props: AuthLayoutProps) => {
   //   EFFECT
   //---------------------
   useEffect(() => {
-    context.me();
+    context.Me();
   }, []);
 
   //---------------------

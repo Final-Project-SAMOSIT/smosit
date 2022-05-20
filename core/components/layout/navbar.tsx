@@ -96,7 +96,7 @@ export const Navbar = () => {
                 </p>
               </div>
               <div>
-                {authContext.mockIsLogin ? (
+                {authContext.me ? (
                   <Button
                     onClick={() => {
                       authContext.logout();
@@ -107,7 +107,9 @@ export const Navbar = () => {
                 ) : (
                   <Button
                     onClick={() => {
-                      router.push("/login");
+                      router.push(
+                        "https://std-sso-fe.sit.kmutt.ac.th/login?response_type=code&client_id=dEV6F8Xb&redirect_uri=http://localhost:3000/redirect&state=1234"
+                      );
                     }}
                     title={t("navbar_login_button")}
                     width={137}
