@@ -14,8 +14,6 @@ RUN npm install
 
 COPY . /usr/src/app
 
-RUN npm run build
-
 EXPOSE 3000
 
-CMD [ "yarn", "dev" ]
+CMD [ "yarn", "build" ]
