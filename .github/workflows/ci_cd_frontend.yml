@@ -48,6 +48,6 @@ jobs:
             docker rm -f frontend
             docker pull ghcr.io/ppitchanon/smosit-frontend:latest
             docker images
-            docker-compose up -d backend
+            docker-compose up -d frontend
             docker image prune -f
             docker ps -a
