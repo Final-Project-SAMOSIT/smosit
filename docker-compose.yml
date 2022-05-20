@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  front_end:
+    build: .
+    container_name: frontend
+    volumes:
+       - '.:/usr/src/app'
+       - '/usr/src/app/node_modules'
+    ports:
+      - '3000:3000'

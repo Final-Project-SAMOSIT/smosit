@@ -1,0 +1,53 @@
+name: CI_CD SMOSIT_FRONTEND
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Login to Github Container Registy
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.ACCOUNT }}
+          password: ${{ secrets.TOKEN_GITHUB }}
+          
+      - name : Create env file
+        run : |
+            touch .env
+            echo BACKEND_API=${{ secrets.BACKEND_API }} >> .env
+            ls -a
+            cat .env
+
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag ghcr.io/ppitchanon/smosit-frontend:latest
+
+      - name: Push Docker image to Github Container registry
+        run: docker push ghcr.io/ppitchanon/smosit-frontend:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login ssh to remote server and deploy container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            docker ps
+            docker rm -f frontend
+            docker pull ghcr.io/ppitchanon/smosit-frontend:latest
+            docker images
+            docker-compose up -d backend
+            docker image prune -f
+            docker ps -a
