@@ -17,7 +17,6 @@ export const Navbar = () => {
   //   COSNT
   //---------------------
   const features = [
-    { name: t("navbar_feature_home_name"), route: "/" },
     { name: t("navbar_feature_home_about"), route: "/about" },
     { name: t("navbar_feature_home_vote"), route: "/vote" },
     { name: t("navbar_feature_home_petition"), route: "/petition" },
@@ -48,6 +47,25 @@ export const Navbar = () => {
               onClick={() => router.push("/")}
             />
             <div className="flex space-x-[65px]">
+              <div
+                className="cursor-pointer w-max flex flex-col space-y-[8px]"
+                onClick={() => router.push("/")}
+                key={`nav_home_link_button`}
+              >
+                <p className="heading5">{t("navbar_feature_home_name")}</p>
+                <div
+                  className={classNames([
+                    "flex-grow mx-[6px] h-[1px] bg-black",
+                    {
+                      "opacity-100": router.asPath === "/",
+                    },
+                    {
+                      "opacity-0": router.asPath !== "/",
+                    },
+                  ])}
+                ></div>
+              </div>
+
               {_.map(features, (feature) => (
                 <div
                   className="cursor-pointer w-max flex flex-col space-y-[8px]"
@@ -59,7 +77,10 @@ export const Navbar = () => {
                     className={classNames([
                       "flex-grow mx-[6px] h-[1px] bg-black",
                       {
-                        "opacity-100": _.includes(router.asPath, feature.route),
+                        "opacity-100":
+                          feature.name === t("navbar_feature_home_name")
+                            ? router.asPath === "/"
+                            : _.includes(router.asPath, feature.route),
                       },
                       {
                         "opacity-0": !_.includes(router.asPath, feature.route),
