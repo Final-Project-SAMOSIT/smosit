@@ -11,6 +11,10 @@
   display: none;
 }
 
+textarea {
+  resize: none;
+}
+
 .heading1 {
   font-size: 48px;
   font-weight: 400;
@@ -67,9 +71,15 @@
   font-weight: 500;
 }
 
-.caption {
+.caption1 {
   font-family: "Noto Sans";
   font-size: 16px;
+  font-weight: 300;
+}
+
+.caption2 {
+  font-family: "Noto Sans";
+  font-size: 14px;
   font-weight: 300;
 }
 

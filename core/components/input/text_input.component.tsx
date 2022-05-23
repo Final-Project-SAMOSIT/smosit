@@ -1,5 +1,6 @@
 import React from "react";
 import { Observer } from "mobx-react-lite";
+import classNames from "classnames";
 
 interface TextInputProps {
   placeholder?: string;
@@ -29,11 +30,26 @@ export const TextInput = (props: TextInputProps) => {
           style={{ width: props.width ? `${props.width}px` : "100%" }}
         >
           {props.title && <p className="heading5">{props.title}</p>}
-          <input
-            type={props.type}
-            className={`rounded-[10px] border border-black w-full min-h-[58px] px-[20px] focus:outline-none`}
-            style={{ height: `${props.height}px` }}
-          />
+          <div className="space-y-[8px]">
+            <input
+              type={props.type}
+              className={classNames(
+                `rounded-[10px] border w-full px-[20px] focus:outline-none`,
+                {
+                  "min-h-[58px]": !props.height,
+                  "border-error": props.error,
+                  "border-black": !props.error,
+                }
+              )}
+              style={{ height: `${props.height}px` }}
+              value={props.value}
+              onChange={props.onChange}
+              onKeyPress={props.onKeyPress}
+            />
+            <p className="caption2 text-error min-h-[21px] mt-[8px]">
+              {props.error}
+            </p>
+          </div>
         </div>
       )}
     </Observer>
