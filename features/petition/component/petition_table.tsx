@@ -122,17 +122,16 @@ export const PetitionTable = (props: PetitionTableProps) => {
 
                   <div
                     className={classNames(
-                      "col-span-full overflow-y-hidden transition-all flex items-center justify-center duration-300 relative",
+                      "col-span-full overflow-y-hidden transition-all flex flex-col items-center justify-center duration-300 relative",
                       {
                         "h-0 pb-0": showingPetition !== petition.pet_id,
-                        "h-[256px] pb-[48px]":
-                          showingPetition === petition.pet_id,
+                        "h-[256px]": showingPetition === petition.pet_id,
                       }
                     )}
                   >
                     <div className="flex justify-center space-x-[25px] items-center relative">
                       <div className="w-[76px] h-[76px] rounded-full bg-gray-30 flex items-end justify-center">
-                        <p className="transition translate-y-[28px] absolute body w-max ">
+                        <p className="bottom-[-28px] absolute body w-max ">
                           Sent Form
                         </p>
                         {Number(petition.status_id) >= 1 && (
@@ -143,7 +142,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       </div>
                       <div className="w-[160px] h-[6px] bg-gray-30" />
                       <div className="w-[76px] h-[76px] rounded-full bg-gray-30 flex items-end justify-center relative">
-                        <p className="transition translate-y-[28px] absolute body w-max ">
+                        <p className="bottom-[-28px] absolute body w-max ">
                           Approve / Reject
                         </p>
                         {Number(petition.status_id) >= 2 && (
@@ -154,7 +153,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       </div>
                       <div className="w-[160px] h-[6px] bg-gray-30" />
                       <div className="w-[76px] h-[76px] rounded-full bg-gray-30 flex items-end justify-center relative">
-                        <p className="transition translate-y-[28px] absolute body w-max ">
+                        <p className="bottom-[-28px] absolute body w-max ">
                           In Progress
                         </p>
                         {Number(petition.status_id) >= 3 && (
@@ -165,7 +164,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       </div>
                       <div className="w-[160px] h-[6px] bg-gray-30" />
                       <div className="w-[76px] h-[76px] rounded-full bg-gray-30 flex items-end justify-center relative">
-                        <p className="transition translate-y-[28px] absolute body w-max ">
+                        <p className="bottom-[-28px] absolute body w-max ">
                           Done
                         </p>
                         {Number(petition.status_id) >= 4 && (
@@ -175,9 +174,16 @@ export const PetitionTable = (props: PetitionTableProps) => {
                         )}
                       </div>
                     </div>
-                    <p className="absolute bottom-[48px] left-[72px] caption1">
-                      Detail: {petition.status.status_description}
-                    </p>
+                    <div className="grid w-full grid-cols-10">
+                      <div className="mt-[48px] col-span-9 col-start-2 space-y-[8px]">
+                        <p className="caption1">
+                          Status: {petition.status.status_description}
+                        </p>
+                        <p className="caption1">
+                          Detail: {petition.pet_details}
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="border-b border-gray-40 col-span-full" />
