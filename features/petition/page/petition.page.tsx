@@ -8,6 +8,7 @@ import { TextArea } from "../../../core/components/input/text_area_input.compone
 import { TextInput } from "../../../core/components/input/text_input.component";
 import { useFormik } from "formik";
 import { petitionFormInit, petitionValidate } from "../form/petition.form";
+import { PetitionTable } from "../component/petition_table";
 
 export const PetitionPage = () => {
   //---------------------
@@ -33,7 +34,8 @@ export const PetitionPage = () => {
   //   EFFECT
   //---------------------
   useEffect(() => {
-    context.preparation();
+    context.preparationForm();
+    context.preparationPetition();
   }, []);
 
   //---------------------
@@ -114,6 +116,10 @@ export const PetitionPage = () => {
                   custom="bg-gray-10 hover:bg-black hover:text-white rounded-[10px] border border-black"
                 />
               </div>
+            </div>
+
+            <div className="mt-[170px]">
+              <PetitionTable data={context.petitionList || []} />
             </div>
           </div>
         </MainLayout>
