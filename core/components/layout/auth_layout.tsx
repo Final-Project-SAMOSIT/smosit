@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Observer } from "mobx-react-lite";
 import { AuthContext } from "../../context/auth.context";
 
@@ -23,5 +23,11 @@ export const AuthLayout = (props: AuthLayoutProps) => {
   //---------------------
   //   RENDER
   //---------------------
-  return <Observer>{() => <Fragment>{props.children}</Fragment>}</Observer>;
+  return (
+    <Observer>
+      {() =>
+        context.isLoading ? <p>loading</p> : <Fragment>{children}</Fragment>
+      }
+    </Observer>
+  );
 };

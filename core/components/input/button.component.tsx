@@ -22,11 +22,12 @@ export const Button = (props: ButtonProps) => {
       onClick={(e) => props.onClick(e)}
       disabled={props.disabled}
       className={classNames(
-        `button flex items-center justify-center h-full min-h-[52px] focus:outline-none transition-all duration-150`,
+        `button flex items-center justify-center h-full focus:outline-none transition-all duration-150`,
         {
           "hover:text-white rounded-[10px] border border-black text-black bg-white hover:bg-black":
             !props.custom,
           [custom || ""]: props.custom,
+          "min-h-[52px]": !props.height,
         }
       )}
       style={{

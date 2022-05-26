@@ -7,8 +7,11 @@ export interface meProps {
   email: string;
   created_at: string;
   updated_at: string;
-  role: {
-    id: string;
-    name: "User" | "Admin" | "Publisher";
+  role_id: string;
+  roles: {
+    role_id: string;
+    role_name: Role;
   };
 }
+
+export type Role = "User" | "Admin" | "Publisher";

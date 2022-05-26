@@ -4,11 +4,15 @@ import { Router } from "next/router";
 import Cookies from "js-cookie";
 import { getMe } from "../service/auth/get_auth";
 import { postAuth } from "../service/auth/post_auth";
+import { meProps, Role } from "../types/auth_types";
+import _ from "lodash";
 
 class AuthContextClass {
   mockIsLogin: boolean;
 
-  me: any;
+  me: meProps | null;
+
+  isLoading: boolean;
 
   //-------------------
   // CONSTUCTOR
@@ -16,11 +20,13 @@ class AuthContextClass {
   constructor() {
     this.mockIsLogin = false;
     this.me = null;
+    this.isLoading = true;
     makeAutoObservable(this);
   }
 
   async Me() {
     try {
+      this.isLoading = true;
       const token = Cookies.get("SMOSIT_TOKEN");
       if (token) {
         const resp = await getMe();
@@ -33,6 +39,8 @@ class AuthContextClass {
       }
     } catch (err: any) {
       console.log(err);
+    } finally {
+      this.isLoading = false;
     }
   }
 
@@ -57,6 +65,10 @@ class AuthContextClass {
     Cookies.remove("SMOSIT_TOKEN");
     this.me = null;
     this.Me();
+  }
+
+  isPermission(roles: Array<Role>): boolean {
+    return _.includes(roles, this.me?.roles?.role_name);
   }
 }
 export const AuthContext = createContext(new AuthContextClass());

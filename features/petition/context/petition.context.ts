@@ -64,6 +64,7 @@ class PetitionContext {
       const resp = await postPetition(value);
       if (resp.status === 200) {
         formik.resetForm();
+        this.preparationPetition();
       }
     } catch (err: any) {
       console.log(err);

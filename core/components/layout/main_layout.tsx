@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Observer } from "mobx-react-lite";
 import { Navbar } from "./navbar";
 import { Router } from "next/router";
+import { AdminNavbar } from "./admin_navbar";
+import { AuthContext } from "../../context/auth.context";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -10,13 +12,22 @@ interface MainLayoutProps {
 export const MainLayout = (props: MainLayoutProps) => {
   const { children } = props;
   //---------------------
+  //   CONTEXT
+  //---------------------
+  const authContext = useContext(AuthContext);
+
+  //---------------------
   //   RENDER
   //---------------------
   return (
     <Observer>
       {() => (
         <div className="w-[100vw] h-screen flex flex-col">
-          <Navbar />
+          {authContext.isPermission(["Publisher"]) ? (
+            <AdminNavbar />
+          ) : (
+            <Navbar />
+          )}
           <div
             className="relative w-full overflow-y-auto"
             style={{ height: "calc(100%)" }}

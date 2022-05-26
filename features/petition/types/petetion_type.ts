@@ -8,11 +8,25 @@ export interface Petition {
   user_id: string;
   status: {
     status_id: string;
-    status_name: string;
+    status_name: PetitionStatus;
     status_description: string;
   };
   pet_types: {
     pet_type_id: string;
-    pet_type_name: string;
+    pet_type_name: PetitionType;
   };
 }
+
+export type PetitionStatus =
+  | "Sent"
+  | "Approve"
+  | "In Progress"
+  | "Done"
+  | "Reject";
+
+export type PetitionType =
+  | "Education"
+  | "Environment"
+  | "Damaged items"
+  | "Lost items"
+  | "Other";

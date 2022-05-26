@@ -7,7 +7,7 @@ import { Button } from "../input/button.component";
 import { useTranslation } from "next-i18next";
 import { AuthContext } from "../../context/auth.context";
 
-export const Navbar = () => {
+export const AdminNavbar = () => {
   //---------------------
   //   i18n
   //---------------------
@@ -17,7 +17,6 @@ export const Navbar = () => {
   //   COSNT
   //---------------------
   const features = [
-    { name: t("navbar_feature_home_about"), route: "/about" },
     { name: t("navbar_feature_home_vote"), route: "/vote" },
     { name: t("navbar_feature_home_petition"), route: "/petition" },
     { name: t("navbar_feature_home_project"), route: "/project" },
@@ -47,25 +46,6 @@ export const Navbar = () => {
               onClick={() => router.push("/")}
             />
             <div className="flex space-x-[65px]">
-              <div
-                className="cursor-pointer w-max flex flex-col space-y-[8px]"
-                onClick={() => router.push("/")}
-                key={`nav_home_link_button`}
-              >
-                <p className="heading5">{t("navbar_feature_home_name")}</p>
-                <div
-                  className={classNames([
-                    "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black transition-all duration-300",
-                    {
-                      "w-[calc(100%-12px)]": router.asPath === "/",
-                    },
-                    {
-                      "w-0": router.asPath !== "/",
-                    },
-                  ])}
-                ></div>
-              </div>
-
               {_.map(features, (feature) => (
                 <div
                   className="cursor-pointer w-max flex flex-col space-y-[8px] group"
@@ -75,7 +55,7 @@ export const Navbar = () => {
                   <p className="heading5">{feature.name}</p>
                   <div
                     className={classNames([
-                      "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black transition-all duration-300",
+                      "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black duration-300 transition-all",
                       {
                         "w-[calc(100%-12px)]":
                           feature.name === t("navbar_feature_home_name")
