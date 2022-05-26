@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 import { getPetition } from "../../../core/service/petition/get_petition";
 import { Petition, PetitionStatus } from "../types/petetion_type";
 import { updatePetition } from "../../../core/service/petition/put_petition";
+import { deletePetition } from "../../../core/service/petition/delete_petition";
 
 class PetitionManageContext {
   petitionList: Array<Petition>;
@@ -30,7 +31,7 @@ class PetitionManageContext {
 
   async onStatusChange(status: PetitionStatus, id: string) {
     try {
-      await updatePetition(id, status);
+      await updatePetition(id, { status: status });
       await this.preparation();
     } catch (err: any) {
       console.log(err);
@@ -38,6 +39,14 @@ class PetitionManageContext {
     }
   }
 
-  async onDelete(id: string) {}
+  async onDelete(id: string) {
+    try {
+      await deletePetition(id);
+      await this.preparation();
+    } catch (err: any) {
+      console.log(err);
+      alert(`${err.message} \n มีปีญหาในการลบข้อมูล`);
+    }
+  }
 }
 export const petitionManageContext = createContext(new PetitionManageContext());

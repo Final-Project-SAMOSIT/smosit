@@ -1,10 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Observer } from "mobx-react-lite";
 import { Petition } from "../types/petetion_type";
 import _ from "lodash";
 import dayjs from "dayjs";
 import classNames from "classnames";
 import { Button } from "../../../core/components/input/button.component";
+import { petitionManageContext } from "../context/petition_manage.context";
 
 interface PetitionManageTableProps {
   data: Array<Petition>;
@@ -12,6 +13,11 @@ interface PetitionManageTableProps {
 
 export const PetitionManageTable = (props: PetitionManageTableProps) => {
   const [focusOn, setFocusOn] = useState(-1);
+
+  //---------------------
+  //   CONTEXT
+  //---------------------
+  const context = useContext(petitionManageContext);
 
   //---------------------
   //   RENDER
@@ -81,13 +87,17 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                 {petition.status.status_name === "Sent" && (
                   <Fragment>
                     <Button
-                      onClick={() => null}
+                      onClick={() =>
+                        context.onStatusChange("Reject", petition.pet_id)
+                      }
                       title="Reject"
                       width={96}
                       height={40}
                     />
                     <Button
-                      onClick={() => null}
+                      onClick={() =>
+                        context.onStatusChange("Approve", petition.pet_id)
+                      }
                       title="Approve"
                       width={96}
                       height={40}
@@ -98,7 +108,7 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                   petition.status.status_name === "Done") && (
                   <Fragment>
                     <Button
-                      onClick={() => null}
+                      onClick={() => context.onDelete(petition.pet_id)}
                       title="Delete"
                       width={96}
                       height={40}
@@ -108,7 +118,9 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                 {petition.status.status_name === "Approve" && (
                   <Fragment>
                     <Button
-                      onClick={() => null}
+                      onClick={() =>
+                        context.onStatusChange("In Progress", petition.pet_id)
+                      }
                       title="working"
                       width={96}
                       height={40}
@@ -118,7 +130,9 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                 {petition.status.status_name === "In Progress" && (
                   <Fragment>
                     <Button
-                      onClick={() => null}
+                      onClick={() =>
+                        context.onStatusChange("Done", petition.pet_id)
+                      }
                       title="Done"
                       width={96}
                       height={40}
