@@ -9,12 +9,15 @@ import { TextInput } from "../../../core/components/input/text_input.component";
 import { useFormik } from "formik";
 import { petitionFormInit, petitionValidate } from "../form/petition.form";
 import { PetitionTable } from "../component/petition_table";
+import { AuthContext } from "../../../core/context/auth.context";
+import { useRouter } from "next/router";
 
 export const PetitionPage = () => {
   //---------------------
   //   CONTEXT
   //---------------------
   const context = useContext(petitionContext);
+  const authContext = useContext(AuthContext);
 
   //---------------------
   //   FORMIK
@@ -26,16 +29,25 @@ export const PetitionPage = () => {
     validateOnBlur: false,
     validateOnMount: false,
     onSubmit: (value) => {
-      context.onCreate(value, formik);
+      context.onCreate(value, formik, authContext.me?.user_id || "");
     },
   });
+
+  //---------------------
+  //   ROUTER
+  //---------------------
+  const router = useRouter();
 
   //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
-    context.preparationForm();
-    context.preparationPetition();
+    if (!authContext.isPermission(["Users"])) {
+      router.push("/401");
+    } else {
+      context.preparationForm();
+      context.preparationPetition(authContext.me?.user_id || "");
+    }
   }, []);
 
   //---------------------
