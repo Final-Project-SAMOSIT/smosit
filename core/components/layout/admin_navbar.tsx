@@ -17,9 +17,9 @@ export const AdminNavbar = () => {
   //   COSNT
   //---------------------
   const features = [
-    { name: t("navbar_feature_home_vote"), route: "/vote" },
-    { name: t("navbar_feature_home_petition"), route: "/petition" },
-    { name: t("navbar_feature_home_project"), route: "/project" },
+    { name: t("navbar_feature_home_vote"), route: "/manage/vote" },
+    { name: t("navbar_feature_home_petition"), route: "/manage/petition" },
+    { name: t("navbar_feature_home_project"), route: "/manage/project" },
   ];
 
   //---------------------
