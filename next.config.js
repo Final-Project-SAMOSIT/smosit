@@ -5,6 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   publicRuntimeConfig: {
     BACKEND_API: process.env.BACKEND_API,
+    FRONTEND_URI: process.env.FRONTEND_URI,
   },
 };
 

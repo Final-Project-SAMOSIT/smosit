@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { Button } from "../input/button.component";
 import { useTranslation } from "next-i18next";
 import { AuthContext } from "../../context/auth.context";
+import getConfig from "next/config";
 
 interface NavbarProps {
   noTranslation?: boolean;
@@ -36,10 +37,14 @@ export const Navbar = (props: NavbarProps) => {
       route: "/petition",
     },
     {
-      name: props.noTranslation ? "Project Form" : t("navbar_feature_home_project"),
+      name: props.noTranslation
+        ? "Project Form"
+        : t("navbar_feature_home_project"),
       route: "/project",
     },
   ];
+
+  const { publicRuntimeConfig } = getConfig();
 
   //---------------------
   //   CONTEXT
@@ -151,7 +156,7 @@ export const Navbar = (props: NavbarProps) => {
                   <Button
                     onClick={() => {
                       router.push(
-                        "https://std-sso-fe.sit.kmutt.ac.th/login?response_type=code&client_id=dEV6F8Xb&redirect_uri=http://localhost:3000/redirect&state=1234"
+                        `https://std-sso-fe.sit.kmutt.ac.th/login?response_type=code&client_id=dEV6F8Xb&redirect_uri=${publicRuntimeConfig.FRONTEND_URI}/redirect&state=1234`
                       );
                     }}
                     title={
