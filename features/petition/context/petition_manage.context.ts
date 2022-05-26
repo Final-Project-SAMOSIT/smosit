@@ -1,6 +1,9 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { getPetition } from "../../../core/service/petition/get_petition";
+import {
+  getAllPetition,
+  getPetition,
+} from "../../../core/service/petition/get_petition";
 import { Petition, PetitionStatus } from "../types/petetion_type";
 import { updatePetition } from "../../../core/service/petition/put_petition";
 import { deletePetition } from "../../../core/service/petition/delete_petition";
@@ -21,8 +24,12 @@ class PetitionManageContext {
   //-------------------
   async preparation() {
     try {
-      const resp = await getPetition();
-      this.petitionList = resp.data.data;
+      const resp = await getAllPetition();
+      if (resp.status !== 204) {
+        this.petitionList = resp.data.data;
+      } else {
+        this.petitionList = [];
+      }
     } catch (err: any) {
       console.log(err);
       alert(`${err.message} \n มีปีญหาในการเตรียมข้อมูล`);

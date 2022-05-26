@@ -49,22 +49,26 @@ class PetitionContext {
     }
   }
 
-  async preparationPetition() {
+  async preparationPetition(id: string) {
     try {
-      const resp = await getPetition();
-      this.petitionList = resp.data.data;
+      const resp = await getPetition(id);
+      if (resp.status !== 204) {
+        this.petitionList = resp.data.data;
+      } else {
+        this.petitionList = [];
+      }
     } catch (err: any) {
       console.log(err);
       alert(`${err.message} \n มีปัญหาในการเตรียมข้อมูล`);
     }
   }
 
-  async onCreate(value: any, formik: FormikProps<any>) {
+  async onCreate(value: any, formik: FormikProps<any>, id: string) {
     try {
       const resp = await postPetition(value);
       if (resp.status === 200) {
         formik.resetForm();
-        this.preparationPetition();
+        this.preparationPetition(id);
       }
     } catch (err: any) {
       console.log(err);

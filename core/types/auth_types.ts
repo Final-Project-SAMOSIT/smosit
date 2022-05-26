@@ -14,4 +14,4 @@ export interface meProps {
   };
 }
 
-export type Role = "User" | "Admin" | "Publisher";
+export type Role = "Users" | "Admin" | "Publisher";
