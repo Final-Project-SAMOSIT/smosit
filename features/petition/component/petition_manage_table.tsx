@@ -77,7 +77,55 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                 </div>
                 <p className="body">{petition.pet_types.pet_type_name}</p>
               </div>
-              <div className="col-span-2 flex justify-end pr-[8px] pt-[8px] pb-[8px] space-x-[8px]"></div>
+              <div className="col-span-2 flex justify-end pr-[8px] pt-[8px] pb-[8px] space-x-[8px]">
+                {petition.status.status_name === "Sent" && (
+                  <Fragment>
+                    <Button
+                      onClick={() => null}
+                      title="Reject"
+                      width={96}
+                      height={40}
+                    />
+                    <Button
+                      onClick={() => null}
+                      title="Approve"
+                      width={96}
+                      height={40}
+                    />
+                  </Fragment>
+                )}
+                {(petition.status.status_name === "Reject" ||
+                  petition.status.status_name === "Done") && (
+                  <Fragment>
+                    <Button
+                      onClick={() => null}
+                      title="Delete"
+                      width={96}
+                      height={40}
+                    />
+                  </Fragment>
+                )}
+                {petition.status.status_name === "Approve" && (
+                  <Fragment>
+                    <Button
+                      onClick={() => null}
+                      title="working"
+                      width={96}
+                      height={40}
+                    />
+                  </Fragment>
+                )}
+                {petition.status.status_name === "In Progress" && (
+                  <Fragment>
+                    <Button
+                      onClick={() => null}
+                      title="Done"
+                      width={96}
+                      height={40}
+                    />
+                  </Fragment>
+                )}
+              </div>
               <div className="col-span-full h-[1px] bg-gray-40" />
             </Fragment>
           ))}
