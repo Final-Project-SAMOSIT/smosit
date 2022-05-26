@@ -49,7 +49,9 @@ class AuthContextClass {
       const resp: any = await postAuth(code);
 
       if (resp.status === 200) {
-        Cookies.set("SMOSIT_TOKEN", resp.data?.data?.token?.token);
+        Cookies.set("SMOSIT_TOKEN", resp.data?.data?.token?.token, {
+          expires: 3,
+        });
         Router.prototype.push("/");
       } else {
         Router.prototype.push("/403");

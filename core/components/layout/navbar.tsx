@@ -7,7 +7,11 @@ import { Button } from "../input/button.component";
 import { useTranslation } from "next-i18next";
 import { AuthContext } from "../../context/auth.context";
 
-export const Navbar = () => {
+interface NavbarProps {
+  noTranslation?: boolean;
+}
+
+export const Navbar = (props: NavbarProps) => {
   //---------------------
   //   i18n
   //---------------------
@@ -17,10 +21,24 @@ export const Navbar = () => {
   //   COSNT
   //---------------------
   const features = [
-    { name: t("navbar_feature_home_about"), route: "/about" },
-    { name: t("navbar_feature_home_vote"), route: "/vote" },
-    { name: t("navbar_feature_home_petition"), route: "/petition" },
-    { name: t("navbar_feature_home_project"), route: "/project" },
+    {
+      name: props.noTranslation ? "About" : t("navbar_feature_home_about"),
+      route: "/about",
+    },
+    {
+      name: props.noTranslation ? "Vote" : t("navbar_feature_home_vote"),
+      route: "/vote",
+    },
+    {
+      name: props.noTranslation
+        ? "Request Petition"
+        : t("navbar_feature_home_petition"),
+      route: "/petition",
+    },
+    {
+      name: props.noTranslation ? "Project Form" : t("navbar_feature_home_project"),
+      route: "/project",
+    },
   ];
 
   //---------------------
@@ -48,11 +66,13 @@ export const Navbar = () => {
             />
             <div className="flex space-x-[65px]">
               <div
-                className="cursor-pointer w-max flex flex-col space-y-[8px]"
+                className="cursor-pointer w-max flex flex-col space-y-[8px] group"
                 onClick={() => router.push("/")}
                 key={`nav_home_link_button`}
               >
-                <p className="heading5">{t("navbar_feature_home_name")}</p>
+                <p className="heading5">
+                  {props.noTranslation ? "Home" : t("navbar_feature_home_name")}
+                </p>
                 <div
                   className={classNames([
                     "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black transition-all duration-300",
@@ -122,7 +142,9 @@ export const Navbar = () => {
                     onClick={() => {
                       authContext.logout();
                     }}
-                    title={t("navbar_logout_button")}
+                    title={
+                      props.noTranslation ? "logout" : t("navbar_logout_button")
+                    }
                     width={137}
                   ></Button>
                 ) : (
@@ -132,7 +154,9 @@ export const Navbar = () => {
                         "https://std-sso-fe.sit.kmutt.ac.th/login?response_type=code&client_id=dEV6F8Xb&redirect_uri=http://localhost:3000/redirect&state=1234"
                       );
                     }}
-                    title={t("navbar_login_button")}
+                    title={
+                      props.noTranslation ? "login" : t("navbar_login_button")
+                    }
                     width={137}
                   ></Button>
                 )}
