@@ -67,7 +67,8 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                   className={classNames(
                     "body cursor-pointer transition-all duration-150",
                     {
-                      "line-clamp-2 hover:text-gray-50 group-hover:pb-[8px]": index !== focusOn,
+                      "line-clamp-2 hover:text-gray-50 group-hover:pb-[8px]":
+                        index !== focusOn,
                     }
                   )}
                   onClick={() => {
@@ -94,16 +95,16 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                         context.onStatusChange("Reject", petition.pet_id)
                       }
                       title="Reject"
-                      width={96}
-                      height={40}
+                      widthCss="w-[96px]"
+                      heightCss="h-[40px]"
                     />
                     <Button
                       onClick={() =>
                         context.onStatusChange("Approve", petition.pet_id)
                       }
                       title="Approve"
-                      width={96}
-                      height={40}
+                      widthCss="w-[96px]"
+                      heightCss="h-[40px]"
                     />
                   </Fragment>
                 )}
@@ -113,8 +114,8 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                     <Button
                       onClick={() => context.onDelete(petition.pet_id)}
                       title="Delete"
-                      width={96}
-                      height={40}
+                      widthCss="w-[96px]"
+                      heightCss="h-[40px]"
                     />
                   </Fragment>
                 )}
@@ -125,8 +126,8 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                         context.onStatusChange("In Progress", petition.pet_id)
                       }
                       title="In Progress"
-                      width={144}
-                      height={40}
+                      widthCss="w-[144px]"
+                      heightCss="h-[40px]"
                     />
                   </Fragment>
                 )}
@@ -137,8 +138,8 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                         context.onStatusChange("Done", petition.pet_id)
                       }
                       title="Done"
-                      width={96}
-                      height={40}
+                      widthCss="w-[96px]"
+                      heightCss="h-[40px]"
                     />
                   </Fragment>
                 )}

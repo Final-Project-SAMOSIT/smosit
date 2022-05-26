@@ -72,7 +72,7 @@ export const PetitionManage = () => {
               <div className="flex flex-col w-max">
                 <div className="flex">
                   <div
-                    className="w-[180px] flex justify-center py-[15px] cursor-pointer"
+                    className="laptop:w-[180px] w-[80px] flex justify-center py-[15px] cursor-pointer"
                     onClick={() => {
                       setFilterType("All");
                     }}
@@ -80,7 +80,7 @@ export const PetitionManage = () => {
                     <p className="heading6">All</p>
                   </div>
                   <div
-                    className="w-[180px] flex justify-center py-[15px] cursor-pointer"
+                    className="laptop:w-[180px] w-[80px] flex justify-center py-[15px] cursor-pointer"
                     onClick={() => {
                       setFilterType("Reject");
                     }}
@@ -88,7 +88,7 @@ export const PetitionManage = () => {
                     <p className="heading6">Reject</p>
                   </div>
                   <div
-                    className="w-[180px] flex justify-center py-[15px] cursor-pointer"
+                    className="laptop:w-[180px] w-[80px] flex justify-center py-[15px] cursor-pointer"
                     onClick={() => {
                       setFilterType("Done");
                     }}
@@ -100,10 +100,10 @@ export const PetitionManage = () => {
                 <div className="w-full h-[2px] bg-gray-20">
                   <div
                     className={classNames(
-                      "w-[180px] h-[2px] bg-gray-50 duration-150 transition-all",
+                      "laptop:w-[180px] w-[80px] h-[2px] bg-gray-50 duration-150 transition-all",
                       {
-                        "ml-[180px]": filterType === "Reject",
-                        "ml-[360px]": filterType === "Done",
+                        "ml-[80px] laptop:ml-[180px]": filterType === "Reject",
+                        "ml-[160px] laptop:ml-[360px]": filterType === "Done",
                       }
                     )}
                   />

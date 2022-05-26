@@ -59,7 +59,7 @@ export const PetitionPage = () => {
         <MainLayout>
           <div className="pt-[32px] pb-[210px] flex flex-col">
             <div className="flex justify-between space-x-[48px] ">
-              <div className="w-1/2 pb-[53px] pt-[42px] flex flex-col justify-between">
+              <div className="laptop:w-1/2 w-full pb-[53px] pt-[42px] flex flex-col justify-between laptop:space-y-0 space-y-[32px]">
                 <p className="border border-black rounded-full pt-[6px] pb-[5px] px-[17px] w-max button select-none">
                   Request Petition
                 </p>
@@ -72,12 +72,12 @@ export const PetitionPage = () => {
                   cursus sed.
                 </p>
               </div>
-              <div className="w-1/2">
+              <div className="hidden w-1/2 laptop:block">
                 <img src="/images/petition_graphic.svg" className="" />
               </div>
             </div>
 
-            <div className="w-full bg-gray-10 mt-[83px] pt-[24px] pb-[24px] px-[93px] flex flex-col space-y-[16px]">
+            <div className="w-full bg-gray-10 laptop:mt-[83px] mt-0 pt-[24px] pb-[24px] laptop:px-[93px] px-[24px] flex flex-col space-y-[16px]">
               <div className="flex justify-center w-full">
                 <p className="pb-[8px] px-[24.5px] border-b border-black title">
                   Form for petition
@@ -96,7 +96,7 @@ export const PetitionPage = () => {
                 />
               </div>
 
-              <div className="w-[512px]">
+              <div className="laptop:w-[512px] w-full">
                 <Dropdown
                   onChange={(e) => formik.setFieldValue("type_id", e)}
                   options={context.petitionType}
@@ -123,14 +123,14 @@ export const PetitionPage = () => {
                 <Button
                   onClick={() => formik.submitForm()}
                   title="submit"
-                  width={137}
-                  height={52}
+                  widthCss="laptop:w-[137px] w-[86px]"
+                  heightCss="laptop:h-[52px] h-[36px]"
                   custom="bg-gray-10 hover:bg-black hover:text-white rounded-[10px] border border-black"
                 />
               </div>
             </div>
 
-            <div className="mt-[170px]">
+            <div className="laptop:mt-[170px] mt-[48px]">
               <PetitionTable data={context.petitionList || []} />
             </div>
           </div>

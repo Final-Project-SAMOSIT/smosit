@@ -78,7 +78,7 @@ export const Navbar = (props: NavbarProps) => {
           <div className="laptop:max-w-[1200px] laptop:mx-auto h-full flex justify-between items-center laptop:p-0 px-[8px]">
             <img
               src="/images/logo.svg"
-              className="h-[60px] mobile:mt-[8px] m-0"
+              className="laptop:h-[60px] h-[48px] mobile:mt-[8px] m-0"
               onClick={() => router.push("/")}
             />
             <div className="laptop:flex space-x-[65px] hidden">
@@ -175,7 +175,7 @@ export const Navbar = (props: NavbarProps) => {
                           setIsDropdownOpen(false);
                         }}
                       >
-                        <p className="caption2 py-[4px] px-[8px]">
+                        <p className="body py-[4px] px-[8px]">
                           {props.noTranslation
                             ? "Home"
                             : t("navbar_feature_home_name")}
@@ -189,7 +189,7 @@ export const Navbar = (props: NavbarProps) => {
                             setIsDropdownOpen(false);
                           }}
                         >
-                          <p className="caption2 py-[4px] px-[8px]">
+                          <p className="body py-[4px] px-[8px]">
                             {feature.name}
                           </p>
                         </div>
@@ -202,7 +202,7 @@ export const Navbar = (props: NavbarProps) => {
                             setIsDropdownOpen(false);
                           }}
                         >
-                          <p className="caption2 py-[4px] px-[8px]">logout</p>
+                          <p className="body py-[4px] px-[8px]">logout</p>
                         </div>
                       ) : (
                         <div
@@ -230,7 +230,7 @@ export const Navbar = (props: NavbarProps) => {
                     title={
                       props.noTranslation ? "logout" : t("navbar_logout_button")
                     }
-                    width={137}
+                    widthCss="w-[137px]"
                   ></Button>
                 ) : (
                   <Button
@@ -242,7 +242,7 @@ export const Navbar = (props: NavbarProps) => {
                     title={
                       props.noTranslation ? "login" : t("navbar_login_button")
                     }
-                    width={137}
+                    widthCss="w-[137px]"
                   ></Button>
                 )}
               </div>
