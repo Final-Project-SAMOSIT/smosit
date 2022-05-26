@@ -62,11 +62,14 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
               <div className="col-span-2 pt-[16px] pb-[8px]">
                 <p className="body">{petition.pet_topic}</p>
               </div>
-              <div className="col-span-2 pt-[16px] pb-[8px]">
+              <div className="col-span-2 pt-[16px] pb-[8px] group">
                 <p
-                  className={classNames("body cursor-pointer", {
-                    "line-clamp-2": index !== focusOn,
-                  })}
+                  className={classNames(
+                    "body cursor-pointer transition-all duration-150",
+                    {
+                      "line-clamp-2 hover:text-gray-50 group-hover:pb-[8px]": index !== focusOn,
+                    }
+                  )}
                   onClick={() => {
                     setFocusOn(index === focusOn ? -1 : index);
                   }}
@@ -121,8 +124,8 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                       onClick={() =>
                         context.onStatusChange("In Progress", petition.pet_id)
                       }
-                      title="working"
-                      width={96}
+                      title="In Progress"
+                      width={144}
                       height={40}
                     />
                   </Fragment>
