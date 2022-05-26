@@ -103,7 +103,7 @@ export const AdminNavbar = () => {
                       authContext.logout();
                     }}
                     title={t("navbar_logout_button")}
-                    width={137}
+                    widthCss="w-[137px]"
                   ></Button>
                 ) : (
                   <Button
@@ -113,7 +113,7 @@ export const AdminNavbar = () => {
                       );
                     }}
                     title={t("navbar_login_button")}
-                    width={137}
+                    widthCss="w-[137px]"
                   ></Button>
                 )}
               </div>

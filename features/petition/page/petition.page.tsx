@@ -123,8 +123,8 @@ export const PetitionPage = () => {
                 <Button
                   onClick={() => formik.submitForm()}
                   title="submit"
-                  width={137}
-                  height={52}
+                  widthCss="w[137px]"
+                  heightCss="h[52px]"
                   custom="bg-gray-10 hover:bg-black hover:text-white rounded-[10px] border border-black"
                 />
               </div>

@@ -230,7 +230,7 @@ export const Navbar = (props: NavbarProps) => {
                     title={
                       props.noTranslation ? "logout" : t("navbar_logout_button")
                     }
-                    width={137}
+                    widthCss="w-[137px]"
                   ></Button>
                 ) : (
                   <Button
@@ -242,7 +242,7 @@ export const Navbar = (props: NavbarProps) => {
                     title={
                       props.noTranslation ? "login" : t("navbar_login_button")
                     }
-                    width={137}
+                    widthCss="w-[137px]"
                   ></Button>
                 )}
               </div>

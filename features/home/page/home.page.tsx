@@ -70,8 +70,8 @@ export const HomePage = () => {
                   <Button
                     onClick={() => null}
                     title="READ MORE"
-                    height={52}
-                    width={137}
+                    heightCss="h-[52px]"
+                    widthCss="w-[137px]"
                   ></Button>
                 </div>
               </div>
