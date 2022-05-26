@@ -1,9 +1,12 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Observer } from "mobx-react-lite";
 import { Petition } from "../types/petetion_type";
 import classNames from "classnames";
 import _ from "lodash";
 import dayjs from "dayjs";
+import { petitionManageContext } from "../context/petition_manage.context";
+import { Button } from "../../../core/components/input/button.component";
+import { AuthContext } from "../../../core/context/auth.context";
 
 interface PetitionTableProps {
   data: Array<Petition>;
@@ -13,19 +16,13 @@ export const PetitionTable = (props: PetitionTableProps) => {
   //---------------------
   //   STATE
   //---------------------
-  const [filterType, setFilterType] = useState("Pending");
   const [showingPetition, setshowingPetition] = useState("");
 
   //---------------------
-  //   HANDLED
+  //   CONTEXT
   //---------------------
-  function getShowPetition() {
-    return _.filter(props.data, (petition) =>
-      filterType === "Completed"
-        ? petition.status.status_name === "Done"
-        : petition.status.status_name !== "Done"
-    );
-  }
+  const context = useContext(petitionManageContext);
+  const authContext = useContext(AuthContext);
 
   //---------------------
   //   RENDER
@@ -34,37 +31,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
     <Observer>
       {() => (
         <div className="flex flex-col items-center w-full space-y-[70px]">
-          <p className="title pb-[15px] border-b border-black px-[12px]">
-            Status
-          </p>
-          <div className="flex flex-col laptop:w-[360px] w-[300px] justify-center space-y-[16px]">
-            <div className="flex w-full">
-              <div
-                className="flex justify-center w-1/2 cursor-pointer select-none"
-                onClick={() => setFilterType("Pending")}
-              >
-                <p className="heading6">pending</p>
-              </div>
-              <div
-                className="flex justify-center w-1/2 cursor-pointer select-none"
-                onClick={() => setFilterType("Completed")}
-              >
-                <p className="heading6">completed</p>
-              </div>
-            </div>
-            <div className="laptop:w-[360px] w-[300px] h-[2px] bg-gray-20">
-              <div
-                className={classNames(
-                  "w-1/2 h-full bg-gray-50 transition-all duration-200",
-                  {
-                    "ml-[150px] laptop:ml-[180px]": filterType === "Completed",
-                  }
-                )}
-              />
-            </div>
-          </div>
-
-          {getShowPetition().length === 0 ? (
+          {props.data.length === 0 ? (
             <div>no Data</div>
           ) : (
             <div className="grid w-full grid-cols-6 laptop:grid-cols-10">
@@ -83,7 +50,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
               <div className="col-span-1 laptop:pb-[38px] pb-[24px]" />
               <div className="border-b border-gray-40 col-span-full" />
 
-              {_.map(getShowPetition(), (petition) => (
+              {_.map(props.data, (petition) => (
                 <Fragment>
                   <div className="col-span-2 col-start-2 min-h-[50px] laptop:flex items-center hidden">
                     <p className="body">
@@ -123,10 +90,10 @@ export const PetitionTable = (props: PetitionTableProps) => {
                   {/* expand detail */}
                   <div
                     className={classNames(
-                      "col-span-full overflow-y-hidden transition-all flex flex-col items-center justify-center duration-300 relative",
+                      "col-span-full overflow-y-auto transition-all flex flex-col items-center justify-center duration-300 relative",
                       {
                         "h-0 pb-0": showingPetition !== petition.pet_id,
-                        "h-[256px]": showingPetition === petition.pet_id,
+                        "h-[280px]": showingPetition === petition.pet_id,
                       }
                     )}
                   >
@@ -227,7 +194,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       <div className="mt-[48px] col-span-9 col-start-2 space-y-[8px]">
                         <table className="">
                           <tbody>
-                            <tr className="laptop:hidden">
+                            <tr>
                               <td className="flex items-start">
                                 <p className="caption1">Topic:</p>
                               </td>
@@ -237,7 +204,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 </p>
                               </td>
                             </tr>
-                            <tr className="laptop:hidden">
+                            <tr>
                               <td className="flex items-start">
                                 <p className="caption1">Type:</p>
                               </td>
@@ -257,7 +224,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 </p>
                               </td>
                             </tr>
-                            <tr className="laptop:hidden">
+                            <tr>
                               <td className="flex items-start">
                                 <p className="caption1">Date:</p>
                               </td>
@@ -282,6 +249,80 @@ export const PetitionTable = (props: PetitionTableProps) => {
                             </tr>
                           </tbody>
                         </table>
+
+                        {authContext.isPermission(["Publisher"]) && (
+                          <div className="flex space-x-[8px]">
+                            {petition.status.status_name === "Sent" && (
+                              <Fragment>
+                                <Button
+                                  onClick={() =>
+                                    context.onStatusChange(
+                                      "Reject",
+                                      petition.pet_id
+                                    )
+                                  }
+                                  title="Reject"
+                                  widthCss="w-[72px] laptop:w-[96px]"
+                                  heightCss="h-[32px] laptop:h-[40px]"
+                                />
+                                <Button
+                                  onClick={() =>
+                                    context.onStatusChange(
+                                      "Approve",
+                                      petition.pet_id
+                                    )
+                                  }
+                                  title="Approve"
+                                  widthCss="w-[72px] laptop:w-[96px]"
+                                  heightCss="h-[32px] laptop:h-[40px]"
+                                />
+                              </Fragment>
+                            )}
+                            {(petition.status.status_name === "Reject" ||
+                              petition.status.status_name === "Done") && (
+                              <Fragment>
+                                <Button
+                                  onClick={() =>
+                                    context.onDelete(petition.pet_id)
+                                  }
+                                  title="Delete"
+                                  widthCss="w-[72px] laptop:w-[96px]"
+                                  heightCss="h-[32px] laptop:h-[40px]"
+                                />
+                              </Fragment>
+                            )}
+                            {petition.status.status_name === "Approve" && (
+                              <Fragment>
+                                <Button
+                                  onClick={() =>
+                                    context.onStatusChange(
+                                      "In Progress",
+                                      petition.pet_id
+                                    )
+                                  }
+                                  title="In Progress"
+                                  widthCss="laptop:w-[144px] w-[96px]"
+                                  heightCss="h-[32px] laptop:h-[40px]"
+                                />
+                              </Fragment>
+                            )}
+                            {petition.status.status_name === "In Progress" && (
+                              <Fragment>
+                                <Button
+                                  onClick={() =>
+                                    context.onStatusChange(
+                                      "Done",
+                                      petition.pet_id
+                                    )
+                                  }
+                                  title="Done"
+                                  widthCss="w-[72px] laptop:w-[96px]"
+                                  heightCss="h-[32px] laptop:h-[40px]"
+                                />
+                              </Fragment>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

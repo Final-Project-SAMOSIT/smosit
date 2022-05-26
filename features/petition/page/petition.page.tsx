@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Observer } from "mobx-react-lite";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { Button } from "../../../core/components/input/button.component";
@@ -11,8 +11,15 @@ import { petitionFormInit, petitionValidate } from "../form/petition.form";
 import { PetitionTable } from "../component/petition_table";
 import { AuthContext } from "../../../core/context/auth.context";
 import { useRouter } from "next/router";
+import classNames from "classnames";
+import _ from "lodash";
 
 export const PetitionPage = () => {
+  //---------------------
+  //   STATE
+  //---------------------
+  const [filterType, setFilterType] = useState("Pending");
+
   //---------------------
   //   CONTEXT
   //---------------------
@@ -37,6 +44,17 @@ export const PetitionPage = () => {
   //   ROUTER
   //---------------------
   const router = useRouter();
+
+  //---------------------
+  //   HANDLED
+  //---------------------
+  function getShowPetition() {
+    return _.filter(context.petitionList, (petition) =>
+      filterType === "Completed"
+        ? petition.status.status_name === "Done"
+        : petition.status.status_name !== "Done"
+    );
+  }
 
   //---------------------
   //   EFFECT
@@ -130,8 +148,38 @@ export const PetitionPage = () => {
               </div>
             </div>
 
-            <div className="laptop:mt-[170px] mt-[48px]">
-              <PetitionTable data={context.petitionList || []} />
+            <div className="laptop:mt-[170px] mt-[48px] flex flex-col items-center w-full space-y-[70px]">
+              <p className="title pb-[15px] border-b border-black px-[12px]">
+                Status
+              </p>
+              <div className="flex flex-col laptop:w-[360px] w-[300px] justify-center space-y-[16px]">
+                <div className="flex w-full">
+                  <div
+                    className="flex justify-center w-1/2 cursor-pointer select-none"
+                    onClick={() => setFilterType("Pending")}
+                  >
+                    <p className="heading6">pending</p>
+                  </div>
+                  <div
+                    className="flex justify-center w-1/2 cursor-pointer select-none"
+                    onClick={() => setFilterType("Completed")}
+                  >
+                    <p className="heading6">completed</p>
+                  </div>
+                </div>
+                <div className="laptop:w-[360px] w-[300px] h-[2px] bg-gray-20">
+                  <div
+                    className={classNames(
+                      "w-1/2 h-full bg-gray-50 transition-all duration-200",
+                      {
+                        "ml-[150px] laptop:ml-[180px]":
+                          filterType === "Completed",
+                      }
+                    )}
+                  />
+                </div>
+              </div>
+              <PetitionTable data={getShowPetition()} />
             </div>
           </div>
         </MainLayout>
