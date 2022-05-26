@@ -98,9 +98,9 @@ export const PetitionTable = (props: PetitionTableProps) => {
                     )}
                   >
                     <div className="flex justify-center space-x-[8px] laptop:space-x-[25px] items-center relative">
-                      <div className="laptop:w-[76px] laptop:h-[76px] h-[24px] w-[24px] rounded-full bg-gray-30 flex items-end justify-center">
+                      <div className="laptop:w-[76px] laptop:h-[76px] h-[32px] w-[32px] rounded-full bg-gray-30 flex items-end justify-center">
                         <p className="bottom-[-28px] absolute body w-max ">
-                          <span className="laptop:text-[14px] text-[12px]">
+                          <span className="laptop:text-[16px] text-[12px]">
                             Sent Form
                           </span>
                         </p>
@@ -112,27 +112,37 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       </div>
                       <div
                         className={classNames(
-                          "laptop:w-[160px] w-[24px] laptop:h-[6px] h-[3px] bg-gray-30",
+                          "laptop:w-[160px] w-[36px] laptop:h-[6px] h-[3px] bg-gray-30",
                           {
                             "bg-black": Number(petition.status_id) >= 2,
                           }
                         )}
                       />
-                      <div className="laptop:w-[76px] laptop:h-[76px] h-[24px] w-[24px] rounded-full bg-gray-30 flex items-end justify-center relative">
-                        <p className="bottom-[-28px] absolute body w-max flex flex-col">
-                          {Number(petition.status_id) > 1 &&
+                      <div className="laptop:w-[76px] laptop:h-[76px] h-[32px] w-[32px] rounded-full bg-gray-30 flex items-end justify-center relative">
+                        <p
+                          className={classNames(
+                            "absolute body w-max flex flex-col",
+                            {
+                              "bottom-[-28px]":
+                                Number(petition.status_id) !== 1,
+                              "bottom-[-46px] laptop:bottom-[-52px]":
+                                Number(petition.status_id) === 1,
+                            }
+                          )}
+                        >
+                          {Number(petition.status_id) >= 1 &&
                             Number(petition.status_id) !== 5 && (
-                              <span className="laptop:text-[14px] text-[12px]">
+                              <span className="laptop:text-[16px] text-[12px]">
                                 Approve
                               </span>
                             )}
                           {Number(petition.status_id) === 5 && (
-                            <span className="laptop:text-[14px] text-[12px]">
+                            <span className="laptop:text-[16px] text-[12px]">
                               Reject
                             </span>
                           )}
                           {Number(petition.status_id) === 1 && (
-                            <span className="laptop:text-[14px] text-[12px]">
+                            <span className="laptop:text-[16px] text-[12px]">
                               / Reject
                             </span>
                           )}
@@ -145,7 +155,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       </div>
                       <div
                         className={classNames(
-                          "laptop:w-[160px] w-[24px] laptop:h-[6px] h-[3px] bg-gray-30",
+                          "laptop:w-[160px] w-[36px] laptop:h-[6px] h-[3px] bg-gray-30",
                           {
                             "bg-black":
                               Number(petition.status_id) >= 3 &&
@@ -153,9 +163,9 @@ export const PetitionTable = (props: PetitionTableProps) => {
                           }
                         )}
                       />
-                      <div className="laptop:w-[76px] laptop:h-[76px] h-[24px] w-[24px] rounded-full bg-gray-30 flex items-end justify-center relative">
+                      <div className="laptop:w-[76px] laptop:h-[76px] h-[32px] w-[32px] rounded-full bg-gray-30 flex items-end justify-center relative">
                         <p className="bottom-[-28px] absolute body w-max ">
-                          <span className="laptop:text-[14px] text-[12px]">
+                          <span className="laptop:text-[16px] text-[12px]">
                             In Progress
                           </span>
                         </p>
@@ -168,7 +178,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       </div>
                       <div
                         className={classNames(
-                          "laptop:w-[160px] w-[24px] laptop:h-[6px] h-[3px] bg-gray-30",
+                          "laptop:w-[160px] w-[36px] laptop:h-[6px] h-[3px] bg-gray-30",
                           {
                             "bg-black":
                               Number(petition.status_id) >= 4 &&
@@ -176,9 +186,9 @@ export const PetitionTable = (props: PetitionTableProps) => {
                           }
                         )}
                       />
-                      <div className="laptop:w-[76px] laptop:h-[76px] h-[24px] w-[24px] rounded-full bg-gray-30 flex items-end justify-center relative">
+                      <div className="laptop:w-[76px] laptop:h-[76px] h-[32px] w-[32px] rounded-full bg-gray-30 flex items-end justify-center relative">
                         <p className="bottom-[-28px] absolute body w-max ">
-                          <span className="laptop:text-[14px] text-[12px]">
+                          <span className="laptop:text-[16px] text-[12px]">
                             Done
                           </span>
                         </p>
