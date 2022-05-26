@@ -22,8 +22,8 @@ export const PetitionTable = (props: PetitionTableProps) => {
   function getShowPetition() {
     return _.filter(props.data, (petition) =>
       filterType === "Completed"
-        ? petition.status.status_name === "Completed"
-        : petition.status_id !== "Completed"
+        ? petition.status.status_name === "Done"
+        : petition.status.status_name !== "Done"
     );
   }
 
@@ -140,7 +140,11 @@ export const PetitionTable = (props: PetitionTableProps) => {
                           </div>
                         )}
                       </div>
-                      <div className="w-[160px] h-[6px] bg-gray-30" />
+                      <div
+                        className={classNames("w-[160px] h-[6px] bg-gray-30", {
+                          "bg-black": Number(petition.status_id) >= 2,
+                        })}
+                      />
                       <div className="w-[76px] h-[76px] rounded-full bg-gray-30 flex items-end justify-center relative">
                         <p className="bottom-[-28px] absolute body w-max ">
                           Approve / Reject
@@ -151,27 +155,41 @@ export const PetitionTable = (props: PetitionTableProps) => {
                           </div>
                         )}
                       </div>
-                      <div className="w-[160px] h-[6px] bg-gray-30" />
+                      <div
+                        className={classNames("w-[160px] h-[6px] bg-gray-30", {
+                          "bg-black":
+                            Number(petition.status_id) >= 3 &&
+                            Number(petition.status_id) !== 5,
+                        })}
+                      />
                       <div className="w-[76px] h-[76px] rounded-full bg-gray-30 flex items-end justify-center relative">
                         <p className="bottom-[-28px] absolute body w-max ">
                           In Progress
                         </p>
-                        {Number(petition.status_id) >= 3 && (
-                          <div className="flex items-center justify-center w-full h-full bg-black rounded-full">
-                            <i className="text-5xl text-white fas fa-check"></i>
-                          </div>
-                        )}
+                        {Number(petition.status_id) >= 3 &&
+                          Number(petition.status_id) !== 5 && (
+                            <div className="flex items-center justify-center w-full h-full bg-black rounded-full">
+                              <i className="text-5xl text-white fas fa-check"></i>
+                            </div>
+                          )}
                       </div>
-                      <div className="w-[160px] h-[6px] bg-gray-30" />
+                      <div
+                        className={classNames("w-[160px] h-[6px] bg-gray-30", {
+                          "bg-black":
+                            Number(petition.status_id) >= 4 &&
+                            Number(petition.status_id) !== 5,
+                        })}
+                      />
                       <div className="w-[76px] h-[76px] rounded-full bg-gray-30 flex items-end justify-center relative">
                         <p className="bottom-[-28px] absolute body w-max ">
                           Done
                         </p>
-                        {Number(petition.status_id) >= 4 && (
-                          <div className="flex items-center justify-center w-full h-full bg-black rounded-full">
-                            <i className="text-5xl text-white fas fa-check"></i>
-                          </div>
-                        )}
+                        {Number(petition.status_id) >= 4 &&
+                          Number(petition.status_id) !== 5 && (
+                            <div className="flex items-center justify-center w-full h-full bg-black rounded-full">
+                              <i className="text-5xl text-white fas fa-check"></i>
+                            </div>
+                          )}
                       </div>
                     </div>
                     <div className="grid w-full grid-cols-10">
