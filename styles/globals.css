@@ -83,6 +83,18 @@ textarea {
   font-weight: 300;
 }
 
+.caption3 {
+  font-family: "Noto Sans";
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.caption4 {
+  font-family: "Noto Sans";
+  font-size: 10px;
+  font-weight: 300;
+}
+
 .topic {
   font-family: "Noto Sans";
   font-size: 30px;
