@@ -8,6 +8,7 @@ import { PetitionManageTable } from "../component/petition_manage_table";
 import { petitionManageContext } from "../context/petition_manage.context";
 import _ from "lodash";
 import { Petition } from "../types/petetion_type";
+import { PetitionTable } from "../component/petition_table";
 
 export const PetitionManage = () => {
   //---------------------
@@ -113,7 +114,8 @@ export const PetitionManage = () => {
 
             <div className="mt-[64px]">
               {_.size(getShowPetition()) > 0 ? (
-                <PetitionManageTable data={getShowPetition()} />
+                // <PetitionManageTable data={getShowPetition()} />
+                <PetitionTable data={getShowPetition()} />
               ) : (
                 <div className="flex justify-center">
                   <p className="body">No data</p>
