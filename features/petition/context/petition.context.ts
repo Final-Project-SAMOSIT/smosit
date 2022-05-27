@@ -76,7 +76,15 @@ class PetitionContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal(`มีปัญหาในการส่งข้อมูล`, err.message);
+
+      if (err.response.status === 403) {
+        this.modal?.openModal(
+          `ไม่สามารถส่งคำร้องเกิน 5 คำร้องได้ กรุณาลองใหม่ภายหลัง`,
+          err.message
+        );
+      } else {
+        this.modal?.openModal(`มีปัญหาในการส่งข้อมูล`, err.message);
+      }
     }
   }
 }
