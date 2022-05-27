@@ -76,7 +76,7 @@ class AuthContextClass {
   }
 
   isPermission(roles: Array<Role>): boolean {
-    return /* _.includes(roles, this.me?.roles?.role_name); */ true;
+    return _.includes(roles, this.me?.roles?.role_name);
   }
 }
 export const AuthContext = createContext(new AuthContextClass());
