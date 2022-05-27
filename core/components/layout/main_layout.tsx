@@ -31,6 +31,7 @@ export const MainLayout = (props: MainLayoutProps) => {
           <div
             className="relative w-full overflow-y-auto"
             style={{ height: "calc(100%)" }}
+            id="main_layout"
           >
             <div className="min-h-[calc(100%-160px)] laptop:min-h-[calc(100%-320px)] max-w-[310px] tablet:max-w-[640px] laptop:max-w-[1200px] mx-auto">
               {children}

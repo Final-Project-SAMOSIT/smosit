@@ -41,10 +41,16 @@ export const PetitionPage = () => {
     validateOnBlur: false,
     validateOnMount: false,
     onSubmit: (value) => {
-      context.onCreate(value, formik, authContext.me?.user_id || "");
-      window.scrollTo({
-        top: petitionListRef?.current?.offsetTop,
-      });
+      context.onCreate(
+        value,
+        () => {
+          formik.resetForm();
+          document.getElementById("main_layout")?.scrollTo({
+            top: petitionListRef?.current?.offsetTop,
+          });
+        },
+        authContext.me?.user_id || ""
+      );
     },
   });
 

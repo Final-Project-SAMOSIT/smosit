@@ -63,11 +63,11 @@ class PetitionContext {
     }
   }
 
-  async onCreate(value: any, formik: FormikProps<any>, id: string) {
+  async onCreate(value: any, callback: () => void, id: string) {
     try {
       const resp = await postPetition(value);
       if (resp.status === 200) {
-        formik.resetForm();
+        callback();
         this.preparationPetition(id);
       }
     } catch (err: any) {
