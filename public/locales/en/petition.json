@@ -33,5 +33,11 @@
     "petition_table_detail_title_userid": "User ID",
     "petition_table_detail_title_detail": "Detail",
     "petition_table_detail_title_date": "Date",
-    "petition_table_detail_title_status": "Status"
+    "petition_table_detail_title_status": "Status",
+
+    "petition_modal_error_data_preparation": "there's a data preparation problem",
+    "petition_modal_error_petition_limit": "petition limit exceed, please try again later",
+    "petition_modal_error_petition_create": "there's a petition creation problem",
+    "petition_modal_error_petition_edit": "there's a petition correction problem",
+    "petition_modal_error_petition_delete": "there's a petition deletion problem"
 }

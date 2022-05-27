@@ -19,6 +19,7 @@ class PetitionContext {
   petitionList: Array<Petition>;
 
   modal: ModalContextClass | null;
+  t: any;
 
   //-------------------
   // CONSTUCTOR
@@ -49,7 +50,10 @@ class PetitionContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูล", err.message);
+      this.modal?.openModal(
+        this.t("petition_modal_error_data_preparation"),
+        err.message
+      );
     }
   }
 
@@ -63,7 +67,10 @@ class PetitionContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูล", err.message);
+      this.modal?.openModal(
+        this.t("petition_modal_error_data_preparation"),
+        err.message
+      );
     }
   }
 
@@ -79,11 +86,14 @@ class PetitionContext {
 
       if (err.response.status === 403) {
         this.modal?.openModal(
-          `ไม่สามารถส่งคำร้องเกิน 5 คำร้องได้ กรุณาลองใหม่ภายหลัง`,
+          this.t("petition_modal_error_petition_limit"),
           err.message
         );
       } else {
-        this.modal?.openModal(`มีปัญหาในการส่งข้อมูล`, err.message);
+        this.modal?.openModal(
+          this.t("petition_modal_error_petition_create"),
+          err.message
+        );
       }
     }
   }

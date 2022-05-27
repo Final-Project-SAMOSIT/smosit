@@ -13,6 +13,7 @@ class PetitionManageContext {
   petitionList: Array<Petition>;
 
   modal: ModalContextClass | null;
+  t: any;
 
   //-------------------
   // CONSTUCTOR
@@ -36,7 +37,10 @@ class PetitionManageContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปีญหาในการเตรียมข้อมูล", err.message);
+      this.modal?.openModal(
+        this.t("petition_modal_error_data_preparation"),
+        err.message
+      );
     }
   }
 
@@ -46,7 +50,10 @@ class PetitionManageContext {
       await this.preparation();
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปีญหาในการแก้ไขข้อมูล", err.message);
+      this.modal?.openModal(
+        this.t("petition_modal_error_petition_edit"),
+        err.message
+      );
     }
   }
 
@@ -56,7 +63,10 @@ class PetitionManageContext {
       await this.preparation();
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปีญหาในการลบข้อมูล", err.message);
+      this.modal?.openModal(
+        this.t("petition_modal_error_petition_delete"),
+        err.message
+      );
     }
   }
 }

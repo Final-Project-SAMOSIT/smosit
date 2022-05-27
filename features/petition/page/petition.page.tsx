@@ -94,6 +94,7 @@ export const PetitionPage = () => {
   //---------------------
   useEffect(() => {
     context.modal = modal
+    context.t = t
     if (!authContext.isPermission(["Users"])) {
       router.push("/401");
     } else {

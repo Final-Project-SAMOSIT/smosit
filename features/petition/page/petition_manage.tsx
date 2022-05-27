@@ -42,6 +42,7 @@ export const PetitionManage = () => {
   //---------------------
   useEffect(() => {
     context.modal = modal;
+    context.t = t;
     if (!authContext.isPermission(["Publisher"])) {
       router.push("/403");
     } else {

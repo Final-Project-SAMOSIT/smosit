@@ -37,5 +37,11 @@
     "petition_modal_edit_peition_title": "แก้ไขสถานะคำร้อง",
     "petition_modal_edit_peition_message": "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
     "petition_modal_delete_peition_title": "ลบสถานะคำร้อง",
-    "petition_modal_delete_peition_message": "คุณแน่ใจใช่หรือไม่ที่จะลบสถานะคำร้องนี้"
+    "petition_modal_delete_peition_message": "คุณแน่ใจใช่หรือไม่ที่จะลบสถานะคำร้องนี้",
+
+    "petition_modal_error_data_preparation": "มีปัญหาในการเตรียมข้อมูล",
+    "petition_modal_error_petition_limit": "ไม่สามารถส่งคำร้องเกิน 5 คำร้องได้ กรุณาลองใหม่ภายหลัง",
+    "petition_modal_error_petition_create": "มีปัญหาในการส่งข้อมูล",
+    "petition_modal_error_petition_edit": "มีปัญหาในการแก้ไขข้อมูล",
+    "petition_modal_error_petition_delete": "มีปัญหาในการลบข้อมูล"
 }
