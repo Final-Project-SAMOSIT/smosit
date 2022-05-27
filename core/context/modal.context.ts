@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
 
-class ModalContextClass {
+export class ModalContextClass {
   isModalOpen: boolean;
   title: string;
   message: string;
@@ -21,11 +21,11 @@ class ModalContextClass {
   //-------------------
   // ACTION
   //-------------------
-  openModal(title: string, message: string, onOk: () => void) {
+  openModal(title: string, message: string, onOk?: () => void) {
     this.isModalOpen = true;
     this.title = title;
     this.message = message;
-    this.onOk = onOk;
+    this.onOk = onOk || (() => null);
   }
 }
 export const ModalContext = createContext(new ModalContextClass());

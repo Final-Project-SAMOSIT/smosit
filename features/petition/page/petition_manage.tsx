@@ -9,6 +9,7 @@ import { petitionManageContext } from "../context/petition_manage.context";
 import _ from "lodash";
 import { Petition } from "../types/petetion_type";
 import { PetitionTable } from "../component/petition_table";
+import { ModalContext } from "../../../core/context/modal.context";
 
 export const PetitionManage = () => {
   //---------------------
@@ -23,6 +24,7 @@ export const PetitionManage = () => {
   //---------------------
   const context = useContext(petitionManageContext);
   const authContext = useContext(AuthContext);
+  const modal = useContext(ModalContext);
 
   //---------------------
   //   ROUTER
@@ -33,6 +35,7 @@ export const PetitionManage = () => {
   //   EFFECT
   //---------------------
   useEffect(() => {
+    context.modal = modal;
     if (!authContext.isPermission(["Publisher"])) {
       router.push("/403");
     } else {

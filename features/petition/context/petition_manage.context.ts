@@ -7,15 +7,19 @@ import {
 import { Petition, PetitionStatus } from "../types/petetion_type";
 import { updatePetition } from "../../../core/service/petition/put_petition";
 import { deletePetition } from "../../../core/service/petition/delete_petition";
+import { ModalContextClass } from "../../../core/context/modal.context";
 
 class PetitionManageContext {
   petitionList: Array<Petition>;
+
+  modal: ModalContextClass | null;
 
   //-------------------
   // CONSTUCTOR
   //-------------------
   constructor() {
     this.petitionList = [];
+    this.modal = null;
     makeAutoObservable(this);
   }
 
@@ -32,7 +36,7 @@ class PetitionManageContext {
       }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปีญหาในการเตรียมข้อมูล`);
+      this.modal?.openModal("มีปีญหาในการเตรียมข้อมูล", err.message);
     }
   }
 
@@ -42,7 +46,7 @@ class PetitionManageContext {
       await this.preparation();
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปีญหาในการแก้ไขข้อมูล`);
+      this.modal?.openModal("มีปีญหาในการแก้ไขข้อมูล", err.message);
     }
   }
 
@@ -52,7 +56,7 @@ class PetitionManageContext {
       await this.preparation();
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปีญหาในการลบข้อมูล`);
+      this.modal?.openModal("มีปีญหาในการลบข้อมูล", err.message);
     }
   }
 }

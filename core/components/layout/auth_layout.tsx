@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { Observer } from "mobx-react-lite";
 import { AuthContext } from "../../context/auth.context";
+import { ModalContext } from "../../context/modal.context";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -12,11 +13,13 @@ export const AuthLayout = (props: AuthLayoutProps) => {
   //   CONTEXT
   //---------------------
   const context = useContext(AuthContext);
+  const modal = useContext(ModalContext);
 
   //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
+    context.modal = modal;
     context.Me();
   }, []);
 

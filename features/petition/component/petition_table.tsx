@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { petitionManageContext } from "../context/petition_manage.context";
 import { Button } from "../../../core/components/input/button.component";
 import { AuthContext } from "../../../core/context/auth.context";
+import { ModalContext } from "../../../core/context/modal.context";
 
 interface PetitionTableProps {
   data: Array<Petition>;
@@ -24,6 +25,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
   //---------------------
   const context = useContext(petitionManageContext);
   const authContext = useContext(AuthContext);
+  const modalContext = useContext(ModalContext);
 
   //---------------------
   //   RENDER
@@ -279,9 +281,15 @@ export const PetitionTable = (props: PetitionTableProps) => {
                               <Fragment>
                                 <Button
                                   onClick={() =>
-                                    context.onStatusChange(
-                                      "Reject",
-                                      petition.pet_id
+                                    modalContext.openModal(
+                                      "แก่ไขสถานะคำร้อง",
+                                      "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
+                                      () => {
+                                        context.onStatusChange(
+                                          "Reject",
+                                          petition.pet_id
+                                        );
+                                      }
                                     )
                                   }
                                   title="Reject"
@@ -290,9 +298,15 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 />
                                 <Button
                                   onClick={() =>
-                                    context.onStatusChange(
-                                      "Approve",
-                                      petition.pet_id
+                                    modalContext.openModal(
+                                      "แก่ไขสถานะคำร้อง",
+                                      "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
+                                      () => {
+                                        context.onStatusChange(
+                                          "Approve",
+                                          petition.pet_id
+                                        );
+                                      }
                                     )
                                   }
                                   title="Approve"
@@ -306,7 +320,13 @@ export const PetitionTable = (props: PetitionTableProps) => {
                               <Fragment>
                                 <Button
                                   onClick={() =>
-                                    context.onDelete(petition.pet_id)
+                                    modalContext.openModal(
+                                      "ลบสถานะคำร้อง",
+                                      "คุณแน่ใจใช่หรือไม่ที่จะลบสถานะคำร้องนี้",
+                                      () => {
+                                        context.onDelete(petition.pet_id);
+                                      }
+                                    )
                                   }
                                   title="Delete"
                                   widthCss="w-[72px] laptop:w-[96px]"
@@ -318,9 +338,15 @@ export const PetitionTable = (props: PetitionTableProps) => {
                               <Fragment>
                                 <Button
                                   onClick={() =>
-                                    context.onStatusChange(
-                                      "In Progress",
-                                      petition.pet_id
+                                    modalContext.openModal(
+                                      "แก่ไขสถานะคำร้อง",
+                                      "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
+                                      () => {
+                                        context.onStatusChange(
+                                          "In Progress",
+                                          petition.pet_id
+                                        );
+                                      }
                                     )
                                   }
                                   title="In Progress"
@@ -333,9 +359,15 @@ export const PetitionTable = (props: PetitionTableProps) => {
                               <Fragment>
                                 <Button
                                   onClick={() =>
-                                    context.onStatusChange(
-                                      "Done",
-                                      petition.pet_id
+                                    modalContext.openModal(
+                                      "แก่ไขสถานะคำร้อง",
+                                      "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
+                                      () => {
+                                        context.onStatusChange(
+                                          "Done",
+                                          petition.pet_id
+                                        );
+                                      }
                                     )
                                   }
                                   title="Done"

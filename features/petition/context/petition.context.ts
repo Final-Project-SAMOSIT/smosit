@@ -8,6 +8,7 @@ import _ from "lodash";
 import { postPetition } from "../../../core/service/petition/post_petition";
 import { FormikProps } from "formik";
 import { Petition } from "../types/petetion_type";
+import { ModalContextClass } from "../../../core/context/modal.context";
 
 class PetitionContext {
   topic: string;
@@ -16,6 +17,8 @@ class PetitionContext {
 
   petitionType: Array<{ name: string; value: any; disabled?: boolean }>;
   petitionList: Array<Petition>;
+
+  modal: ModalContextClass | null;
 
   //-------------------
   // CONSTUCTOR
@@ -26,6 +29,7 @@ class PetitionContext {
     this.petitionType = [];
     this.detail = "";
     this.petitionList = [];
+    this.modal = null;
     makeAutoObservable(this);
   }
 
@@ -45,7 +49,7 @@ class PetitionContext {
       }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปัญหาในการเตรียมข้อมูล`);
+      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูล", err.message);
     }
   }
 
@@ -59,7 +63,7 @@ class PetitionContext {
       }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปัญหาในการเตรียมข้อมูล`);
+      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูล", err.message);
     }
   }
 
@@ -72,7 +76,7 @@ class PetitionContext {
       }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปัญหาในการส่งข้อมูล`);
+      this.modal?.openModal(`มีปัญหาในการส่งข้อมูล`, err.message);
     }
   }
 }
