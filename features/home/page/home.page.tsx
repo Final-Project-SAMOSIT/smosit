@@ -1,12 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Observer } from "mobx-react-lite";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { Button } from "../../../core/components/input/button.component";
 import { FeatureCard } from "../components/feature_card.component";
 import _ from "lodash";
 import { useRouter } from "next/router";
+import { AuthContext } from "../../../core/context/auth.context";
 
 export const HomePage = () => {
+  //---------------------
+  //   CONTEXT
+  //---------------------
+  const authContext = useContext(AuthContext);
+
   //---------------------
   //   CONST
   //---------------------
@@ -21,7 +27,9 @@ export const HomePage = () => {
       topic: "Request Petition",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel eleifend arcu, purus malesuada nibh morbi senectus.Tellus risus neque, felis nisl vulputate scelerisque urna congue. Egestas ac facilisi enim euarcu mollis est arcu quis. Faucibus sit interdum risus, sed at feugiat integer.",
-      featureRoute: "/petition",
+      featureRoute: authContext.isPermission(["Publisher"])
+        ? "/manage/petition"
+        : "/petition",
     },
     {
       topic: "Project Form",
