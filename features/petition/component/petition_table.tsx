@@ -92,8 +92,8 @@ export const PetitionTable = (props: PetitionTableProps) => {
                     className={classNames(
                       "col-span-full overflow-y-auto transition-all flex flex-col items-center justify-center duration-300 relative",
                       {
-                        "h-0 pb-0": showingPetition !== petition.pet_id,
-                        "h-[280px]": showingPetition === petition.pet_id,
+                        "h-0 py-0": showingPetition !== petition.pet_id,
+                        "h-full py-[16px]": showingPetition === petition.pet_id,
                       }
                     )}
                   >
