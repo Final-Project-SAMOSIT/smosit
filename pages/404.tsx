@@ -15,14 +15,12 @@ const Error404Page: NextPage = () => {
           src="/images/404.png"
           className="w-11/12 mx-auto laptop:w-5/12 laptop:mx-0"
         />
-        <div className="w-1/12">
-          <Button
-            onClick={() => router.push("/")}
-            title="Back"
-            widthCss="w-2/5 laptop:w-1/12"
-            heightCss="laptop:h-[52px] h-[36px]"
-          />
-        </div>
+        <Button
+          onClick={() => router.push("/en")}
+          title="Back"
+          widthCss="w-2/5 laptop:w-1/12"
+          heightCss="laptop:h-[52px] h-[36px]"
+        />
       </div>
     </div>
   );

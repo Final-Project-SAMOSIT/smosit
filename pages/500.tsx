@@ -16,7 +16,7 @@ const Error500Page: NextPage = () => {
           className="w-11/12 mx-auto laptop:w-5/12 laptop:mx-0"
         />
         <Button
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/en")}
           title="Back"
           widthCss="w-2/5 laptop:w-1/12"
           heightCss="laptop:h-[52px] h-[36px]"
