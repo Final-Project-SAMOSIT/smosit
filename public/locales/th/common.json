@@ -13,5 +13,6 @@
     "modal_cancel_button": "ยกเลิก",
     "modal_ok_button": "ตกลง",
     "modal_logout_title": "ออกจากระบบ",
-    "modal_logout_message": "คุณต้องการที่จะออกจากระบบใช่หรือไม่?"
+    "modal_logout_message": "คุณต้องการที่จะออกจากระบบใช่หรือไม่?",
+    "modal_login_error_title": "มีปัญหาในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง"
 }

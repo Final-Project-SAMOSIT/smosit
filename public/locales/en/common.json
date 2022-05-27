@@ -13,5 +13,6 @@
     "modal_cancel_button": "cancel",
     "modal_ok_button": "ok",
     "modal_logout_title": "Logout",
-    "modal_logout_message": "Are you sure you want to logout?"
+    "modal_logout_message": "Are you sure you want to logout?",
+    "modal_login_error_title": "There was an error while logging in, Please try again later."
 }

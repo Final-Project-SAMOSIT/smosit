@@ -7,11 +7,11 @@ import { postAuth } from "../service/auth/post_auth";
 import { meProps, Role } from "../types/auth_types";
 import _ from "lodash";
 import { ModalContextClass } from "./modal.context";
-import { runInThisContext } from "vm";
 
 class AuthContextClass {
   mockIsLogin: boolean;
   modal: ModalContextClass | null;
+  t: any;
 
   me: meProps | null;
 
@@ -63,7 +63,7 @@ class AuthContextClass {
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal(
-        "มีปัญหาในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง",
+        this.t("modal_login_error_title"),
         err.message,
         () => Router.prototype.push("/403")
       );
