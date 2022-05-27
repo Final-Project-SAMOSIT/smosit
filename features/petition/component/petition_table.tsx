@@ -8,6 +8,7 @@ import { petitionManageContext } from "../context/petition_manage.context";
 import { Button } from "../../../core/components/input/button.component";
 import { AuthContext } from "../../../core/context/auth.context";
 import { ModalContext } from "../../../core/context/modal.context";
+import { useTranslation } from "next-i18next";
 
 interface PetitionTableProps {
   data: Array<Petition>;
@@ -15,6 +16,11 @@ interface PetitionTableProps {
 }
 
 export const PetitionTable = (props: PetitionTableProps) => {
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("petition");
+
   //---------------------
   //   STATE
   //---------------------
@@ -28,6 +34,13 @@ export const PetitionTable = (props: PetitionTableProps) => {
   const modalContext = useContext(ModalContext);
 
   //---------------------
+  //   HANDLED
+  //---------------------
+  function getSimpleText(text: string) {
+    return _.toLower(_.replace(text, " ", ""));
+  }
+
+  //---------------------
   //   RENDER
   //---------------------
   return (
@@ -35,20 +48,28 @@ export const PetitionTable = (props: PetitionTableProps) => {
       {() => (
         <div className="flex flex-col items-center w-full space-y-[70px]">
           {props.data.length === 0 ? (
-            <div>no Data</div>
+            <div>{t("petition_table_empty")}</div>
           ) : (
             <div className="grid w-full grid-cols-6 laptop:grid-cols-10 gap-x-[16px]">
               <div className="col-span-2 laptop:pb-[38px] pb-[24px] col-start-2 laptop:block hidden">
-                <p className="heading6">date</p>
+                <p className="heading6">
+                  {t("petition_table_date_column_header")}
+                </p>
               </div>
               <div className="laptop:col-span-2 col-span-3 laptop:pb-[38px] pb-[24px]">
-                <p className="heading6">topic</p>
+                <p className="heading6">
+                  {t("petition_table_topic_column_header")}
+                </p>
               </div>
               <div className="col-span-2 laptop:pb-[38px] pb-[24px]">
-                <p className="heading6">type</p>
+                <p className="heading6">
+                  {t("petition_table_type_column_header")}
+                </p>
               </div>
               <div className="col-span-2 laptop:pb-[38px] pb-[24px] laptop:block hidden">
-                <p className="heading6">status</p>
+                <p className="heading6">
+                  {t("petition_table_status_column_header")}
+                </p>
               </div>
               <div className="col-span-1 laptop:pb-[38px] pb-[24px]" />
               <div className="border-b border-gray-40 col-span-full" />
@@ -67,10 +88,22 @@ export const PetitionTable = (props: PetitionTableProps) => {
                     <p className="body line-clamp-2">{petition.pet_topic}</p>
                   </div>
                   <div className="col-span-2 min-h-[50px] flex items-center">
-                    <p className="body">{petition.pet_types.pet_type_name}</p>
+                    <p className="body">
+                      {t(
+                        `petition_type_${getSimpleText(
+                          petition.pet_types.pet_type_name
+                        )}`
+                      )}
+                    </p>
                   </div>
                   <div className="col-span-2 min-h-[50px] items-center laptop:flex hidden">
-                    <p className="body">{petition.status.status_name}</p>
+                    <p className="body">
+                      {t(
+                        `petition_status_${getSimpleText(
+                          petition.status.status_name
+                        )}`
+                      )}
+                    </p>
                   </div>
                   <div className="col-span-1 min-h-[50px] flex items-center">
                     <i
@@ -104,7 +137,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       <div className="laptop:w-[76px] laptop:h-[76px] h-[32px] w-[32px] rounded-full bg-gray-30 flex items-end justify-center">
                         <p className="bottom-[-28px] absolute body w-max ">
                           <span className="laptop:text-[16px] text-[12px]">
-                            Sent Form
+                            {t("petition_status_sent")}
                           </span>
                         </p>
                         {Number(petition.status_id) >= 1 && (
@@ -136,17 +169,17 @@ export const PetitionTable = (props: PetitionTableProps) => {
                           {Number(petition.status_id) >= 1 &&
                             Number(petition.status_id) !== 5 && (
                               <span className="laptop:text-[16px] text-[12px]">
-                                Approve
+                                {t("petition_status_approve")}
                               </span>
                             )}
                           {Number(petition.status_id) === 5 && (
                             <span className="laptop:text-[16px] text-[12px]">
-                              Reject
+                              {t("petition_status_reject")}
                             </span>
                           )}
                           {Number(petition.status_id) === 1 && (
                             <span className="laptop:text-[16px] text-[12px]">
-                              / Reject
+                              / {t("petition_status_reject")}
                             </span>
                           )}
                         </p>
@@ -169,7 +202,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       <div className="laptop:w-[76px] laptop:h-[76px] h-[32px] w-[32px] rounded-full bg-gray-30 flex items-end justify-center relative">
                         <p className="bottom-[-28px] absolute body w-max ">
                           <span className="laptop:text-[16px] text-[12px]">
-                            In Progress
+                            {t("petition_status_inprogress")}
                           </span>
                         </p>
                         {Number(petition.status_id) >= 3 &&
@@ -192,7 +225,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       <div className="laptop:w-[76px] laptop:h-[76px] h-[32px] w-[32px] rounded-full bg-gray-30 flex items-end justify-center relative">
                         <p className="bottom-[-28px] absolute body w-max ">
                           <span className="laptop:text-[16px] text-[12px]">
-                            Done
+                            {t("petition_status_done")}
                           </span>
                         </p>
                         {Number(petition.status_id) >= 4 &&
@@ -209,7 +242,9 @@ export const PetitionTable = (props: PetitionTableProps) => {
                           <tbody>
                             <tr>
                               <td className="flex items-start">
-                                <p className="caption1">Topic:</p>
+                                <p className="caption1">
+                                  {t("petition_table_detail_title_topic")}:
+                                </p>
                               </td>
                               <td>
                                 <p className="caption1 pl-[8px]">
@@ -219,18 +254,26 @@ export const PetitionTable = (props: PetitionTableProps) => {
                             </tr>
                             <tr>
                               <td className="flex items-start">
-                                <p className="caption1">Type:</p>
+                                <p className="caption1">
+                                  {t("petition_table_detail_title_type")}:
+                                </p>
                               </td>
                               <td>
                                 <p className="caption1 pl-[8px]">
-                                  {petition.pet_types.pet_type_name}
+                                  {t(
+                                    `petition_type_${getSimpleText(
+                                      petition.pet_types.pet_type_name
+                                    )}`
+                                  )}
                                 </p>
                               </td>
                             </tr>
                             {props.showUserId && (
                               <tr>
                                 <td className="flex items-start">
-                                  <p className="caption1">User ID:</p>
+                                  <p className="caption1">
+                                    {t("petition_table_detail_title_userid")}:
+                                  </p>
                                 </td>
                                 <td>
                                   <p className="caption1 pl-[8px]">
@@ -241,7 +284,9 @@ export const PetitionTable = (props: PetitionTableProps) => {
                             )}
                             <tr>
                               <td className="flex items-start">
-                                <p className="caption1">Detail:</p>
+                                <p className="caption1">
+                                  {t("petition_table_detail_title_detail")}:
+                                </p>
                               </td>
                               <td>
                                 <p className="caption1 pl-[8px]">
@@ -251,7 +296,9 @@ export const PetitionTable = (props: PetitionTableProps) => {
                             </tr>
                             <tr>
                               <td className="flex items-start">
-                                <p className="caption1">Date:</p>
+                                <p className="caption1">
+                                  {t("petition_table_detail_title_date")}:
+                                </p>
                               </td>
                               <td>
                                 <p className="caption1 pl-[8px]">
@@ -264,11 +311,17 @@ export const PetitionTable = (props: PetitionTableProps) => {
                             </tr>
                             <tr>
                               <td className="flex items-start">
-                                <p className="caption1">Status:</p>
+                                <p className="caption1">
+                                  {t("petition_table_detail_title_status")}:
+                                </p>
                               </td>
                               <td>
                                 <p className="caption1 pl-[8px]">
-                                  {petition.status.status_description}
+                                  {t(
+                                    `petition_status_${getSimpleText(
+                                      petition.status.status_name
+                                    )}`
+                                  )}
                                 </p>
                               </td>
                             </tr>
@@ -282,8 +335,8 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 <Button
                                   onClick={() =>
                                     modalContext.openModal(
-                                      "แก่ไขสถานะคำร้อง",
-                                      "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
+                                      t("petition_modal_edit_peition_title"),
+                                      t("petition_modal_edit_peition_message"),
                                       () => {
                                         context.onStatusChange(
                                           "Reject",
@@ -292,15 +345,15 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                       }
                                     )
                                   }
-                                  title="Reject"
+                                  title={t("petition_status_reject")}
                                   widthCss="w-[72px] laptop:w-[96px]"
                                   heightCss="h-[32px] laptop:h-[40px]"
                                 />
                                 <Button
                                   onClick={() =>
                                     modalContext.openModal(
-                                      "แก่ไขสถานะคำร้อง",
-                                      "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
+                                      t("petition_modal_edit_peition_title"),
+                                      t("petition_modal_edit_peition_message"),
                                       () => {
                                         context.onStatusChange(
                                           "Approve",
@@ -309,7 +362,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                       }
                                     )
                                   }
-                                  title="Approve"
+                                  title={t("petition_status_approve")}
                                   widthCss="w-[72px] laptop:w-[96px]"
                                   heightCss="h-[32px] laptop:h-[40px]"
                                 />
@@ -321,14 +374,16 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 <Button
                                   onClick={() =>
                                     modalContext.openModal(
-                                      "ลบสถานะคำร้อง",
-                                      "คุณแน่ใจใช่หรือไม่ที่จะลบสถานะคำร้องนี้",
+                                      t("petition_modal_delete_peition_title"),
+                                      t(
+                                        "petition_modal_delete_peition_message"
+                                      ),
                                       () => {
                                         context.onDelete(petition.pet_id);
                                       }
                                     )
                                   }
-                                  title="Delete"
+                                  title={t("petition_status_delete")}
                                   widthCss="w-[72px] laptop:w-[96px]"
                                   heightCss="h-[32px] laptop:h-[40px]"
                                 />
@@ -339,8 +394,8 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 <Button
                                   onClick={() =>
                                     modalContext.openModal(
-                                      "แก่ไขสถานะคำร้อง",
-                                      "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
+                                      t("petition_modal_edit_peition_title"),
+                                      t("petition_modal_edit_peition_message"),
                                       () => {
                                         context.onStatusChange(
                                           "In Progress",
@@ -349,7 +404,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                       }
                                     )
                                   }
-                                  title="In Progress"
+                                  title={t("petition_status_inprogress")}
                                   widthCss="laptop:w-[144px] w-[96px]"
                                   heightCss="h-[32px] laptop:h-[40px]"
                                 />
@@ -360,8 +415,8 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 <Button
                                   onClick={() =>
                                     modalContext.openModal(
-                                      "แก่ไขสถานะคำร้อง",
-                                      "คุณแน่ใจใช่หรือไม่ที่จะแก้ไขสถานะคำร้องนี้",
+                                      t("petition_modal_edit_peition_title"),
+                                      t("petition_modal_edit_peition_message"),
                                       () => {
                                         context.onStatusChange(
                                           "Done",
@@ -370,7 +425,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                       }
                                     )
                                   }
-                                  title="Done"
+                                  title={t("petition_status_done")}
                                   widthCss="w-[72px] laptop:w-[96px]"
                                   heightCss="h-[32px] laptop:h-[40px]"
                                 />

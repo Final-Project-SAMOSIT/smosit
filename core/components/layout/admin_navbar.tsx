@@ -189,7 +189,7 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                             setIsDropdownOpen(false);
                           }}
                         >
-                          <p className="caption2 py-[4px] px-[8px]">
+                          <p className="body py-[4px] px-[8px]">
                             {props.noTranslation
                               ? "login"
                               : t("navbar_login_button")}

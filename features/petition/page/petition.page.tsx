@@ -13,8 +13,15 @@ import { AuthContext } from "../../../core/context/auth.context";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import _ from "lodash";
+import { useTranslation } from "next-i18next";
+import { ModalContext } from "../../../core/context/modal.context";
 
 export const PetitionPage = () => {
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("petition");
+
   //---------------------
   //   STATE
   //---------------------
@@ -25,6 +32,7 @@ export const PetitionPage = () => {
   //---------------------
   const context = useContext(petitionContext);
   const authContext = useContext(AuthContext);
+  const modal = useContext(ModalContext)
 
   //---------------------
   //   REF
@@ -70,10 +78,22 @@ export const PetitionPage = () => {
     );
   }
 
+  function getSimpleText(text: string) {
+    return _.toLower(_.replace(text, " ", ""));
+  }
+
+  function getPetetionTypeOption() {
+    return _.map(context.petitionType, (type) => ({
+      name: t(`petition_type_${getSimpleText(type.name)}`),
+      value: type.value,
+    }));
+  }
+
   //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
+    context.modal = modal
     if (!authContext.isPermission(["Users"])) {
       router.push("/401");
     } else {
@@ -93,16 +113,10 @@ export const PetitionPage = () => {
             <div className="flex justify-between space-x-[48px] ">
               <div className="laptop:w-1/2 w-full pb-[53px] pt-[42px] flex flex-col justify-between laptop:space-y-0 space-y-[32px]">
                 <p className="border border-black rounded-full pt-[6px] pb-[5px] px-[17px] w-max button select-none">
-                  Request Petition
+                  {t("petition_introduce_tag")}
                 </p>
-                <p className="heading1">What is Request Petition</p>
-                <p className="body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  tortor quam nunc, sit ullamcorper consequat risus. Lorem est
-                  varius aliquet gravida habitasse aliquet amet a. Nisi porta id
-                  sit maecenas. Eros morbi blandit accumsan adipiscing diam
-                  cursus sed.
-                </p>
+                <p className="heading1">{t("petition_introduce_title")}</p>
+                <p className="body">{t("petition_introduce_detail")}</p>
               </div>
               <div className="hidden w-1/2 laptop:block">
                 <img src="/images/petition_graphic.svg" className="" />
@@ -112,12 +126,14 @@ export const PetitionPage = () => {
             <div className="w-full bg-gray-10 laptop:mt-[83px] mt-0 pt-[24px] pb-[24px] laptop:px-[93px] px-[24px] flex flex-col space-y-[16px]">
               <div className="flex justify-center w-full">
                 <p className="pb-[8px] px-[24.5px] border-b border-black title">
-                  Form for petition
+                  {t("petition_form_title")}
                 </p>
               </div>
 
               <div className="space-y-[12px] w-full">
-                <p className="heading6">Topic</p>
+                <p className="heading6">
+                  {t("petition_form_topic_input_title")}
+                </p>
                 <TextInput
                   onChange={(e) => {
                     formik.setFieldValue("pet_topic", e.target.value);
@@ -131,9 +147,9 @@ export const PetitionPage = () => {
               <div className="laptop:w-[512px] w-full">
                 <Dropdown
                   onChange={(e) => formik.setFieldValue("type_id", e)}
-                  options={context.petitionType}
+                  options={getPetetionTypeOption()}
                   value={formik.values.type_id}
-                  topic="Type"
+                  topic={t("petition_form_type_input_title")}
                   error={formik.errors.type_id}
                 />
               </div>
@@ -144,7 +160,7 @@ export const PetitionPage = () => {
                     formik.setFieldValue("pet_details", e.target.value)
                   }
                   value={formik.values.pet_details}
-                  title="detail"
+                  title={t("petition_form_detail_input_title")}
                   height={160}
                   limitText={500}
                   error={formik.errors.pet_details}
@@ -154,7 +170,7 @@ export const PetitionPage = () => {
               <div className="flex justify-center w-full">
                 <Button
                   onClick={() => formik.submitForm()}
-                  title="submit"
+                  title={t("petition_form_submit_button")}
                   widthCss="laptop:w-[137px] w-[86px]"
                   heightCss="laptop:h-[52px] h-[36px]"
                   custom="bg-gray-10 hover:bg-black hover:text-white rounded-[10px] border border-black"
@@ -164,7 +180,7 @@ export const PetitionPage = () => {
 
             <div className="laptop:mt-[170px] mt-[48px] flex flex-col items-center w-full space-y-[70px]">
               <p className="title pb-[15px] border-b border-black px-[12px]">
-                Status
+                {t("petition_list_title")}
               </p>
               <div className="flex flex-col laptop:w-[360px] w-[300px] justify-center space-y-[16px]">
                 <div className="flex w-full">
@@ -172,13 +188,17 @@ export const PetitionPage = () => {
                     className="flex justify-center w-1/2 cursor-pointer select-none"
                     onClick={() => setFilterType("Pending")}
                   >
-                    <p className="heading6">pending</p>
+                    <p className="heading6">
+                      {t("petition_list_filter_pending")}
+                    </p>
                   </div>
                   <div
                     className="flex justify-center w-1/2 cursor-pointer select-none"
                     onClick={() => setFilterType("Completed")}
                   >
-                    <p className="heading6">completed</p>
+                    <p className="heading6">
+                      {t("petition_list_filter_completed")}
+                    </p>
                   </div>
                 </div>
                 <div className="laptop:w-[360px] w-[300px] h-[2px] bg-gray-20">
@@ -194,7 +214,11 @@ export const PetitionPage = () => {
                 </div>
               </div>
               <div ref={petitionListRef}>
-                <PetitionTable data={getShowPetition()} />
+                <PetitionTable
+                  data={
+                    getShowPetition() 
+                  }
+                />
               </div>
             </div>
           </div>
