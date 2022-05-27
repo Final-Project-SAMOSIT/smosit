@@ -1,15 +1,22 @@
 import type { NextPage } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { Button } from "../core/components/input/button.component";
+import { AdminNavbar } from "../core/components/layout/admin_navbar";
 import { Navbar } from "../core/components/layout/navbar";
+import { AuthContext } from "../core/context/auth.context";
 
 const Error404Page: NextPage = () => {
   const router = useRouter();
+  const authContext = useContext(AuthContext);
 
   return (
     <div className="flex flex-col items-center h-screen">
-      <Navbar noTranslation />
+      {authContext.isPermission(["Publisher"]) ? (
+        <AdminNavbar />
+      ) : (
+        <Navbar noTranslation />
+      )}
       <div className="flex flex-col items-center justify-around w-full h-[calc(100%-90px)]">
         <img
           src="/images/404.png"

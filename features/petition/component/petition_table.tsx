@@ -10,6 +10,7 @@ import { AuthContext } from "../../../core/context/auth.context";
 
 interface PetitionTableProps {
   data: Array<Petition>;
+  showUserId?: boolean;
 }
 
 export const PetitionTable = (props: PetitionTableProps) => {
@@ -34,7 +35,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
           {props.data.length === 0 ? (
             <div>no Data</div>
           ) : (
-            <div className="grid w-full grid-cols-6 laptop:grid-cols-10">
+            <div className="grid w-full grid-cols-6 laptop:grid-cols-10 gap-x-[16px]">
               <div className="col-span-2 laptop:pb-[38px] pb-[24px] col-start-2 laptop:block hidden">
                 <p className="heading6">date</p>
               </div>
@@ -61,7 +62,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                     </p>
                   </div>
                   <div className="laptop:col-span-2 col-span-3 min-h-[50px] flex items-center">
-                    <p className="body">{petition.pet_topic}</p>
+                    <p className="body line-clamp-2">{petition.pet_topic}</p>
                   </div>
                   <div className="col-span-2 min-h-[50px] flex items-center">
                     <p className="body">{petition.pet_types.pet_type_name}</p>
@@ -224,6 +225,18 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 </p>
                               </td>
                             </tr>
+                            {props.showUserId && (
+                              <tr>
+                                <td className="flex items-start">
+                                  <p className="caption1">User ID:</p>
+                                </td>
+                                <td>
+                                  <p className="caption1 pl-[8px]">
+                                    {petition.user_id}
+                                  </p>
+                                </td>
+                              </tr>
+                            )}
                             <tr>
                               <td className="flex items-start">
                                 <p className="caption1">Detail:</p>

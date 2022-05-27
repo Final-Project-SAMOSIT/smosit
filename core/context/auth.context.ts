@@ -65,8 +65,7 @@ class AuthContextClass {
 
   logout() {
     Cookies.remove("SMOSIT_TOKEN");
-    this.me = null;
-    this.Me();
+    Router.prototype.push("/");
   }
 
   isPermission(roles: Array<Role>): boolean {

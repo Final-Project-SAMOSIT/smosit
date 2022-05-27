@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Observer } from "mobx-react-lite";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { Button } from "../../../core/components/input/button.component";
@@ -27,6 +27,11 @@ export const PetitionPage = () => {
   const authContext = useContext(AuthContext);
 
   //---------------------
+  //   REF
+  //---------------------
+  const petitionListRef = useRef<HTMLDivElement>(null);
+
+  //---------------------
   //   FORMIK
   //---------------------
   const formik = useFormik({
@@ -37,6 +42,9 @@ export const PetitionPage = () => {
     validateOnMount: false,
     onSubmit: (value) => {
       context.onCreate(value, formik, authContext.me?.user_id || "");
+      window.scrollTo({
+        top: petitionListRef?.current?.offsetTop,
+      });
     },
   });
 
@@ -179,7 +187,9 @@ export const PetitionPage = () => {
                   />
                 </div>
               </div>
-              <PetitionTable data={getShowPetition()} />
+              <div ref={petitionListRef}>
+                <PetitionTable data={getShowPetition()} />
+              </div>
             </div>
           </div>
         </MainLayout>

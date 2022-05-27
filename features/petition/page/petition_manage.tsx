@@ -115,7 +115,7 @@ export const PetitionManage = () => {
             <div className="mt-[64px]">
               {_.size(getShowPetition()) > 0 ? (
                 // <PetitionManageTable data={getShowPetition()} />
-                <PetitionTable data={getShowPetition()} />
+                <PetitionTable data={getShowPetition()} showUserId />
               ) : (
                 <div className="flex justify-center">
                   <p className="body">No data</p>
