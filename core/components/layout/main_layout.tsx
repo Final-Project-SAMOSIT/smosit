@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Observer } from "mobx-react-lite";
 import { Navbar } from "./navbar";
 import { Router } from "next/router";
@@ -16,12 +16,24 @@ export const MainLayout = (props: MainLayoutProps) => {
   //---------------------
   //   i18n
   //---------------------
-  const { t } = useTranslation("common");
+  const { i18n, t } = useTranslation("common");
 
   //---------------------
   //   CONTEXT
   //---------------------
   const authContext = useContext(AuthContext);
+
+  //---------------------
+  //   EFFECT
+  //---------------------
+  useEffect(() => {
+    const lang = localStorage.getItem("language");
+    if (lang) {
+      i18n.changeLanguage(lang);
+    } else {
+      localStorage.setItem("language", i18n.language);
+    }
+  }, []);
 
   //---------------------
   //   RENDER

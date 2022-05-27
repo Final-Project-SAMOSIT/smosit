@@ -113,6 +113,7 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                   ])}
                   onClick={() => {
                     i18n.changeLanguage("en");
+                    localStorage.setItem("language", "en");
                   }}
                 >
                   EN
@@ -125,6 +126,7 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                   ])}
                   onClick={() => {
                     i18n.changeLanguage("th");
+                    localStorage.setItem("language", "th");
                   }}
                 >
                   TH

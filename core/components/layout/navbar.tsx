@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-  Fragment,
-} from "react";
+import React, { useContext, useState, Fragment } from "react";
 import { Observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import _ from "lodash";
@@ -13,7 +7,6 @@ import { Button } from "../input/button.component";
 import { useTranslation } from "next-i18next";
 import { AuthContext } from "../../context/auth.context";
 import getConfig from "next/config";
-import { useClickOutside } from "../../libs/click_detector";
 import { ModalContext } from "../../context/modal.context";
 
 interface NavbarProps {
@@ -138,6 +131,7 @@ export const Navbar = (props: NavbarProps) => {
                   ])}
                   onClick={() => {
                     i18n.changeLanguage("en");
+                    localStorage.setItem("language", "en");
                   }}
                 >
                   EN
@@ -150,6 +144,7 @@ export const Navbar = (props: NavbarProps) => {
                   ])}
                   onClick={() => {
                     i18n.changeLanguage("th");
+                    localStorage.setItem("language", "th");
                   }}
                 >
                   TH
