@@ -2,12 +2,18 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Observer } from "mobx-react-lite";
 import { ModalContext } from "../../context/modal.context";
 import { Button } from "../input/button.component";
+import { useTranslation } from "next-i18next";
 
 interface ModalLayoutProps {
   children: React.ReactNode;
 }
 
 export const ModalLayout = (props: ModalLayoutProps) => {
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("common");
+
   //---------------------
   //   CONTEXT
   //---------------------
@@ -28,7 +34,7 @@ export const ModalLayout = (props: ModalLayoutProps) => {
                 <div className="flex space-x-[16px] pt-[24px]">
                   <Button
                     onClick={() => (modal.isModalOpen = false)}
-                    title="ยกเลิก"
+                    title={t("modal_cancel_button")}
                     heightCss="laptop:h-[40px] h-[32px]"
                     widthCss="laptop:w-[112px] w-[72px]"
                   ></Button>
@@ -37,7 +43,7 @@ export const ModalLayout = (props: ModalLayoutProps) => {
                       modal.onOk();
                       modal.isModalOpen = false;
                     }}
-                    title="ตกลง"
+                    title={t("modal_ok_button")}
                     heightCss="laptop:h-[40px] h-[32px]"
                     widthCss="laptop:w-[112px] w-[72px]"
                   ></Button>

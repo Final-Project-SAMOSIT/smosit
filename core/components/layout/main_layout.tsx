@@ -4,6 +4,7 @@ import { Navbar } from "./navbar";
 import { Router } from "next/router";
 import { AdminNavbar } from "./admin_navbar";
 import { AuthContext } from "../../context/auth.context";
+import { useTranslation } from "next-i18next";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,12 @@ interface MainLayoutProps {
 
 export const MainLayout = (props: MainLayoutProps) => {
   const { children } = props;
+
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("common");
+
   //---------------------
   //   CONTEXT
   //---------------------
@@ -44,7 +51,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                     className="h-[48px] laptop:h-[103px]"
                   />
                   <div className="text-white">
-                    <p className="topic2">Contact us</p>
+                    <p className="topic2">{t("footer_contact_us_label")}</p>
                     <a
                       className="heading5"
                       href="https://www.facebook.com/samositkmutt"

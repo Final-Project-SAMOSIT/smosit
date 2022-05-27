@@ -1,0 +1,15 @@
+{
+    "home_page_about_tag": "ABOUT",
+    "home_page_about_title": "What is SAMO SIT",
+    "home_page_about_detail": "SAMO SIT is a web application used by students of SIT faculty at KMUTT to manage collaboration between students and the student union. Many features in our web application were developed with the goal of assisting students or the student union in getting connected fast and resolving problems that may arise.",
+    "home_page_about_read_more_button": "READ MORE",
+    "home_page_voting_feature_card_title": "Voting",
+    "home_page_voting_feature_card_detail": "To confirm the work of the student club committee, which is appointed each academic year within our faculty, we use a student club election system.",
+    "home_page_voting_feature_card_button": "CLICK",
+    "home_page_petition_feature_card_title": "Request Petition",
+    "home_page_petition_feature_card_detail": "It's a way for students to submit suggestions to student clubs. It doesn't matter if it's about reporting damages, broken things, or a lack of facilities that under the working on student club.",
+    "home_page_petition_feature_card_button": "CLICK",
+    "home_page_project_form_feature_card_title": "Project Form",
+    "home_page_project_form_feature_card_detail": "It's a form to file an official request that can be to make a complaint with the faculty, such as request to start a some project. But in this process must be someone in student club serving as administrators to assist in to consider.",
+    "home_page_project_form_feature_card_button": "CLICK"
+}

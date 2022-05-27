@@ -7,6 +7,7 @@ import { Button } from "../input/button.component";
 import { useTranslation } from "next-i18next";
 import { AuthContext } from "../../context/auth.context";
 import getConfig from "next/config";
+import { ModalContext } from "../../context/modal.context";
 
 interface AdminNavbarProps {
   noTranslation?: boolean;
@@ -19,6 +20,11 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
   const { t, i18n } = useTranslation("common");
 
   //---------------------
+  //   CONTEXT
+  //---------------------
+  const modal = useContext(ModalContext);
+
+  //---------------------
   //   STATE
   //---------------------
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -27,9 +33,22 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
   //   COSNT
   //---------------------
   const features = [
-    { name: t("navbar_feature_home_vote"), route: "/manage/vote" },
-    { name: t("navbar_feature_home_petition"), route: "/manage/petition" },
-    { name: t("navbar_feature_home_project"), route: "/manage/project" },
+    {
+      name: props.noTranslation
+        ? "Request Petition"
+        : t("navbar_feature_home_vote"),
+      route: "/manage/vote",
+    },
+    {
+      name: props.noTranslation
+        ? "Project Form"
+        : t("navbar_feature_home_petition"),
+      route: "/manage/petition",
+    },
+    {
+      name: props.noTranslation ? "login" : t("navbar_feature_home_project"),
+      route: "/manage/project",
+    },
   ];
 
   const { publicRuntimeConfig } = getConfig();
@@ -70,7 +89,10 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                       "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black duration-300 transition-all",
                       {
                         "w-[calc(100%-12px)]":
-                          feature.name === t("navbar_feature_home_name")
+                          feature.name ===
+                          (props.noTranslation
+                            ? "Home"
+                            : t("navbar_feature_home_name"))
                             ? router.asPath === "/"
                             : _.includes(router.asPath, feature.route),
                       },
@@ -141,11 +163,21 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                         <div
                           className="w-[128px] bg-white"
                           onClick={() => {
-                            authContext.logout();
-                            setIsDropdownOpen(false);
+                            modal.openModal(
+                              t("modal_logout_title"),
+                              t("modal_logout_message"),
+                              () => {
+                                authContext.logout();
+                                setIsDropdownOpen(false);
+                              }
+                            );
                           }}
                         >
-                          <p className="body py-[4px] px-[8px]">logout</p>
+                          <p className="body py-[4px] px-[8px]">
+                            {props.noTranslation
+                              ? "logout"
+                              : t("navbar_logout_button")}
+                          </p>
                         </div>
                       ) : (
                         <div
@@ -157,7 +189,11 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                             setIsDropdownOpen(false);
                           }}
                         >
-                          <p className="caption2 py-[4px] px-[8px]">login</p>
+                          <p className="caption2 py-[4px] px-[8px]">
+                            {props.noTranslation
+                              ? "login"
+                              : t("navbar_login_button")}
+                          </p>
                         </div>
                       )}
                     </div>
@@ -169,9 +205,17 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                 {authContext.me ? (
                   <Button
                     onClick={() => {
-                      authContext.logout();
+                      modal.openModal(
+                        t("modal_logout_title"),
+                        t("modal_logout_message"),
+                        () => {
+                          authContext.logout();
+                        }
+                      );
                     }}
-                    title={t("navbar_logout_button")}
+                    title={
+                      props.noTranslation ? "logout" : t("navbar_logout_button")
+                    }
                     widthCss="w-[137px]"
                   ></Button>
                 ) : (
@@ -181,7 +225,9 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                         "https://std-sso-fe.sit.kmutt.ac.th/login?response_type=code&client_id=dEV6F8Xb&redirect_uri=http://localhost:3000/redirect&state=1234"
                       );
                     }}
-                    title={t("navbar_login_button")}
+                    title={
+                      props.noTranslation ? "login" : t("navbar_login_button")
+                    }
                     widthCss="w-[137px]"
                   ></Button>
                 )}

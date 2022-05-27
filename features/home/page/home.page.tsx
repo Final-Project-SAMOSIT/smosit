@@ -6,8 +6,14 @@ import { FeatureCard } from "../components/feature_card.component";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../../core/context/auth.context";
+import { useTranslation } from "next-i18next";
 
 export const HomePage = () => {
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("home");
+
   //---------------------
   //   CONTEXT
   //---------------------
@@ -18,23 +24,20 @@ export const HomePage = () => {
   //---------------------
   const features = [
     {
-      topic: "Voting",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel eleifend arcu, purus malesuada nibh morbi senectus.Tellus risus neque, felis nisl vulputate scelerisque urna congue. Egestas ac facilisi enim euarcu mollis est arcu quis. Faucibus sit interdum risus, sed at feugiat integer.",
+      topic: t("home_page_voting_feature_card_title"),
+      description: t("home_page_voting_feature_card_detail"),
       featureRoute: "",
     },
     {
-      topic: "Request Petition",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel eleifend arcu, purus malesuada nibh morbi senectus.Tellus risus neque, felis nisl vulputate scelerisque urna congue. Egestas ac facilisi enim euarcu mollis est arcu quis. Faucibus sit interdum risus, sed at feugiat integer.",
+      topic: t("home_page_petition_feature_card_title"),
+      description: t("home_page_petition_feature_card_detail"),
       featureRoute: authContext.isPermission(["Publisher"])
         ? "/manage/petition"
         : "/petition",
     },
     {
-      topic: "Project Form",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel eleifend arcu, purus malesuada nibh morbi senectus.Tellus risus neque, felis nisl vulputate scelerisque urna congue. Egestas ac facilisi enim euarcu mollis est arcu quis. Faucibus sit interdum risus, sed at feugiat integer.",
+      topic: t("home_page_project_form_feature_card_title"),
+      description: t("home_page_project_form_feature_card_detail"),
       featureRoute: "",
     },
   ];
@@ -64,20 +67,14 @@ export const HomePage = () => {
 
               <div className="laptop:w-1/2 w-full pb-[53px] pt-[42px] flex flex-col justify-between laptop:space-y-0 space-y-[32px]">
                 <p className="border border-black rounded-full pt-[6px] pb-[5px] px-[17px] w-max button select-none">
-                  ABOUT
+                  {t("home_page_about_tag")}
                 </p>
-                <p className="heading1">What is SAMO SIT</p>
-                <p className="body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  tortor quam nunc, sit ullamcorper consequat risus. Lorem est
-                  varius aliquet gravida habitasse aliquet amet a. Nisi porta id
-                  sit maecenas. Eros morbi blandit accumsan adipiscing diam
-                  cursus sed.
-                </p>
+                <p className="heading1">{t("home_page_about_title")}</p>
+                <p className="body">{t("home_page_about_detail")}</p>
                 <div className="flex justify-end w-full">
                   <Button
                     onClick={() => null}
-                    title="READ MORE"
+                    title={t("home_page_about_read_more_button")}
                     heightCss="laptop:h-[52px] h-[36px]"
                     widthCss="laptop:w-[137px] w-[96px]"
                   ></Button>
@@ -85,14 +82,14 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[41px] space-y-[36px] laptop:space-y-0 h-max tablet:w-[320px] tablet:mx-auto laptop:w-full w-full ">
+            <div className="grid grid-cols-1 laptop:grid-cols-3 tablet:w-[320px] tablet:mx-auto laptop:w-full w-full gap-[32px]">
               {_.map(features, (feature) => (
-                <div className="h-full" key={`${feature.topic}`}>
+                <div className="w-full h-full" key={`${feature.topic}`}>
                   <FeatureCard
                     title={feature.topic}
                     description={feature.description}
                     onClick={() => router.push(feature.featureRoute)}
-                  ></FeatureCard>
+                  />
                 </div>
               ))}
             </div>

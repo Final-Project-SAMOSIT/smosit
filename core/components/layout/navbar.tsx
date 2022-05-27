@@ -210,7 +210,11 @@ export const Navbar = (props: NavbarProps) => {
                             );
                           }}
                         >
-                          <p className="body py-[4px] px-[8px]">logout</p>
+                          <p className="body py-[4px] px-[8px]">
+                            {props.noTranslation
+                              ? "logout"
+                              : t("navbar_logout_button")}
+                          </p>
                         </div>
                       ) : (
                         <div
@@ -222,7 +226,11 @@ export const Navbar = (props: NavbarProps) => {
                             setIsDropdownOpen(false);
                           }}
                         >
-                          <p className="body py-[4px] px-[8px]">login</p>
+                          <p className="body py-[4px] px-[8px]">
+                            {props.noTranslation
+                              ? "login"
+                              : t("navbar_login_button")}
+                          </p>
                         </div>
                       )}
                     </div>
@@ -234,8 +242,8 @@ export const Navbar = (props: NavbarProps) => {
                   <Button
                     onClick={() => {
                       modal.openModal(
-                        "logout",
-                        "Are you sure you want to logout?",
+                        t("modal_logout_title"),
+                        t("modal_logout_message"),
                         () => {
                           authContext.logout();
                         }
