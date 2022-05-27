@@ -11,10 +11,16 @@ const Error500Page: NextPage = () => {
     <div className="flex flex-col items-center h-screen">
       <Navbar noTranslation />
       <div className="flex flex-col items-center justify-around w-full h-[calc(100%-90px)]">
-        <img src="/images/500.svg" className="w-5/12" />
-        <div className="w-1/12">
-          <Button onClick={() => router.push("/")} title="Back" />
-        </div>
+        <img
+          src="/images/500.svg"
+          className="w-11/12 mx-auto laptop:w-5/12 laptop:mx-0"
+        />
+        <Button
+          onClick={() => router.push("/")}
+          title="Back"
+          widthCss="w-2/5 laptop:w-1/12"
+          heightCss="laptop:h-[52px] h-[36px]"
+        />
       </div>
     </div>
   );
