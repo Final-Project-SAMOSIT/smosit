@@ -14,6 +14,7 @@ import { useTranslation } from "next-i18next";
 import { AuthContext } from "../../context/auth.context";
 import getConfig from "next/config";
 import { useClickOutside } from "../../libs/click_detector";
+import { ModalContext } from "../../context/modal.context";
 
 interface NavbarProps {
   noTranslation?: boolean;
@@ -62,6 +63,7 @@ export const Navbar = (props: NavbarProps) => {
   //   CONTEXT
   //---------------------
   const authContext = useContext(AuthContext);
+  const modal = useContext(ModalContext);
 
   //---------------------
   //   ROUTER
@@ -198,8 +200,14 @@ export const Navbar = (props: NavbarProps) => {
                         <div
                           className="w-[128px] bg-white"
                           onClick={() => {
-                            authContext.logout();
-                            setIsDropdownOpen(false);
+                            modal.openModal(
+                              "logout",
+                              "Are you sure you want to logout?",
+                              () => {
+                                authContext.logout();
+                                setIsDropdownOpen(false);
+                              }
+                            );
                           }}
                         >
                           <p className="body py-[4px] px-[8px]">logout</p>
@@ -214,7 +222,7 @@ export const Navbar = (props: NavbarProps) => {
                             setIsDropdownOpen(false);
                           }}
                         >
-                          <p className="caption2 py-[4px] px-[8px]">login</p>
+                          <p className="body py-[4px] px-[8px]">login</p>
                         </div>
                       )}
                     </div>
@@ -225,7 +233,13 @@ export const Navbar = (props: NavbarProps) => {
                 {authContext.me ? (
                   <Button
                     onClick={() => {
-                      authContext.logout();
+                      modal.openModal(
+                        "logout",
+                        "Are you sure you want to logout?",
+                        () => {
+                          authContext.logout();
+                        }
+                      );
                     }}
                     title={
                       props.noTranslation ? "logout" : t("navbar_logout_button")
