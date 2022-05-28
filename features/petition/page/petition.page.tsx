@@ -32,7 +32,7 @@ export const PetitionPage = () => {
   //---------------------
   const context = useContext(petitionContext);
   const authContext = useContext(AuthContext);
-  const modal = useContext(ModalContext)
+  const modal = useContext(ModalContext);
 
   //---------------------
   //   REF
@@ -93,8 +93,8 @@ export const PetitionPage = () => {
   //   EFFECT
   //---------------------
   useEffect(() => {
-    context.modal = modal
-    context.t = t
+    context.modal = modal;
+    context.t = t;
     if (!authContext.isPermission(["Users"])) {
       router.push("/401");
     } else {
@@ -142,6 +142,8 @@ export const PetitionPage = () => {
                   value={formik.values.pet_topic}
                   error={formik.errors.pet_topic}
                   height={40}
+                  limitText={100}
+                  showLimit
                 />
               </div>
 
@@ -215,11 +217,7 @@ export const PetitionPage = () => {
                 </div>
               </div>
               <div ref={petitionListRef}>
-                <PetitionTable
-                  data={
-                    getShowPetition() 
-                  }
-                />
+                <PetitionTable data={getShowPetition()} />
               </div>
             </div>
           </div>
