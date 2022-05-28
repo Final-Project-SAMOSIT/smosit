@@ -28,6 +28,7 @@
     "petition_status_inprogress": "In Progress",
     "petition_status_done": "Done",
     "petition_status_reject": "Reject",
+    "petition_status_delete": "Delete",
     "petition_table_detail_title_topic": "Topic",
     "petition_table_detail_title_type": "Type",
     "petition_table_detail_title_userid": "User ID",

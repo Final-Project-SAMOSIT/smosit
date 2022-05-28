@@ -28,6 +28,7 @@
     "petition_status_inprogress": "กำลังดำเนินการ",
     "petition_status_done": "เสร็จสิ้น",
     "petition_status_reject": "ปฏิเสธ",
+    "petition_status_delete": "ลบ",
     "petition_table_detail_title_topic": "หัวข้อ",
     "petition_table_detail_title_type": "ประเภท",
     "petition_table_detail_title_userid": "รหัสนักศึกษา",
