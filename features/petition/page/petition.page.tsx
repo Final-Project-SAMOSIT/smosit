@@ -137,12 +137,10 @@ export const PetitionPage = () => {
                 </p>
                 <TextInput
                   onChange={(e) => {
-                    if (e.target.value.length > 100) {
-                      formik.setFieldValue(
-                        "pet_topic",
-                        e.target.value.substring(0, 100)
-                      );
-                    }
+                    formik.setFieldValue(
+                      "pet_topic",
+                      e.target.value.substring(0, 100)
+                    );
                   }}
                   value={formik.values.pet_topic}
                   error={formik.errors.pet_topic}
