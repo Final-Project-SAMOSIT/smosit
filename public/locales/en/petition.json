@@ -35,6 +35,10 @@
     "petition_table_detail_title_detail": "Detail",
     "petition_table_detail_title_date": "Date",
     "petition_table_detail_title_status": "Status",
+    "petition_modal_edit_peition_title": "Edit petition",
+    "petition_modal_edit_peition_message": "Are you sure that you want to modify status",
+    "petition_modal_delete_peition_title": "Delete petition",
+    "petition_modal_delete_peition_message": "Are you sure that you want to delete status",
 
     "petition_modal_error_data_preparation": "there's a data preparation problem",
     "petition_modal_error_petition_limit": "petition limit exceed, please try again later",
