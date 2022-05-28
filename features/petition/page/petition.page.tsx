@@ -137,7 +137,12 @@ export const PetitionPage = () => {
                 </p>
                 <TextInput
                   onChange={(e) => {
-                    formik.setFieldValue("pet_topic", e.target.value);
+                    if (e.target.value.length > 100) {
+                      formik.setFieldValue(
+                        "pet_topic",
+                        _.slice(e.target.value, 0, 100)
+                      );
+                    }
                   }}
                   value={formik.values.pet_topic}
                   error={formik.errors.pet_topic}
@@ -160,7 +165,10 @@ export const PetitionPage = () => {
               <div className="w-full">
                 <TextArea
                   onChange={(e) =>
-                    formik.setFieldValue("pet_details", e.target.value)
+                    formik.setFieldValue(
+                      "pet_details",
+                      _.slice(e.target.value, 0, 100)
+                    )
                   }
                   value={formik.values.pet_details}
                   title={t("petition_form_detail_input_title")}

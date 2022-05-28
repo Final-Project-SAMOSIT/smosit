@@ -11,7 +11,7 @@
     "petition_list_filter_pending": "รอดำเนินการ",
     "petition_list_filter_completed": "เสร็จสิ้น",
     "petition_list_filter_all": "ทั้งหมด",
-    "petition_list_filter_rejected": "ปฏเสธ",
+    "petition_list_filter_rejected": "ปฏิเสธ",
     "petition_list_filter_done": "เสร็จสิ้น",
     "petition_table_empty": "ไม่มีข้อมูล",
     "petition_table_date_column_header": "วันที่",
