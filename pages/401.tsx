@@ -16,7 +16,7 @@ const Error401Page: NextPage = () => {
       {authContext.isPermission(["Publisher"]) ? (
         <AdminNavbar />
       ) : (
-        <Navbar noTranslation />
+        <Navbar />
       )}
       <div className="flex flex-col items-center justify-around w-full h-[calc(100%-90px)]">
         <img

@@ -13,7 +13,7 @@ const Error404Page: NextPage = () => {
   return (
     <div className="flex flex-col items-center h-screen">
       {authContext.isPermission(["Publisher"]) ? (
-        <AdminNavbar />
+        <AdminNavbar noTranslation />
       ) : (
         <Navbar noTranslation />
       )}
