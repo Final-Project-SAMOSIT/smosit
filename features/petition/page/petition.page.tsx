@@ -140,7 +140,7 @@ export const PetitionPage = () => {
                     if (e.target.value.length > 100) {
                       formik.setFieldValue(
                         "pet_topic",
-                        _.slice(e.target.value, 0, 100)
+                        e.target.value.substring(0, 100)
                       );
                     }
                   }}
@@ -167,7 +167,7 @@ export const PetitionPage = () => {
                   onChange={(e) =>
                     formik.setFieldValue(
                       "pet_details",
-                      _.slice(e.target.value, 0, 100)
+                      e.target.value.substring(0, 100)
                     )
                   }
                   value={formik.values.pet_details}
