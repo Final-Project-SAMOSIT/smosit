@@ -33,7 +33,7 @@ export const TextInput = (props: TextInputProps) => {
           style={{ width: props.width ? `${props.width}px` : "100%" }}
         >
           {props.showLimit && props.limitText && (
-            <div className="absolute bottom-[9px] right-[9px]">
+            <div className="absolute top-[8px] right-[9px]">
               <p className="body text-gray-50">
                 {props.value?.length}/{props.limitText}
               </p>
