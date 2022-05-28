@@ -166,8 +166,12 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
                           className="w-[128px] bg-white"
                           onClick={() => {
                             modal.openModal(
-                              t("modal_logout_title"),
-                              t("modal_logout_message"),
+                              props.noTranslation
+                                ? "Logout"
+                                : t("modal_logout_title"),
+                              props.noTranslation
+                                ? "Are you sure you want to logout?"
+                                : t("modal_logout_message"),
                               () => {
                                 authContext.logout();
                                 setIsDropdownOpen(false);

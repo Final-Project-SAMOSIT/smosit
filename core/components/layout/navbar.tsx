@@ -110,7 +110,10 @@ export const Navbar = (props: NavbarProps) => {
                       "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black transition-all duration-300",
                       {
                         "w-[calc(100%-12px)]":
-                          feature.name === t("navbar_feature_home_name")
+                          feature.name ===
+                          (props.noTranslation
+                            ? "Home"
+                            : t("navbar_feature_home_name"))
                             ? router.asPath === "/"
                             : _.includes(router.asPath, feature.route),
                       },
@@ -237,8 +240,8 @@ export const Navbar = (props: NavbarProps) => {
                   <Button
                     onClick={() => {
                       modal.openModal(
-                        t("modal_logout_title"),
-                        t("modal_logout_message"),
+                        props.noTranslation ? "Logout" : t("modal_logout_title"),
+                        props.noTranslation ? "Are you sure you want to logout?" : t("modal_logout_message"),
                         () => {
                           authContext.logout();
                         }
