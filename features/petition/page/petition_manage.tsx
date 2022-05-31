@@ -8,8 +8,16 @@ import { PetitionManageTable } from "../component/petition_manage_table";
 import { petitionManageContext } from "../context/petition_manage.context";
 import _ from "lodash";
 import { Petition } from "../types/petetion_type";
+import { PetitionTable } from "../component/petition_table";
+import { ModalContext } from "../../../core/context/modal.context";
+import { useTranslation } from "next-i18next";
 
 export const PetitionManage = () => {
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("petition");
+
   //---------------------
   //   STATE
   //---------------------
@@ -22,6 +30,7 @@ export const PetitionManage = () => {
   //---------------------
   const context = useContext(petitionManageContext);
   const authContext = useContext(AuthContext);
+  const modal = useContext(ModalContext);
 
   //---------------------
   //   ROUTER
@@ -32,6 +41,8 @@ export const PetitionManage = () => {
   //   EFFECT
   //---------------------
   useEffect(() => {
+    context.modal = modal;
+    context.t = t;
     if (!authContext.isPermission(["Publisher"])) {
       router.push("/403");
     } else {
@@ -72,38 +83,40 @@ export const PetitionManage = () => {
               <div className="flex flex-col w-max">
                 <div className="flex">
                   <div
-                    className="w-[180px] flex justify-center py-[15px] cursor-pointer"
+                    className="laptop:w-[180px] w-[80px] flex justify-center py-[15px] cursor-pointer"
                     onClick={() => {
                       setFilterType("All");
                     }}
                   >
-                    <p className="heading6">All</p>
+                    <p className="heading6">{t("petition_list_filter_all")}</p>
                   </div>
                   <div
-                    className="w-[180px] flex justify-center py-[15px] cursor-pointer"
+                    className="laptop:w-[180px] w-[80px] flex justify-center py-[15px] cursor-pointer"
                     onClick={() => {
                       setFilterType("Reject");
                     }}
                   >
-                    <p className="heading6">Reject</p>
+                    <p className="heading6">
+                      {t("petition_list_filter_rejected")}
+                    </p>
                   </div>
                   <div
-                    className="w-[180px] flex justify-center py-[15px] cursor-pointer"
+                    className="laptop:w-[180px] w-[80px] flex justify-center py-[15px] cursor-pointer"
                     onClick={() => {
                       setFilterType("Done");
                     }}
                   >
-                    <p className="heading6">Done</p>
+                    <p className="heading6">{t("petition_list_filter_done")}</p>
                   </div>
                 </div>
 
                 <div className="w-full h-[2px] bg-gray-20">
                   <div
                     className={classNames(
-                      "w-[180px] h-[2px] bg-gray-50 duration-150 transition-all",
+                      "laptop:w-[180px] w-[80px] h-[2px] bg-gray-50 duration-150 transition-all",
                       {
-                        "ml-[180px]": filterType === "Reject",
-                        "ml-[360px]": filterType === "Done",
+                        "ml-[80px] laptop:ml-[180px]": filterType === "Reject",
+                        "ml-[160px] laptop:ml-[360px]": filterType === "Done",
                       }
                     )}
                   />
@@ -113,10 +126,10 @@ export const PetitionManage = () => {
 
             <div className="mt-[64px]">
               {_.size(getShowPetition()) > 0 ? (
-                <PetitionManageTable data={getShowPetition()} />
+                <PetitionTable data={getShowPetition()} showUserId />
               ) : (
                 <div className="flex justify-center">
-                  <p className="body">No data</p>
+                  <p className="body">{t("petition_table_empty")}</p>
                 </div>
               )}
             </div>

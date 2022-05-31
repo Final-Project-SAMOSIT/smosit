@@ -5,6 +5,7 @@ import { appWithTranslation } from "next-i18next";
 import App, { AppContext } from "next/app";
 import { configure } from "mobx";
 import { AuthLayout } from "../core/components/layout/auth_layout";
+import { ModalLayout } from "../core/components/layout/modal_layout";
 
 configure({
   enforceActions: "never",
@@ -12,9 +13,11 @@ configure({
 function MyApp({ Component, pageProps }: any) {
   return (
     <Fragment>
-      <AuthLayout>
-        <Component {...pageProps} />
-      </AuthLayout>
+      <ModalLayout>
+        <AuthLayout>
+          <Component {...pageProps} />
+        </AuthLayout>
+      </ModalLayout>
     </Fragment>
   );
 }

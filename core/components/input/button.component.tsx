@@ -4,8 +4,8 @@ import React from "react";
 interface ButtonProps {
   title: string;
   isLoading?: boolean;
-  width?: number;
-  height?: number;
+  widthCss?: string;
+  heightCss?: string;
   onClick: (event: any) => void;
   disabled?: boolean;
   custom?: string;
@@ -22,18 +22,17 @@ export const Button = (props: ButtonProps) => {
       onClick={(e) => props.onClick(e)}
       disabled={props.disabled}
       className={classNames(
-        `button flex items-center justify-center h-full focus:outline-none transition-all duration-150`,
+        "button flex items-center justify-center focus:outline-none transition-all duration-150",
         {
+          [`${custom}`]: custom,
           "hover:text-white rounded-[10px] border border-black text-black bg-white hover:bg-black":
-            !props.custom,
-          [custom || ""]: props.custom,
-          "min-h-[52px]": !props.height,
+            !custom,
+          "min-h-[52px] h-auto": !props.heightCss,
+          [`${props.heightCss}`]: props.heightCss,
+          "w-full": !props.widthCss,
+          [`${props.widthCss}`]: props.widthCss,
         }
       )}
-      style={{
-        width: props.width ? `${props.width}px` : "100%",
-        height: props.height ? `${props.height}px` : "auto",
-      }}
     >
       {props.title}
     </button>

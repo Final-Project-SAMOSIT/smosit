@@ -1,18 +1,26 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { getPetition } from "../../../core/service/petition/get_petition";
+import {
+  getAllPetition,
+  getPetition,
+} from "../../../core/service/petition/get_petition";
 import { Petition, PetitionStatus } from "../types/petetion_type";
 import { updatePetition } from "../../../core/service/petition/put_petition";
 import { deletePetition } from "../../../core/service/petition/delete_petition";
+import { ModalContextClass } from "../../../core/context/modal.context";
 
 class PetitionManageContext {
   petitionList: Array<Petition>;
+
+  modal: ModalContextClass | null;
+  t: any;
 
   //-------------------
   // CONSTUCTOR
   //-------------------
   constructor() {
     this.petitionList = [];
+    this.modal = null;
     makeAutoObservable(this);
   }
 
@@ -21,11 +29,18 @@ class PetitionManageContext {
   //-------------------
   async preparation() {
     try {
-      const resp = await getPetition();
-      this.petitionList = resp.data.data;
+      const resp = await getAllPetition();
+      if (resp.status !== 204) {
+        this.petitionList = resp.data.data;
+      } else {
+        this.petitionList = [];
+      }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปีญหาในการเตรียมข้อมูล`);
+      this.modal?.openModal(
+        this.t("petition_modal_error_data_preparation"),
+        err.message
+      );
     }
   }
 
@@ -35,7 +50,10 @@ class PetitionManageContext {
       await this.preparation();
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปีญหาในการแก้ไขข้อมูล`);
+      this.modal?.openModal(
+        this.t("petition_modal_error_petition_edit"),
+        err.message
+      );
     }
   }
 
@@ -45,7 +63,10 @@ class PetitionManageContext {
       await this.preparation();
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปีญหาในการลบข้อมูล`);
+      this.modal?.openModal(
+        this.t("petition_modal_error_petition_delete"),
+        err.message
+      );
     }
   }
 }

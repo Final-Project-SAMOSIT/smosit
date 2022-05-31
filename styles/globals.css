@@ -15,86 +15,198 @@ textarea {
   resize: none;
 }
 
-.heading1 {
-  font-size: 48px;
-  font-weight: 400;
-  font-family: "Noto Sans";
+@screen mobile {
+  .heading1 {
+    font-size: 28px;
+    font-weight: 400;
+    font-family: "Noto Sans";
+  }
+
+  .heading2 {
+    font-family: "Noto Sans";
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .heading3 {
+    font-family: "Noto Sans";
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .heading4 {
+    font-family: "Noto Sans";
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .heading5 {
+    font-family: "Noto Sans";
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .heading6 {
+    font-family: "Noto Sans";
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    font-family: "Noto Sans";
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .body {
+    font-family: "Noto Sans";
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .button {
+    font-family: "Noto Sans";
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .caption1 {
+    font-family: "Noto Sans";
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .caption2 {
+    font-family: "Noto Sans";
+    font-size: 10px;
+    font-weight: 300;
+  }
+
+  .caption3 {
+    font-family: "Noto Sans";
+    font-size: 8px;
+    font-weight: 300;
+  }
+
+  .caption4 {
+    font-family: "Noto Sans";
+    font-size: 6px;
+    font-weight: 300;
+  }
+
+  .topic {
+    font-family: "Noto Sans";
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .topic2 {
+    font-family: "Noto Sans";
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .title {
+    font-family: "Noto Sans";
+    font-size: 20px;
+    font-weight: 600;
+  }
 }
 
-.heading2 {
-  font-family: "Noto Sans";
-  font-size: 36px;
-  font-weight: 400;
-}
+@screen laptop {
+  .heading1 {
+    font-size: 48px;
+    font-weight: 400;
+    font-family: "Noto Sans";
+  }
 
-.heading3 {
-  font-family: "Noto Sans";
-  font-size: 30px;
-  font-weight: 400;
-}
+  .heading2 {
+    font-family: "Noto Sans";
+    font-size: 36px;
+    font-weight: 400;
+  }
 
-.heading4 {
-  font-family: "Noto Sans";
-  font-size: 24px;
-  font-weight: 400;
-}
+  .heading3 {
+    font-family: "Noto Sans";
+    font-size: 30px;
+    font-weight: 400;
+  }
 
-.heading5 {
-  font-family: "Noto Sans";
-  font-size: 20px;
-  font-weight: 400;
-}
+  .heading4 {
+    font-family: "Noto Sans";
+    font-size: 24px;
+    font-weight: 400;
+  }
 
-.heading6 {
-  font-family: "Noto Sans";
-  font-size: 20px;
-  font-weight: 500;
-  text-transform: uppercase;
-}
+  .heading5 {
+    font-family: "Noto Sans";
+    font-size: 20px;
+    font-weight: 400;
+  }
 
-.subtitle {
-  font-family: "Noto Sans";
-  font-size: 18px;
-  font-weight: 400;
-}
+  .heading6 {
+    font-family: "Noto Sans";
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
 
-.body {
-  font-family: "Noto Sans";
-  font-size: 16px;
-  font-weight: 400;
-}
+  .subtitle {
+    font-family: "Noto Sans";
+    font-size: 18px;
+    font-weight: 400;
+  }
 
-.button {
-  font-family: "Noto Sans";
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: 500;
-}
+  .body {
+    font-family: "Noto Sans";
+    font-size: 16px;
+    font-weight: 400;
+  }
 
-.caption1 {
-  font-family: "Noto Sans";
-  font-size: 16px;
-  font-weight: 300;
-}
+  .button {
+    font-family: "Noto Sans";
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
 
-.caption2 {
-  font-family: "Noto Sans";
-  font-size: 14px;
-  font-weight: 300;
-}
+  .caption1 {
+    font-family: "Noto Sans";
+    font-size: 16px;
+    font-weight: 300;
+  }
 
-.topic {
-  font-family: "Noto Sans";
-  font-size: 30px;
-  font-weight: 500;
-}
-.topic2 {
-  font-family: "Noto Sans";
-  font-size: 24px;
-  font-weight: 600;
-}
-.title {
-  font-family: "Noto Sans";
-  font-size: 36px;
-  font-weight: 600;
+  .caption2 {
+    font-family: "Noto Sans";
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .caption3 {
+    font-family: "Noto Sans";
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .caption4 {
+    font-family: "Noto Sans";
+    font-size: 10px;
+    font-weight: 300;
+  }
+
+  .topic {
+    font-family: "Noto Sans";
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .topic2 {
+    font-family: "Noto Sans";
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .title {
+    font-family: "Noto Sans";
+    font-size: 36px;
+    font-weight: 600;
+  }
 }

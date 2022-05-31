@@ -1,9 +1,18 @@
 {
+    "========================navbar========================": "",
     "navbar_feature_home_name": "หน้าหลัก",
     "navbar_feature_home_about": "เกี่ยวกับ",
     "navbar_feature_home_vote": "โหวต",
     "navbar_feature_home_petition": "ยื่นคำร้อง",
     "navbar_feature_home_project": "ฟอร์มโครงการ",
     "navbar_login_button": "เข้าสู่ระบบ",
-    "navbar_logout_button": "ออกจากระบบ"
+    "navbar_logout_button": "ออกจากระบบ",
+    "========================footer========================": "",
+    "footer_contact_us_label": "ติดต่อเรา",
+    "========================modal========================": "",
+    "modal_cancel_button": "ยกเลิก",
+    "modal_ok_button": "ตกลง",
+    "modal_logout_title": "ออกจากระบบ",
+    "modal_logout_message": "คุณต้องการที่จะออกจากระบบใช่หรือไม่?",
+    "modal_login_error_title": "มีปัญหาในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง"
 }

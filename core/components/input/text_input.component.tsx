@@ -16,6 +16,9 @@ interface TextInputProps {
 
   height?: number;
   width?: number;
+
+  limitText?: number;
+  showLimit?: boolean;
 }
 
 export const TextInput = (props: TextInputProps) => {
@@ -26,9 +29,16 @@ export const TextInput = (props: TextInputProps) => {
     <Observer>
       {() => (
         <div
-          className={`space-y-[11px]`}
+          className={`space-y-[11px] relative`}
           style={{ width: props.width ? `${props.width}px` : "100%" }}
         >
+          {props.showLimit && props.limitText && (
+            <div className="absolute top-[8px] right-[9px]">
+              <p className="body text-gray-50">
+                {props.value?.length}/{props.limitText}
+              </p>
+            </div>
+          )}
           {props.title && <p className="heading5">{props.title}</p>}
           <div className="space-y-[8px]">
             <input

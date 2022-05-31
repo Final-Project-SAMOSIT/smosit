@@ -35,9 +35,6 @@ export const TextArea = (props: TextAreaInputProps) => {
   //   HANDLED
   //---------------------
   function onChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    if (limitText && e.target.value.length > limitText) {
-      return;
-    }
     props.onChange(e);
   }
 
