@@ -7,6 +7,7 @@ import _ from "lodash";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../../core/context/auth.context";
 import { useTranslation } from "next-i18next";
+import { NewsCard } from "../../news/components/news_card.component";
 
 export const HomePage = () => {
   //---------------------
@@ -92,6 +93,33 @@ export const HomePage = () => {
                   />
                 </div>
               ))}
+            </div>
+            <div className="flex flex-col space-y-[64px]">
+              <div className="flex items-end justify-between">
+                <p className="heading3 pb-[11px] border-b pr-[32px] border-black">
+                  News
+                </p>
+                <div
+                  className="flex space-x-[4px] items-center group cursor-pointer"
+                  onClick={() => router.push("/news")}
+                >
+                  <p className="text-body">see all</p>
+                  <i className="fas fa-chevron-right text-[10px] pt-[3px] w-0 overflow-hidden group-hover:w-[6.25px] transition-all duration-150"></i>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-x-[32px]">
+                {_.map(["", ""], () => (
+                  <NewsCard
+                    topic="test"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit. Volutpat scelerisque senectus tempor consequat. 
+                  A et enim nullam consectetur enim turpis. Lorem ipsum dolor sit amet"
+                    src="https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
+                    timeStamp="2022-07-29T13:18:24.073Z"
+                    onClick={() => router.push(`/news/${"::ID"}`)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </MainLayout>
