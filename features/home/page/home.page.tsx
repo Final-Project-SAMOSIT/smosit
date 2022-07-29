@@ -107,8 +107,8 @@ export const HomePage = () => {
                   <i className="fas fa-chevron-right text-[10px] pt-[3px] w-0 overflow-hidden group-hover:w-[6.25px] transition-all duration-150"></i>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-x-[32px]">
-                {_.map(["", ""], () => (
+              <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[196px]">
+                {_.map(["", "", "", "", ""], () => (
                   <NewsCard
                     topic="test"
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing
