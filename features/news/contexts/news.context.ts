@@ -12,7 +12,7 @@ class NewsContext {
   //-------------------
   constructor() {
     this.currentPage = 1;
-    this.totalPage = 1;
+    this.totalPage = 9;
     this.news = [];
     makeAutoObservable(this);
   }

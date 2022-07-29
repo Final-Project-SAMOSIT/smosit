@@ -31,10 +31,10 @@ export const NewsPage = () => {
       {() => (
         <MainLayout>
           <div className="tablet:mt-[64px] mt-[32px] laptop:mt-[112px] flex flex-col tablet:mb-[64px] mb-[32px] laptop:mb-[96px]">
-            <p className="heading3 pb-[11px] border-b pr-[32px] border-black w-max mb-[64px]">
+            <p className="heading3 pb-[11px] border-b pr-[32px] border-black w-max mb-[32px] laptop:mb-[64px]">
               News
             </p>
-            <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[196px]">
+            <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[96px]">
               {_.map(["", "", "", "", ""], () => (
                 <NewsCard
                   topic="test"

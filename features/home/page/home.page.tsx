@@ -60,13 +60,13 @@ export const HomePage = () => {
     <Observer>
       {() => (
         <MainLayout>
-          <div className="flex flex-col pt-[32px] laptop:pt-[132px] pb-[72px] laptop:pb-[210px] space-y-[0px] laptop:space-y-[138px]">
+          <div className="flex flex-col pt-[32px] laptop:pt-[132px] pb-[72px] laptop:pb-[210px] space-y-[32px] laptop:space-y-[138px]">
             <div className="flex w-full">
               <div className="hidden w-1/2 laptop:block">
                 <img src="/images/about_us.svg" className="mx-auto" alt="" />
               </div>
 
-              <div className="laptop:w-1/2 w-full pb-[53px] pt-[42px] flex flex-col justify-between laptop:space-y-0 space-y-[32px]">
+              <div className="laptop:w-1/2 w-full pt-[42px] flex flex-col justify-between laptop:space-y-0 space-y-[32px]">
                 <p className="border border-black rounded-full pt-[6px] pb-[5px] px-[17px] w-max button select-none">
                   {t("home_page_about_tag")}
                 </p>
@@ -83,7 +83,7 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 laptop:grid-cols-3 tablet:w-[320px] tablet:mx-auto laptop:w-full w-full gap-[32px]">
+            <div className="grid grid-cols-1 tablet:grid-cols-3 tablet:mx-auto tablet:w-full w-full gap-x-[8px] gap-y-[16px] laptop:gap-[32px]">
               {_.map(features, (feature) => (
                 <div className="w-full h-full" key={`${feature.topic}`}>
                   <FeatureCard

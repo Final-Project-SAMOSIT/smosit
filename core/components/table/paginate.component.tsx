@@ -40,7 +40,7 @@ export const Paginate = (props: PaginateProps) => {
   return (
     <Observer>
       {() => (
-        <div className="flex space-x-[24px] items-center">
+        <div className="flex space-x-[16px] laptop:space-x-[24px] items-center">
           <div
             className={classNames(
               "flex justify-center items-center w-[40px] h-[40px] rounded-full",
