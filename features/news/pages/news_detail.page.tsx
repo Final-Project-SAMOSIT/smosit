@@ -53,7 +53,7 @@ export const NewsDetailPage = () => {
             </p>
             <img
               src="https://i.pinimg.com/564x/a9/00/49/a900494ac06bfb931efb6885c995c9ff.jpg"
-              className="w-full aspect-[2/1] object-cover mb-[18px]"
+              className="w-full aspect-[3/1] object-contain bg-black mb-[18px]"
               alt=""
             />
             <p className="text-center caption2 mb-[32px] tablet:mb-[48px]">
