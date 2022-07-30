@@ -7,7 +7,7 @@ import _ from "lodash";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../../core/context/auth.context";
 import { useTranslation } from "next-i18next";
-import { NewsCard } from "../../news/components/news_card.component";
+import { PreviewCard } from "../../../core/components/card/preview_card.component";
 
 export const HomePage = () => {
   //---------------------
@@ -109,7 +109,7 @@ export const HomePage = () => {
               </div>
               <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[196px]">
                 {_.map(["", "", "", "", ""], () => (
-                  <NewsCard
+                  <PreviewCard
                     topic="test"
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing
                   elit. Volutpat scelerisque senectus tempor consequat. 

@@ -3,7 +3,7 @@ import { Observer } from "mobx-react-lite";
 import { newsContext } from "../contexts/news.context";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import _ from "lodash";
-import { NewsCard } from "../components/news_card.component";
+import { PreviewCard } from "../../../core/components/card/preview_card.component";
 import { useRouter } from "next/router";
 import { Paginate } from "../../../core/components/table/paginate.component";
 
@@ -36,7 +36,7 @@ export const NewsPage = () => {
             </p>
             <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[96px]">
               {_.map(["", "", "", "", ""], () => (
-                <NewsCard
+                <PreviewCard
                   topic="test"
                   description="Lorem ipsum dolor sit amet, consectetur adipiscing
                   elit. Volutpat scelerisque senectus tempor consequat. 

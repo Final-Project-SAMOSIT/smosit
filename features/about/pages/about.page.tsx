@@ -5,7 +5,7 @@ import { MainLayout } from "../../../core/components/layout/main_layout";
 import { Button } from "../../../core/components/input/button.component";
 import { Dropdown } from "../../../core/components/input/dropdown_input";
 import _ from "lodash";
-import { NewsCard } from "../../news/components/news_card.component";
+import { PreviewCard } from "../../../core/components/card/preview_card.component";
 
 export const AboutPage = () => {
   //---------------------
@@ -93,7 +93,7 @@ export const AboutPage = () => {
               </div>
               <div className="grid grid-cols-1 laptop:max-w-none max-w-[480px]  laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] mb-[32px] laptop:mb-[96px]">
                 {_.map(["", "", ""], () => (
-                  <NewsCard
+                  <PreviewCard
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing
                     elit. Volutpat scelerisque senectus tempor consequat. 
                     A et enim nullam consectetur enim turpis."

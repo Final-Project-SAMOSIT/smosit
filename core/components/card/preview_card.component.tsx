@@ -13,7 +13,7 @@ interface NewsCardProps {
   onClick: () => void;
 }
 
-export const NewsCard = (props: NewsCardProps) => {
+export const PreviewCard = (props: NewsCardProps) => {
   //---------------------
   //   i18n
   //---------------------
@@ -23,17 +23,6 @@ export const NewsCard = (props: NewsCardProps) => {
   //   REF
   //---------------------
   const desciptionRef = useRef<HTMLDivElement>(null);
-
-  //---------------------
-  //   EFFECT
-  //---------------------
-  useEffect(() => {
-    console.log(
-      desciptionRef.current?.clientHeight,
-      desciptionRef.current?.offsetHeight,
-      desciptionRef.current?.scrollHeight
-    );
-  }, [desciptionRef.current]);
 
   //---------------------
   //   RENDER
