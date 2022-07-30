@@ -6,12 +6,18 @@ import { Button } from "../../../core/components/input/button.component";
 import { Dropdown } from "../../../core/components/input/dropdown_input";
 import _ from "lodash";
 import { PreviewCard } from "../../../core/components/card/preview_card.component";
+import { useRouter } from "next/router";
 
 export const AboutPage = () => {
   //---------------------
   //   i18n
   //---------------------
   const { i18n } = useTranslation("about");
+
+  //---------------------
+  //   ROUTER
+  //---------------------
+  const router = useRouter();
 
   //---------------------
   //   CONTEXT
@@ -97,7 +103,7 @@ export const AboutPage = () => {
                     description="Lorem ipsum dolor sit amet, consectetur adipiscing
                     elit. Volutpat scelerisque senectus tempor consequat. 
                     A et enim nullam consectetur enim turpis."
-                    onClick={() => null}
+                    onClick={() => router.push("/about/::ID")}
                     src="https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
                     topic="Topic Work"
                     timeStamp="2022-07-29T13:18:24.073Z"
