@@ -94,7 +94,7 @@ export const HomePage = () => {
                 </div>
               ))}
             </div>
-            <div className="flex flex-col space-y-[64px]">
+            <div className="flex flex-col space-y-[64px] mb-[112px]">
               <div className="flex items-end justify-between">
                 <p className="heading3 pb-[11px] border-b pr-[32px] border-black">
                   News
