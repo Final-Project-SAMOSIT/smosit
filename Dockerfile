@@ -18,7 +18,7 @@ COPY . /usr/src/app
 
 # RUN yarn add --dev @types/react
 
-RUN yarn build
+RUN yarn dev
 
 EXPOSE 3000
 
