@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Observer } from "mobx-react-lite";
 import { Navbar } from "./navbar";
 import { Router } from "next/router";
 import { AdminNavbar } from "./admin_navbar";
 import { AuthContext } from "../../context/auth.context";
+import { useTranslation } from "next-i18next";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -11,10 +12,28 @@ interface MainLayoutProps {
 
 export const MainLayout = (props: MainLayoutProps) => {
   const { children } = props;
+
+  //---------------------
+  //   i18n
+  //---------------------
+  const { i18n, t } = useTranslation("common");
+
   //---------------------
   //   CONTEXT
   //---------------------
   const authContext = useContext(AuthContext);
+
+  //---------------------
+  //   EFFECT
+  //---------------------
+  useEffect(() => {
+    const lang = localStorage.getItem("language");
+    if (lang) {
+      i18n.changeLanguage(lang);
+    } else {
+      localStorage.setItem("language", i18n.language);
+    }
+  }, []);
 
   //---------------------
   //   RENDER
@@ -31,6 +50,7 @@ export const MainLayout = (props: MainLayoutProps) => {
           <div
             className="relative w-full overflow-y-auto"
             style={{ height: "calc(100%)" }}
+            id="main_layout"
           >
             <div className="min-h-[calc(100%-160px)] laptop:min-h-[calc(100%-320px)] max-w-[310px] tablet:max-w-[640px] laptop:max-w-[1200px] mx-auto">
               {children}
@@ -43,7 +63,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                     className="h-[48px] laptop:h-[103px]"
                   />
                   <div className="text-white">
-                    <p className="topic2">Contact us</p>
+                    <p className="topic2">{t("footer_contact_us_label")}</p>
                     <a
                       className="heading5"
                       href="https://www.facebook.com/samositkmutt"

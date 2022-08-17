@@ -10,7 +10,7 @@ const PetitionRoute: NextPage = () => {
 export async function getServerSideProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["common", "petition"])),
     },
   };
 }

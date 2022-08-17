@@ -8,6 +8,7 @@ import _ from "lodash";
 import { postPetition } from "../../../core/service/petition/post_petition";
 import { FormikProps } from "formik";
 import { Petition } from "../types/petetion_type";
+import { ModalContextClass } from "../../../core/context/modal.context";
 
 class PetitionContext {
   topic: string;
@@ -16,6 +17,9 @@ class PetitionContext {
 
   petitionType: Array<{ name: string; value: any; disabled?: boolean }>;
   petitionList: Array<Petition>;
+
+  modal: ModalContextClass | null;
+  t: any;
 
   //-------------------
   // CONSTUCTOR
@@ -26,6 +30,7 @@ class PetitionContext {
     this.petitionType = [];
     this.detail = "";
     this.petitionList = [];
+    this.modal = null;
     makeAutoObservable(this);
   }
 
@@ -45,7 +50,10 @@ class PetitionContext {
       }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปัญหาในการเตรียมข้อมูล`);
+      this.modal?.openModal(
+        this.t("petition_modal_error_data_preparation"),
+        err.message
+      );
     }
   }
 
@@ -59,20 +67,34 @@ class PetitionContext {
       }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปัญหาในการเตรียมข้อมูล`);
+      this.modal?.openModal(
+        this.t("petition_modal_error_data_preparation"),
+        err.message
+      );
     }
   }
 
-  async onCreate(value: any, formik: FormikProps<any>, id: string) {
+  async onCreate(value: any, callback: () => void, id: string) {
     try {
       const resp = await postPetition(value);
       if (resp.status === 200) {
-        formik.resetForm();
+        callback();
         this.preparationPetition(id);
       }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปัญหาในการส่งข้อมูล`);
+
+      if (err.response.status === 403) {
+        this.modal?.openModal(
+          this.t("petition_modal_error_petition_limit"),
+          err.message
+        );
+      } else {
+        this.modal?.openModal(
+          this.t("petition_modal_error_petition_create"),
+          err.message
+        );
+      }
     }
   }
 }

@@ -1,9 +1,18 @@
 {
+    "========================navbar========================": "",
     "navbar_feature_home_name": "Home",
     "navbar_feature_home_about": "About",
     "navbar_feature_home_vote": "Voting",
     "navbar_feature_home_petition": "Request Petition",
     "navbar_feature_home_project": "Project Form",
     "navbar_login_button": "login",
-    "navbar_logout_button": "logout"
+    "navbar_logout_button": "logout",
+    "========================footer========================": "",
+    "footer_contact_us_label": "Contact us",
+    "========================modal========================": "",
+    "modal_cancel_button": "cancel",
+    "modal_ok_button": "ok",
+    "modal_logout_title": "Logout",
+    "modal_logout_message": "Are you sure you want to logout?",
+    "modal_login_error_title": "There was an error while logging in, Please try again later."
 }

@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-  Fragment,
-} from "react";
+import React, { useContext, useState, Fragment } from "react";
 import { Observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import _ from "lodash";
@@ -13,7 +7,7 @@ import { Button } from "../input/button.component";
 import { useTranslation } from "next-i18next";
 import { AuthContext } from "../../context/auth.context";
 import getConfig from "next/config";
-import { useClickOutside } from "../../libs/click_detector";
+import { ModalContext } from "../../context/modal.context";
 
 interface NavbarProps {
   noTranslation?: boolean;
@@ -62,6 +56,7 @@ export const Navbar = (props: NavbarProps) => {
   //   CONTEXT
   //---------------------
   const authContext = useContext(AuthContext);
+  const modal = useContext(ModalContext);
 
   //---------------------
   //   ROUTER
@@ -115,7 +110,10 @@ export const Navbar = (props: NavbarProps) => {
                       "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black transition-all duration-300",
                       {
                         "w-[calc(100%-12px)]":
-                          feature.name === t("navbar_feature_home_name")
+                          feature.name ===
+                          (props.noTranslation
+                            ? "Home"
+                            : t("navbar_feature_home_name"))
                             ? router.asPath === "/"
                             : _.includes(router.asPath, feature.route),
                       },
@@ -136,6 +134,7 @@ export const Navbar = (props: NavbarProps) => {
                   ])}
                   onClick={() => {
                     i18n.changeLanguage("en");
+                    localStorage.setItem("language", "en");
                   }}
                 >
                   EN
@@ -148,6 +147,7 @@ export const Navbar = (props: NavbarProps) => {
                   ])}
                   onClick={() => {
                     i18n.changeLanguage("th");
+                    localStorage.setItem("language", "th");
                   }}
                 >
                   TH
@@ -198,11 +198,21 @@ export const Navbar = (props: NavbarProps) => {
                         <div
                           className="w-[128px] bg-white"
                           onClick={() => {
-                            authContext.logout();
-                            setIsDropdownOpen(false);
+                            modal.openModal(
+                              "logout",
+                              "Are you sure you want to logout?",
+                              () => {
+                                authContext.logout();
+                                setIsDropdownOpen(false);
+                              }
+                            );
                           }}
                         >
-                          <p className="body py-[4px] px-[8px]">logout</p>
+                          <p className="body py-[4px] px-[8px]">
+                            {props.noTranslation
+                              ? "logout"
+                              : t("navbar_logout_button")}
+                          </p>
                         </div>
                       ) : (
                         <div
@@ -214,7 +224,11 @@ export const Navbar = (props: NavbarProps) => {
                             setIsDropdownOpen(false);
                           }}
                         >
-                          <p className="caption2 py-[4px] px-[8px]">login</p>
+                          <p className="body py-[4px] px-[8px]">
+                            {props.noTranslation
+                              ? "login"
+                              : t("navbar_login_button")}
+                          </p>
                         </div>
                       )}
                     </div>
@@ -225,7 +239,13 @@ export const Navbar = (props: NavbarProps) => {
                 {authContext.me ? (
                   <Button
                     onClick={() => {
-                      authContext.logout();
+                      modal.openModal(
+                        props.noTranslation ? "Logout" : t("modal_logout_title"),
+                        props.noTranslation ? "Are you sure you want to logout?" : t("modal_logout_message"),
+                        () => {
+                          authContext.logout();
+                        }
+                      );
                     }}
                     title={
                       props.noTranslation ? "logout" : t("navbar_logout_button")

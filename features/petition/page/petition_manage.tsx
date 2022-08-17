@@ -9,8 +9,15 @@ import { petitionManageContext } from "../context/petition_manage.context";
 import _ from "lodash";
 import { Petition } from "../types/petetion_type";
 import { PetitionTable } from "../component/petition_table";
+import { ModalContext } from "../../../core/context/modal.context";
+import { useTranslation } from "next-i18next";
 
 export const PetitionManage = () => {
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("petition");
+
   //---------------------
   //   STATE
   //---------------------
@@ -23,6 +30,7 @@ export const PetitionManage = () => {
   //---------------------
   const context = useContext(petitionManageContext);
   const authContext = useContext(AuthContext);
+  const modal = useContext(ModalContext);
 
   //---------------------
   //   ROUTER
@@ -33,6 +41,8 @@ export const PetitionManage = () => {
   //   EFFECT
   //---------------------
   useEffect(() => {
+    context.modal = modal;
+    context.t = t;
     if (!authContext.isPermission(["Publisher"])) {
       router.push("/403");
     } else {
@@ -78,7 +88,7 @@ export const PetitionManage = () => {
                       setFilterType("All");
                     }}
                   >
-                    <p className="heading6">All</p>
+                    <p className="heading6">{t("petition_list_filter_all")}</p>
                   </div>
                   <div
                     className="laptop:w-[180px] w-[80px] flex justify-center py-[15px] cursor-pointer"
@@ -86,7 +96,9 @@ export const PetitionManage = () => {
                       setFilterType("Reject");
                     }}
                   >
-                    <p className="heading6">Reject</p>
+                    <p className="heading6">
+                      {t("petition_list_filter_rejected")}
+                    </p>
                   </div>
                   <div
                     className="laptop:w-[180px] w-[80px] flex justify-center py-[15px] cursor-pointer"
@@ -94,7 +106,7 @@ export const PetitionManage = () => {
                       setFilterType("Done");
                     }}
                   >
-                    <p className="heading6">Done</p>
+                    <p className="heading6">{t("petition_list_filter_done")}</p>
                   </div>
                 </div>
 
@@ -114,11 +126,10 @@ export const PetitionManage = () => {
 
             <div className="mt-[64px]">
               {_.size(getShowPetition()) > 0 ? (
-                // <PetitionManageTable data={getShowPetition()} />
-                <PetitionTable data={getShowPetition()} />
+                <PetitionTable data={getShowPetition()} showUserId />
               ) : (
                 <div className="flex justify-center">
-                  <p className="body">No data</p>
+                  <p className="body">{t("petition_table_empty")}</p>
                 </div>
               )}
             </div>

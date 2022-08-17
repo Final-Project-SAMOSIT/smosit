@@ -6,9 +6,12 @@ import { getMe } from "../service/auth/get_auth";
 import { postAuth } from "../service/auth/post_auth";
 import { meProps, Role } from "../types/auth_types";
 import _ from "lodash";
+import { ModalContextClass } from "./modal.context";
 
 class AuthContextClass {
   mockIsLogin: boolean;
+  modal: ModalContextClass | null;
+  t: any;
 
   me: meProps | null;
 
@@ -21,6 +24,7 @@ class AuthContextClass {
     this.mockIsLogin = false;
     this.me = null;
     this.isLoading = true;
+    this.modal = null;
     makeAutoObservable(this);
   }
 
@@ -58,15 +62,17 @@ class AuthContextClass {
       }
     } catch (err: any) {
       console.log(err);
-      alert(`${err.message} \n มีปัญหาในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง`);
-      Router.prototype.push("/403");
+      this.modal?.openModal(
+        this.t("modal_login_error_title"),
+        err.message,
+        () => Router.prototype.push("/403")
+      );
     }
   }
 
   logout() {
     Cookies.remove("SMOSIT_TOKEN");
-    this.me = null;
-    this.Me();
+    Router.prototype.push("/");
   }
 
   isPermission(roles: Array<Role>): boolean {
