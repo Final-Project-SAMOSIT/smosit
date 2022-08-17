@@ -16,8 +16,8 @@ COPY . /usr/src/app
 
 # RUN yarn add --dev @types/react
 
-RUN yarn build
+RUN next build
 
 EXPOSE 3000
 
-CMD [ "yarn", "start" ]
+CMD [ "next", "start" ]
