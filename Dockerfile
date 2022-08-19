@@ -6,8 +6,6 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
 
-COPY tsconfig.json /usr/src/app
-
 COPY .env /usr/src/app
 
 RUN npm install prettier -g
@@ -16,9 +14,7 @@ RUN npm install
 
 COPY . /usr/src/app
 
-# RUN yarn add --dev @types/react
-
-RUN yarn dev
+RUN yarn build
 
 EXPOSE 3000
 
