@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { News } from "../types/News.type";
+import { News } from "../types/news.type";
 
 class NewsContext {
   currentPage: number;
