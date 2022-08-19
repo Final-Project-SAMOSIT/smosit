@@ -12,6 +12,8 @@ RUN npm install prettier -g
 
 RUN npm install 
 
+RUN npm install @types/react
+
 COPY . /usr/src/app
 
 RUN yarn build
