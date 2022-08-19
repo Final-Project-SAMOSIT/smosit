@@ -8,11 +8,7 @@ COPY package.json /usr/src/app
 
 COPY .env /usr/src/app
 
-RUN npm install prettier -g
-
-RUN npm install 
-
-RUN npm install @types/react
+RUN yarn install 
 
 COPY . /usr/src/app
 
