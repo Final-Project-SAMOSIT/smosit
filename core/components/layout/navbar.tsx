@@ -37,6 +37,10 @@ export const Navbar = (props: NavbarProps) => {
       route: "/vote",
     },
     {
+      name: props.noTranslation ? "News" : t("navbar_feature_home_news"),
+      route: "/news",
+    },
+    {
       name: props.noTranslation
         ? "Request Petition"
         : t("navbar_feature_home_petition"),
@@ -76,7 +80,7 @@ export const Navbar = (props: NavbarProps) => {
               className="laptop:h-[60px] h-[48px] mobile:mt-[8px] m-0"
               onClick={() => router.push("/")}
             />
-            <div className="laptop:flex space-x-[65px] hidden">
+            <div className="laptop:flex space-x-[48px] hidden">
               <div
                 className="cursor-pointer w-max flex flex-col space-y-[8px] group"
                 onClick={() => router.push("/")}
@@ -240,8 +244,12 @@ export const Navbar = (props: NavbarProps) => {
                   <Button
                     onClick={() => {
                       modal.openModal(
-                        props.noTranslation ? "Logout" : t("modal_logout_title"),
-                        props.noTranslation ? "Are you sure you want to logout?" : t("modal_logout_message"),
+                        props.noTranslation
+                          ? "Logout"
+                          : t("modal_logout_title"),
+                        props.noTranslation
+                          ? "Are you sure you want to logout?"
+                          : t("modal_logout_message"),
                         () => {
                           authContext.logout();
                         }
