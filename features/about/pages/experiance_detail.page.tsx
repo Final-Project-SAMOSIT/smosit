@@ -39,6 +39,7 @@ export const ExperianceDetailPage = () => {
               {i18n.language === "th" &&
                 dayjs("2022-07-29T13:18:24.073Z")
                   .locale(i18n.language)
+                  .add(i18n.language === "th" ? 543 : 0, "year")
                   .format("DD MMMM YYYY, H:mm น.")}
             </p>
             <img
