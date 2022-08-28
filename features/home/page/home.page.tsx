@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import { AuthContext } from "../../../core/context/auth.context";
 import { useTranslation } from "next-i18next";
 import { PreviewCard } from "../../../core/components/card/preview_card.component";
+import { homeContext } from "../contexts/home.context";
+import { ModalContext } from "../../../core/context/modal.context";
 
 export const HomePage = () => {
   //---------------------
@@ -19,6 +21,8 @@ export const HomePage = () => {
   //   CONTEXT
   //---------------------
   const authContext = useContext(AuthContext);
+  const context = useContext(homeContext);
+  const modalContext = useContext(ModalContext);
 
   //---------------------
   //   CONST
@@ -51,7 +55,10 @@ export const HomePage = () => {
   //---------------------
   //   EFFECT
   //---------------------
-  useEffect(() => {}, []);
+  useEffect(() => {
+    context.modal = modalContext;
+    context.newsPreparation();
+  }, []);
 
   //---------------------
   //   RENDER
@@ -108,15 +115,16 @@ export const HomePage = () => {
                 </div>
               </div>
               <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[196px]">
-                {_.map(["", "", "", "", ""], () => (
+                {_.map(context.newsList, (news) => (
                   <PreviewCard
-                    topic="test"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit. Volutpat scelerisque senectus tempor consequat. 
-                  A et enim nullam consectetur enim turpis. Lorem ipsum dolor sit amet"
-                    src="https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
-                    timeStamp="2022-07-29T13:18:24.073Z"
-                    onClick={() => router.push(`/news/${"::ID"}`)}
+                    topic={news.news_title}
+                    description={news.news_details}
+                    src={
+                      news.news_img ||
+                      "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
+                    }
+                    timeStamp={news.news_created_at}
+                    onClick={() => router.push(`/news/${news.news_id}`)}
                   />
                 ))}
               </div>

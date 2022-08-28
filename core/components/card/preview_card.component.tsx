@@ -41,6 +41,7 @@ export const PreviewCard = (props: NewsCardProps) => {
             <p className="caption1 mb-[8px]">
               {dayjs(props.timeStamp)
                 .locale(i18n.language)
+                .add(i18n.language === "th" ? 543 : 0, "year")
                 .format("DD MMMM YYYY")}
             </p>
           )}
