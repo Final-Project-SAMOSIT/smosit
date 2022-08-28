@@ -3,7 +3,7 @@ import { makeAutoObservable } from "mobx";
 import { ModalContextClass } from "../../../core/context/modal.context";
 import { getNewsList } from "../../../core/service/news/get_news";
 import { AxiosResponse } from "axios";
-import { News } from "../types/news";
+import { News } from "../../../core/types/news";
 
 class HomeContext {
   newsList: Array<News>;
