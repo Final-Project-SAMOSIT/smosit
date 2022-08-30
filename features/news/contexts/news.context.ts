@@ -8,6 +8,7 @@ import { News } from "../../../core/types/news";
 class NewsContext {
   currentPage: number;
   totalPage: number;
+  perPage: number = 6;
   newsList: Array<News>;
   modal?: ModalContextClass;
 
@@ -16,16 +17,21 @@ class NewsContext {
   //-------------------
   constructor() {
     this.currentPage = 1;
-    this.totalPage = 9;
+    this.totalPage = 0;
     this.newsList = [];
     makeAutoObservable(this);
   }
 
   async newsPreparation() {
     try {
-      const resp: AxiosResponse<{ data: Array<News> }> = await getNewsList();
+      const resp: AxiosResponse<{ data: Array<News>; allItem: number }> =
+        await getNewsList({
+          skip: this.currentPage - 1,
+          take: this.perPage,
+        });
       if (resp.status !== 204) {
         this.newsList = resp.data.data;
+        this.totalPage = Math.ceil(resp.data.allItem / this.perPage);
       }
     } catch (err: any) {
       this.modal?.openModal("มีปัญหาในการเตรียมข่าว", err.message);
