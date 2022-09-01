@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Observer } from "mobx-react-lite";
 import { useTranslation } from "next-i18next";
 import { MainLayout } from "../../../core/components/layout/main_layout";
@@ -7,6 +7,7 @@ import { Dropdown } from "../../../core/components/input/dropdown_input";
 import _ from "lodash";
 import { PreviewCard } from "../../../core/components/card/preview_card.component";
 import { useRouter } from "next/router";
+import { aboutContext } from "../contexts/about.context";
 
 export const AboutPage = () => {
   //---------------------
@@ -22,11 +23,15 @@ export const AboutPage = () => {
   //---------------------
   //   CONTEXT
   //---------------------
+  const context = useContext(aboutContext);
 
   //---------------------
   //   EFFECT
   //---------------------
-  useEffect(() => {}, []);
+  useEffect(() => {
+    context.preparationStudentUnion();
+    context.preparationYear();
+  }, []);
 
   //---------------------
   //   RENDER
@@ -69,25 +74,57 @@ export const AboutPage = () => {
 
             <div className="w-[137px] self-center mb-[32px] laptop:mb-[72px]">
               <Dropdown
-                onChange={() => null}
-                options={[{ name: "YEAR 2022", value: "2022" }]}
-                value={"2022"}
+                onChange={(e) => {
+                  context.year = Number(e);
+                  context.preparationStudentUnion();
+                }}
+                options={_.map(context.yearList, (year) => ({
+                  name: `YEAR ${year}`,
+                  value: year,
+                }))}
+                value={context.year.toString()}
               />
             </div>
 
             <div className="grid grid-cols-3 gap-y-[24px] laptop:gap-y-[32px] gap-x-[16px] mb-[72px] laptop:mb-[112px]">
               <div />
               <StudentUnionCard
-                image="https://i.pinimg.com/564x/a9/00/49/a900494ac06bfb931efb6885c995c9ff.jpg"
-                name="Name Lastname"
-                position="position"
+                image={context.studentList[0]?.student_union_info.std_img || ""}
+                name={_.join(
+                  [
+                    _.get(
+                      context.studentList[0],
+                      `student_union_info.std_fname_${i18n.language}`
+                    ),
+                    _.get(
+                      context.studentList[0],
+                      `student_union_info.std_lname_${i18n.language}`
+                    ),
+                  ],
+                  " "
+                )}
+                position={
+                  context.studentList[0]?.std_position.position_name || ""
+                }
               />
               <div />
-              {_.map(["", "", "", "", "", "", "", "", ""], () => (
+              {_.map(_.slice(context.studentList, 1), (user) => (
                 <StudentUnionCard
-                  image="https://i.pinimg.com/564x/a9/00/49/a900494ac06bfb931efb6885c995c9ff.jpg"
-                  name="Name Lastname"
-                  position="position"
+                  image={user.student_union_info.std_img}
+                  name={_.join(
+                    [
+                      _.get(
+                        user,
+                        `student_union_info.std_fname_${i18n.language}`
+                      ),
+                      _.get(
+                        user,
+                        `student_union_info.std_lname_${i18n.language}`
+                      ),
+                    ],
+                    " "
+                  )}
+                  position={user.std_position.position_name}
                 />
               ))}
             </div>
