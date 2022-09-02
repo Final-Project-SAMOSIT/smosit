@@ -13,3 +13,10 @@ export const getStudentUnion = (options: { union_year: number }) => {
 export const getYears = () => {
   return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getAllUnionYear`);
 };
+
+export const getExperiences = (options: { union_year: number }) => {
+  const qs = querystring.stringify(options);
+  return appAxios().get(
+    `${publicRuntimeConfig.BACKEND_API}/getExperiences?${qs}`
+  );
+};

@@ -29,8 +29,9 @@ export const AboutPage = () => {
   //   EFFECT
   //---------------------
   useEffect(() => {
-    context.preparationStudentUnion();
     context.preparationYear();
+    context.preparationStudentUnion();
+    context.preparationExperience();
   }, []);
 
   //---------------------
@@ -135,15 +136,13 @@ export const AboutPage = () => {
                 <div className="border-b border-black w-[110px]" />
               </div>
               <div className="grid grid-cols-1 laptop:max-w-none max-w-[480px]  laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] mb-[32px] laptop:mb-[96px]">
-                {_.map(["", "", ""], () => (
+                {_.map(context.experienceList, (experience) => (
                   <PreviewCard
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Volutpat scelerisque senectus tempor consequat. 
-                    A et enim nullam consectetur enim turpis."
-                    onClick={() => router.push("/about/::ID")}
+                    description={experience.news_details}
+                    onClick={() => router.push(`/about/${experience.news_id}`)}
                     src="https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
-                    topic="Topic Work"
-                    timeStamp="2022-07-29T13:18:24.073Z"
+                    topic={experience.news_title}
+                    timeStamp={experience.news_created_at}
                   />
                 ))}
               </div>
@@ -160,6 +159,12 @@ export const AboutPage = () => {
   );
 };
 
+const positionMap = new Map<string, { th: string; en: string }>();
+positionMap.set("President", { th: "ประธาน", en: "President" });
+positionMap.set("Vice President", { th: "รองประธาน", en: "Vice President" });
+positionMap.set("Secretary", { th: "เลขา", en: "Secretary" });
+positionMap.set("Board", { th: "กรรมการ", en: "Board" });
+
 interface StudentUnionCardProps {
   image: string;
   name: string;
@@ -167,17 +172,26 @@ interface StudentUnionCardProps {
 }
 
 const StudentUnionCard = (props: StudentUnionCardProps) => {
+  const { i18n } = useTranslation("about");
   return (
     <div className="flex flex-col items-center">
-      <img
-        src={props.image}
-        className="w-[200px] aspect-square rounded-full mb-[8px] laptop:mb-[20px]"
-        alt=""
-      />
+      {props.image ? (
+        <img
+          src={props.image}
+          className="w-[200px] aspect-square rounded-full mb-[8px] laptop:mb-[20px]"
+          alt=""
+        />
+      ) : (
+        <div className="bg-gray-20 w-[200px] h-[200px] p-[8px] rounded-full overflow-hidden">
+          <i className="fas fa-user text-[207px]" />
+        </div>
+      )}
       <p className="text-center heading5 mb-[4px] laptop:mb-[11px]">
         {props.name}
       </p>
-      <p className="text-center caption1">{props.position}</p>
+      <p className="text-center caption1">
+        {_.get(positionMap.get(props.position), i18n.language)}
+      </p>
     </div>
   );
 };

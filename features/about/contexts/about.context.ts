@@ -1,8 +1,9 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { User } from "../types/user";
+import { Experience, User } from "../types/user";
 import { ModalContextClass } from "../../../core/context/modal.context";
 import {
+  getExperiences,
   getStudentUnion,
   getYears,
 } from "../../../core/service/about/get_about";
@@ -12,6 +13,7 @@ import _ from "lodash";
 class AboutContext {
   studentList: Array<User>;
   yearList: Array<number>;
+  experienceList: Array<Experience>;
   year: number;
   modal?: ModalContextClass;
 
@@ -21,6 +23,7 @@ class AboutContext {
   constructor() {
     this.studentList = [];
     this.yearList = [];
+    this.experienceList = [];
     this.year = new Date().getFullYear();
     makeAutoObservable(this);
   }
@@ -36,7 +39,7 @@ class AboutContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูล", err.message);
+      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลสมาชิก", err.message);
     }
   }
 
@@ -50,7 +53,20 @@ class AboutContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูล", err.message);
+      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลปี", err.message);
+    }
+  }
+
+  async preparationExperience() {
+    try {
+      const resp: AxiosResponse<{ data: Array<Experience> }> =
+        await getExperiences({ union_year: this.year });
+      if (resp.status !== 204) {
+        this.experienceList = resp.data.data;
+      }
+    } catch (err: any) {
+      console.log(err);
+      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลประสบการณ์", err.message);
     }
   }
 }
