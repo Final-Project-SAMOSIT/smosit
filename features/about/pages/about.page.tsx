@@ -8,6 +8,7 @@ import _ from "lodash";
 import { PreviewCard } from "../../../core/components/card/preview_card.component";
 import { useRouter } from "next/router";
 import { aboutContext } from "../contexts/about.context";
+import { ModalContext } from "../../../core/context/modal.context";
 
 export const AboutPage = () => {
   //---------------------
@@ -24,11 +25,13 @@ export const AboutPage = () => {
   //   CONTEXT
   //---------------------
   const context = useContext(aboutContext);
+  const modalContext = useContext(ModalContext)
 
   //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
+    context.modal = modalContext
     context.preparationYear();
     context.preparationStudentUnion();
     context.preparationExperience();
