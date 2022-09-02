@@ -34,7 +34,7 @@ export const NewsDetailPage = () => {
     context.modal = modalContext;
     context.newsPreparation(router.query.id?.toString() || "");
     context.newsSuggestionPreparation();
-  }, []);
+  }, [router.query.id]);
 
   //---------------------
   //   RENDER
