@@ -81,6 +81,7 @@ export const AboutPage = () => {
                 onChange={(e) => {
                   context.year = Number(e);
                   context.preparationStudentUnion();
+                  context.preparationExperience();
                 }}
                 options={_.map(context.yearList, (year) => ({
                   name: `YEAR ${year}`,
@@ -151,7 +152,10 @@ export const AboutPage = () => {
                   <PreviewCard
                     description={experience.news_details}
                     onClick={() => router.push(`/about/${experience.news_id}`)}
-                    src="https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
+                    src={
+                      experience.news_img ||
+                      "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
+                    }
                     topic={experience.news_title}
                     timeStamp={experience.news_created_at}
                   />

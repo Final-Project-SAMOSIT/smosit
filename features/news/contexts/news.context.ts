@@ -6,19 +6,16 @@ import { ModalContextClass } from "../../../core/context/modal.context";
 import { News } from "../../../core/types/news";
 
 class NewsContext {
-  currentPage: number;
-  totalPage: number;
+  currentPage: number = 1;
+  totalPage: number = 1;
   perPage: number = 6;
-  newsList: Array<News>;
+  newsList: Array<News> = [];
   modal?: ModalContextClass;
 
   //-------------------
   // CONSTUCTOR
   //-------------------
   constructor() {
-    this.currentPage = 1;
-    this.totalPage = 0;
-    this.newsList = [];
     makeAutoObservable(this);
   }
 

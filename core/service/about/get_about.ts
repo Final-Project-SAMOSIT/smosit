@@ -20,3 +20,9 @@ export const getExperiences = (options: { union_year: number }) => {
     `${publicRuntimeConfig.BACKEND_API}/getExperiences?${qs}`
   );
 };
+
+export const getExperience = (id: string | number) => {
+  return appAxios().get(
+    `${publicRuntimeConfig.BACKEND_API}/getExperiences/${id}`
+  );
+};
