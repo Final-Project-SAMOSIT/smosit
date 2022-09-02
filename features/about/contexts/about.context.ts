@@ -11,25 +11,23 @@ import { AxiosResponse } from "axios";
 import _ from "lodash";
 
 class AboutContext {
-  studentList: Array<User>;
-  yearList: Array<number>;
-  experienceList: Array<Experience>;
-  year: number;
+  studentList: Array<User> = [];
+  yearList: Array<number> = [];
+  experienceList: Array<Experience> = [];
+  year: number = new Date().getFullYear();
+  isStudentLoading: boolean = false;
   modal?: ModalContextClass;
 
   //-------------------
   // CONSTUCTOR
   //-------------------
   constructor() {
-    this.studentList = [];
-    this.yearList = [];
-    this.experienceList = [];
-    this.year = new Date().getFullYear();
     makeAutoObservable(this);
   }
 
   async preparationStudentUnion() {
     try {
+      this.isStudentLoading = true;
       const resp: AxiosResponse<{ data: Array<User> }> = await getStudentUnion({
         union_year: this.year,
       });
@@ -40,6 +38,8 @@ class AboutContext {
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลสมาชิก", err.message);
+    } finally {
+      this.isStudentLoading = false;
     }
   }
 

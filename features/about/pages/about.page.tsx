@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Observer } from "mobx-react-lite";
+import React, { Fragment, useContext, useEffect } from "react";
+import { observer, Observer } from "mobx-react-lite";
 import { useTranslation } from "next-i18next";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { Button } from "../../../core/components/input/button.component";
@@ -25,13 +25,13 @@ export const AboutPage = () => {
   //   CONTEXT
   //---------------------
   const context = useContext(aboutContext);
-  const modalContext = useContext(ModalContext)
+  const modalContext = useContext(ModalContext);
 
   //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
-    context.modal = modalContext
+    context.modal = modalContext;
     context.preparationYear();
     context.preparationStudentUnion();
     context.preparationExperience();
@@ -91,46 +91,54 @@ export const AboutPage = () => {
             </div>
 
             <div className="grid grid-cols-3 gap-y-[24px] laptop:gap-y-[32px] gap-x-[16px] mb-[72px] laptop:mb-[112px]">
-              <div />
-              <StudentUnionCard
-                image={context.studentList[0]?.student_union_info.std_img || ""}
-                name={_.join(
-                  [
-                    _.get(
-                      context.studentList[0],
-                      `student_union_info.std_fname_${i18n.language}`
-                    ),
-                    _.get(
-                      context.studentList[0],
-                      `student_union_info.std_lname_${i18n.language}`
-                    ),
-                  ],
-                  " "
-                )}
-                position={
-                  context.studentList[0]?.std_position.position_name || ""
-                }
-              />
-              <div />
-              {_.map(_.slice(context.studentList, 1), (user) => (
-                <StudentUnionCard
-                  image={user.student_union_info.std_img}
-                  name={_.join(
-                    [
-                      _.get(
-                        user,
-                        `student_union_info.std_fname_${i18n.language}`
-                      ),
-                      _.get(
-                        user,
-                        `student_union_info.std_lname_${i18n.language}`
-                      ),
-                    ],
-                    " "
-                  )}
-                  position={user.std_position.position_name}
-                />
-              ))}
+              {context.isStudentLoading ? (
+                <div>Loading</div>
+              ) : (
+                <Fragment>
+                  <div />
+                  <StudentUnionCard
+                    image={
+                      context.studentList[0]?.student_union_info.std_img || ""
+                    }
+                    name={_.join(
+                      [
+                        _.get(
+                          context.studentList[0],
+                          `student_union_info.std_fname_${i18n.language}`
+                        ),
+                        _.get(
+                          context.studentList[0],
+                          `student_union_info.std_lname_${i18n.language}`
+                        ),
+                      ],
+                      " "
+                    )}
+                    position={
+                      context.studentList[0]?.std_position.position_name || ""
+                    }
+                  />
+                  <div />
+                  {_.map(_.slice(context.studentList, 1), (user) => (
+                    <StudentUnionCard
+                      image={user.student_union_info.std_img}
+                      name={_.join(
+                        [
+                          _.get(
+                            user,
+                            `student_union_info.std_fname_${i18n.language}`
+                          ),
+                          _.get(
+                            user,
+                            `student_union_info.std_lname_${i18n.language}`
+                          ),
+                        ],
+                        " "
+                      )}
+                      position={user.std_position.position_name}
+                    />
+                  ))}
+                </Fragment>
+              )}
             </div>
 
             <div className="flex flex-col items-center">
@@ -162,39 +170,48 @@ export const AboutPage = () => {
   );
 };
 
-const positionMap = new Map<string, { th: string; en: string }>();
-positionMap.set("President", { th: "ประธาน", en: "President" });
-positionMap.set("Vice President", { th: "รองประธาน", en: "Vice President" });
-positionMap.set("Secretary", { th: "เลขา", en: "Secretary" });
-positionMap.set("Board", { th: "กรรมการ", en: "Board" });
-
 interface StudentUnionCardProps {
   image: string;
   name: string;
   position: string;
 }
 
+const positionMap = {
+  President: { th: "ประธาน", en: "President" },
+  VicePresident: { th: "รองประธาน", en: "Vice President" },
+  Secretary: { th: "เลขา", en: "Secretary" },
+  Board: { th: "กรรมการ", en: "Board" },
+};
+
 const StudentUnionCard = (props: StudentUnionCardProps) => {
   const { i18n } = useTranslation("about");
+
   return (
-    <div className="flex flex-col items-center">
-      {props.image ? (
-        <img
-          src={props.image}
-          className="w-[200px] aspect-square rounded-full mb-[8px] laptop:mb-[20px]"
-          alt=""
-        />
-      ) : (
-        <div className="bg-gray-20 w-[200px] h-[200px] p-[8px] rounded-full overflow-hidden">
-          <i className="fas fa-user text-[207px]" />
+    <Observer>
+      {() => (
+        <div className="flex flex-col items-center">
+          {props.image ? (
+            <img
+              src={props.image}
+              className="w-[200px] aspect-square rounded-full mb-[8px] laptop:mb-[20px]"
+              alt=""
+            />
+          ) : (
+            <div className="bg-gray-20 w-[200px] h-[200px] p-[8px] rounded-full overflow-hidden">
+              <i className="fas fa-user text-[207px]" />
+            </div>
+          )}
+          <p className="text-center heading5 mb-[4px] laptop:mb-[11px]">
+            {props.name}
+          </p>
+          <p className="text-center caption1">
+            {_.get(
+              positionMap,
+              `${_.replace(props.position, / /g, "")}.${i18n.language}`
+            )}
+          </p>
         </div>
       )}
-      <p className="text-center heading5 mb-[4px] laptop:mb-[11px]">
-        {props.name}
-      </p>
-      <p className="text-center caption1">
-        {_.get(positionMap.get(props.position), i18n.language)}
-      </p>
-    </div>
+    </Observer>
   );
 };
