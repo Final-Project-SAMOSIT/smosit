@@ -6,6 +6,7 @@ import App, { AppContext } from "next/app";
 import { configure } from "mobx";
 import { AuthLayout } from "../core/components/layout/auth_layout";
 import { ModalLayout } from "../core/components/layout/modal_layout";
+import "../styles/editor.css";
 
 configure({
   enforceActions: "never",

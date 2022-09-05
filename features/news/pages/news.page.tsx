@@ -7,6 +7,8 @@ import { PreviewCard } from "../../../core/components/card/preview_card.componen
 import { useRouter } from "next/router";
 import { Paginate } from "../../../core/components/table/paginate.component";
 import { ModalContext } from "../../../core/context/modal.context";
+import { Button } from "../../../core/components/input/button.component";
+import { AuthContext } from "../../../core/context/auth.context";
 
 export const NewsPage = () => {
   //---------------------
@@ -14,6 +16,7 @@ export const NewsPage = () => {
   //---------------------
   const context = useContext(newsContext);
   const modalContext = useContext(ModalContext);
+  const authContext = useContext(AuthContext);
 
   //---------------------
   //   ROUTER
@@ -36,9 +39,19 @@ export const NewsPage = () => {
       {() => (
         <MainLayout>
           <div className="tablet:mt-[64px] mt-[32px] laptop:mt-[112px] flex flex-col tablet:mb-[64px] mb-[32px] laptop:mb-[96px]">
-            <p className="heading3 pb-[11px] border-b pr-[32px] border-black w-max mb-[32px] laptop:mb-[64px]">
-              News
-            </p>
+            <div className="justify-between flex">
+              <p className="heading3 pb-[11px] border-b pr-[32px] border-black w-max mb-[32px] laptop:mb-[64px]">
+                News
+              </p>
+              {authContext.isPermission(["Publisher"]) && (
+                <Button
+                  onClick={() => router.push("/news/create")}
+                  title="add post"
+                  widthCss="w-[137px]"
+                  heightCss="h-[52px]"
+                />
+              )}
+            </div>
             <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[96px]">
               {_.map(context.newsList, (news) => (
                 <PreviewCard

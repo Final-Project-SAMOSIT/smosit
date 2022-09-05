@@ -1,12 +1,29 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const appAxios = () => {
+export const defaultAppAxiosConfigs = () => {
   const token = Cookies.get("SMOSIT_TOKEN");
-  return axios.create({
+
+  return {
     timeout: 30000,
     headers: {
       Authorization: `Bearer ${token}`,
+    },
+  };
+};
+
+export const appAxios = () => {
+  const token = Cookies.get("SMOSIT_TOKEN");
+  return axios.create(defaultAppAxiosConfigs());
+};
+
+export const appAxiosMulipart = () => {
+  const token = Cookies.get("SMOSIT_TOKEN");
+  return axios.create({
+    ...defaultAppAxiosConfigs(),
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "content-type": "multipart/form-data",
     },
   });
 };

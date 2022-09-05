@@ -14,3 +14,7 @@ export const getNewsList = (options?: {
 export const getNews = (id: string | number) => {
   return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getNews/${id}`);
 };
+
+export const getNewsType = () => {
+  return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getNewsType`);
+}

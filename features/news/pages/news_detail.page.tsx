@@ -9,6 +9,8 @@ import _ from "lodash";
 import { PreviewCard } from "../../../core/components/card/preview_card.component";
 import { newsDetailContext } from "../contexts/news_detail.context";
 import { ModalContext } from "../../../core/context/modal.context";
+import draftToHtml from "draftjs-to-html";
+import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 
 export const NewsDetailPage = () => {
   //---------------------
@@ -26,6 +28,19 @@ export const NewsDetailPage = () => {
   //   ROUTER
   //---------------------
   const router = useRouter();
+
+  //---------------------
+  //   HANDLED
+  //---------------------
+  function getHTML() {
+    if (context.news?.news_details) {
+      const object = JSON?.parse(context.news?.news_details || "");
+
+      return draftToHtml(convertToRaw(convertFromRaw(object)));
+    } else {
+      return "";
+    }
+  }
 
   //---------------------
   //   EFFECT
@@ -72,9 +87,16 @@ export const NewsDetailPage = () => {
               <p className="text-center caption2 mb-[32px] tablet:mb-[48px]">
                 {context.news?.news_caption_img}
               </p>
-              <p className="text-body mb-[64px] tablet:mb-[96px]">
+              <div
+                className="text-body mb-[64px] tablet:mb-[96px]"
+                dangerouslySetInnerHTML={{
+                  __html: getHTML(),
+                }}
+              />
+
+              {/* <p className="text-body mb-[64px] tablet:mb-[96px]">
                 {context.news?.news_details}
-              </p>
+              </p> */}
               <div className="space-y-[11px] flex flex-col mb-[64px]">
                 <p className="heading3">Suggestion</p>
                 <div className="w-[110px] border-b border-black" />

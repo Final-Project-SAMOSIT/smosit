@@ -11,6 +11,7 @@ interface DropdownInputProps {
   placeholder?: string;
   topic?: string;
   error?: string;
+  disabled?: boolean;
 }
 
 export const Dropdown = (props: DropdownInputProps) => {
@@ -68,7 +69,12 @@ export const Dropdown = (props: DropdownInputProps) => {
     <Observer>
       {() => (
         <Fragment>
-          <div className="relative w-full" ref={ref}>
+          <div
+            className={classNames("relative w-full", {
+              "opacity-40": props.disabled,
+            })}
+            ref={ref}
+          >
             {topic && <p className="heading6 mb-[12px]">{topic}</p>}
 
             <div
@@ -82,7 +88,7 @@ export const Dropdown = (props: DropdownInputProps) => {
                 }
               )}
               onClick={() => {
-                setIsOpen(!isOpen);
+                !props.disabled && setIsOpen(!isOpen);
               }}
             >
               <p className="select-none body">{findValue(props.value)}</p>
@@ -118,8 +124,8 @@ export const Dropdown = (props: DropdownInputProps) => {
                 ))}
               </div>
             )}
+            <p className="caption2 text-error mt-[8px] min-h-[21px]">{error}</p>
           </div>
-          <p className="caption2 text-error mt-[8px] min-h-[21px]">{error}</p>
         </Fragment>
       )}
     </Observer>

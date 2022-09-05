@@ -11,6 +11,7 @@ interface RichTextProps {
   heightCss?: string;
   border?: boolean;
   onChange: (editorState: EditorState) => void;
+  error?: string;
 }
 
 export default function RichText(props: RichTextProps) {
@@ -46,7 +47,7 @@ export default function RichText(props: RichTextProps) {
           onEditorStateChange={props.onChange}
           wrapperClassName="caption1 relative"
           editorClassName={classNames(
-            `px-[16px] pt-[11px] pb-[14px] ${
+            `${
               props.heightCss || "h-[40px]"
             } focus-within:border-primary-40 leading-0 cursor-text rounded-[4px] ${
               props.border && "border border-gray-40"
@@ -55,7 +56,7 @@ export default function RichText(props: RichTextProps) {
             { "bg-gray-10": props.disabled }
           )}
           toolbarClassName={classNames(
-            "flex space-x-[32px] border border-black rounded-[4px] py-[9px] px-[12px] mb-[7px] absolute top-[-52px] left-0 z-30",
+            "flex space-x-[32px] border border-black rounded-[4px] pt-[9px] pb-[4px] px-[12px] mb-[7px] absolute top-[-52px] left-0 z-30",
             {
               block: isToolbarOpen,
             },
@@ -70,20 +71,22 @@ export default function RichText(props: RichTextProps) {
               className: "flex space-x-[32px]",
               options: ["bold", "italic", "underline", "strikethrough"],
               bold: {
-                // icon: "/images/bold.svg",
+                icon: "/images/B.svg",
                 className:
                   "h-[24px] w-[24px] flex justify-center items-center cursor-pointer hover:bg-gray-30 rounded-[4px]",
               },
               italic: {
-                // icon: "/images/italic.svg",
+                icon: "/images/I.svg",
                 className:
                   "h-[24px] w-[24px] flex justify-center items-center cursor-pointer hover:bg-gray-30 rounded-[4px]",
               },
               strikethrough: {
+                icon: "/images/T.svg",
                 className:
                   "h-[24px] w-[24px] flex justify-center items-center cursor-pointer hover:bg-gray-30 rounded-[4px]",
               },
               underline: {
+                icon: "/images/U.svg",
                 className:
                   "h-[24px] w-[24px] flex justify-center items-center cursor-pointer hover:bg-gray-30 rounded-[4px]",
               },
@@ -98,6 +101,11 @@ export default function RichText(props: RichTextProps) {
             setIsToolbarOpen(false);
           }}
         />
+      )}
+      {props.error && (
+        <p className="caption2 text-error min-h-[21px] mt-[8px]">
+          {props.error}
+        </p>
       )}
     </div>
   );
