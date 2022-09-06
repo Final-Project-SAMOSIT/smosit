@@ -20,6 +20,7 @@ interface TextInputProps {
   limitText?: number;
   showLimit?: boolean;
   withoutBorder?: boolean;
+  ["text-center"]?: boolean;
 }
 
 export const TextInput = (props: TextInputProps) => {
@@ -49,6 +50,7 @@ export const TextInput = (props: TextInputProps) => {
                 "border-error": props.error,
                 "border-black": !props.error,
                 "border px-[20px] rounded-[10px]": !props.withoutBorder,
+                "text-center": props["text-center"],
               })}
               style={{ height: `${props.height}px` }}
               value={props.value}
