@@ -23,7 +23,7 @@ class NewsContext {
     try {
       const resp: AxiosResponse<{ data: Array<News>; allItem: number }> =
         await getNewsList({
-          skip: this.currentPage - 1,
+          skip: (this.currentPage - 1) * this.perPage,
           take: this.perPage,
         });
       if (resp.status !== 204) {
