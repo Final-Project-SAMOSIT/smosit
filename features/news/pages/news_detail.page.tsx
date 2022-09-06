@@ -32,25 +32,12 @@ export const NewsDetailPage = () => {
   const router = useRouter();
 
   //---------------------
-  //   HANDLED
-  //---------------------
-  function getHTML() {
-    if (context.news?.news_details) {
-      const object = JSON?.parse(context.news?.news_details || "");
-
-      return draftToHtml(convertToRaw(convertFromRaw(object)));
-    } else {
-      return "";
-    }
-  }
-
-  //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
     context.modal = modalContext;
     context.newsPreparation(router.query.id?.toString() || "");
-    context.newsSuggestionPreparation();
+    context.newsSuggestionPreparation(router.query.id?.toString() || "");
   }, [router.query.id]);
 
   //---------------------
