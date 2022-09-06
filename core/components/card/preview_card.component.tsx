@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/th";
 import { useTranslation } from "next-i18next";
 import classNames from "classnames";
+import { rawStringToHtml } from "../../libs/rich_text_utills";
 
 interface NewsCardProps {
   src: string;
@@ -52,9 +53,15 @@ export const PreviewCard = (props: NewsCardProps) => {
             {props.topic}
           </p>
           <div className="relative" ref={desciptionRef}>
-            <p className="text-body max-h-[73px] overflow-hidden">
+            <div
+              className="text-body max-h-[73px] overflow-hidden"
+              dangerouslySetInnerHTML={{
+                __html: rawStringToHtml(props.description),
+              }}
+            />
+            {/* <p className="text-body max-h-[73px] overflow-hidden">
               {props.description}
-            </p>
+            </p> */}
             <div
               className={classNames("absolute bottom-0 right-0 flex pb-[1px]", {
                 hidden: (desciptionRef.current?.clientHeight || 0) <= 72,

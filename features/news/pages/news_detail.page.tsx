@@ -11,6 +11,7 @@ import { newsDetailContext } from "../contexts/news_detail.context";
 import { ModalContext } from "../../../core/context/modal.context";
 import draftToHtml from "draftjs-to-html";
 import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
+import { rawStringToHtml } from "../../../core/libs/rich_text_utills";
 
 export const NewsDetailPage = () => {
   //---------------------
@@ -90,7 +91,7 @@ export const NewsDetailPage = () => {
               <div
                 className="text-body mb-[64px] tablet:mb-[96px]"
                 dangerouslySetInnerHTML={{
-                  __html: getHTML(),
+                  __html: rawStringToHtml(context.news?.news_details || ""),
                 }}
               />
 
