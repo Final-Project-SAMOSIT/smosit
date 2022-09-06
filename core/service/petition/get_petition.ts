@@ -4,7 +4,7 @@ import { appAxios } from "../../libs/axios";
 const { publicRuntimeConfig } = getConfig();
 
 export const getPetitionType = () => {
-  return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getPetType`);
+  return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getPetitionType`);
 };
 
 export const getPetition = (id: string) => {

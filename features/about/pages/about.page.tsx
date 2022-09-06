@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Observer } from "mobx-react-lite";
+import React, { Fragment, useContext, useEffect } from "react";
+import { observer, Observer } from "mobx-react-lite";
 import { useTranslation } from "next-i18next";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { Button } from "../../../core/components/input/button.component";
@@ -7,6 +7,10 @@ import { Dropdown } from "../../../core/components/input/dropdown_input";
 import _ from "lodash";
 import { PreviewCard } from "../../../core/components/card/preview_card.component";
 import { useRouter } from "next/router";
+import { aboutContext } from "../contexts/about.context";
+import { ModalContext } from "../../../core/context/modal.context";
+import { AuthContext } from "../../../core/context/auth.context";
+import Loading from "../../../core/components/utility/loading";
 
 export const AboutPage = () => {
   //---------------------
@@ -22,11 +26,19 @@ export const AboutPage = () => {
   //---------------------
   //   CONTEXT
   //---------------------
+  const context = useContext(aboutContext);
+  const modalContext = useContext(ModalContext);
+  const authContext = useContext(AuthContext);
 
   //---------------------
   //   EFFECT
   //---------------------
-  useEffect(() => {}, []);
+  useEffect(() => {
+    context.modal = modalContext;
+    context.preparationYear();
+    context.preparationStudentUnion();
+    context.preparationExperience();
+  }, []);
 
   //---------------------
   //   RENDER
@@ -69,52 +81,112 @@ export const AboutPage = () => {
 
             <div className="w-[137px] self-center mb-[32px] laptop:mb-[72px]">
               <Dropdown
-                onChange={() => null}
-                options={[{ name: "YEAR 2022", value: "2022" }]}
-                value={"2022"}
+                onChange={(e) => {
+                  context.year = Number(e);
+                  context.preparationStudentUnion();
+                  context.preparationExperience();
+                }}
+                options={_.map(context.yearList, (year) => ({
+                  name: `YEAR ${year}`,
+                  value: year,
+                }))}
+                value={context.year.toString()}
               />
             </div>
 
             <div className="grid grid-cols-3 gap-y-[24px] laptop:gap-y-[32px] gap-x-[16px] mb-[72px] laptop:mb-[112px]">
-              <div />
-              <StudentUnionCard
-                image="https://i.pinimg.com/564x/a9/00/49/a900494ac06bfb931efb6885c995c9ff.jpg"
-                name="Name Lastname"
-                position="position"
-              />
-              <div />
-              {_.map(["", "", "", "", "", "", "", "", ""], () => (
-                <StudentUnionCard
-                  image="https://i.pinimg.com/564x/a9/00/49/a900494ac06bfb931efb6885c995c9ff.jpg"
-                  name="Name Lastname"
-                  position="position"
-                />
-              ))}
+              {context.isStudentLoading ? (
+                <Loading text="text-4xl" />
+              ) : (
+                <Fragment>
+                  <div />
+                  <StudentUnionCard
+                    image={
+                      context.studentList[0]?.student_union_info.std_img || ""
+                    }
+                    name={_.join(
+                      [
+                        _.get(
+                          context.studentList[0],
+                          `student_union_info.std_fname_${i18n.language}`
+                        ),
+                        _.get(
+                          context.studentList[0],
+                          `student_union_info.std_lname_${i18n.language}`
+                        ),
+                      ],
+                      " "
+                    )}
+                    position={
+                      context.studentList[0]?.std_position.position_name || ""
+                    }
+                  />
+                  <div />
+                  {_.map(_.slice(context.studentList, 1), (user) => (
+                    <StudentUnionCard
+                      image={user.student_union_info.std_img}
+                      name={_.join(
+                        [
+                          _.get(
+                            user,
+                            `student_union_info.std_fname_${i18n.language}`
+                          ),
+                          _.get(
+                            user,
+                            `student_union_info.std_lname_${i18n.language}`
+                          ),
+                        ],
+                        " "
+                      )}
+                      position={user.std_position.position_name}
+                    />
+                  ))}
+                </Fragment>
+              )}
             </div>
 
             <div className="flex flex-col items-center">
-              <div className="flex flex-col mb-[48px] laptop:mb-[64px] w-full">
-                <p className="heading3">Work Experiences</p>
-                <div className="border-b border-black w-[110px]" />
+              <div className="flex justify-between w-full">
+                <div className="flex flex-col mb-[48px] laptop:mb-[64px] w-full">
+                  <p className="heading3">Work Experiences</p>
+                  <div className="border-b border-black w-[110px]" />
+                </div>
+                {authContext.isPermission(["Publisher"]) && (
+                  <Button
+                    title="add post"
+                    onClick={() => {
+                      router.push("/about/create");
+                    }}
+                    widthCss={"w-[137px]"}
+                    heightCss={"h-[52px]"}
+                  />
+                )}
               </div>
               <div className="grid grid-cols-1 laptop:max-w-none max-w-[480px]  laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] mb-[32px] laptop:mb-[96px]">
-                {_.map(["", "", ""], () => (
+                {_.map(context.experienceList, (experience) => (
                   <PreviewCard
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Volutpat scelerisque senectus tempor consequat. 
-                    A et enim nullam consectetur enim turpis."
-                    onClick={() => router.push("/about/::ID")}
-                    src="https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
-                    topic="Topic Work"
-                    timeStamp="2022-07-29T13:18:24.073Z"
+                    description={experience.news_details}
+                    onClick={() => router.push(`/about/${experience.news_id}`)}
+                    src={
+                      experience.news_img ||
+                      "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
+                    }
+                    topic={experience.news_title}
+                    timeStamp={experience.news_created_at}
                   />
                 ))}
               </div>
-              <Button
-                onClick={() => null}
-                title="load more"
-                widthCss="w-[137px]"
-              />
+              {context.isFetchingExperience ? (
+                <Loading text="text-4xl" />
+              ) : (
+                !context.isOutofContent && (
+                  <Button
+                    onClick={() => context.preparationExperience()}
+                    title="load more"
+                    widthCss="w-[137px]"
+                  />
+                )
+              )}
             </div>
           </div>
         </MainLayout>
@@ -129,18 +201,42 @@ interface StudentUnionCardProps {
   position: string;
 }
 
+const positionMap = {
+  President: { th: "ประธาน", en: "President" },
+  VicePresident: { th: "รองประธาน", en: "Vice President" },
+  Secretary: { th: "เลขา", en: "Secretary" },
+  Board: { th: "กรรมการ", en: "Board" },
+};
+
 const StudentUnionCard = (props: StudentUnionCardProps) => {
+  const { i18n } = useTranslation("about");
+
   return (
-    <div className="flex flex-col items-center">
-      <img
-        src={props.image}
-        className="w-[200px] aspect-square rounded-full mb-[8px] laptop:mb-[20px]"
-        alt=""
-      />
-      <p className="text-center heading5 mb-[4px] laptop:mb-[11px]">
-        {props.name}
-      </p>
-      <p className="text-center caption1">{props.position}</p>
-    </div>
+    <Observer>
+      {() => (
+        <div className="flex flex-col items-center">
+          {props.image ? (
+            <img
+              src={props.image}
+              className="w-[200px] aspect-square rounded-full mb-[8px] laptop:mb-[20px]"
+              alt=""
+            />
+          ) : (
+            <div className="bg-gray-20 w-[200px] h-[200px] p-[8px] rounded-full overflow-hidden">
+              <i className="fas fa-user text-[207px]" />
+            </div>
+          )}
+          <p className="text-center heading5 mb-[4px] laptop:mb-[11px]">
+            {props.name}
+          </p>
+          <p className="text-center caption1">
+            {_.get(
+              positionMap,
+              `${_.replace(props.position, / /g, "")}.${i18n.language}`
+            )}
+          </p>
+        </div>
+      )}
+    </Observer>
   );
 };

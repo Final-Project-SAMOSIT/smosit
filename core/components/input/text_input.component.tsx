@@ -19,6 +19,7 @@ interface TextInputProps {
 
   limitText?: number;
   showLimit?: boolean;
+  withoutBorder?: boolean;
 }
 
 export const TextInput = (props: TextInputProps) => {
@@ -43,22 +44,23 @@ export const TextInput = (props: TextInputProps) => {
           <div className="space-y-[8px]">
             <input
               type={props.type}
-              className={classNames(
-                `rounded-[10px] border w-full px-[20px] focus:outline-none`,
-                {
-                  "min-h-[58px]": !props.height,
-                  "border-error": props.error,
-                  "border-black": !props.error,
-                }
-              )}
+              className={classNames(`w-full focus:outline-none`, {
+                "min-h-[58px]": !props.height,
+                "border-error": props.error,
+                "border-black": !props.error,
+                "border px-[20px] rounded-[10px]": !props.withoutBorder,
+              })}
               style={{ height: `${props.height}px` }}
               value={props.value}
               onChange={props.onChange}
               onKeyPress={props.onKeyPress}
+              placeholder={props.placeholder}
             />
-            <p className="caption2 text-error min-h-[21px] mt-[8px]">
-              {props.error}
-            </p>
+            {props.error && (
+              <p className="caption2 text-error min-h-[21px] mt-[8px]">
+                {props.error}
+              </p>
+            )}
           </div>
         </div>
       )}

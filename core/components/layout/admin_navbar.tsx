@@ -34,10 +34,18 @@ export const AdminNavbar = (props: AdminNavbarProps) => {
   //---------------------
   const features = [
     {
+      name: props.noTranslation ? "About" : t("navbar_feature_home_about"),
+      route: "/about",
+    },
+    {
       name: props.noTranslation
         ? "Request Petition"
         : t("navbar_feature_home_vote"),
       route: "/manage/vote",
+    },
+    {
+      name: props.noTranslation ? "News" : t("navbar_feature_home_news"),
+      route: "/news",
     },
     {
       name: props.noTranslation
