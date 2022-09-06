@@ -33,7 +33,7 @@ class ExperienceDetailContext {
         this.experience = resp.data.data;
       }
 
-      this.preparationExperienceList();
+      this.preparationExperienceList(id);
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลประสบการณ์", err.message);
@@ -42,12 +42,13 @@ class ExperienceDetailContext {
     }
   }
 
-  async preparationExperienceList() {
+  async preparationExperienceList(id: string | number) {
     try {
       this.isLoading = true;
       const resp: AxiosResponse<{ data: Array<Experience> }> =
         await getExperiences({
           union_year: Number(this.experience?.union_year),
+          news_id: id,
         });
       if (resp.status !== 204) {
         this.experienceList = resp.data.data;

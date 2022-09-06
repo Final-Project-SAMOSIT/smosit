@@ -6,6 +6,7 @@ const { publicRuntimeConfig } = getConfig();
 export const getNewsList = (options?: {
   take?: number | string;
   skip?: number | string;
+  news_id?: number | string;
 }) => {
   const qs = querystring.stringify(options || {});
   return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getNews?${qs}`);
@@ -17,4 +18,4 @@ export const getNews = (id: string | number) => {
 
 export const getNewsType = () => {
   return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getNewsType`);
-}
+};
