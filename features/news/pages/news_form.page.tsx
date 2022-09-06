@@ -42,7 +42,11 @@ export const NewsFormPage = () => {
     validateOnBlur: false,
     validateOnMount: false,
     onSubmit: (e) => {
-      context.onCreate(e);
+      if (context.isEdit) {
+        context.onUpdate(router.query?.id?.toString() || "", e);
+      } else {
+        context.onCreate(e);
+      }
     },
   });
 
@@ -75,6 +79,10 @@ export const NewsFormPage = () => {
     } else {
       context.modal = modalContext;
       context.preparation();
+      if (router.query.id) {
+        context.isEdit = true;
+        context.preparationForm(router.query.id.toString(), formik);
+      }
     }
   }, []);
 

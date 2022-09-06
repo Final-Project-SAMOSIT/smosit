@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { NewsDetailPage } from "../../features/news/pages/news_detail.page";
+import { NewsFormPage } from "../../../features/news/pages/news_form.page";
 
-const NewsDetailsRoute: NextPage = () => {
-  return <NewsDetailPage />;
+const NewsFormRoute: NextPage = () => {
+  return <NewsFormPage />;
 };
 
 export async function getServerSideProps({ locale }: { locale: string }) {
@@ -14,4 +14,4 @@ export async function getServerSideProps({ locale }: { locale: string }) {
   };
 }
 
-export default NewsDetailsRoute;
+export default NewsFormRoute;
