@@ -57,7 +57,18 @@ class NewsFormContext {
       };
 
       const resp: AxiosResponse<{ data: News }> = await postNews(body);
-      Router.prototype.push(`/news/${resp.data.data.news_id}`);
+
+      const typeName = this.newsTypeList.find(
+        (type) => type.news_type_id === resp.data.data.news_type_id
+      )?.news_type_name;
+
+      if (typeName === "News") {
+        Router.prototype.push(`/news/${resp.data.data.news_id}`);
+      } else if (typeName === "Experience") {
+        Router.prototype.push(`/about/${resp.data.data.news_id}`);
+      } else {
+        Router.prototype.back();
+      }
     } catch (err: any) {
       this.modal?.openModal("มีปัญหาในการสร้าง", err.message);
     }

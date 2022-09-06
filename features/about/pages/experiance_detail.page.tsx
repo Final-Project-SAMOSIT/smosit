@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import _ from "lodash";
 import { ModalContext } from "../../../core/context/modal.context";
 import { experienceDetailContext } from "../contexts/about_detail.context";
+import { rawStringToHtml } from "../../../core/libs/rich_text_utills";
 
 export const ExperianceDetailPage = () => {
   //---------------------
@@ -69,9 +70,14 @@ export const ExperianceDetailPage = () => {
               <p className="text-center caption2 mb-[32px] tablet:mb-[48px]">
                 {context.experience?.news_caption_img}
               </p>
-              <p className="text-body mb-[64px] tablet:mb-[96px]">
-                {context.experience?.news_details}
-              </p>
+              <div
+                className="text-body mb-[64px] tablet:mb-[96px]"
+                dangerouslySetInnerHTML={{
+                  __html: rawStringToHtml(
+                    context.experience?.news_details || ""
+                  ),
+                }}
+              />
               <div className="space-y-[11px] flex flex-col mb-[64px]">
                 <p className="heading3">Suggestion</p>
                 <div className="w-[110px] border-b border-black" />

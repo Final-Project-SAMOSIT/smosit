@@ -9,6 +9,7 @@ import { PreviewCard } from "../../../core/components/card/preview_card.componen
 import { useRouter } from "next/router";
 import { aboutContext } from "../contexts/about.context";
 import { ModalContext } from "../../../core/context/modal.context";
+import { AuthContext } from "../../../core/context/auth.context";
 
 export const AboutPage = () => {
   //---------------------
@@ -26,6 +27,7 @@ export const AboutPage = () => {
   //---------------------
   const context = useContext(aboutContext);
   const modalContext = useContext(ModalContext);
+  const authContext = useContext(AuthContext);
 
   //---------------------
   //   EFFECT
@@ -143,9 +145,21 @@ export const AboutPage = () => {
             </div>
 
             <div className="flex flex-col items-center">
-              <div className="flex flex-col mb-[48px] laptop:mb-[64px] w-full">
-                <p className="heading3">Work Experiences</p>
-                <div className="border-b border-black w-[110px]" />
+              <div className="flex justify-between w-full">
+                <div className="flex flex-col mb-[48px] laptop:mb-[64px] w-full">
+                  <p className="heading3">Work Experiences</p>
+                  <div className="border-b border-black w-[110px]" />
+                </div>
+                {authContext.isPermission(["Publisher"]) && (
+                  <Button
+                    title="add post"
+                    onClick={() => {
+                      router.push("/about/create");
+                    }}
+                    widthCss={"w-[137px]"}
+                    heightCss={"h-[52px]"}
+                  />
+                )}
               </div>
               <div className="grid grid-cols-1 laptop:max-w-none max-w-[480px]  laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] mb-[32px] laptop:mb-[96px]">
                 {_.map(context.experienceList, (experience) => (

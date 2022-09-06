@@ -59,9 +59,6 @@ export const PreviewCard = (props: NewsCardProps) => {
                 __html: rawStringToHtml(props.description),
               }}
             />
-            {/* <p className="text-body max-h-[73px] overflow-hidden">
-              {props.description}
-            </p> */}
             <div
               className={classNames("absolute bottom-0 right-0 flex pb-[1px]", {
                 hidden: (desciptionRef.current?.clientHeight || 0) <= 72,
