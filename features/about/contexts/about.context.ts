@@ -66,13 +66,12 @@ class AboutContext {
         await getExperiences({
           union_year: this.year,
           take: 3,
-          skip: _.size(this.experienceList),
+          skip: Math.floor(_.size(this.experienceList) / 3),
         });
       if (resp.status !== 204) {
         this.experienceList = [...this.experienceList, ...resp.data.data];
-        this.experienceList = _.uniqBy(this.experienceList, "news_id");
-        if (_.size(resp.data.data) === 0) {
-          this.isOutofContent = true;
+        if(_.size(resp.data.data) === 0) {
+          this.isOutofContent= true
         }
       }
     } catch (err: any) {

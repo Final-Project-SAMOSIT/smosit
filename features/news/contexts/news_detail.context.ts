@@ -34,11 +34,9 @@ class NewsDetailContext {
     }
   }
 
-  async newsSuggestionPreparation(id: number | string) {
+  async newsSuggestionPreparation() {
     try {
-      const resp: AxiosResponse<{ data: Array<News> }> = await getNewsList({
-        news_id: id,
-      });
+      const resp: AxiosResponse<{ data: Array<News> }> = await getNewsList();
       if (resp.status !== 204) {
         this.newsList = resp.data.data;
       }
