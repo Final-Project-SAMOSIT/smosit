@@ -81,7 +81,11 @@ export const NewsFormPage = () => {
       context.preparation();
       if (router.query.id) {
         context.isEdit = true;
-        context.preparationForm(router.query.id.toString(), formik);
+        context.preparationForm(
+          router.query.id.toString(),
+          formik,
+          router.pathname.split("/")[1] === "about"
+        );
       }
     }
   }, []);

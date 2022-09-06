@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-import { ExperianceDetailPage } from "../../features/about/pages/experiance_detail.page";
+import { ExperianceDetailPage } from "../../../features/about/pages/experiance_detail.page";
 
 const AboutRoute: NextPage = () => {
   return <ExperianceDetailPage />;

@@ -1,15 +1,15 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { Experience, User } from "../types/user";
+import { Experience } from "../types/user";
 import { ModalContextClass } from "../../../core/context/modal.context";
 import {
   getExperience,
   getExperiences,
-  getStudentUnion,
-  getYears,
 } from "../../../core/service/about/get_about";
 import { AxiosResponse } from "axios";
 import _ from "lodash";
+import { deleteNews } from "../../../core/service/news/delete_news";
+import { Router } from "next/router";
 
 class ExperienceDetailContext {
   experience?: Experience;
@@ -57,6 +57,16 @@ class ExperienceDetailContext {
       this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลประสบการณ์", err.message);
     } finally {
       this.isLoading = false;
+    }
+  }
+
+  async onDelete(id: string | number) {
+    try {
+      await deleteNews(id);
+      Router.prototype.push("/about");
+    } catch (err: any) {
+      console.log(err);
+      this.modal?.openModal("มีปัญหาในการลบข่าว", err.message);
     }
   }
 }

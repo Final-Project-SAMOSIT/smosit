@@ -15,6 +15,7 @@ import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 import { Router } from "next/router";
 import { FormikProps } from "formik";
 import { patchNews } from "../../../core/service/news/patch_news";
+import { getExperience } from "../../../core/service/about/get_about";
 
 class NewsFormContext {
   modal?: ModalContextClass;
@@ -42,10 +43,17 @@ class NewsFormContext {
 
   async preparationForm(
     id: string | number,
-    formik: FormikProps<typeof newsFormInitValue>
+    formik: FormikProps<typeof newsFormInitValue>,
+    asExperience?: boolean
   ) {
     try {
-      const resp: AxiosResponse<{ data: News }> = await getNews(id);
+      let resp: AxiosResponse<{ data: News }>;
+      if (asExperience) {
+        resp = await getExperience(id);
+      } else {
+        resp = await getNews(id);
+      }
+
       const editor = EditorState.createWithContent(
         convertFromRaw(JSON.parse(resp.data.data.news_details))
       );
