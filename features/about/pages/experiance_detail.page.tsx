@@ -9,6 +9,7 @@ import _ from "lodash";
 import { ModalContext } from "../../../core/context/modal.context";
 import { experienceDetailContext } from "../contexts/about_detail.context";
 import { rawStringToHtml } from "../../../core/libs/rich_text_utills";
+import Loading from "../../../core/components/utility/loading";
 
 export const ExperianceDetailPage = () => {
   //---------------------
@@ -40,7 +41,9 @@ export const ExperianceDetailPage = () => {
       {() => (
         <MainLayout>
           {context.isLoading ? (
-            <div>Loading</div>
+            <div className="w-full flex justify-center">
+              <Loading text="text-4xl" />
+            </div>
           ) : (
             <div className="flex flex-col tablet:mt-[64px] mt-[32px] laptop:mt-[112px] tablet:mb-[64px] mb-[32px] laptop:mb-[96px]">
               <p className="title mb-[32px]">

@@ -14,7 +14,11 @@ export const getYears = () => {
   return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getAllUnionYear`);
 };
 
-export const getExperiences = (options: { union_year: number }) => {
+export const getExperiences = (options: {
+  union_year: number;
+  take?: number;
+  skip?: number;
+}) => {
   const qs = querystring.stringify(options);
   return appAxios().get(
     `${publicRuntimeConfig.BACKEND_API}/getExperiences?${qs}`

@@ -12,6 +12,7 @@ import { ModalContext } from "../../../core/context/modal.context";
 import draftToHtml from "draftjs-to-html";
 import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 import { rawStringToHtml } from "../../../core/libs/rich_text_utills";
+import Loading from "../../../core/components/utility/loading";
 
 export const NewsDetailPage = () => {
   //---------------------
@@ -60,7 +61,9 @@ export const NewsDetailPage = () => {
       {() => (
         <MainLayout>
           {context.isLoading ? (
-            <div>Loading</div>
+            <div className="w-full flex justify-center">
+              <Loading text="text-4xl" />
+            </div>
           ) : (
             <div className="flex flex-col tablet:mt-[64px] mt-[32px] laptop:mt-[112px] tablet:mb-[64px] mb-[32px] laptop:mb-[96px]">
               <p className="title mb-[32px]">{context.news?.news_title}</p>
@@ -95,9 +98,6 @@ export const NewsDetailPage = () => {
                 }}
               />
 
-              {/* <p className="text-body mb-[64px] tablet:mb-[96px]">
-                {context.news?.news_details}
-              </p> */}
               <div className="space-y-[11px] flex flex-col mb-[64px]">
                 <p className="heading3">Suggestion</p>
                 <div className="w-[110px] border-b border-black" />

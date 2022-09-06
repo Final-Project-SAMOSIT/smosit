@@ -14,6 +14,8 @@ class AboutContext {
   studentList: Array<User> = [];
   yearList: Array<number> = [];
   experienceList: Array<Experience> = [];
+  isFetchingExperience: boolean = false;
+  isOutofContent: boolean = false;
   year: number = new Date().getFullYear();
   isStudentLoading: boolean = false;
   modal?: ModalContextClass;
@@ -59,14 +61,24 @@ class AboutContext {
 
   async preparationExperience() {
     try {
+      this.isFetchingExperience = true;
       const resp: AxiosResponse<{ data: Array<Experience> }> =
-        await getExperiences({ union_year: this.year });
+        await getExperiences({
+          union_year: this.year,
+          take: 3,
+          skip: Math.floor(_.size(this.experienceList) / 3),
+        });
       if (resp.status !== 204) {
-        this.experienceList = resp.data.data;
+        this.experienceList = [...this.experienceList, ...resp.data.data];
+        if(_.size(resp.data.data) === 0) {
+          this.isOutofContent= true
+        }
       }
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลประสบการณ์", err.message);
+    } finally {
+      this.isFetchingExperience = false;
     }
   }
 }

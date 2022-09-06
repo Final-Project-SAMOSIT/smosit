@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { aboutContext } from "../contexts/about.context";
 import { ModalContext } from "../../../core/context/modal.context";
 import { AuthContext } from "../../../core/context/auth.context";
+import Loading from "../../../core/components/utility/loading";
 
 export const AboutPage = () => {
   //---------------------
@@ -95,7 +96,7 @@ export const AboutPage = () => {
 
             <div className="grid grid-cols-3 gap-y-[24px] laptop:gap-y-[32px] gap-x-[16px] mb-[72px] laptop:mb-[112px]">
               {context.isStudentLoading ? (
-                <div>Loading</div>
+                <Loading text="text-4xl" />
               ) : (
                 <Fragment>
                   <div />
@@ -175,11 +176,17 @@ export const AboutPage = () => {
                   />
                 ))}
               </div>
-              <Button
-                onClick={() => null}
-                title="load more"
-                widthCss="w-[137px]"
-              />
+              {context.isFetchingExperience ? (
+                <Loading text="text-4xl" />
+              ) : (
+                !context.isOutofContent && (
+                  <Button
+                    onClick={() => context.preparationExperience()}
+                    title="load more"
+                    widthCss="w-[137px]"
+                  />
+                )
+              )}
             </div>
           </div>
         </MainLayout>

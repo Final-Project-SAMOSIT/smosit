@@ -3,6 +3,7 @@ import { Observer } from "mobx-react-lite";
 import { AuthContext } from "../../context/auth.context";
 import { ModalContext } from "../../context/modal.context";
 import { useTranslation } from "next-i18next";
+import Loading from "../utility/loading";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ export const AuthLayout = (props: AuthLayoutProps) => {
   //   EFFECT
   //---------------------
   useEffect(() => {
-    context.t = t
+    context.t = t;
     context.modal = modal;
     context.Me();
   }, []);
@@ -36,7 +37,13 @@ export const AuthLayout = (props: AuthLayoutProps) => {
   return (
     <Observer>
       {() =>
-        context.isLoading ? <p>loading</p> : <Fragment>{children}</Fragment>
+        context.isLoading ? (
+          <div className="w-full flex justify-center mt-[48px]">
+            <Loading text="text-7xl" />
+          </div>
+        ) : (
+          <Fragment>{children}</Fragment>
+        )
       }
     </Observer>
   );
