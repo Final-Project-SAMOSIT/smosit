@@ -30,10 +30,6 @@ export default function RichText(props: RichTextProps) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(isToolbarOpen);
-  }, [isToolbarOpen]);
-
   function getEditorState() {
     return props.value;
   }
@@ -46,6 +42,7 @@ export default function RichText(props: RichTextProps) {
           editorState={getEditorState()}
           onEditorStateChange={props.onChange}
           wrapperClassName="caption1 relative"
+          stripPastedStyles
           editorClassName={classNames(
             `${
               props.heightCss || "h-[40px]"
