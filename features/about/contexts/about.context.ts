@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { Experience, User } from "../types/user";
+import { Experience, Position, User } from "../types/user";
 import { ModalContextClass } from "../../../core/context/modal.context";
 import {
   getExperiences,
@@ -19,11 +19,16 @@ class AboutContext {
   year: number = new Date().getFullYear();
   isStudentLoading: boolean = false;
   modal?: ModalContextClass;
-
+  positionPoint: Map<Position, number>;
   //-------------------
   // CONSTUCTOR
   //-------------------
   constructor() {
+    this.positionPoint = new Map<Position, number>();
+    this.positionPoint.set("President", 1);
+    this.positionPoint.set("Vice President", 2);
+    this.positionPoint.set("Secretary", 3);
+    this.positionPoint.set("Board", 4);
     makeAutoObservable(this);
   }
 
@@ -35,7 +40,11 @@ class AboutContext {
       });
       if (resp.status !== 204) {
         this.studentList = [];
-        this.studentList = resp.data.data;
+        this.studentList = resp.data.data.sort(
+          (a, b) =>
+            (this.positionPoint.get(a.std_position.position_name) || 9999) -
+            (this.positionPoint.get(b.std_position.position_name) || 0)
+        );
       }
     } catch (err: any) {
       console.log(err);

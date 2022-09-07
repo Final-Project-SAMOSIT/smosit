@@ -3,7 +3,7 @@ export interface User {
   std_id: string;
   std_position: {
     position_id: string;
-    position_name: string;
+    position_name: Position;
   };
   student_union_info: {
     std_fname_en: string;
@@ -17,6 +17,8 @@ export interface User {
   union_id: string;
   union_year: number;
 }
+
+export type Position = "President" | "Vice President" | "Board" | "Secretary";
 
 export interface Experience {
   news_caption_img: string;
