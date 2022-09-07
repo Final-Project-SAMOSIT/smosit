@@ -77,7 +77,7 @@ export const Navbar = (props: NavbarProps) => {
           <div className="laptop:max-w-[1200px] laptop:mx-auto h-full flex justify-between items-center laptop:p-0 px-[8px]">
             <img
               src="/images/logo.svg"
-              className="laptop:h-[60px] h-[48px] mobile:mt-[8px] m-0"
+              className="laptop:h-[60px] h-[48px] mobile:mt-[8px] m-0 cursor-pointer"
               onClick={() => router.push("/")}
             />
             <div className="laptop:flex space-x-[48px] hidden">
