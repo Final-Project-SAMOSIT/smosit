@@ -13,11 +13,11 @@ const Error401Page: NextPage = () => {
 
   return (
     <div className="flex flex-col items-center h-screen">
-      {authContext.isPermission(["Publisher"]) ? (
+      {/* {authContext.isPermission(["Publisher"]) ? (
         <AdminNavbar />
       ) : (
         <Navbar />
-      )}
+      )} */}
       <div className="flex flex-col items-center justify-around w-full h-[calc(100%-90px)]">
         <img
           src="/images/401.svg"
