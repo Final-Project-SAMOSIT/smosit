@@ -4,6 +4,8 @@ import { ModalContextClass } from "../../../core/context/modal.context";
 import { News } from "../../../core/types/news";
 import { getNews, getNewsList } from "../../../core/service/news/get_news";
 import { AxiosResponse } from "axios";
+import { Router } from "next/router";
+import { deleteNews } from "../../../core/service/news/delete_news";
 
 class NewsDetailContext {
   news?: News;
@@ -34,16 +36,24 @@ class NewsDetailContext {
     }
   }
 
-  async newsSuggestionPreparation(id: number | string) {
+  async newsSuggestionPreparation() {
     try {
-      const resp: AxiosResponse<{ data: Array<News> }> = await getNewsList({
-        news_id: id,
-      });
+      const resp: AxiosResponse<{ data: Array<News> }> = await getNewsList();
       if (resp.status !== 204) {
         this.newsList = resp.data.data;
       }
     } catch (err: any) {
       this.modal?.openModal("มีปัญหาในการเตรียมข่าว", err.message);
+    }
+  }
+
+  async onDelete(id: string | number) {
+    try {
+      await deleteNews(id);
+      Router.prototype.push("/news");
+    } catch (err: any) {
+      console.log(err);
+      this.modal?.openModal("มีปัญหาในการลบข่าว", err.message);
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { Fragment, useContext, useEffect, useRef } from "react";
 import { Observer } from "mobx-react-lite";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import _, { filter } from "lodash";
@@ -42,7 +42,11 @@ export const NewsFormPage = () => {
     validateOnBlur: false,
     validateOnMount: false,
     onSubmit: (e) => {
-      context.onCreate(e);
+      if (context.isEdit) {
+        context.onUpdate(router.query?.id?.toString() || "", e);
+      } else {
+        context.onCreate(e);
+      }
     },
   });
 
@@ -75,6 +79,14 @@ export const NewsFormPage = () => {
     } else {
       context.modal = modalContext;
       context.preparation();
+      if (router.query.id) {
+        context.isEdit = true;
+        context.preparationForm(
+          router.query.id.toString(),
+          formik,
+          router.pathname.split("/")[1] === "about"
+        );
+      }
     }
   }, []);
 
@@ -86,8 +98,10 @@ export const NewsFormPage = () => {
       {() => (
         <MainLayout>
           <div className="flex flex-col tablet:mt-[64px] mt-[32px] laptop:mt-[112px] tablet:mb-[64px] mb-[32px] laptop:mb-[96px]">
-            <p className="title w-[350px] border-b border-black">Create post</p>
-            <div className="heading2 mt-[96px]">
+            <p className="title laptop:w-[350px] tablet:w-[160px] w-[140px]   border-b border-black">
+              Create post
+            </p>
+            <div className="heading2 tablet:mt-[56px] mt-[32px] laptop:mt-[96px]">
               <TextInput
                 placeholder="Title"
                 height={72}
@@ -125,27 +139,48 @@ export const NewsFormPage = () => {
                 />
               </div>
             ) : (
-              <div
-                className="w-full aspect-[3/1] rounded-[10px] border border-dashed border-dark-50 flex flex-col items-center justify-center space-y-[48px] mt-[36px] cursor-pointer"
-                onClick={() => fileInputRef?.current?.click()}
-              >
-                <i className="fa-solid fa-file-image text-gray-40 text-[72px]" />
-                <p className="caption2 select-none">Support: jpg, png</p>
-              </div>
+              <Fragment>
+                <div
+                  className={classNames(
+                    "w-full aspect-[3/1] rounded-[10px] border border-dashed p-[16px] tablet:p-0 flex flex-col items-center justify-center tablet:space-y-[36px] space-y-[24px] laptop:space-y-[48px] tablet:mt-[24px] mt-[16px] laptop:mt-[36px] cursor-pointer",
+                    {
+                      "border-error": formik.errors.news_img,
+                      "border-dark-50": !formik.errors.news_img,
+                    }
+                  )}
+                  onClick={() => fileInputRef?.current?.click()}
+                >
+                  <i className="fa-solid fa-file-image text-gray-40 text-[72px]" />
+                  <p className="caption2 select-none">Support: jpg, png</p>
+                </div>
+                {formik.errors.news_img && (
+                  <p className="caption2 text-error min-h-[21px] mt-[8px]">
+                    {formik.errors.news_img}
+                  </p>
+                )}
+              </Fragment>
             )}
 
-            <div className="text-center caption2 mt-[32px] mx-auto w-[220px]">
+            <div className="text-center caption2 tablet:mt-[24px] mt-[8px] laptop:mt-[32px] mx-auto w-[220px]">
               <TextInput
                 placeholder="Type caption for image(optional)"
                 height={24}
+                onChange={(e) => {
+                  formik.setFieldValue("news_caption_img", e.target.value);
+                }}
+                value={formik.values.news_caption_img}
+                text-center
                 withoutBorder
               />
             </div>
             <div
-              className={classNames("mt-[56px]", {
-                "text-gray-40": !formik.values.news_details_text,
-                "text-black": formik.values.news_details_text,
-              })}
+              className={classNames(
+                "laptop:mt-[56px] tablet:mt-[48px] mt-[24px]",
+                {
+                  "text-gray-40": !formik.values.news_details_text,
+                  "text-black": formik.values.news_details_text,
+                }
+              )}
             >
               <RichText
                 onChange={(e) => {
@@ -162,7 +197,7 @@ export const NewsFormPage = () => {
               />
             </div>
 
-            <div className="w-full flex justify-between space-x-[16px] mb-[36px]">
+            <div className="w-full flex flex-col tablet:flex-row justify-between sapce-x-0 tablet:space-x-[16px] mb-[36px]">
               <Dropdown
                 onChange={(e) => {
                   formik.setFieldValue("news_type_id", e);

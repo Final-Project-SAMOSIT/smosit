@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Observer } from "mobx-react-lite";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { useTranslation } from "next-i18next";
@@ -10,6 +10,8 @@ import { ModalContext } from "../../../core/context/modal.context";
 import { experienceDetailContext } from "../contexts/about_detail.context";
 import { rawStringToHtml } from "../../../core/libs/rich_text_utills";
 import Loading from "../../../core/components/utility/loading";
+import { AuthContext } from "../../../core/context/auth.context";
+import { useClickOutside } from "../../../core/libs/click_detector";
 
 export const ExperianceDetailPage = () => {
   //---------------------
@@ -18,10 +20,26 @@ export const ExperianceDetailPage = () => {
   const { i18n } = useTranslation();
 
   //---------------------
+  //   STATE
+  //---------------------
+  const [isOpen, setIsOpen] = useState(false);
+
+  //---------------------
+  //   REF
+  //---------------------
+  const ref = useRef<HTMLDivElement>(null);
+  useClickOutside(ref, () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  });
+
+  //---------------------
   //   CONTEXT
   //---------------------
   const context = useContext(experienceDetailContext);
   const modalContext = useContext(ModalContext);
+  const authContext = useContext(AuthContext);
 
   //---------------------
   //   ROUTER
@@ -46,9 +64,60 @@ export const ExperianceDetailPage = () => {
             </div>
           ) : (
             <div className="flex flex-col tablet:mt-[64px] mt-[32px] laptop:mt-[112px] tablet:mb-[64px] mb-[32px] laptop:mb-[96px]">
-              <p className="title mb-[32px]">
-                {context.experience?.news_title}
-              </p>
+              <div className="flex justify-between tablet:mb-[16px] mb-[8px] laptop:mb-[32px]">
+                <p className="title ">{context.experience?.news_title}</p>
+                {authContext.isPermission(["Publisher"]) && (
+                  <div className="relative">
+                    <i
+                      className="fas fa-ellipsis-h mr-[4px] p-[2px]"
+                      onClick={() => {
+                        setTimeout(() => {
+                          setIsOpen(true);
+                        }, 150);
+                      }}
+                    />
+                    {isOpen && (
+                      <div
+                        className="absolute w-[160px] border border-black shadow-sm right-0 flex flex-col"
+                        ref={ref}
+                      >
+                        {_.map(
+                          [
+                            {
+                              name: "Edit",
+                              action: () =>
+                                router.push(`${router.asPath}/edit`),
+                            },
+                            {
+                              name: "Delete",
+                              action: () =>
+                                modalContext.openModal(
+                                  "Delete",
+                                  "Are you sure you want to delete?",
+                                  () => {
+                                    context.onDelete(
+                                      router.query.id?.toString() || ""
+                                    );
+                                  }
+                                ),
+                            },
+                          ],
+                          (option) => (
+                            <div
+                              className="px-[16px] pt-[7px] pb-[11px] bg-white hover:bg-gray-10"
+                              onClick={option.action}
+                            >
+                              <p className="text-body select-none">
+                                {option.name}
+                              </p>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
               <div className="w-1/2 border-b border-black mb-[21px]" />
               <p className="button mb-[32px]">
                 posted on:{" "}

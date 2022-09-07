@@ -96,7 +96,9 @@ export const AboutPage = () => {
 
             <div className="grid grid-cols-3 gap-y-[24px] laptop:gap-y-[32px] gap-x-[16px] mb-[72px] laptop:mb-[112px]">
               {context.isStudentLoading ? (
-                <Loading text="text-4xl" />
+                <div className="flex w-full justify-center col-span-full">
+                  <Loading text="text-4xl" />
+                </div>
               ) : (
                 <Fragment>
                   <div />

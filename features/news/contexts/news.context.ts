@@ -10,6 +10,7 @@ class NewsContext {
   totalPage: number = 1;
   perPage: number = 6;
   newsList: Array<News> = [];
+  isLoading: boolean = false;
   modal?: ModalContextClass;
 
   //-------------------
@@ -21,6 +22,7 @@ class NewsContext {
 
   async newsPreparation() {
     try {
+      this.isLoading = true;
       const resp: AxiosResponse<{ data: Array<News>; allItem: number }> =
         await getNewsList({
           skip: (this.currentPage - 1) * this.perPage,
@@ -32,6 +34,8 @@ class NewsContext {
       }
     } catch (err: any) {
       this.modal?.openModal("มีปัญหาในการเตรียมข่าว", err.message);
+    } finally {
+      this.isLoading = false;
     }
   }
 }

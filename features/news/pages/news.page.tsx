@@ -9,6 +9,7 @@ import { Paginate } from "../../../core/components/table/paginate.component";
 import { ModalContext } from "../../../core/context/modal.context";
 import { Button } from "../../../core/components/input/button.component";
 import { AuthContext } from "../../../core/context/auth.context";
+import Loading from "../../../core/components/utility/loading";
 
 export const NewsPage = () => {
   //---------------------
@@ -53,18 +54,24 @@ export const NewsPage = () => {
               )}
             </div>
             <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[96px]">
-              {_.map(context.newsList, (news) => (
-                <PreviewCard
-                  topic={news.news_title}
-                  description={news.news_details}
-                  src={
-                    news.news_img ||
-                    "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
-                  }
-                  timeStamp={news.news_created_at}
-                  onClick={() => router.push(`/news/${news.news_id}`)}
-                />
-              ))}
+              {context.isLoading ? (
+                <div className="col-span-full flex justify-center">
+                  <Loading text="text-4xl" />
+                </div>
+              ) : (
+                _.map(context.newsList, (news) => (
+                  <PreviewCard
+                    topic={news.news_title}
+                    description={news.news_details}
+                    src={
+                      news.news_img ||
+                      "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
+                    }
+                    timeStamp={news.news_created_at}
+                    onClick={() => router.push(`/news/${news.news_id}`)}
+                  />
+                ))
+              )}
             </div>
             <div className="flex justify-end w-full">
               <Paginate

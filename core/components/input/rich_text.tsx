@@ -30,22 +30,19 @@ export default function RichText(props: RichTextProps) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(isToolbarOpen);
-  }, [isToolbarOpen]);
-
   function getEditorState() {
     return props.value;
   }
 
   return (
-    <div>
+    <div className="min-h-[160px]">
       {Editor && (
         <Editor
           placeholder={props.placeholder}
           editorState={getEditorState()}
           onEditorStateChange={props.onChange}
           wrapperClassName="caption1 relative"
+          stripPastedStyles
           editorClassName={classNames(
             `${
               props.heightCss || "h-[40px]"
@@ -56,7 +53,7 @@ export default function RichText(props: RichTextProps) {
             { "bg-gray-10": props.disabled }
           )}
           toolbarClassName={classNames(
-            "flex space-x-[32px] border border-black rounded-[4px] pt-[9px] pb-[4px] px-[12px] mb-[7px] absolute top-[-52px] left-0 z-30",
+            "flex space-x-[32px] border border-black bg-white rounded-[4px] pt-[9px] pb-[4px] px-[12px] mb-[7px] absolute top-[-52px] left-0 z-30",
             {
               block: isToolbarOpen,
             },
