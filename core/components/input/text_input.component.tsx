@@ -13,6 +13,7 @@ interface TextInputProps {
 
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (e: any) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 
   height?: number;
   width?: number;
@@ -21,6 +22,7 @@ interface TextInputProps {
   showLimit?: boolean;
   withoutBorder?: boolean;
   ["text-center"]?: boolean;
+  ["hide-error-text"]?: boolean;
 }
 
 export const TextInput = (props: TextInputProps) => {
@@ -51,14 +53,17 @@ export const TextInput = (props: TextInputProps) => {
                 "border-black": !props.error,
                 "border px-[20px] rounded-[10px]": !props.withoutBorder,
                 "text-center": props["text-center"],
+                "bg-gray-20 text-gray-50": props.disabled,
               })}
               style={{ height: `${props.height}px` }}
               value={props.value}
               onChange={props.onChange}
               onKeyPress={props.onKeyPress}
+              onBlur={props.onBlur}
+              disabled={props.disabled}
               placeholder={props.placeholder}
             />
-            {props.error && (
+            {props.error && !props["hide-error-text"] && (
               <p className="caption2 text-error min-h-[21px] mt-[8px]">
                 {props.error}
               </p>

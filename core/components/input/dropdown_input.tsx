@@ -12,6 +12,7 @@ interface DropdownInputProps {
   topic?: string;
   error?: string;
   disabled?: boolean;
+  ["hide-error-text"]?: boolean;
 }
 
 export const Dropdown = (props: DropdownInputProps) => {
@@ -48,10 +49,7 @@ export const Dropdown = (props: DropdownInputProps) => {
     let newOptions = options;
 
     if (placeholder) {
-      newOptions = [
-        { name: placeholder, value: "", disabled: true },
-        ...newOptions,
-      ];
+      newOptions = [...newOptions];
     }
 
     return newOptions;
@@ -105,7 +103,7 @@ export const Dropdown = (props: DropdownInputProps) => {
             {isOpen && (
               <div
                 className={classNames(
-                  "absolute z-10 flex flex-col w-full border-b shadow-[2px_4px_4px_rgba(0,0,0,0.25)] border-x body min-h-[20px]",
+                  "absolute z-10 flex flex-col w-full border-b shadow-[2px_4px_4px_rgba(0,0,0,0.25)] border-x body min-h-[20px] max-h-[121px] overflow-y-auto",
                   {
                     "border-error": error,
                     "border-black": !error,
@@ -114,9 +112,18 @@ export const Dropdown = (props: DropdownInputProps) => {
               >
                 {_.map(getOption(), (option) => (
                   <div
-                    className="h-[40px] w-full bg-white hover:bg-gray-10 flex items-center px-[20px] select-none hover:font-bold"
+                    className={classNames(
+                      "h-[40px] min-h-[40px] w-full bg-white flex items-center px-[20px] select-none",
+                      {
+                        "hover:bg-gray-10 hover:font-bold text-black":
+                          !option.disabled,
+                        "text-gray-50": option.disabled,
+                      }
+                    )}
                     onClick={() => {
-                      onChange(option);
+                      if (!option.disabled) {
+                        onChange(option);
+                      }
                     }}
                   >
                     {option.name}
@@ -124,7 +131,11 @@ export const Dropdown = (props: DropdownInputProps) => {
                 ))}
               </div>
             )}
-            <p className="caption2 text-error mt-[8px] min-h-[21px]">{error}</p>
+            {error && !props["hide-error-text"] && (
+              <p className="caption2 text-error mt-[8px] min-h-[21px]">
+                {error}
+              </p>
+            )}
           </div>
         </Fragment>
       )}

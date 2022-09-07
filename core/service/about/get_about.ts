@@ -30,3 +30,11 @@ export const getExperience = (id: string | number) => {
     `${publicRuntimeConfig.BACKEND_API}/getExperiences/${id}`
   );
 };
+
+export const getPosition = () => {
+  return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getPosition`);
+};
+
+export const getStudent = (id: string) => {
+  return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getStudentUnionInfo/${id}`);
+};
