@@ -32,16 +32,22 @@ export const ModalLayout = (props: ModalLayoutProps) => {
                 <p className="text-center heading2">{modal.title}</p>
                 <p className="text-center heading5">{modal.message}</p>
                 <div className="flex space-x-[16px] pt-[24px]">
-                  <Button
-                    onClick={() => (modal.isModalOpen = false)}
-                    title={t("modal_cancel_button")}
-                    heightCss="laptop:h-[40px] h-[32px]"
-                    widthCss="laptop:w-[112px] w-[72px]"
-                  ></Button>
+                  {modal.onOk && (
+                    <Button
+                      onClick={() => {
+                        modal.isModalOpen = false;
+                        modal.onOk = null;
+                      }}
+                      title={t("modal_cancel_button")}
+                      heightCss="laptop:h-[40px] h-[32px]"
+                      widthCss="laptop:w-[112px] w-[72px]"
+                    ></Button>
+                  )}
                   <Button
                     onClick={() => {
-                      modal.onOk();
+                      modal.onOk && modal.onOk();
                       modal.isModalOpen = false;
+                      modal.onOk = null;
                     }}
                     title={t("modal_ok_button")}
                     heightCss="laptop:h-[40px] h-[32px]"

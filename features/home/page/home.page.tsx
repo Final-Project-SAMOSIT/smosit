@@ -31,7 +31,7 @@ export const HomePage = () => {
     {
       topic: t("home_page_voting_feature_card_title"),
       description: t("home_page_voting_feature_card_detail"),
-      featureRoute: "",
+      featureRoute: "/vote",
     },
     {
       topic: t("home_page_petition_feature_card_title"),
@@ -43,7 +43,7 @@ export const HomePage = () => {
     {
       topic: t("home_page_project_form_feature_card_title"),
       description: t("home_page_project_form_feature_card_detail"),
-      featureRoute: "",
+      featureRoute: "/project",
     },
   ];
 
@@ -81,7 +81,7 @@ export const HomePage = () => {
                 <p className="body">{t("home_page_about_detail")}</p>
                 <div className="flex justify-end w-full">
                   <Button
-                    onClick={() => null}
+                    onClick={() => router.push("/about")}
                     title={t("home_page_about_read_more_button")}
                     heightCss="laptop:h-[52px] h-[36px]"
                     widthCss="laptop:w-[137px] w-[96px]"
