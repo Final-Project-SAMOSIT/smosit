@@ -76,7 +76,10 @@ class PetitionContext {
 
   async onCreate(value: any, callback: () => void, id: string) {
     try {
-      const resp = await postPetition(value);
+      const resp = await postPetition({
+        ...value,
+        petition_type_id: value.type_id,
+      });
       if (resp.status === 200) {
         callback();
         this.preparationPetition(id);
