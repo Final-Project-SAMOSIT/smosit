@@ -135,7 +135,7 @@ export const UserFormModal = (props: UserFormModalProps) => {
                 {formik.values.std_img ? (
                   <img
                     src={formik.values.std_img}
-                    className="my-[8px] w-[121px] aspect-square rounded-full object-contain"
+                    className="my-[8px] w-[121px] aspect-square rounded-full object-cover"
                     onClick={() => {
                       fileInputRef?.current?.click();
                     }}
