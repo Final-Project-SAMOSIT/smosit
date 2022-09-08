@@ -150,7 +150,7 @@ export const AboutPage = () => {
                         (item, index) => (
                           <div
                             className={classNames(
-                              "absolute w-[48px] top-0 h-[48px] rounded-full bg-gray-20 flex justify-center items-center z-10 duration-150 transform"
+                              "absolute w-[48px] top-0 h-[48px] rounded-full bg-gray-40 flex justify-center items-center z-10 duration-150 transform"
                             )}
                             style={{
                               top: -(isFloatButtonOpen ? 52 * (index + 1) : 0),
