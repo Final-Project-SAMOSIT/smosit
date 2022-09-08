@@ -240,7 +240,8 @@ export const NewsFormPage = () => {
               <Button
                 onClick={() => formik.submitForm()}
                 title="publish"
-                heightCss="w-[137px] h-[52px]"
+                heightCss="h-[40px] laptop:h-[52px]"
+                widthCss="w-[137px]"
               ></Button>
             </div>
           </div>

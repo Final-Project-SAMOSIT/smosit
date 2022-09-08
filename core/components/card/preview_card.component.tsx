@@ -34,7 +34,7 @@ export const PreviewCard = (props: NewsCardProps) => {
         <div className="flex flex-col">
           <img
             src={props.src}
-            className="w-full aspect-[16/9] object-cover rounded-[10px] mb-[32px] cursor-pointer"
+            className="w-full aspect-[16/9] object-contain rounded-[10px] mb-[32px] cursor-pointer"
             onClick={props.onClick}
             alt=""
           />

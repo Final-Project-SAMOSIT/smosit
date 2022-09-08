@@ -49,7 +49,7 @@ export const NewsPage = () => {
                   onClick={() => router.push("/news/create")}
                   title="add post"
                   widthCss="w-[137px]"
-                  heightCss="h-[52px]"
+                  heightCss="laptop:h-[52px] h-[40px]"
                 />
               )}
             </div>

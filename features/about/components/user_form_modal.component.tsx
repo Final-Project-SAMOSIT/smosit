@@ -14,7 +14,7 @@ import classNames from "classnames";
 import Loading from "../../../core/components/utility/loading";
 
 interface UserFormModalProps {
-  userInfo?: { userId: string; unionId: string, unionYear: number };
+  userInfo?: { userId: string; unionId: string; unionYear: number };
   positionOptions: Array<{ name: string; value: string }>;
   onClose: () => void;
   onSave: (value: typeof userInitValue) => void;
@@ -95,7 +95,7 @@ export const UserFormModal = (props: UserFormModalProps) => {
     <Observer>
       {() => (
         <div className="fixed top-0 left-0 z-30 flex justify-center w-screen h-screen bg-black bg-opacity-60">
-          <div className="bg-white mt-[48px] py-[24px] px-[32px] h-max w-[480px] flex flex-col items-center space-y-[12px]">
+          <div className="bg-white mt-0 tablet:mt-[48px] py-[24px] px-[32px] h-full overflow-y-auto tablet:h-max w-[480px] flex flex-col items-center space-y-[12px]">
             <p className="title">
               {context.isEdit ? "Edit" : "Create"} Information
             </p>
@@ -111,7 +111,7 @@ export const UserFormModal = (props: UserFormModalProps) => {
                 }
               }}
               error={formik.errors.std_id}
-              disabled={props.userInfo ? true : false}
+              disabled={props.userInfo?.userId ? true : false}
               hide-error-text
               type="number"
             />
@@ -135,7 +135,7 @@ export const UserFormModal = (props: UserFormModalProps) => {
                 {formik.values.std_img ? (
                   <img
                     src={formik.values.std_img}
-                    className="my-[8px] w-[121px] aspect-square rounded-full object-cover"
+                    className="my-[8px] w-[121px] aspect-square rounded-full object-contain"
                     onClick={() => {
                       fileInputRef?.current?.click();
                     }}
@@ -226,13 +226,13 @@ export const UserFormModal = (props: UserFormModalProps) => {
                     onClick={props.onClose}
                     title="cancel"
                     heightCss="h-[40px]"
-                    widthCss="w-[132px]"
+                    widthCss="tablet:w-[132px] w-[122px]"
                   />
                   <Button
                     onClick={() => formik.submitForm()}
                     title={context.isEdit ? "save" : "create"}
                     heightCss="h-[40px]"
-                    widthCss="w-[132px]"
+                    widthCss="tablet:w-[132px] w-[122px]"
                   />
                 </div>
               </Fragment>

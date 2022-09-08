@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { observer, Observer } from "mobx-react-lite";
 import { useTranslation } from "next-i18next";
 import { MainLayout } from "../../../core/components/layout/main_layout";
@@ -13,6 +19,8 @@ import { AuthContext } from "../../../core/context/auth.context";
 import Loading from "../../../core/components/utility/loading";
 import { UserFormModal } from "../components/user_form_modal.component";
 import { Position, positionMap } from "../types/user";
+import classNames from "classnames";
+import { useClickOutside } from "../../../core/libs/click_detector";
 
 export const AboutPage = () => {
   //---------------------
@@ -26,11 +34,24 @@ export const AboutPage = () => {
   const router = useRouter();
 
   //---------------------
+  //   STATE
+  //---------------------
+  const [isFloatButtonOpen, setIsFloatButtonOpen] = useState(false);
+
+  //---------------------
   //   CONTEXT
   //---------------------
   const context = useContext(aboutContext);
   const modalContext = useContext(ModalContext);
   const authContext = useContext(AuthContext);
+
+  //---------------------
+  //   REF
+  //---------------------
+  const floatButtonRef = useRef<HTMLDivElement>(null);
+  useClickOutside(floatButtonRef, () => {
+    setIsFloatButtonOpen(false);
+  });
 
   //---------------------
   //   HANDLED
@@ -101,14 +122,61 @@ export const AboutPage = () => {
                 Directory of student union
               </p>
               {!context.isEditMode && (
-                <div className="absolute right-0 hidden laptop:block">
-                  <Button
-                    onClick={() => (context.isEditMode = true)}
-                    title="manage"
-                    widthCss="w-[137px]"
-                    heightCss="h-[52px]"
-                  />
-                </div>
+                <Fragment>
+                  <div className="absolute right-0 hidden laptop:block">
+                    <Button
+                      onClick={() => (context.isEditMode = true)}
+                      title="manage"
+                      widthCss="w-[137px]"
+                      heightCss="h-[52px]"
+                    />
+                  </div>
+                  <div className="fixed bottom-[8px] right-[8px] z-20 block laptop:hidden">
+                    <div
+                      className="relative w-[48px] h-[48px]"
+                      ref={floatButtonRef}
+                    >
+                      {_.map(
+                        [
+                          {
+                            icon: "fas fa-edit",
+                            action: () => (context.isEditMode = true),
+                          },
+                          {
+                            icon: "fas fa-plus",
+                            action: () => (context.isEditModalOpen = true),
+                          },
+                        ],
+                        (item, index) => (
+                          <div
+                            className={classNames(
+                              "absolute w-[48px] top-0 h-[48px] rounded-full bg-gray-20 flex justify-center items-center z-10 duration-150 transform"
+                            )}
+                            style={{
+                              top: -(isFloatButtonOpen ? 52 * (index + 1) : 0),
+                            }}
+                            onClick={item.action}
+                          >
+                            <i
+                              className={`${item.icon} text-[16px] text-white`}
+                            />
+                          </div>
+                        )
+                      )}
+
+                      <div
+                        className="absolute rounded-full bg-gray-40 w-[48px] h-[48px] flex justify-center items-center z-20"
+                        onClick={() =>
+                          setTimeout(() => {
+                            setIsFloatButtonOpen(true);
+                          }, 150)
+                        }
+                      >
+                        <i className="fas fa-ellipsis text-white text-[28px]" />
+                      </div>
+                    </div>
+                  </div>
+                </Fragment>
               )}
             </div>
 
@@ -225,7 +293,7 @@ export const AboutPage = () => {
                   }}
                   title="cancel"
                   widthCss="w-[137px]"
-                  heightCss="h-[52px]"
+                  heightCss="h-[40px] laptop:h-[52px]"
                 />
                 <Button
                   onClick={() => {
@@ -237,7 +305,7 @@ export const AboutPage = () => {
                   }}
                   title="save"
                   widthCss="w-[137px]"
-                  heightCss="h-[52px]"
+                  heightCss="h-[40px] laptop:h-[52px]"
                 />
               </div>
             ) : (
@@ -254,7 +322,7 @@ export const AboutPage = () => {
                         router.push("/about/create");
                       }}
                       widthCss={"w-[137px]"}
-                      heightCss={"h-[52px]"}
+                      heightCss={"laptop:h-[52px] h-[40px]"}
                     />
                   )}
                 </div>
@@ -306,6 +374,8 @@ interface StudentUnionCardProps {
 const StudentUnionCard = (props: StudentUnionCardProps) => {
   const { i18n } = useTranslation("about");
 
+  const modalContext = useContext(ModalContext);
+
   return (
     <Observer>
       {() => (
@@ -320,10 +390,16 @@ const StudentUnionCard = (props: StudentUnionCardProps) => {
               </div>
             )}
             {props.isEditable && (
-              <div className="absolute top-0 right-0">
+              <div className="absolute tablet:top-0 top-[-4px] tablet:right-0 right-[-4px]">
                 <i
-                  className="cursor-pointer fas fa-trash-alt"
-                  onClick={props.onDelete}
+                  className="cursor-pointer fas fa-trash-alt text-red-500 tablet:text-[16px] text-[14px]"
+                  onClick={() => {
+                    modalContext.openModal(
+                      "Delete student",
+                      "Are you sure you want to delete studen?",
+                      props.onDelete
+                    );
+                  }}
                 />
               </div>
             )}
