@@ -21,6 +21,7 @@ import { UserFormModal } from "../components/user_form_modal.component";
 import { Position, positionMap } from "../types/user";
 import classNames from "classnames";
 import { useClickOutside } from "../../../core/libs/click_detector";
+import { UnionYearFormModal } from "../components/union_year_form_modal.component";
 
 export const AboutPage = () => {
   //---------------------
@@ -79,6 +80,7 @@ export const AboutPage = () => {
       {() => (
         <MainLayout>
           <div className="flex flex-col mt-[32px] laptop:mt-[132px] mb-[72px] laptop:mb-[210px]">
+            {context.isCreateYearModalOpen && <UnionYearFormModal />}
             {context.isEditModalOpen && (
               <UserFormModal
                 positionOptions={context.positionOptions}
@@ -123,7 +125,13 @@ export const AboutPage = () => {
               </p>
               {!context.isEditMode && (
                 <Fragment>
-                  <div className="absolute right-0 hidden laptop:block">
+                  <div className="absolute right-0 hidden laptop:flex space-x-[8px]">
+                    <Button
+                      onClick={() => (context.isCreateYearModalOpen = true)}
+                      title="create"
+                      widthCss="w-[137px]"
+                      heightCss="h-[52px]"
+                    />
                     <Button
                       onClick={() => (context.isEditMode = true)}
                       title="manage"
@@ -144,7 +152,8 @@ export const AboutPage = () => {
                           },
                           {
                             icon: "fas fa-plus",
-                            action: () => (context.isEditModalOpen = true),
+                            action: () =>
+                              (context.isCreateYearModalOpen = true),
                           },
                         ],
                         (item, index) => (
@@ -187,10 +196,7 @@ export const AboutPage = () => {
                   context.preparationStudentUnion();
                   context.preparationExperience();
                 }}
-                options={_.map(context.yearList, (year) => ({
-                  name: `YEAR ${year}`,
-                  value: year,
-                }))}
+                options={context.yearOptions}
                 value={context.year.toString()}
               />
             </div>
@@ -200,7 +206,8 @@ export const AboutPage = () => {
                 <div className="flex justify-center w-full col-span-full">
                   <Loading text="text-4xl" />
                 </div>
-              ) : (
+              ) : _.size(context.studentList) + _.size(context.addedUser) !==
+                0 ? (
                 <Fragment>
                   <div />
                   <StudentUnionCard
@@ -281,6 +288,21 @@ export const AboutPage = () => {
                     </div>
                   )}
                 </Fragment>
+              ) : context.isEditMode ? (
+                <div className="flex justify-center w-full h-max col-span-full">
+                  <div
+                    className="w-[96px] tablet:w-[200px] aspect-square rounded-full border border-dashed border-gray-50 flex justify-center items-center group cursor-pointer"
+                    onClick={() => {
+                      context.isEditModalOpen = true;
+                    }}
+                  >
+                    <i className="fas fa-plus text-[72px] text-gray-40 group-hover:text-gray-50 duration-150" />
+                  </div>
+                </div>
+              ) : (
+                <p className="col-span-full caption1 text-center">
+                  There's no Student in the Union
+                </p>
               )}
             </div>
 

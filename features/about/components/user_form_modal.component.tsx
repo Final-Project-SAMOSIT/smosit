@@ -95,7 +95,7 @@ export const UserFormModal = (props: UserFormModalProps) => {
     <Observer>
       {() => (
         <div className="fixed top-0 left-0 z-30 flex justify-center w-screen h-screen bg-black bg-opacity-60">
-          <div className="bg-white mt-0 tablet:mt-[48px] py-[24px] px-[32px] h-full overflow-y-auto tablet:h-max w-[480px] flex flex-col items-center space-y-[12px]">
+          <div className="bg-white mt-0 tablet:mt-[48px] py-[24px] px-[32px] h-full overflow-y-auto tablet:overflow-y-visible tablet:h-max w-[480px] flex flex-col items-center space-y-[12px]">
             <p className="title">
               {context.isEdit ? "Edit" : "Create"} Information
             </p>

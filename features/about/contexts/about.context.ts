@@ -10,9 +10,13 @@ import {
 } from "../../../core/service/about/get_about";
 import { AxiosResponse } from "axios";
 import _ from "lodash";
-import { postStudentUnion } from "../../../core/service/about/post_about";
+import {
+  postStudentUnion,
+  postUnionYear,
+} from "../../../core/service/about/post_about";
 import { patchStudentUnion } from "../../../core/service/about/patch_about";
 import { deleteStudentUnion } from "../../../core/service/about/delete_about";
+import { unionYearInit } from "../form/union_year.form";
 
 class AboutContext {
   studentList: Array<User> = [];
@@ -33,6 +37,7 @@ class AboutContext {
     unionYear: 0,
   };
   addedUser: Array<User> = [];
+  isCreateYearModalOpen: boolean = false;
   //-------------------
   // CONSTUCTOR
   //-------------------
@@ -145,6 +150,36 @@ class AboutContext {
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการลบข้อมูลสมาชิก", err.message);
+    }
+  }
+
+  get yearOptions() {
+    return _.map(this.yearList, (year) => ({
+      name: `YEAR ${year}`,
+      value: year,
+    }));
+  }
+
+  get aroundYearOptions() {
+    return _.map(
+      _.range(new Date().getFullYear() - 5, new Date().getFullYear() + 5),
+      (year) => ({
+        name: `YEAR ${year}`,
+        value: year.toString(),
+      })
+    );
+  }
+
+  async onCreateYear(value: typeof unionYearInit) {
+    try {
+      await postUnionYear(value);
+      this.year = Number(value.union_year);
+      this.preparationStudentUnion();
+      this.isEditMode = true;
+      this.isCreateYearModalOpen = false;
+    } catch (err: any) {
+      console.log(err);
+      this.modal?.openModal("มีปัญหาในการสร้างปี", err.message);
     }
   }
 }
