@@ -323,6 +323,7 @@ export const AboutPage = () => {
                       context.addedUser = [];
                       context.isEditMode = false;
                       context.preparationStudentUnion();
+                      context.preparationYear();
                     });
                   }}
                   title="save"
