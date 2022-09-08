@@ -90,7 +90,7 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 tablet:grid-cols-3 tablet:mx-auto tablet:w-full w-full gap-x-[8px] gap-y-[16px] laptop:gap-[32px]">
+            <div className="grid grid-cols-1 tablet:grid-cols-3 tablet:mx-auto w-full gap-x-[8px] gap-y-[16px] laptop:gap-[32px]">
               {_.map(features, (feature) => (
                 <div className="w-full h-full" key={`${feature.topic}`}>
                   <FeatureCard

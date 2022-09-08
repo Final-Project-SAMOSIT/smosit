@@ -42,8 +42,8 @@ class PetitionContext {
       const resp = await getPetitionType();
       if (resp.status === 200) {
         this.petitionType = _.map(resp.data.data, (type) => ({
-          name: type.pet_type_name,
-          value: type.pet_type_id,
+          name: type.petition_type_name,
+          value: type.petition_type_id,
         }));
       } else {
         this.petitionType = [];

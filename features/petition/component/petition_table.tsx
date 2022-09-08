@@ -79,19 +79,19 @@ export const PetitionTable = (props: PetitionTableProps) => {
                   <div className="col-span-2 col-start-2 min-h-[50px] laptop:flex items-center hidden">
                     <p className="body">
                       {dayjs(
-                        petition.pet_date,
+                        petition.petition_date,
                         "YYYY-MM-DDTHH:mm:ss.SSSZ"
                       ).format("D/M/YYYY")}
                     </p>
                   </div>
                   <div className="laptop:col-span-2 col-span-3 min-h-[50px] flex items-center">
-                    <p className="body line-clamp-2">{petition.pet_topic}</p>
+                    <p className="body line-clamp-2">{petition.petition_topic}</p>
                   </div>
                   <div className="col-span-2 min-h-[50px] flex items-center">
                     <p className="body">
                       {t(
                         `petition_type_${getSimpleText(
-                          petition.pet_types.pet_type_name
+                          petition.petition_types.petition_type_name
                         )}`
                       )}
                     </p>
@@ -110,14 +110,14 @@ export const PetitionTable = (props: PetitionTableProps) => {
                       className={classNames(
                         "fa-solid fa-angle-right p-[4px] cursor-pointer transition-all duration-150",
                         {
-                          "rotate-90": showingPetition === petition.pet_id,
+                          "rotate-90": showingPetition === petition.petition_id,
                         }
                       )}
                       onClick={() =>
                         setshowingPetition(
-                          showingPetition === petition.pet_id
+                          showingPetition === petition.petition_id
                             ? ""
-                            : petition.pet_id
+                            : petition.petition_id
                         )
                       }
                     />
@@ -128,8 +128,8 @@ export const PetitionTable = (props: PetitionTableProps) => {
                     className={classNames(
                       "col-span-full overflow-y-auto transition-all flex flex-col items-center justify-center duration-300 relative",
                       {
-                        "h-0 py-0": showingPetition !== petition.pet_id,
-                        "h-full py-[16px]": showingPetition === petition.pet_id,
+                        "h-0 py-0": showingPetition !== petition.petition_id,
+                        "h-full py-[16px]": showingPetition === petition.petition_id,
                       }
                     )}
                   >
@@ -248,7 +248,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                               </td>
                               <td>
                                 <p className="caption1 pl-[8px]">
-                                  {petition.pet_topic}
+                                  {petition.petition_topic}
                                 </p>
                               </td>
                             </tr>
@@ -262,7 +262,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                 <p className="caption1 pl-[8px]">
                                   {t(
                                     `petition_type_${getSimpleText(
-                                      petition.pet_types.pet_type_name
+                                      petition.petition_types.petition_type_name
                                     )}`
                                   )}
                                 </p>
@@ -290,7 +290,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                               </td>
                               <td>
                                 <p className="caption1 pl-[8px]">
-                                  {petition.pet_details}
+                                  {petition.petition_details}
                                 </p>
                               </td>
                             </tr>
@@ -303,7 +303,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                               <td>
                                 <p className="caption1 pl-[8px]">
                                   {dayjs(
-                                    petition.pet_date,
+                                    petition.petition_date,
                                     "YYYY-MM-DDTHH:mm:ss.SSSZ"
                                   ).format("D/M/YYYY")}
                                 </p>
@@ -340,7 +340,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                       () => {
                                         context.onStatusChange(
                                           "Reject",
-                                          petition.pet_id
+                                          petition.petition_id
                                         );
                                       }
                                     )
@@ -357,7 +357,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                       () => {
                                         context.onStatusChange(
                                           "Approve",
-                                          petition.pet_id
+                                          petition.petition_id
                                         );
                                       }
                                     )
@@ -379,7 +379,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                         "petition_modal_delete_peition_message"
                                       ),
                                       () => {
-                                        context.onDelete(petition.pet_id);
+                                        context.onDelete(petition.petition_id);
                                       }
                                     )
                                   }
@@ -399,7 +399,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                       () => {
                                         context.onStatusChange(
                                           "In Progress",
-                                          petition.pet_id
+                                          petition.petition_id
                                         );
                                       }
                                     )
@@ -420,7 +420,7 @@ export const PetitionTable = (props: PetitionTableProps) => {
                                       () => {
                                         context.onStatusChange(
                                           "Done",
-                                          petition.pet_id
+                                          petition.petition_id
                                         );
                                       }
                                     )
