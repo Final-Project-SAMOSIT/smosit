@@ -18,6 +18,7 @@ export const getExperiences = (options: {
   union_year: number;
   take?: number;
   skip?: number;
+  news_id?: string;
 }) => {
   const qs = querystring.stringify(options);
   return appAxios().get(

@@ -28,6 +28,7 @@ class NewsDetailContext {
       this.isLoading = true;
       const resp: AxiosResponse<{ data: News }> = await getNews(id);
       this.news = resp.data.data;
+      this.newsSuggestionPreparation();
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการเตรียมข่าว", err.message);
@@ -38,7 +39,9 @@ class NewsDetailContext {
 
   async newsSuggestionPreparation() {
     try {
-      const resp: AxiosResponse<{ data: Array<News> }> = await getNewsList();
+      const resp: AxiosResponse<{ data: Array<News> }> = await getNewsList({
+        news_id: this.news?.news_id.toString(),
+      });
       if (resp.status !== 204) {
         this.newsList = resp.data.data;
       }

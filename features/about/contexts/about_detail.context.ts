@@ -48,6 +48,7 @@ class ExperienceDetailContext {
       const resp: AxiosResponse<{ data: Array<Experience> }> =
         await getExperiences({
           union_year: Number(this.experience?.union_year),
+          news_id: this.experience?.news_id,
         });
       if (resp.status !== 204) {
         this.experienceList = resp.data.data;

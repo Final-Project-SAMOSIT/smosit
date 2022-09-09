@@ -68,7 +68,6 @@ export const NewsDetailPage = () => {
   useEffect(() => {
     context.modal = modalContext;
     context.newsPreparation(router.query.id?.toString() || "");
-    context.newsSuggestionPreparation();
   }, [router.query.id]);
 
   //---------------------
