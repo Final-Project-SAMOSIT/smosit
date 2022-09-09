@@ -1,4 +1,4 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, { useContext, useState, Fragment, useRef } from "react";
 import { Observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import _ from "lodash";
@@ -8,6 +8,7 @@ import { useTranslation } from "next-i18next";
 import { AuthContext } from "../../context/auth.context";
 import getConfig from "next/config";
 import { ModalContext } from "../../context/modal.context";
+import { useClickOutside } from "../../libs/click_detector";
 
 interface NavbarProps {
   noTranslation?: boolean;
@@ -25,34 +26,54 @@ export const Navbar = (props: NavbarProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   //---------------------
-  //   COSNT
+  //   REF
   //---------------------
-  const features = [
-    {
-      name: props.noTranslation ? "About" : t("navbar_feature_home_about"),
-      route: "/about",
-    },
-    {
-      name: props.noTranslation ? "Vote" : t("navbar_feature_home_vote"),
-      route: "/vote",
-    },
-    {
-      name: props.noTranslation ? "News" : t("navbar_feature_home_news"),
-      route: "/news",
-    },
-    {
-      name: props.noTranslation
-        ? "Request Petition"
-        : t("navbar_feature_home_petition"),
-      route: "/petition",
-    },
-    {
-      name: props.noTranslation
-        ? "Project Form"
-        : t("navbar_feature_home_project"),
-      route: "/project",
-    },
-  ];
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navBarRef = useRef<HTMLDivElement>(null);
+  useClickOutside(dropdownRef, () => {
+    setIsDropdownOpen(false);
+  });
+
+  //---------------------
+  //   HANDLED
+  //---------------------
+  function getFeatures() {
+    return [
+      {
+        name: props.noTranslation ? "About" : t("navbar_feature_home_about"),
+        route: "/about",
+      },
+      {
+        name: props.noTranslation ? "Vote" : t("navbar_feature_home_vote"),
+        route:
+          authContext.me?.roles.role_name === "Admin"
+            ? "/manage/vote"
+            : "/vote",
+      },
+      {
+        name: props.noTranslation ? "News" : t("navbar_feature_home_news"),
+        route: "/news",
+      },
+      {
+        name: props.noTranslation
+          ? "Request Petition"
+          : t("navbar_feature_home_petition"),
+        route:
+          authContext.me?.roles.role_name === "Admin"
+            ? "/manage/petition"
+            : "/petition",
+      },
+      {
+        name: props.noTranslation
+          ? "Project Form"
+          : t("navbar_feature_home_project"),
+        route:
+          authContext.me?.roles.role_name === "Admin"
+            ? "/manage/project"
+            : "/project",
+      },
+    ];
+  }
 
   const { publicRuntimeConfig } = getConfig();
 
@@ -74,7 +95,10 @@ export const Navbar = (props: NavbarProps) => {
     <Observer>
       {() => (
         <div className="w-full h-[90px]">
-          <div className="laptop:max-w-[1200px] laptop:mx-auto h-full flex justify-between items-center laptop:p-0 px-[8px]">
+          <div
+            className="laptop:max-w-[1200px] laptop:mx-auto h-full flex justify-between items-center laptop:p-0 px-[8px]"
+            ref={navBarRef}
+          >
             <img
               src="/images/logo.svg"
               className="laptop:h-[60px] h-[48px] mobile:mt-[8px] m-0 cursor-pointer"
@@ -102,7 +126,7 @@ export const Navbar = (props: NavbarProps) => {
                 ></div>
               </div>
 
-              {_.map(features, (feature) => (
+              {_.map(getFeatures(), (feature) => (
                 <div
                   className="cursor-pointer w-max flex flex-col space-y-[8px] group"
                   onClick={() => router.push(feature.route)}
@@ -160,84 +184,89 @@ export const Navbar = (props: NavbarProps) => {
               <div className="relative block laptop:hidden">
                 <div
                   className=" border-black border rounded-[5px] w-[36px] h-[36px] flex items-center justify-center cursor-pointer"
-                  onClick={() => setIsDropdownOpen(true)}
+                  onClick={() =>
+                    setTimeout(() => {
+                      setIsDropdownOpen(!isDropdownOpen);
+                    }, 150)
+                  }
                 >
                   <i className="fas fa-bars"></i>
                 </div>
 
-                {isDropdownOpen && (
-                  <Fragment>
+                <div
+                  className={classNames(
+                    "fixed flex flex-col left-0 bg-white w-screen overflow-hidden divide-y z-20 divide-black duration-300 transform",
+                    {
+                      "h-[240px] border-black shadow-lg border-y":
+                        isDropdownOpen,
+                      "h-0": !isDropdownOpen,
+                    }
+                  )}
+                  style={{ top: `${navBarRef.current?.clientHeight}px` }}
+                  ref={dropdownRef}
+                >
+                  <div
+                    className="w-[128px] bg-white"
+                    onClick={() => {
+                      router.push("/");
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    <p className="body py-[6px] px-[8px]">
+                      {props.noTranslation
+                        ? "Home"
+                        : t("navbar_feature_home_name")}
+                    </p>
+                  </div>
+                  {_.map(getFeatures(), (feature) => (
                     <div
-                      className="fixed top-0 left-0 z-10 w-screen h-screen"
-                      onClick={() => setIsDropdownOpen(false)}
-                    />
-                    <div className="absolute flex flex-col right-[4px] top-[40px] border border-black rounded-[10px] overflow-hidden divide-y divide-black z-20">
-                      <div
-                        className="w-[128px] bg-white"
-                        onClick={() => {
-                          router.push("/");
-                          setIsDropdownOpen(false);
-                        }}
-                      >
-                        <p className="body py-[4px] px-[8px]">
-                          {props.noTranslation
-                            ? "Home"
-                            : t("navbar_feature_home_name")}
-                        </p>
-                      </div>
-                      {_.map(features, (feature) => (
-                        <div
-                          className="w-[128px] bg-white"
-                          onClick={() => {
-                            router.push(feature.route);
-                            setIsDropdownOpen(false);
-                          }}
-                        >
-                          <p className="body py-[4px] px-[8px]">
-                            {feature.name}
-                          </p>
-                        </div>
-                      ))}
-                      {authContext.me ? (
-                        <div
-                          className="w-[128px] bg-white"
-                          onClick={() => {
-                            modal.openModal(
-                              "logout",
-                              "Are you sure you want to logout?",
-                              () => {
-                                authContext.logout();
-                                setIsDropdownOpen(false);
-                              }
-                            );
-                          }}
-                        >
-                          <p className="body py-[4px] px-[8px]">
-                            {props.noTranslation
-                              ? "logout"
-                              : t("navbar_logout_button")}
-                          </p>
-                        </div>
-                      ) : (
-                        <div
-                          className="w-[128px] bg-white"
-                          onClick={() => {
-                            router.push(
-                              `https://std-sso-fe.sit.kmutt.ac.th/login?response_type=code&client_id=dEV6F8Xb&redirect_uri=${publicRuntimeConfig.FRONTEND_URI}/redirect&state=1234`
-                            );
-                            setIsDropdownOpen(false);
-                          }}
-                        >
-                          <p className="body py-[4px] px-[8px]">
-                            {props.noTranslation
-                              ? "login"
-                              : t("navbar_login_button")}
-                          </p>
-                        </div>
-                      )}
+                      className="w-full bg-white"
+                      onClick={() => {
+                        router.push(feature.route);
+                        setIsDropdownOpen(false);
+                      }}
+                    >
+                      <p className="body py-[6px] px-[8px]">{feature.name}</p>
                     </div>
-                  </Fragment>
-                )}
+                  ))}
+                  {authContext.me ? (
+                    <div
+                      className="w-full bg-white"
+                      onClick={() => {
+                        modal.openModal(
+                          "logout",
+                          "Are you sure you want to logout?",
+                          () => {
+                            authContext.logout();
+                            setIsDropdownOpen(false);
+                          }
+                        );
+                      }}
+                    >
+                      <p className="body py-[6px] px-[8px]">
+                        {props.noTranslation
+                          ? "logout"
+                          : t("navbar_logout_button")}
+                      </p>
+                    </div>
+                  ) : (
+                    <div
+                      className="w-full bg-white"
+                      onClick={() => {
+                        router.push(
+                          `https://std-sso-fe.sit.kmutt.ac.th/login?response_type=code&client_id=dEV6F8Xb&redirect_uri=${publicRuntimeConfig.FRONTEND_URI}/redirect&state=1234`
+                        );
+                        setIsDropdownOpen(false);
+                      }}
+                    >
+                      <p className="body py-[6px] px-[8px]">
+                        {props.noTranslation
+                          ? "login"
+                          : t("navbar_login_button")}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="hidden laptop:block">
                 {authContext.me ? (

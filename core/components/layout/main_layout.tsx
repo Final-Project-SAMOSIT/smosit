@@ -42,11 +42,7 @@ export const MainLayout = (props: MainLayoutProps) => {
     <Observer>
       {() => (
         <div className="w-[100vw] h-screen flex flex-col">
-          {authContext.isPermission(["Publisher"]) ? (
-            <AdminNavbar />
-          ) : (
-            <Navbar />
-          )}
+          <Navbar />
           <div
             className="relative w-full overflow-y-auto"
             style={{ height: "calc(100%)" }}
