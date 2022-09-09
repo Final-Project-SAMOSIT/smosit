@@ -138,12 +138,12 @@ export const PetitionPage = () => {
                 <TextInput
                   onChange={(e) => {
                     formik.setFieldValue(
-                      "pet_topic",
+                      "petition_topic",
                       e.target.value.substring(0, 100)
                     );
                   }}
-                  value={formik.values.pet_topic}
-                  error={formik.errors.pet_topic}
+                  value={formik.values.petition_topic}
+                  error={formik.errors.petition_topic}
                   height={40}
                   limitText={100}
                   showLimit
@@ -164,15 +164,15 @@ export const PetitionPage = () => {
                 <TextArea
                   onChange={(e) =>
                     formik.setFieldValue(
-                      "pet_details",
+                      "petition_details",
                       e.target.value.substring(0, 100)
                     )
                   }
-                  value={formik.values.pet_details}
+                  value={formik.values.petition_details}
                   title={t("petition_form_detail_input_title")}
                   height={160}
                   limitText={500}
-                  error={formik.errors.pet_details}
+                  error={formik.errors.petition_details}
                   showLimit
                 />
               </div>

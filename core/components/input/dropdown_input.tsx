@@ -103,7 +103,7 @@ export const Dropdown = (props: DropdownInputProps) => {
             {isOpen && (
               <div
                 className={classNames(
-                  "absolute z-10 flex flex-col w-full border-b shadow-[2px_4px_4px_rgba(0,0,0,0.25)] border-x body min-h-[20px] max-h-[121px] overflow-y-auto",
+                  "absolute z-10 flex flex-col w-full border-b shadow-[2px_4px_4px_rgba(0,0,0,0.25)] border-x body min-h-[20px] max-h-[140px] overflow-y-auto",
                   {
                     "border-error": error,
                     "border-black": !error,

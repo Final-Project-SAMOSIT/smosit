@@ -1,8 +1,8 @@
 export interface Petition {
-  pet_date: string;
-  pet_details: string;
-  pet_id: string;
-  pet_topic: string;
+  petition_date: string;
+  petition_details: string;
+  petition_id: string;
+  petition_topic: string;
   status_id: string;
   type_id: string;
   user_id: string;
@@ -11,9 +11,9 @@ export interface Petition {
     status_name: PetitionStatus;
     status_description: string;
   };
-  pet_types: {
-    pet_type_id: string;
-    pet_type_name: PetitionType;
+  petition_types: {
+    petition_type_id: string;
+    petition_type_name: PetitionType;
   };
 }
 

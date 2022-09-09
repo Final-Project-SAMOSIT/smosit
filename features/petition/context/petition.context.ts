@@ -42,8 +42,8 @@ class PetitionContext {
       const resp = await getPetitionType();
       if (resp.status === 200) {
         this.petitionType = _.map(resp.data.data, (type) => ({
-          name: type.pet_type_name,
-          value: type.pet_type_id,
+          name: type.petition_type_name,
+          value: type.petition_type_id,
         }));
       } else {
         this.petitionType = [];
@@ -76,7 +76,10 @@ class PetitionContext {
 
   async onCreate(value: any, callback: () => void, id: string) {
     try {
-      const resp = await postPetition(value);
+      const resp = await postPetition({
+        ...value,
+        petition_type_id: value.type_id,
+      });
       if (resp.status === 200) {
         callback();
         this.preparationPetition(id);

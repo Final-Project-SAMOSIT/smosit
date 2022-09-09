@@ -5,7 +5,7 @@ export class ModalContextClass {
   isModalOpen: boolean;
   title: string;
   message: string;
-  onOk: () => void;
+  onOk?: (() => void) | null = null;
 
   //-------------------
   // CONSTUCTOR
@@ -14,7 +14,6 @@ export class ModalContextClass {
     this.isModalOpen = false;
     this.title = "";
     this.message = "";
-    this.onOk = () => null;
     makeAutoObservable(this);
   }
 
@@ -25,7 +24,7 @@ export class ModalContextClass {
     this.isModalOpen = true;
     this.title = title;
     this.message = message;
-    this.onOk = onOk || (() => null);
+    this.onOk = onOk || null;
   }
 }
 export const ModalContext = createContext(new ModalContextClass());

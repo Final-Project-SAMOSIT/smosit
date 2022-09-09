@@ -31,7 +31,7 @@ export const HomePage = () => {
     {
       topic: t("home_page_voting_feature_card_title"),
       description: t("home_page_voting_feature_card_detail"),
-      featureRoute: "",
+      featureRoute: "/vote",
     },
     {
       topic: t("home_page_petition_feature_card_title"),
@@ -43,7 +43,7 @@ export const HomePage = () => {
     {
       topic: t("home_page_project_form_feature_card_title"),
       description: t("home_page_project_form_feature_card_detail"),
-      featureRoute: "",
+      featureRoute: "/project",
     },
   ];
 
@@ -81,7 +81,7 @@ export const HomePage = () => {
                 <p className="body">{t("home_page_about_detail")}</p>
                 <div className="flex justify-end w-full">
                   <Button
-                    onClick={() => null}
+                    onClick={() => router.push("/about")}
                     title={t("home_page_about_read_more_button")}
                     heightCss="laptop:h-[52px] h-[36px]"
                     widthCss="laptop:w-[137px] w-[96px]"
@@ -90,7 +90,7 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 tablet:grid-cols-3 tablet:mx-auto tablet:w-full w-full gap-x-[8px] gap-y-[16px] laptop:gap-[32px]">
+            <div className="grid grid-cols-1 tablet:grid-cols-3 tablet:mx-auto w-full gap-x-[8px] gap-y-[16px] laptop:gap-[32px]">
               {_.map(features, (feature) => (
                 <div className="w-full h-full" key={`${feature.topic}`}>
                   <FeatureCard

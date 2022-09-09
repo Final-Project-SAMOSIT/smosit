@@ -46,7 +46,7 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
           <div className="col-span-full h-[1px] bg-gray-40" />
 
           {_.map(props.data, (petition, index) => (
-            <Fragment key={`petition_${petition.pet_id}`}>
+            <Fragment key={`petition_${petition.petition_id}`}>
               <div
                 className={classNames("col-span-1 pt-[16px] pb-[8px] ", {
                   "h-[64px]": focusOn !== index,
@@ -54,13 +54,13 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                 })}
               >
                 <p className="body">
-                  {dayjs(petition.pet_date, "YYYY-MM-DDTHH:mm:ss.SSSZ").format(
+                  {dayjs(petition.petition_date, "YYYY-MM-DDTHH:mm:ss.SSSZ").format(
                     "D/M/YYYY"
                   )}
                 </p>
               </div>
               <div className="col-span-2 pt-[16px] pb-[8px]">
-                <p className="body">{petition.pet_topic}</p>
+                <p className="body">{petition.petition_topic}</p>
               </div>
               <div className="col-span-2 pt-[16px] pb-[8px] group">
                 <p
@@ -75,7 +75,7 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                     setFocusOn(index === focusOn ? -1 : index);
                   }}
                 >
-                  {petition.pet_details}
+                  {petition.petition_details}
                 </p>
               </div>
               <div className="col-span-1 pt-[16px] pb-[8px]">
@@ -85,14 +85,14 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                 <div className="border border-black rounded-[5px] h-[32px] px-[16px] flex items-center justify-center w-max col-span-2">
                   <p className="body">{petition.status.status_name}</p>
                 </div>
-                <p className="body">{petition.pet_types.pet_type_name}</p>
+                <p className="body">{petition.petition_types.petition_type_name}</p>
               </div>
               <div className="col-span-2 flex justify-end pr-[8px] pt-[8px] pb-[8px] space-x-[8px]">
                 {petition.status.status_name === "Sent" && (
                   <Fragment>
                     <Button
                       onClick={() =>
-                        context.onStatusChange("Reject", petition.pet_id)
+                        context.onStatusChange("Reject", petition.petition_id)
                       }
                       title="Reject"
                       widthCss="w-[96px]"
@@ -100,7 +100,7 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                     />
                     <Button
                       onClick={() =>
-                        context.onStatusChange("Approve", petition.pet_id)
+                        context.onStatusChange("Approve", petition.petition_id)
                       }
                       title="Approve"
                       widthCss="w-[96px]"
@@ -112,7 +112,7 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                   petition.status.status_name === "Done") && (
                   <Fragment>
                     <Button
-                      onClick={() => context.onDelete(petition.pet_id)}
+                      onClick={() => context.onDelete(petition.petition_id)}
                       title="Delete"
                       widthCss="w-[96px]"
                       heightCss="h-[40px]"
@@ -123,7 +123,7 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                   <Fragment>
                     <Button
                       onClick={() =>
-                        context.onStatusChange("In Progress", petition.pet_id)
+                        context.onStatusChange("In Progress", petition.petition_id)
                       }
                       title="In Progress"
                       widthCss="w-[144px]"
@@ -135,7 +135,7 @@ export const PetitionManageTable = (props: PetitionManageTableProps) => {
                   <Fragment>
                     <Button
                       onClick={() =>
-                        context.onStatusChange("Done", petition.pet_id)
+                        context.onStatusChange("Done", petition.petition_id)
                       }
                       title="Done"
                       widthCss="w-[96px]"

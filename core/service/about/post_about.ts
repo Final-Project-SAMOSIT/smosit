@@ -15,3 +15,10 @@ export const postStudentUnion = (body: any) => {
     body
   );
 };
+
+export const postUnionYear = (body: any) => {
+  return appAxios().post(
+    `${publicRuntimeConfig.BACKEND_API}/createUnionYear`,
+    body
+  );
+};
