@@ -123,7 +123,7 @@ export const AboutPage = () => {
               <p className="heading2 border-b border-black w-max px-[16px]">
                 Directory of student union
               </p>
-              {!context.isEditMode && (
+              {!context.isEditMode && authContext.isPermission(["Publisher"]) && (
                 <Fragment>
                   <div className="absolute right-0 hidden laptop:flex space-x-[8px]">
                     <Button
@@ -177,7 +177,7 @@ export const AboutPage = () => {
                         className="absolute rounded-full bg-gray-40 w-[48px] h-[48px] flex justify-center items-center z-20"
                         onClick={() =>
                           setTimeout(() => {
-                            setIsFloatButtonOpen(true);
+                            setIsFloatButtonOpen(!isFloatButtonOpen);
                           }, 150)
                         }
                       >
@@ -194,7 +194,7 @@ export const AboutPage = () => {
                 onChange={(e) => {
                   context.year = Number(e);
                   context.preparationStudentUnion();
-                  context.preparationExperience();
+                  context.preparationExperience(true);
                 }}
                 options={context.yearOptions}
                 value={context.year.toString()}
@@ -349,22 +349,26 @@ export const AboutPage = () => {
                     />
                   )}
                 </div>
-                <div className="grid grid-cols-1 laptop:max-w-none max-w-[480px] laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] mb-[32px] laptop:mb-[96px]">
-                  {_.map(context.experienceList, (experience) => (
-                    <PreviewCard
-                      description={experience.news_details}
-                      onClick={() =>
-                        router.push(`/about/${experience.news_id}`)
-                      }
-                      src={
-                        experience.news_img ||
-                        "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
-                      }
-                      topic={experience.news_title}
-                      timeStamp={experience.news_created_at}
-                    />
-                  ))}
-                </div>
+                {_.size(context.experienceList) !== 0 ? (
+                  <div className="grid grid-cols-1 laptop:max-w-none max-w-[480px] tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] mb-[32px] laptop:mb-[96px]">
+                    {_.map(context.experienceList, (experience) => (
+                      <PreviewCard
+                        description={experience.news_details}
+                        onClick={() =>
+                          router.push(`/about/${experience.news_id}`)
+                        }
+                        src={
+                          experience.news_img ||
+                          "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
+                        }
+                        topic={experience.news_title}
+                        timeStamp={experience.news_created_at}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="caption1">There's no Experience yet</p>
+                )}
                 {context.isFetchingExperience ? (
                   <Loading text="text-4xl" />
                 ) : (

@@ -104,8 +104,11 @@ class AboutContext {
     }
   }
 
-  async preparationExperience() {
+  async preparationExperience(reset?: boolean) {
     try {
+      if (reset) {
+        this.experienceList = [];
+      }
       this.isFetchingExperience = true;
       const resp: AxiosResponse<{ data: Array<Experience> }> =
         await getExperiences({

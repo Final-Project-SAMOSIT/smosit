@@ -13,7 +13,7 @@ export const Paginate = (props: PaginateProps) => {
   //---------------------
   //   STATE
   //---------------------
-  const [pagesIndex] = useState(_.range(0, props.totalPage));
+  const [pagesIndex, setPagesIndex] = useState<Array<number>>([]);
 
   //---------------------
   //   HANDLED
@@ -35,6 +35,13 @@ export const Paginate = (props: PaginateProps) => {
   }
 
   //---------------------
+  //   EFFECT
+  //---------------------
+  useEffect(() => {
+    setPagesIndex(_.range(0, props.totalPage));
+  }, [props.totalPage]);
+
+  //---------------------
   //   RENDER
   //---------------------
   return (
@@ -46,7 +53,8 @@ export const Paginate = (props: PaginateProps) => {
               "flex justify-center items-center w-[40px] h-[40px] rounded-full",
               {
                 "text-gray-30": props.page === 1,
-                "cursor-pointer": props.page !== 1,
+                "cursor-pointer hover:bg-gray-30 duration-150":
+                  props.page !== 1,
               }
             )}
             onClick={() =>
@@ -61,7 +69,8 @@ export const Paginate = (props: PaginateProps) => {
                 "cursor-pointer select-none button w-[40px] h-[40px] flex items-center justify-center rounded-full",
                 {
                   "bg-black text-white": index + 1 === props.page,
-                  "bg-white text-black": index + 1 !== props.page,
+                  "bg-white text-black hover:bg-gray-30 duration-150":
+                    index + 1 !== props.page,
                 }
               )}
               onClick={() => props.onChangePage(index + 1)}
@@ -74,7 +83,8 @@ export const Paginate = (props: PaginateProps) => {
               "flex items-center justify-center w-[40px] h-[40px] rounded-full",
               {
                 "text-gray-30": props.page === props.totalPage,
-                "cursor-pointer": props.page !== props.totalPage,
+                "cursor-pointer hover:bg-gray-30 duration-150":
+                  props.page !== props.totalPage,
               }
             )}
             onClick={() =>

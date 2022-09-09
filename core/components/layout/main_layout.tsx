@@ -52,20 +52,20 @@ export const MainLayout = (props: MainLayoutProps) => {
             style={{ height: "calc(100%)" }}
             id="main_layout"
           >
-            <div className="min-h-[calc(100%-160px)] laptop:min-h-[calc(100%-320px)] max-w-[310px] tablet:max-w-[640px] laptop:max-w-[1200px] mx-auto">
+            <div className="min-h-[calc(100%-160px)] laptop:min-h-[calc(100%-200px)] max-w-[310px] tablet:max-w-[640px] laptop:max-w-[1200px] mx-auto">
               {children}
             </div>
-            <div className="h-[160px] laptop:h-[320px] bg-dark-50 w-screen laptop:block flex items-center justify-center">
-              <div className="max-w-[1200px] w-full laptop:w-auto mx-auto laptop:pt-[83px] laptop:pb-[31px] flex flex-col justify-center laptop:justify-start">
+            <div className="h-[160px] laptop:h-[200px] bg-dark-50 w-screen laptop:block flex items-center justify-center">
+              <div className="max-w-[1200px] w-full laptop:w-auto mx-auto laptop:pt-[36px] laptop:pb-[24px] flex flex-col justify-center laptop:justify-start">
                 <div className="flex items-center justify-between w-full laptop:w-auto laptop:p-0 px-[8px]">
                   <img
                     src="/images/logo_white.svg"
-                    className="h-[48px] laptop:h-[103px]"
+                    className="h-[48px] laptop:h-[72px]"
                   />
                   <div className="text-white">
                     <p className="topic2">{t("footer_contact_us_label")}</p>
                     <a
-                      className="heading5"
+                      className="heading5 underline"
                       href="https://www.facebook.com/samositkmutt"
                       target={"_blank"}
                     >
@@ -73,7 +73,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                     </a>
                   </div>
                 </div>
-                <div className="h-[1px] bg-white w-full laptop:mt-[50px] laptop:mb-[28px] mt-[24px] mb-[16px]" />
+                <div className="h-[1px] bg-white w-full laptop:mt-[24px] laptop:mb-[16px] mt-[24px] mb-[16px]" />
                 <p className="text-white body">© 2022 All Right Reserved</p>
               </div>
             </div>
