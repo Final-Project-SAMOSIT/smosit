@@ -104,8 +104,11 @@ class AboutContext {
     }
   }
 
-  async preparationExperience() {
+  async preparationExperience(reset?: boolean) {
     try {
+      if (reset) {
+        this.experienceList = [];
+      }
       this.isFetchingExperience = true;
       const resp: AxiosResponse<{ data: Array<Experience> }> =
         await getExperiences({
@@ -175,6 +178,8 @@ class AboutContext {
       await postUnionYear(value);
       this.year = Number(value.union_year);
       this.preparationStudentUnion();
+      this.preparationExperience(true);
+      this.preparationYear()
       this.isEditMode = true;
       this.isCreateYearModalOpen = false;
     } catch (err: any) {
