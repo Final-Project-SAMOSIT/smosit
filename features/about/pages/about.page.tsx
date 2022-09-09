@@ -350,7 +350,7 @@ export const AboutPage = () => {
                   )}
                 </div>
                 {_.size(context.experienceList) !== 0 ? (
-                  <div className="grid grid-cols-1 laptop:max-w-none max-w-[480px] tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] mb-[32px] laptop:mb-[96px]">
+                  <div className="grid w-full grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] mb-[32px] laptop:mb-[96px]">
                     {_.map(context.experienceList, (experience) => (
                       <PreviewCard
                         description={experience.news_details}

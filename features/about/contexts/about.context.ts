@@ -178,6 +178,8 @@ class AboutContext {
       await postUnionYear(value);
       this.year = Number(value.union_year);
       this.preparationStudentUnion();
+      this.preparationExperience(true);
+      this.preparationYear()
       this.isEditMode = true;
       this.isCreateYearModalOpen = false;
     } catch (err: any) {
