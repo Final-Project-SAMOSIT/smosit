@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useRef } from "react";
 import { Observer } from "mobx-react-lite";
 import { MainLayout } from "../../../core/components/layout/main_layout";
-import _, { filter } from "lodash";
+import _ from "lodash";
 import { ModalContext } from "../../../core/context/modal.context";
 import { TextInput } from "../../../core/components/input/text_input.component";
 import { useFormik } from "formik";
@@ -86,6 +86,8 @@ export const NewsFormPage = () => {
           formik,
           router.pathname.split("/")[1] === "about"
         );
+      } else {
+        context.isEdit = false;
       }
     }
   }, []);
@@ -201,6 +203,16 @@ export const NewsFormPage = () => {
               <Dropdown
                 onChange={(e) => {
                   formik.setFieldValue("news_type_id", e);
+                  const typeName = _.find(
+                    context.newsTypeList,
+                    (type) => type.news_type_id === e
+                  )?.news_type_name;
+                  if (typeName === "News") {
+                    formik.setFieldValue(
+                      "union_year",
+                      newsFormInitValue.union_year
+                    );
+                  }
                 }}
                 options={_.map(context.newsTypeList, (type) => ({
                   name: type.news_type_name,
