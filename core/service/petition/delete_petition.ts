@@ -5,6 +5,6 @@ const { publicRuntimeConfig } = getConfig();
 
 export const deletePetition = (id: string) => {
   return appAxios().delete(
-    `${publicRuntimeConfig.BACKEND_API}/deletePet/${id}`
+    `${publicRuntimeConfig.BACKEND_API}/deletePetition/${id}`
   );
 };

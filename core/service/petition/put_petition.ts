@@ -5,7 +5,7 @@ const { publicRuntimeConfig } = getConfig();
 
 export const updatePetition = (id: string, body: any) => {
   return appAxios().put(
-    `${publicRuntimeConfig.BACKEND_API}/editStatusPet/${id}`,
+    `${publicRuntimeConfig.BACKEND_API}/editStatusPetition/${id}`,
     body
   );
 };
