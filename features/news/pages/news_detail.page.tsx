@@ -88,7 +88,7 @@ export const NewsDetailPage = () => {
                 {authContext.isPermission(["Publisher"]) && (
                   <div className="relative">
                     <i
-                      className="fas fa-ellipsis-h mr-[4px] p-[2px]"
+                      className="fas fa-ellipsis-h mr-[4px] p-[2px] cursor-pointer"
                       onClick={() => {
                         setTimeout(() => {
                           setIsOpen(true);
@@ -123,7 +123,7 @@ export const NewsDetailPage = () => {
                           ],
                           (option) => (
                             <div
-                              className="px-[16px] pt-[7px] pb-[11px] bg-white hover:bg-gray-10"
+                              className="px-[16px] pt-[7px] pb-[11px] bg-white hover:bg-gray-10 cursor-pointer"
                               onClick={option.action}
                             >
                               <p className="text-body select-none">

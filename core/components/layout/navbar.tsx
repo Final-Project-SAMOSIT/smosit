@@ -46,7 +46,7 @@ export const Navbar = (props: NavbarProps) => {
       {
         name: props.noTranslation ? "Vote" : t("navbar_feature_home_vote"),
         route:
-          authContext.me?.roles.role_name === "Admin"
+          authContext.me?.roles.role_name === "Publisher"
             ? "/manage/vote"
             : "/vote",
       },
@@ -59,7 +59,7 @@ export const Navbar = (props: NavbarProps) => {
           ? "Request Petition"
           : t("navbar_feature_home_petition"),
         route:
-          authContext.me?.roles.role_name === "Admin"
+          authContext.me?.roles.role_name === "Publisher"
             ? "/manage/petition"
             : "/petition",
       },
@@ -68,7 +68,7 @@ export const Navbar = (props: NavbarProps) => {
           ? "Project Form"
           : t("navbar_feature_home_project"),
         route:
-          authContext.me?.roles.role_name === "Admin"
+          authContext.me?.roles.role_name === "Publisher"
             ? "/manage/project"
             : "/project",
       },
