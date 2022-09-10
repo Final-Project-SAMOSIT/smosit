@@ -57,6 +57,7 @@ export const HomePage = () => {
   //---------------------
   useEffect(() => {
     context.modal = modalContext;
+    context.t = t;
     context.newsPreparation();
   }, []);
 

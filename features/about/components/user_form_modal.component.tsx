@@ -87,6 +87,7 @@ export const UserFormModal = (props: UserFormModalProps) => {
 
   useEffect(() => {
     context.modal = modal;
+    context.t = t;
     if (props.userInfo) {
       context.prepareUser(props.userInfo.userId, onSetFormik);
     }
@@ -240,7 +241,11 @@ export const UserFormModal = (props: UserFormModalProps) => {
                   />
                   <Button
                     onClick={() => formik.submitForm()}
-                    title={context.isEdit ? t("about_page_save_button") : t("about_page_create_button")}
+                    title={
+                      context.isEdit
+                        ? t("about_page_save_button")
+                        : t("about_page_create_button")
+                    }
                     heightCss="h-[40px]"
                     widthCss="tablet:w-[132px] w-[122px]"
                   />

@@ -10,8 +10,14 @@ import { ModalContext } from "../../../core/context/modal.context";
 import { Button } from "../../../core/components/input/button.component";
 import { AuthContext } from "../../../core/context/auth.context";
 import Loading from "../../../core/components/utility/loading";
+import { useTranslation } from "next-i18next";
 
 export const NewsPage = () => {
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("news");
+
   //---------------------
   //   CONTEXT
   //---------------------
@@ -29,6 +35,8 @@ export const NewsPage = () => {
   //---------------------
   useEffect(() => {
     context.modal = modalContext;
+    context.t = t
+
     context.newsPreparation();
   }, []);
 
@@ -42,12 +50,12 @@ export const NewsPage = () => {
           <div className="tablet:mt-[64px] mt-[32px] laptop:mt-[112px] flex flex-col tablet:mb-[64px] mb-[32px] laptop:mb-[96px]">
             <div className="justify-between flex">
               <p className="heading3 pb-[11px] border-b pr-[32px] border-black w-max mb-[32px] laptop:mb-[64px]">
-                News
+                {t("news_page_news_title")}
               </p>
               {authContext.isPermission(["Publisher"]) && (
                 <Button
                   onClick={() => router.push("/news/create")}
-                  title="add post"
+                  title={t("news_page_add_news_button")}
                   widthCss="w-[137px]"
                   heightCss="laptop:h-[52px] h-[40px]"
                 />

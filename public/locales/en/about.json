@@ -28,5 +28,18 @@
   "========================Experience========================": "",
   "about_page_experience_title": "Work Experiences",
   "about_page_experience_create_button": "Add post",
-  "about_page_experience_no_experience": "There's no Experience yet"
+  "about_page_experience_no_experience": "There's no Experience yet",
+
+  "========================Error Modal========================": "",
+  "modal_about_page_member_preparation_fail": "There's a members preparation problem",
+  "modal_about_page_position_preparation_fail": "There's a position preparation problem",
+  "modal_about_page_year_preparation_fail": "There's a year preparation problem",
+  "modal_about_page_experience_preparation_fail": "There's a experience preparation problem",
+  "modal_about_page_save_member_fail": "There's a member saving problem",
+  "modal_about_page_delete_member_fail": "There's a member deleting problem",
+  "modal_about_page_create_year_fail": "There's a year creating problem",
+
+  "modal_user_form_upload_fail": "There's a uploading problem",
+  "modal_user_form_user_create_fail": "There's a user creating problem",
+  "modal_user_form_user_update_fail": "There's a user updating problem"
 }

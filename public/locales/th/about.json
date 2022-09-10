@@ -28,5 +28,18 @@
   "========================Experience========================": "",
   "about_page_experience_title": "ผลงาน",
   "about_page_experience_create_button": "เพิ่มโพสต์",
-  "about_page_experience_no_experience": "ยังไม่มีผลงาน"
+  "about_page_experience_no_experience": "ยังไม่มีผลงาน",
+
+  "========================Error Modal========================": "",
+  "modal_about_page_member_preparation_fail": "มีปัญหาในการเตรียมข้อมูลสมาชิก",
+  "modal_about_page_position_preparation_fail": "มีปัญหาในการเตรียมข้อมูลตำแหน่ง",
+  "modal_about_page_year_preparation_fail": "มีปัญหาในการเตรียมข้อมูลปี",
+  "modal_about_page_experience_preparation_fail": "มีปัญหาในการเตรียมข้อมูลประสบการณ์",
+  "modal_about_page_save_member_fail": "มีปัญหาในการบันทึกข้อมูลสมาชิก",
+  "modal_about_page_delete_member_fail": "มีปัญหาในการลบข้อมูลสมาชิก",
+  "modal_about_page_create_year_fail": "มีปัญหาในการสร้างปี",
+
+  "modal_user_form_upload_fail": "มีปัญหาในการอัพโหลดรูปภาพ",
+  "modal_user_form_user_create_fail": "มีปัญหาในการสร้างผู้ใช้",
+  "modal_user_form_user_update_fail": "มีปัญหาในการอัพเดทผู้ใช้"
 }

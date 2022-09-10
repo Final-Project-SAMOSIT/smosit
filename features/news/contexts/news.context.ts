@@ -4,6 +4,7 @@ import { AxiosResponse } from "axios";
 import { getNewsList } from "../../../core/service/news/get_news";
 import { ModalContextClass } from "../../../core/context/modal.context";
 import { News } from "../../../core/types/news";
+import { TFunction } from "next-i18next";
 
 class NewsContext {
   currentPage: number = 1;
@@ -12,6 +13,8 @@ class NewsContext {
   newsList: Array<News> = [];
   isLoading: boolean = false;
   modal?: ModalContextClass;
+
+  t: TFunction = (t: string) => t;
 
   //-------------------
   // CONSTUCTOR
@@ -33,7 +36,7 @@ class NewsContext {
         this.totalPage = Math.ceil(resp.data.allItem / this.perPage);
       }
     } catch (err: any) {
-      this.modal?.openModal("มีปัญหาในการเตรียมข่าว", err.message);
+      this.modal?.openModal(this.t("modal_news_page_news_list_preparation_fail"), err.message);F
     } finally {
       this.isLoading = false;
     }

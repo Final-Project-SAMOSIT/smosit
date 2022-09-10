@@ -1,0 +1,42 @@
+{
+  "========================News========================": "",
+  "news_page_news_title": "News",
+  "news_page_add_news_button": "Add post",
+
+  "========================News Detail========================": "",
+  "news_detail_page_post_at": "Posted on",
+  "news_detail_suggestion": "Suggestion post",
+  "news_detail_edit_button": "Edit",
+  "news_detail_delete_button": "Delete",
+
+  "========================News Form========================": "",
+  "news_form_create_title": "Create post",
+  "news_form_edit_title": "Edit post",
+  "news_form_title_input_placeholder": "Title",
+  "news_form_caption_input_placeholder": "Image caption(optional)",
+  "news_form_detail_input_placeholder": "detail",
+  "news_form_type_dropdown_title": "Type",
+  "news_form_type_dropdown_placeholder": "Select type",
+  "news_form_type_news": "News",
+  "news_form_type_experience": "Experience",
+  "news_form_type_news_and_experiences": "News and Experience",
+  "news_form_year_dropdown_title": "Year",
+  "news_form_year_dropdown_placeholder": "Select year",
+  "news_form_publish_button": "Publish",
+
+  "========================Modal========================": "",
+  "modal_experience_detail_preparation_fail": "There's a experience preparation problem",
+  "modal_experience_detail_deletion_fail": "There's a deleting problem",
+
+  "modal_news_detail_detail_preparation_fail": "There's a news detail preparation problem",
+  "modal_news_detail_news_list_preparation_fail": "There's a news suggestion list preparation problem",
+  "modal_news_detail_news_deletion_fail": "There's a news deletion problem",
+
+  "modal_news_form_type_preparation_fail": "There's a type preparation problem",
+  "modal_news_form_form_preparation_fail": "There's a form preparation problem",
+  "modal_news_form_upload_fail": "There's a uploading problem",
+  "modal_news_form_creating_fail": "There's a creating problem",
+  "modal_news_form_editing_fail": "There's a editing problem",
+
+  "modal_news_page_news_list_preparation_fail": "There's a news list preparation problem"
+}

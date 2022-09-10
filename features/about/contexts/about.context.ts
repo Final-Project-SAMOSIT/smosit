@@ -70,7 +70,10 @@ class AboutContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลสมาชิก", err.message);
+      this.modal?.openModal(
+        this.t("modal_about_page_member_preparation_fail"),
+        err.message
+      );
     } finally {
       this.isStudentLoading = false;
     }
@@ -90,7 +93,10 @@ class AboutContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลตำแหน่ง", err.message);
+      this.modal?.openModal(
+        this.t("modal_about_page_position_preparation_fail"),
+        err.message
+      );
     }
   }
 
@@ -104,7 +110,10 @@ class AboutContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลปี", err.message);
+      this.modal?.openModal(
+        this.t("modal_about_page_year_preparation_fail"),
+        err.message
+      );
     }
   }
 
@@ -129,7 +138,10 @@ class AboutContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลประสบการณ์", err.message);
+      this.modal?.openModal(
+        this.t("modal_about_page_experience_preparation_fail"),
+        err.message
+      );
     } finally {
       this.isFetchingExperience = false;
     }
@@ -146,7 +158,10 @@ class AboutContext {
       onSaved();
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการบันทึกข้อมูลสมาชิก", err.message);
+      this.modal?.openModal(
+        this.t("modal_about_page_save_member_fail"),
+        err.message
+      );
     }
   }
 
@@ -156,7 +171,10 @@ class AboutContext {
       this.preparationStudentUnion();
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการลบข้อมูลสมาชิก", err.message);
+      this.modal?.openModal(
+        this.t("modal_about_page_delete_member_fail"),
+        err.message
+      );
     }
   }
 
@@ -192,7 +210,10 @@ class AboutContext {
       this.isCreateYearModalOpen = false;
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการสร้างปี", err.message);
+      this.modal?.openModal(
+        this.t("modal_about_page_create_year_fail"),
+        err.message
+      );
     }
   }
 }

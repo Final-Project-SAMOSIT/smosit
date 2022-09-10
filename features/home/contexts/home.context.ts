@@ -4,11 +4,13 @@ import { ModalContextClass } from "../../../core/context/modal.context";
 import { getNewsList } from "../../../core/service/news/get_news";
 import { AxiosResponse } from "axios";
 import { News } from "../../../core/types/news";
+import { TFunction } from "next-i18next";
 
 class HomeContext {
   newsList: Array<News>;
   isNewsLoading: boolean;
   modal?: ModalContextClass;
+  t: TFunction = (t: string) => t;
 
   //-------------------
   // CONSTUCTOR
@@ -30,7 +32,7 @@ class HomeContext {
         this.newsList = resp.data.data;
       }
     } catch (err: any) {
-      this.modal?.openModal("มีปัญหาในการเตรียมข่าว", err.message);
+      this.modal?.openModal(this.t("modal_user_form_upload_fail"), err.message);
     }
   }
 }

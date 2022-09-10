@@ -14,5 +14,7 @@
   "home_page_project_form_feature_card_button": "CLICK",
 
   "home_page_news_title": "News",
-  "home_page_news_see_all_button": "see all"
+  "home_page_news_see_all_button": "see all",
+
+  "modal_home_page_news_preparation_fail": "There's a news preparation problem"
 }

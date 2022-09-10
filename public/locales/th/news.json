@@ -1,0 +1,42 @@
+{
+  "========================News========================": "",
+  "news_page_news_title": "ข่าว",
+  "news_page_add_news_button": "เพิ่มโพสต์",
+
+  "========================News Detail========================": "",
+  "news_detail_page_post_at": "โพสต์เมื่อ",
+  "news_detail_suggestion": "โพสต์แนะนำ",
+  "news_detail_edit_button": "แก้ไข",
+  "news_detail_delete_button": "ลบ",
+
+  "========================News Form========================": "",
+  "news_form_create_title": "สร้างโพสต์",
+  "news_form_edit_title": "แก้ไขโพสต์",
+  "news_form_title_input_placeholder": "หัวข้อ",
+  "news_form_caption_input_placeholder": "คำอธิบายรูปภาพ(ไม่บังคับ)",
+  "news_form_detail_input_placeholder": "เนื้อหา",
+  "news_form_type_dropdown_title": "ประเภท",
+  "news_form_type_dropdown_placeholder": "เลือกประเภท",
+  "news_form_type_news": "ข่าว",
+  "news_form_type_experience": "ผลงาน",
+  "news_form_type_news_and_experience": "ข่าวและผลงาน",
+  "news_form_year_dropdown_title": "ปี",
+  "news_form_year_dropdown_placeholder": "เลือกปี",
+  "news_form_publish_button": "เผยแพร่",
+
+  "========================Modal========================": "",
+  "modal_experience_detail_preparation_fail": "There's a experience preparation problem",
+  "modal_experience_detail_deletion_fail": "There's a deletion problem",
+
+  "modal_news_detail_detail_preparation_fail": "มีปัญหาในการเตรียมข้อมูลข่าว",
+  "modal_news_detail_news_list_preparation_fail": "มีปัญหาในการเตรียมข่าว",
+  "modal_news_detail_news_deletion_fail": "มีปัญหาในการลบข่าว",
+
+  "modal_news_form_type_preparation_fail": "มีปัญหาในการเตรียมข้อมูลประเภทโพสต์",
+  "modal_news_form_form_preparation_fail": "มีปัญหาในการเตรียมฟอร์ม",
+  "modal_news_form_upload_fail": "มีปัญหาในการอัพโหลดรูปภาพ",
+  "modal_news_form_creating_fail": "มีปัญหาในการสร้าง",
+  "modal_news_form_editing_fail": "มีปัญหาในการแก้ไข",
+
+  "modal_news_page_news_list_preparation_fail": "มีปัญหาในการเตรียมข่าว",
+}

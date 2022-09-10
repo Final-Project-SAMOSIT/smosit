@@ -9,7 +9,7 @@ const AboutRoute: NextPage = () => {
 export async function getServerSideProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "about"])),
+      ...(await serverSideTranslations(locale, ["common", "about", "news"])),
     },
   };
 }

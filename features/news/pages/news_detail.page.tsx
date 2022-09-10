@@ -9,8 +9,6 @@ import _ from "lodash";
 import { PreviewCard } from "../../../core/components/card/preview_card.component";
 import { newsDetailContext } from "../contexts/news_detail.context";
 import { ModalContext } from "../../../core/context/modal.context";
-import draftToHtml from "draftjs-to-html";
-import { convertFromRaw, convertToRaw, EditorState } from "draft-js";
 import { rawStringToHtml } from "../../../core/libs/rich_text_utills";
 import Loading from "../../../core/components/utility/loading";
 import { AuthContext } from "../../../core/context/auth.context";
@@ -20,7 +18,7 @@ export const NewsDetailPage = () => {
   //---------------------
   //   i18n
   //---------------------]
-  const { i18n } = useTranslation("news");
+  const { i18n, t } = useTranslation("news");
 
   //---------------------
   //   CONTEXT
@@ -50,23 +48,11 @@ export const NewsDetailPage = () => {
   });
 
   //---------------------
-  //   HANDLED
-  //---------------------
-  function getHTML() {
-    if (context.news?.news_details) {
-      const object = JSON?.parse(context.news?.news_details || "");
-
-      return draftToHtml(convertToRaw(convertFromRaw(object)));
-    } else {
-      return "";
-    }
-  }
-
-  //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
     context.modal = modalContext;
+    context.t = t;
     context.newsPreparation(router.query.id?.toString() || "");
   }, [router.query.id]);
 
@@ -103,12 +89,12 @@ export const NewsDetailPage = () => {
                         {_.map(
                           [
                             {
-                              name: "Edit",
+                              name: t("news_detail_edit_button"),
                               action: () =>
                                 router.push(`${router.asPath}/edit`),
                             },
                             {
-                              name: "Delete",
+                              name: t("news_detail_delete_button"),
                               action: () =>
                                 modalContext.openModal(
                                   "Delete",
@@ -139,7 +125,7 @@ export const NewsDetailPage = () => {
               </div>
               <div className="w-1/2 border-b border-black mb-[21px]" />
               <p className="button mb-[32px]">
-                posted on:{" "}
+                {t("news_detail_page_post_at")}:{" "}
                 {i18n.language === "en" &&
                   dayjs(context.news?.news_created_at)
                     .locale(i18n.language)
@@ -169,7 +155,7 @@ export const NewsDetailPage = () => {
               />
 
               <div className="space-y-[11px] flex flex-col mb-[64px]">
-                <p className="heading3">Suggestion</p>
+                <p className="heading3">{t("news_detail_suggestion")}</p>
                 <div className="w-[110px] border-b border-black" />
               </div>
               <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[196px]">

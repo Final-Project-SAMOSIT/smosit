@@ -10,6 +10,7 @@ import { AxiosResponse } from "axios";
 import _ from "lodash";
 import { deleteNews } from "../../../core/service/news/delete_news";
 import { Router } from "next/router";
+import { TFunction } from "next-i18next";
 
 class ExperienceDetailContext {
   experience?: Experience;
@@ -17,6 +18,8 @@ class ExperienceDetailContext {
   experienceList: Array<Experience> = [];
 
   modal?: ModalContextClass;
+
+  t: TFunction = (t: string) => t;
 
   //-------------------
   // CONSTUCTOR
@@ -36,7 +39,10 @@ class ExperienceDetailContext {
       this.preparationExperienceList();
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลประสบการณ์", err.message);
+      this.modal?.openModal(
+        this.t("modal_experience_detail_preparation_fail"),
+        err.message
+      );
     } finally {
       this.isLoading = false;
     }
@@ -55,7 +61,10 @@ class ExperienceDetailContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลประสบการณ์", err.message);
+      this.modal?.openModal(
+        this.t("modal_experience_detail_preparation_fail"),
+        err.message
+      );
     } finally {
       this.isLoading = false;
     }
@@ -67,7 +76,10 @@ class ExperienceDetailContext {
       Router.prototype.push("/about");
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการลบข่าว", err.message);
+      this.modal?.openModal(
+        this.t("modal_experience_detail_deletion_fail"),
+        err.message
+      );
     }
   }
 }

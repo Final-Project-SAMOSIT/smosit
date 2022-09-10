@@ -13,8 +13,14 @@ import { Button } from "../../../core/components/input/button.component";
 import { AuthContext } from "../../../core/context/auth.context";
 import { useRouter } from "next/router";
 import { newsFormContext } from "../contexts/news_form.context";
+import { useTranslation } from "next-i18next";
 
 export const NewsFormPage = () => {
+  //---------------------
+  //   i18n
+  //---------------------
+  const { t } = useTranslation("news");
+
   //---------------------
   //   CONTEXT
   //---------------------
@@ -78,6 +84,7 @@ export const NewsFormPage = () => {
       router.push("/401");
     } else {
       context.modal = modalContext;
+      context.t = t;
       context.preparation();
       if (router.query.id) {
         context.isEdit = true;
@@ -101,11 +108,13 @@ export const NewsFormPage = () => {
         <MainLayout>
           <div className="flex flex-col tablet:mt-[64px] mt-[32px] laptop:mt-[112px] tablet:mb-[64px] mb-[32px] laptop:mb-[96px]">
             <p className="title laptop:w-[350px] tablet:w-[160px] w-[140px]   border-b border-black">
-              Create post
+              {context.isEdit
+                ? t("news_form_edit_title")
+                : t("news_form_create_title")}
             </p>
             <div className="heading2 tablet:mt-[56px] mt-[32px] laptop:mt-[96px]">
               <TextInput
-                placeholder="Title"
+                placeholder={t("news_form_title_input_placeholder")}
                 height={72}
                 error={formik.errors.news_title}
                 onChange={(e) =>
@@ -165,7 +174,7 @@ export const NewsFormPage = () => {
 
             <div className="text-center caption2 tablet:mt-[24px] mt-[8px] laptop:mt-[32px] mx-auto w-[220px]">
               <TextInput
-                placeholder="Type caption for image(optional)"
+                placeholder={t("news_form_caption_input_placeholder")}
                 height={24}
                 onChange={(e) => {
                   formik.setFieldValue("news_caption_img", e.target.value);
@@ -193,7 +202,7 @@ export const NewsFormPage = () => {
                   );
                 }}
                 value={formik.values.news_details}
-                placeholder="Type Detail"
+                placeholder={t("news_form_detail_input_placeholder")}
                 heightCss="h-[160px]"
                 error={formik.errors.news_details_text}
               />
@@ -215,13 +224,17 @@ export const NewsFormPage = () => {
                   }
                 }}
                 options={_.map(context.newsTypeList, (type) => ({
-                  name: type.news_type_name,
+                  name: t(
+                    `news_form_type_${_.toLower(
+                      _.replace(type.news_type_name, / /g, "_")
+                    )}`
+                  ),
                   value: type.news_type_id,
                 }))}
                 value={formik.values.news_type_id}
                 error={formik.errors.news_type_id}
-                placeholder="Select type"
-                topic="Type"
+                placeholder={t("news_form_type_dropdown_placeholder")}
+                topic={t("news_form_type_dropdown_title")}
               />
               <Dropdown
                 onChange={(e) => {
@@ -243,15 +256,15 @@ export const NewsFormPage = () => {
                     : formik.values.union_year.toString()
                 }
                 error={formik.errors.union_year}
-                placeholder="Select year"
-                topic="year"
+                placeholder={t("news_form_year_dropdown_placeholder")}
+                topic={t("news_form_year_dropdown_title")}
                 disabled={isYearDisabled()}
               />
             </div>
             <div className="w-full flex justify-center">
               <Button
                 onClick={() => formik.submitForm()}
-                title="publish"
+                title={t("news_form_publish_button")}
                 heightCss="h-[40px] laptop:h-[52px]"
                 widthCss="w-[137px]"
               ></Button>

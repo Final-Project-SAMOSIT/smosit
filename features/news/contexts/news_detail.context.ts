@@ -6,6 +6,7 @@ import { getNews, getNewsList } from "../../../core/service/news/get_news";
 import { AxiosResponse } from "axios";
 import { Router } from "next/router";
 import { deleteNews } from "../../../core/service/news/delete_news";
+import { TFunction } from "next-i18next";
 
 class NewsDetailContext {
   news?: News;
@@ -13,6 +14,7 @@ class NewsDetailContext {
   newsList: Array<News>;
 
   modal?: ModalContextClass;
+  t: TFunction = (t: string) => t;
 
   //-------------------
   // CONSTUCTOR
@@ -31,7 +33,10 @@ class NewsDetailContext {
       this.newsSuggestionPreparation();
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข่าว", err.message);
+      this.modal?.openModal(
+        this.t("modal_news_detail_detail_preparation_fail"),
+        err.message
+      );
     } finally {
       this.isLoading = false;
     }
@@ -46,7 +51,10 @@ class NewsDetailContext {
         this.newsList = resp.data.data;
       }
     } catch (err: any) {
-      this.modal?.openModal("มีปัญหาในการเตรียมข่าว", err.message);
+      this.modal?.openModal(
+        this.t("modal_news_detail_news_list_preparation_fail"),
+        err.message
+      );
     }
   }
 
@@ -56,7 +64,10 @@ class NewsDetailContext {
       Router.prototype.push("/news");
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการลบข่าว", err.message);
+      this.modal?.openModal(
+        this.t("modal_news_detail_news_deletion_fail"),
+        err.message
+      );
     }
   }
 }

@@ -11,9 +11,11 @@ import {
   patchStudent,
   patchStudentUnion,
 } from "../../../core/service/about/patch_about";
+import { TFunction } from "next-i18next";
 
 class UserFormContext {
   modal?: ModalContextClass;
+  t: TFunction = (t: string) => t;
 
   isEdit: boolean = false;
   isLoading: boolean = false;
@@ -34,7 +36,7 @@ class UserFormContext {
       onUploaded(resp.data.data);
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการอัพโหลดรูปภาพ", err.message);
+      this.modal?.openModal(this.t("modal_user_form_upload_fail"), err.message);
     }
   }
 
@@ -43,7 +45,7 @@ class UserFormContext {
       await postStudent(value);
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการสร้างผู้ใช้", err.message);
+      this.modal?.openModal(this.t("modal_user_form_upload_fail"), err.message);
     }
   }
 
@@ -80,7 +82,7 @@ class UserFormContext {
       }
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการอัพเดทผู้ใช้", err.message);
+      this.modal?.openModal(this.t("modal_user_form_upload_fail"), err.message);
     }
   }
 }

@@ -17,7 +17,7 @@ export const ExperianceDetailPage = () => {
   //---------------------
   //   i18n
   //---------------------
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("news");
 
   //---------------------
   //   STATE
@@ -49,6 +49,7 @@ export const ExperianceDetailPage = () => {
   useEffect(() => {
     context.modal = modalContext;
     context.preparation(router.query?.id?.toString() || "");
+    context.t = t;
   }, [router.query.id]);
 
   //---------------------
@@ -84,12 +85,12 @@ export const ExperianceDetailPage = () => {
                         {_.map(
                           [
                             {
-                              name: "Edit",
+                              name: t("news_detail_edit_button"),
                               action: () =>
                                 router.push(`${router.asPath}/edit`),
                             },
                             {
-                              name: "Delete",
+                              name: t("news_detail_delete_button"),
                               action: () =>
                                 modalContext.openModal(
                                   "Delete",
@@ -120,7 +121,7 @@ export const ExperianceDetailPage = () => {
               </div>
               <div className="w-1/2 border-b border-black mb-[21px]" />
               <p className="button mb-[32px]">
-                posted on:{" "}
+                {t("news_detail_page_post_at")}:{" "}
                 {i18n.language === "en" &&
                   dayjs(context.experience?.news_created_at)
                     .locale(i18n.language)
@@ -151,7 +152,7 @@ export const ExperianceDetailPage = () => {
                 }}
               />
               <div className="space-y-[11px] flex flex-col mb-[64px]">
-                <p className="heading3">Suggestion</p>
+                <p className="heading3">{t("news_detail_suggestion")}</p>
                 <div className="w-[110px] border-b border-black" />
               </div>
               <div className="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-x-[32px] gap-y-[64px] laptop:gap-y-[112px] mb-[72px] laptop:mb-[196px]">

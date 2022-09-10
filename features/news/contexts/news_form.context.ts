@@ -16,11 +16,13 @@ import { Router } from "next/router";
 import { FormikProps } from "formik";
 import { patchNews } from "../../../core/service/news/patch_news";
 import { getExperience } from "../../../core/service/about/get_about";
+import { TFunction } from "next-i18next";
 
 class NewsFormContext {
   modal?: ModalContextClass;
   newsTypeList: Array<NewsType> = [];
   isEdit: boolean = false;
+  t: TFunction = (t: string) => t;
 
   //-------------------
   // CONSTUCTOR
@@ -37,7 +39,10 @@ class NewsFormContext {
       this.newsTypeList = resp.data.data;
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลประเภทโพสต์", err.message);
+      this.modal?.openModal(
+        this.t("modal_news_form_type_preparation_fail"),
+        err.message
+      );
     }
   }
 
@@ -69,7 +74,10 @@ class NewsFormContext {
       formik.setFieldValue("union_year", resp.data.data.union_year);
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการเตรียมฟอร์ม", err.message);
+      this.modal?.openModal(
+        this.t("modal_news_form_form_preparation_fail"),
+        err.message
+      );
     }
   }
 
@@ -83,7 +91,7 @@ class NewsFormContext {
       onUploaded(resp.data.data);
     } catch (err: any) {
       console.log(err);
-      this.modal?.openModal("มีปัญหาในการอัพโหลดรูปภาพ", err.message);
+      this.modal?.openModal(this.t("modal_news_form_upload_fail"), err.message);
     }
   }
 
@@ -110,7 +118,10 @@ class NewsFormContext {
         Router.prototype.back();
       }
     } catch (err: any) {
-      this.modal?.openModal("มีปัญหาในการสร้าง", err.message);
+      this.modal?.openModal(
+        this.t("modal_news_form_creating_fail"),
+        err.message
+      );
     }
   }
 
@@ -139,7 +150,10 @@ class NewsFormContext {
         Router.prototype.back();
       }
     } catch (err: any) {
-      this.modal?.openModal("มีปัญหาในการแก้ไข", err.message);
+      this.modal?.openModal(
+        this.t("modal_news_form_editing_fail"),
+        err.message
+      );
     }
   }
 }
