@@ -95,12 +95,12 @@ export const PetitionPage = () => {
   useEffect(() => {
     context.modal = modal;
     context.t = t;
-    if (!authContext.isPermission(["Users"])) {
-      router.push("/401");
-    } else {
-      context.preparationForm();
-      context.preparationPetition(authContext.me?.user_id || "");
-    }
+    // if (!authContext.isPermission(["Users"])) {
+    //   router.push("/401");
+    // } else {
+    context.preparationForm();
+    context.preparationPetition(authContext.me?.user_id || "");
+    // }
   }, []);
 
   //---------------------
@@ -112,7 +112,7 @@ export const PetitionPage = () => {
         <MainLayout>
           <div className="pt-[32px] pb-[210px] flex flex-col">
             <div className="flex justify-between space-x-[48px] ">
-              <div className="laptop:w-1/2 w-full pb-[53px] pt-[42px] flex flex-col justify-between laptop:space-y-0 space-y-[32px]">
+              <div className="laptop:w-1/2 w-full pb-[53px] pt-[42px] flex flex-col laptop:space-y-[24px] space-y-[32px]">
                 <p className="border border-black rounded-full pt-[6px] pb-[5px] px-[17px] w-max button select-none">
                   {t("petition_introduce_tag")}
                 </p>
