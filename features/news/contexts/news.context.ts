@@ -36,7 +36,10 @@ class NewsContext {
         this.totalPage = Math.ceil(resp.data.allItem / this.perPage);
       }
     } catch (err: any) {
-      this.modal?.openModal(this.t("modal_news_page_news_list_preparation_fail"), err.message);F
+      this.modal?.openModal(
+        this.t("modal_news_page_news_list_preparation_fail"),
+        err.message
+      );
     } finally {
       this.isLoading = false;
     }
