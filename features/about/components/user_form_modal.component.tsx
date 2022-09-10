@@ -25,7 +25,7 @@ export const UserFormModal = (props: UserFormModalProps) => {
   //---------------------
   //   i18n
   //---------------------
-  const { i18n } = useTranslation("news");
+  const { i18n, t } = useTranslation("about");
 
   //---------------------
   //   FORMIK
@@ -38,8 +38,12 @@ export const UserFormModal = (props: UserFormModalProps) => {
     validateOnMount: false,
     onSubmit: async (e) => {
       modal.openModal(
-        `${context.isEdit ? "Edit" : "Create"} user`,
-        `Are you sure to ${context.isEdit ? "Edit" : "Create"} user`,
+        context.isEdit
+          ? t("about_page_student_union_edit_student_confirm_modal_title")
+          : t("about_page_student_union_create_student_confirm_modal_title"),
+        context.isEdit
+          ? t("about_page_student_union_create_student_confirm_modal_message")
+          : t("about_page_student_union_edit_student_confirm_modal_message"),
         async () => {
           if (context.isEdit) {
             await context.onUpdate(e, props.userInfo);
@@ -97,10 +101,14 @@ export const UserFormModal = (props: UserFormModalProps) => {
         <div className="fixed top-0 left-0 z-30 flex justify-center w-screen h-screen bg-black bg-opacity-60">
           <div className="bg-white mt-0 tablet:mt-[24px] py-[24px] px-[32px] h-full overflow-y-auto tablet:overflow-y-visible tablet:h-max w-[480px] flex flex-col items-center space-y-[12px]">
             <p className="title">
-              {context.isEdit ? "Edit" : "Create"} Information
+              {context.isEdit
+                ? t("about_page_student_union_create_student_modal_title")
+                : t("about_page_student_union_edit_student_modal_title")}
             </p>
             <TextInput
-              placeholder="Student ID"
+              placeholder={t(
+                "about_page_student_union_student_modal_form_student_id_placeholder"
+              )}
               value={formik.values.std_id}
               height={40}
               onChange={(e) => {
@@ -219,18 +227,20 @@ export const UserFormModal = (props: UserFormModalProps) => {
                   }}
                   error={formik.errors.position_id}
                   hide-error-text
-                  placeholder="Position"
+                  placeholder={t(
+                    "about_page_student_union_student_modal_form_position_placeholder"
+                  )}
                 />
                 <div className="flex justify-between space-x-[8px]">
                   <Button
                     onClick={props.onClose}
-                    title="cancel"
+                    title={t("about_page_cancel_button")}
                     heightCss="h-[40px]"
                     widthCss="tablet:w-[132px] w-[122px]"
                   />
                   <Button
                     onClick={() => formik.submitForm()}
-                    title={context.isEdit ? "save" : "create"}
+                    title={context.isEdit ? t("about_page_save_button") : t("about_page_create_button")}
                     heightCss="h-[40px]"
                     widthCss="tablet:w-[132px] w-[122px]"
                   />

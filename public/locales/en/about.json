@@ -1,0 +1,32 @@
+{
+  "========================Student Union========================": "",
+  "about_page_student_union_title": "Directory of student union",
+  "about_page_student_union_create_button": "Create",
+  "about_page_student_union_manage_button": "Manage",
+  "about_page_student_union_year_dropdown_prefix": "Year",
+  "about_page_student_union_year_dropdown_placeholder": "Select Year",
+  "about_page_student_union_create_year_modal_title": "Create Student Union",
+  "about_page_student_union_create_year_modal_message": "Are you sure you want to create year?",
+  "about_page_student_union_no_student": "There's no Student in the Union",
+  "about_page_student_union_create_student_modal_title": "Create Information",
+  "about_page_student_union_edit_student_modal_title": "Edit Information",
+  "about_page_student_union_student_modal_form_student_id_placeholder": "Student ID",
+  "about_page_student_union_student_modal_form_position_placeholder": "Position",
+  "about_page_student_union_create_student_confirm_modal_title": "Create user",
+  "about_page_student_union_create_student_confirm_modal_message": "Are you sure to create user?",
+  "about_page_student_union_edit_student_confirm_modal_title": "Edit user",
+  "about_page_student_union_edit_student_confirm_modal_message": "Are you sure to edit user?",
+  "about_page_student_union_delete_student_confirm_modal_title": "Delete student",
+  "about_page_student_union_delete_student_confirm_modal_message": "Are you sure you want to delete student?",
+
+  "========================General========================": "",
+  "about_page_cancel_button": "Cancel",
+  "about_page_create_button": "Create",
+  "about_page_save_button": "Save",
+  "about_page_edit_button": "Edit",
+
+  "========================Experience========================": "",
+  "about_page_experience_title": "Work Experiences",
+  "about_page_experience_create_button": "Add post",
+  "about_page_experience_no_experience": "There's no Experience yet"
+}

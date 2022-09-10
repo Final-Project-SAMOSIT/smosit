@@ -27,7 +27,7 @@ export const AboutPage = () => {
   //---------------------
   //   i18n
   //---------------------
-  const { i18n } = useTranslation("about");
+  const { i18n, t } = useTranslation("about");
 
   //---------------------
   //   ROUTER
@@ -66,6 +66,7 @@ export const AboutPage = () => {
   //---------------------
   useEffect(() => {
     context.modal = modalContext;
+    context.t = t;
     context.preparationYear();
     context.preparationStudentUnion();
     context.preparationExperience();
@@ -121,20 +122,20 @@ export const AboutPage = () => {
             )}
             <div className="space-y-[21px] flex flex-col relative items-center mb-[32px] laptop:mb-[56px] w-full">
               <p className="heading2 border-b border-black w-max px-[16px]">
-                Directory of student union
+                {t("about_page_student_union_title")}
               </p>
               {!context.isEditMode && authContext.isPermission(["Publisher"]) && (
                 <Fragment>
                   <div className="absolute right-0 hidden laptop:flex space-x-[8px]">
                     <Button
                       onClick={() => (context.isCreateYearModalOpen = true)}
-                      title="create"
+                      title={t("about_page_student_union_create_button")}
                       widthCss="w-[137px]"
                       heightCss="h-[52px]"
                     />
                     <Button
                       onClick={() => (context.isEditMode = true)}
-                      title="manage"
+                      title={t("about_page_student_union_manage_button")}
                       widthCss="w-[137px]"
                       heightCss="h-[52px]"
                     />
@@ -301,7 +302,7 @@ export const AboutPage = () => {
                 </div>
               ) : (
                 <p className="col-span-full caption1 text-center">
-                  There's no Student in the Union
+                  {t("about_page_student_union_no_student")}
                 </p>
               )}
             </div>
@@ -313,7 +314,7 @@ export const AboutPage = () => {
                     context.addedUser = [];
                     context.isEditMode = false;
                   }}
-                  title="cancel"
+                  title={t("about_page_cancel_button")}
                   widthCss="w-[137px]"
                   heightCss="h-[40px] laptop:h-[52px]"
                 />
@@ -326,7 +327,7 @@ export const AboutPage = () => {
                       context.preparationYear();
                     });
                   }}
-                  title="save"
+                  title={t("about_page_save_button")}
                   widthCss="w-[137px]"
                   heightCss="h-[40px] laptop:h-[52px]"
                 />
@@ -335,12 +336,14 @@ export const AboutPage = () => {
               <div className="flex flex-col items-center">
                 <div className="flex justify-between w-full">
                   <div className="flex flex-col mb-[48px] laptop:mb-[64px] w-full">
-                    <p className="heading3">Work Experiences</p>
+                    <p className="heading3">
+                      {t("about_page_experience_title")}
+                    </p>
                     <div className="border-b border-black w-[110px]" />
                   </div>
                   {authContext.isPermission(["Publisher"]) && (
                     <Button
-                      title="add post"
+                      title={t("about_page_experience_create_button")}
                       onClick={() => {
                         router.push("/about/create");
                       }}
@@ -367,7 +370,9 @@ export const AboutPage = () => {
                     ))}
                   </div>
                 ) : (
-                  <p className="caption1">There's no Experience yet</p>
+                  <p className="caption1">
+                    {t("about_page_experience_no_experience")}
+                  </p>
                 )}
                 {context.isFetchingExperience ? (
                   <Loading text="text-4xl" />
@@ -399,7 +404,7 @@ interface StudentUnionCardProps {
 }
 
 const StudentUnionCard = (props: StudentUnionCardProps) => {
-  const { i18n } = useTranslation("about");
+  const { i18n, t } = useTranslation("about");
 
   const modalContext = useContext(ModalContext);
 
@@ -422,8 +427,12 @@ const StudentUnionCard = (props: StudentUnionCardProps) => {
                   className="cursor-pointer fas fa-trash-alt text-red-500 tablet:text-[16px] text-[14px]"
                   onClick={() => {
                     modalContext.openModal(
-                      "Delete student",
-                      "Are you sure you want to delete studen?",
+                      t(
+                        "about_page_student_union_delete_student_confirm_modal_title"
+                      ),
+                      t(
+                        "about_page_student_union_delete_student_confirm_modal_message"
+                      ),
                       props.onDelete
                     );
                   }}

@@ -18,7 +18,7 @@ export const PreviewCard = (props: NewsCardProps) => {
   //---------------------
   //   i18n
   //---------------------
-  const { i18n } = useTranslation("");
+  const { i18n, t } = useTranslation(["common"]);
 
   //---------------------
   //   REF
@@ -69,7 +69,7 @@ export const PreviewCard = (props: NewsCardProps) => {
                 className="bg-white pl-[5px] text-primary-30 underline cursor-pointer"
                 onClick={props.onClick}
               >
-                read more
+                {t("read_more_button")}
               </p>
             </div>
           </div>

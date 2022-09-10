@@ -14,11 +14,15 @@ import {
   postStudentUnion,
   postUnionYear,
 } from "../../../core/service/about/post_about";
-import { patchStudentUnion } from "../../../core/service/about/patch_about";
 import { deleteStudentUnion } from "../../../core/service/about/delete_about";
 import { unionYearInit } from "../form/union_year.form";
+import { TFunction } from "next-i18next";
 
 class AboutContext {
+  t: TFunction = (t: string) => {
+    return t;
+  };
+
   studentList: Array<User> = [];
   yearList: Array<number> = [];
   experienceList: Array<Experience> = [];
@@ -158,7 +162,9 @@ class AboutContext {
 
   get yearOptions() {
     return _.map(this.yearList, (year) => ({
-      name: `YEAR ${year}`,
+      name: `${this.t(
+        "about_page_student_union_year_dropdown_prefix"
+      )} ${year}`,
       value: year,
     }));
   }
@@ -167,7 +173,9 @@ class AboutContext {
     return _.map(
       _.range(new Date().getFullYear() - 5, new Date().getFullYear() + 5),
       (year) => ({
-        name: `YEAR ${year}`,
+        name: `${this.t(
+          "about_page_student_union_year_dropdown_prefix"
+        )} ${year}`,
         value: year.toString(),
       })
     );
@@ -179,7 +187,7 @@ class AboutContext {
       this.year = Number(value.union_year);
       this.preparationStudentUnion();
       this.preparationExperience(true);
-      this.preparationYear()
+      this.preparationYear();
       this.isEditMode = true;
       this.isCreateYearModalOpen = false;
     } catch (err: any) {

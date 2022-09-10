@@ -104,13 +104,15 @@ export const HomePage = () => {
             <div className="flex flex-col space-y-[64px] mb-[112px]">
               <div className="flex items-end justify-between">
                 <p className="heading3 pb-[11px] border-b pr-[32px] border-black">
-                  News
+                  {t("home_page_news_title")}
                 </p>
                 <div
                   className="flex space-x-[4px] items-center group cursor-pointer"
                   onClick={() => router.push("/news")}
                 >
-                  <p className="text-body">see all</p>
+                  <p className="text-body">
+                    {t("home_page_news_see_all_button")}
+                  </p>
                   <i className="fas fa-chevron-right text-[10px] pt-[3px] w-0 overflow-hidden group-hover:w-[6.25px] transition-all duration-150"></i>
                 </div>
               </div>

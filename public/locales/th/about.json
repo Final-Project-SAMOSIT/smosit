@@ -1,0 +1,32 @@
+{
+  "========================Student Union========================": "",
+  "about_page_student_union_title": "ทำเนียบสโมสรนักศึกษา",
+  "about_page_student_union_create_button": "สร้าง",
+  "about_page_student_union_manage_button": "จัดการ",
+  "about_page_student_union_year_dropdown_prefix": "ปี",
+  "about_page_student_union_year_dropdown_placeholder": "เลือกปี",
+  "about_page_student_union_create_year_modal_title": "สร้างสโมสรนักศึกษา",
+  "about_page_student_union_create_year_modal_message": "คุณต้องการสร้างสโมสรนักศึกษาใช่หรือไม่?",
+  "about_page_student_union_no_student": "ยังไม่มีนักศึกษาในสโมสร",
+  "about_page_student_union_create_student_modal_title": "สร้างข้อมูลนักศึกษา",
+  "about_page_student_union_edit_student_modal_title": "แก้ไขข้อมูลนักศึกษา",
+  "about_page_student_union_student_modal_form_student_id_placeholder": "รหัสนักศึกษา",
+  "about_page_student_union_student_modal_form_position_placeholder": "ตำแหน่ง",
+  "about_page_student_union_create_student_confirm_modal_title": "สร้างนักศึกษา",
+  "about_page_student_union_create_student_confirm_modal_message": "คุณต้องการสร้างนักศึกษาใข่หรือไม่?",
+  "about_page_student_union_edit_student_confirm_modal_title": "แก้ไขนักศึกษา",
+  "about_page_student_union_edit_student_confirm_modal_message": "คุณต้องการแก้ไขนักศึกษาใข่หรือไม่?",
+  "about_page_student_union_delete_student_confirm_modal_title": "ลบนักศึกษา",
+  "about_page_student_union_delete_student_confirm_modal_message": "คุณต้องการลบนักศึกษาใข่หรือไม่?",
+
+  "========================General========================": "",
+  "about_page_cancel_button": "ยกเลิก",
+  "about_page_create_button": "สร้าง",
+  "about_page_save_button": "บันทึก",
+  "about_page_edit_button": "แก้ไข",
+
+  "========================Experience========================": "",
+  "about_page_experience_title": "ผลงาน",
+  "about_page_experience_create_button": "เพิ่มโพสต์",
+  "about_page_experience_no_experience": "ยังไม่มีผลงาน"
+}
