@@ -245,7 +245,7 @@ export const AboutPage = () => {
                     }}
                   />
                   <div />
-                  {_.map(_.slice(getStudentList(), 1), (user) => (
+                  {_.map(_.slice(getStudentList(), 1), (user, index) => (
                     <StudentUnionCard
                       image={user.student_union_info.std_img}
                       name={_.join(
@@ -264,7 +264,14 @@ export const AboutPage = () => {
                       position={user.std_position.position_name}
                       isEditable={context.isEditMode}
                       onDelete={() => {
-                        context.onDelete(user.union_id || "");
+                        if (index < _.size(context.studentList)) {
+                          context.onDelete(user.union_id || "");
+                        } else {
+                          context.addedUser = _.filter(
+                            context.addedUser,
+                            (item) => item.std_id !== user.std_id
+                          );
+                        }
                       }}
                       onEdit={() => {
                         context.editingUser = {
@@ -301,7 +308,7 @@ export const AboutPage = () => {
                   </div>
                 </div>
               ) : (
-                <p className="col-span-full caption1 text-center">
+                <p className="text-center col-span-full caption1">
                   {t("about_page_student_union_no_student")}
                 </p>
               )}
