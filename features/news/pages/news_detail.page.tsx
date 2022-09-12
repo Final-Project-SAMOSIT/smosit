@@ -148,7 +148,7 @@ export const NewsDetailPage = () => {
                 {context.news?.news_caption_img}
               </p>
               <div
-                className="text-body mb-[64px] tablet:mb-[96px]"
+                className="text-body mb-[64px] tablet:mb-[96px] space-y-[4px]"
                 dangerouslySetInnerHTML={{
                   __html: rawStringToHtml(context.news?.news_details || ""),
                 }}
