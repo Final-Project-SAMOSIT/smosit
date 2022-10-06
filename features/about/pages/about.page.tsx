@@ -22,6 +22,7 @@ import { Position, positionMap } from "../types/user";
 import classNames from "classnames";
 import { useClickOutside } from "../../../core/libs/click_detector";
 import { UnionYearFormModal } from "../components/union_year_form_modal.component";
+import { UnionConcilSection } from "../components/union_concil_section.component";
 
 export const AboutPage = () => {
   //---------------------
@@ -202,110 +203,12 @@ export const AboutPage = () => {
               />
             </div>
 
-            <div className="grid grid-cols-3 gap-y-[24px] laptop:gap-y-[32px] gap-x-[16px] mb-[72px] laptop:mb-[112px]">
-              {context.isStudentLoading ? (
-                <div className="flex justify-center w-full col-span-full">
-                  <Loading text="text-4xl" />
-                </div>
-              ) : _.size(context.studentList) + _.size(context.addedUser) !==
-                0 ? (
-                <Fragment>
-                  <div />
-                  <StudentUnionCard
-                    image={
-                      getStudentList()[0]?.student_union_info.std_img || ""
-                    }
-                    name={_.join(
-                      [
-                        _.get(
-                          getStudentList()[0],
-                          `student_union_info.std_fname_${i18n.language}`
-                        ),
-                        _.get(
-                          getStudentList()[0],
-                          `student_union_info.std_lname_${i18n.language}`
-                        ),
-                      ],
-                      " "
-                    )}
-                    position={
-                      getStudentList()[0]?.std_position.position_name || ""
-                    }
-                    isEditable={context.isEditMode}
-                    onDelete={() => {
-                      context.onDelete(getStudentList()[0]?.union_id || "");
-                    }}
-                    onEdit={() => {
-                      context.editingUser = {
-                        unionId: getStudentList()[0]?.union_id || "",
-                        userId: getStudentList()[0]?.std_id || "",
-                        unionYear: context.year,
-                      };
-                      context.isEditModalOpen = true;
-                    }}
-                  />
-                  <div />
-                  {_.map(_.slice(getStudentList(), 1), (user) => (
-                    <StudentUnionCard
-                      image={user.student_union_info.std_img}
-                      name={_.join(
-                        [
-                          _.get(
-                            user,
-                            `student_union_info.std_fname_${i18n.language}`
-                          ),
-                          _.get(
-                            user,
-                            `student_union_info.std_lname_${i18n.language}`
-                          ),
-                        ],
-                        " "
-                      )}
-                      position={user.std_position.position_name}
-                      isEditable={context.isEditMode}
-                      onDelete={() => {
-                        context.onDelete(user.union_id || "");
-                      }}
-                      onEdit={() => {
-                        context.editingUser = {
-                          unionId: user.union_id || "",
-                          userId: user.std_id || "",
-                          unionYear: context.year,
-                        };
-                        context.isEditModalOpen = true;
-                      }}
-                    />
-                  ))}
-                  {context.isEditMode && (
-                    <div className="flex justify-center w-full h-max">
-                      <div
-                        className="w-[96px] tablet:w-[200px] aspect-square rounded-full border border-dashed border-gray-50 flex justify-center items-center group cursor-pointer"
-                        onClick={() => {
-                          context.isEditModalOpen = true;
-                        }}
-                      >
-                        <i className="fas fa-plus text-[72px] text-gray-40 group-hover:text-gray-50 duration-150" />
-                      </div>
-                    </div>
-                  )}
-                </Fragment>
-              ) : context.isEditMode ? (
-                <div className="flex justify-center w-full h-max col-span-full">
-                  <div
-                    className="w-[96px] tablet:w-[200px] aspect-square rounded-full border border-dashed border-gray-50 flex justify-center items-center group cursor-pointer"
-                    onClick={() => {
-                      context.isEditModalOpen = true;
-                    }}
-                  >
-                    <i className="fas fa-plus text-[72px] text-gray-40 group-hover:text-gray-50 duration-150" />
-                  </div>
-                </div>
-              ) : (
-                <p className="col-span-full caption1 text-center">
-                  {t("about_page_student_union_no_student")}
-                </p>
-              )}
-            </div>
+            <UnionConcilSection
+              isLoading={context.isStudentLoading}
+              addedUser={context.addedUser}
+              studentList={context.studentList}
+              editMode={context.isEditMode}
+            />
 
             {context.isEditMode ? (
               <div className="flex justify-center space-x-[24px]">
@@ -389,78 +292,6 @@ export const AboutPage = () => {
             )}
           </div>
         </MainLayout>
-      )}
-    </Observer>
-  );
-};
-
-interface StudentUnionCardProps {
-  image: string;
-  name: string;
-  position: string;
-  onEdit?: () => void;
-  onDelete?: () => void;
-  isEditable?: boolean;
-}
-
-const StudentUnionCard = (props: StudentUnionCardProps) => {
-  const { i18n, t } = useTranslation("about");
-
-  const modalContext = useContext(ModalContext);
-
-  return (
-    <Observer>
-      {() => (
-        <div className="flex flex-col items-center">
-          <div className="mb-[8px] laptop:mb-[20px] relative">
-            {props.isEditable && (
-              <div
-                className="absolute flex items-center justify-center w-full h-full duration-150 bg-white bg-opacity-0 opacity-0 cursor-pointer hover:bg-opacity-60 hover:opacity-100"
-                onClick={props.onEdit}
-              >
-                <i className="fas fa-edit text-[72px] text-white" />
-              </div>
-            )}
-            {props.isEditable && (
-              <div className="absolute tablet:top-0 top-[-4px] tablet:right-0 right-[-4px]">
-                <i
-                  className="cursor-pointer fas fa-trash-alt text-red-500 tablet:text-[16px] text-[14px]"
-                  onClick={() => {
-                    modalContext.openModal(
-                      t(
-                        "about_page_student_union_delete_student_confirm_modal_title"
-                      ),
-                      t(
-                        "about_page_student_union_delete_student_confirm_modal_message"
-                      ),
-                      props.onDelete
-                    );
-                  }}
-                />
-              </div>
-            )}
-            {props.image ? (
-              <img
-                src={props.image}
-                className="w-[96px] tablet:w-[200px] rounded-full aspect-square mb-[8px] laptop:mb-[20px]"
-                alt=""
-              />
-            ) : (
-              <div className="bg-gray-20 w-[96px] tablet:w-[200px] rounded-full aspect-square flex justify-center items-center p-[8px]">
-                <i className="fas fa-user text-[207px]" />
-              </div>
-            )}
-          </div>
-          <p className="text-center heading5 mb-[4px] laptop:mb-[11px]">
-            {props.name}
-          </p>
-          <p className="text-center caption1">
-            {_.get(
-              positionMap,
-              `${_.replace(props.position, / /g, "")}.${i18n.language}`
-            )}
-          </p>
-        </div>
       )}
     </Observer>
   );
