@@ -12,6 +12,8 @@ interface UnionConcilSectionProps {
   studentList: Array<User>;
   addedUser: Array<User>;
   editMode?: boolean;
+  onEditUser: () => void;
+  onOpenEditModal: () => void;
 }
 
 export const UnionConcilSection = (props: UnionConcilSectionProps) => {
@@ -69,14 +71,7 @@ export const UnionConcilSection = (props: UnionConcilSectionProps) => {
                   onDelete={() => {
                     context.onDelete(getStudentList()[0]?.union_id || "");
                   }}
-                  onEdit={() => {
-                    context.editingUser = {
-                      unionId: getStudentList()[0]?.union_id || "",
-                      userId: getStudentList()[0]?.std_id || "",
-                      unionYear: context.year,
-                    };
-                    context.isEditModalOpen = true;
-                  }}
+                  onEdit={props.onEditUser}
                 />
                 <div />
                 {_.map(_.slice(getStudentList(), 1), (user) => (
@@ -100,23 +95,14 @@ export const UnionConcilSection = (props: UnionConcilSectionProps) => {
                     onDelete={() => {
                       context.onDelete(user.union_id || "");
                     }}
-                    onEdit={() => {
-                      context.editingUser = {
-                        unionId: user.union_id || "",
-                        userId: user.std_id || "",
-                        unionYear: context.year,
-                      };
-                      context.isEditModalOpen = true;
-                    }}
+                    onEdit={props.onEditUser}
                   />
                 ))}
                 {props.editMode && (
                   <div className="flex justify-center w-full h-max">
                     <div
                       className="w-[96px] tablet:w-[200px] aspect-square rounded-full border border-dashed border-gray-50 flex justify-center items-center group cursor-pointer"
-                      onClick={() => {
-                        context.isEditModalOpen = true;
-                      }}
+                      onClick={props.onOpenEditModal}
                     >
                       <i className="fas fa-plus text-[72px] text-gray-40 group-hover:text-gray-50 duration-150" />
                     </div>
@@ -131,9 +117,7 @@ export const UnionConcilSection = (props: UnionConcilSectionProps) => {
               <div className="flex justify-center w-full h-max col-span-full">
                 <div
                   className="w-[96px] tablet:w-[200px] aspect-square rounded-full border border-dashed border-gray-50 flex justify-center items-center group cursor-pointer"
-                  onClick={() => {
-                    context.isEditModalOpen = true;
-                  }}
+                  onClick={props.onOpenEditModal}
                 >
                   <i className="fas fa-plus text-[72px] text-gray-40 group-hover:text-gray-50 duration-150" />
                 </div>

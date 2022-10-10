@@ -26,11 +26,13 @@ export const Button = (props: ButtonProps) => {
         {
           [`${custom}`]: custom,
           "hover:text-white rounded-[10px] border border-black text-black bg-white hover:bg-black":
-            !custom,
+            !custom && !props.disabled,
           "min-h-[52px] h-auto": !props.heightCss,
           [`${props.heightCss}`]: props.heightCss,
           "w-full": !props.widthCss,
           [`${props.widthCss}`]: props.widthCss,
+          "bg-gray-30 text-black rounded-[10px] border border-gray-50 cursor-not-allowed opacity-50":
+            props.disabled,
         }
       )}
     >

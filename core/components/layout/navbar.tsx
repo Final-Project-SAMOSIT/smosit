@@ -45,10 +45,7 @@ export const Navbar = (props: NavbarProps) => {
       },
       {
         name: props.noTranslation ? "Vote" : t("navbar_feature_home_vote"),
-        route:
-          authContext.me?.roles.role_name === "Publisher"
-            ? "/manage/vote"
-            : "/vote",
+        route: "/vote",
       },
       {
         name: props.noTranslation ? "News" : t("navbar_feature_home_news"),

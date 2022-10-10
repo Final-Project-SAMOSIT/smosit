@@ -204,10 +204,21 @@ export const AboutPage = () => {
             </div>
 
             <UnionConcilSection
-              isLoading={context.isStudentLoading}
               addedUser={context.addedUser}
               studentList={context.studentList}
+              isLoading={context.isStudentLoading}
               editMode={context.isEditMode}
+              onEditUser={() => {
+                context.editingUser = {
+                  unionId: getStudentList()[0]?.union_id || "",
+                  userId: getStudentList()[0]?.std_id || "",
+                  unionYear: context.year,
+                };
+                context.isEditModalOpen = true;
+              }}
+              onOpenEditModal={() => {
+                context.isEditModalOpen = true;
+              }}
             />
 
             {context.isEditMode ? (
