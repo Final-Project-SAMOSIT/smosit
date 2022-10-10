@@ -60,7 +60,7 @@ export const ExperianceDetailPage = () => {
       {() => (
         <MainLayout>
           {context.isLoading ? (
-            <div className="w-full flex justify-center">
+            <div className="flex justify-center w-full">
               <Loading text="text-4xl" />
             </div>
           ) : (
@@ -108,7 +108,7 @@ export const ExperianceDetailPage = () => {
                               className="px-[16px] pt-[7px] pb-[11px] bg-white hover:bg-gray-10 cursor-pointer"
                               onClick={option.action}
                             >
-                              <p className="text-body select-none">
+                              <p className="select-none text-body">
                                 {option.name}
                               </p>
                             </div>
@@ -144,7 +144,7 @@ export const ExperianceDetailPage = () => {
                 {context.experience?.news_caption_img}
               </p>
               <div
-                className="text-body mb-[64px] tablet:mb-[96px]"
+                className="text-body mb-[64px] tablet:mb-[96px] space-y-[32px]"
                 dangerouslySetInnerHTML={{
                   __html: rawStringToHtml(
                     context.experience?.news_details || ""
