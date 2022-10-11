@@ -24,6 +24,7 @@ import {
 import { unionYearVotingInitValue } from "../form/union_year_voting.form";
 import { postCreateVote, postVote } from "../../../core/service/vote/post_vote";
 import dayjs from "dayjs";
+dayjs.extend(require("dayjs/plugin/customParseFormat"));
 import { Vote } from "../types/vote.types";
 import { patchUnion } from "../../../core/service/vote/patch_vote";
 import { Router } from "next/router";
@@ -272,11 +273,13 @@ class VoteContext {
     try {
       await postUnionYear({ union_year: value.union_year });
 
+      console.log(value.end_date, value.open_date);
+
       await postCreateVote(Number(value.union_year), {
-        end_date: dayjs(new Date(value.end_date)).format(
+        end_date: dayjs(value.end_date, "DD/MM/YYYY").format(
           "YYYY-MM-DDTHH:mm:ss.SSSZ"
         ),
-        open_date: dayjs(new Date(value.open_date)).format(
+        open_date: dayjs(value.open_date, "DD/MM/YYYY").format(
           "YYYY-MM-DDTHH:mm:ss.SSSZ"
         ),
         union_year: Number(value.union_year),
