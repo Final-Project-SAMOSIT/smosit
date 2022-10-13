@@ -8,7 +8,9 @@ COPY package.json /usr/src/app
 
 COPY .env /usr/src/app
 
-RUN yarn install 
+RUN yarn
+
+RUN yarn add prettier -g
 
 COPY . /usr/src/app
 
