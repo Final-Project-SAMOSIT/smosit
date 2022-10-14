@@ -35,10 +35,16 @@ class AboutContext {
   isEditModalOpen: boolean = false;
   isEditMode: boolean = false;
   positionOptions: Array<{ name: string; value: string }> = [];
-  editingUser: { userId: string; unionId: string; unionYear: number } = {
+  editingUser: {
+    userId: string;
+    unionId: string;
+    unionYear: number;
+    positionId?: string;
+  } = {
     userId: "",
     unionId: "",
     unionYear: 0,
+    positionId: "",
   };
   addedUser: Array<User> = [];
   isCreateYearModalOpen: boolean = false;

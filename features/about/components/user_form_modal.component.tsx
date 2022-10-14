@@ -14,7 +14,12 @@ import classNames from "classnames";
 import Loading from "../../../core/components/utility/loading";
 
 interface UserFormModalProps {
-  userInfo?: { userId: string; unionId: string; unionYear: number };
+  userInfo?: {
+    userId: string;
+    unionId: string;
+    unionYear: number;
+    positionId?: string;
+  };
   positionOptions: Array<{ name: string; value: string }>;
   onClose: () => void;
   onSave: (value: typeof userInitValue) => void;
@@ -82,7 +87,7 @@ export const UserFormModal = (props: UserFormModalProps) => {
     formik.setFieldValue("std_img", value.std_img);
     formik.setFieldValue("std_lname_en", value.std_lname_en);
     formik.setFieldValue("std_lname_th", value.std_lname_th);
-    formik.setFieldValue("position_id", "");
+    formik.setFieldValue("position_id", props.userInfo?.positionId || "");
   }
 
   useEffect(() => {

@@ -129,12 +129,6 @@ export const AboutPage = () => {
                 <Fragment>
                   <div className="absolute right-0 hidden laptop:flex space-x-[8px]">
                     <Button
-                      onClick={() => (context.isCreateYearModalOpen = true)}
-                      title={t("about_page_student_union_create_button")}
-                      widthCss="w-[137px]"
-                      heightCss="h-[52px]"
-                    />
-                    <Button
                       onClick={() => (context.isEditMode = true)}
                       title={t("about_page_student_union_manage_button")}
                       widthCss="w-[137px]"
@@ -151,11 +145,6 @@ export const AboutPage = () => {
                           {
                             icon: "fas fa-edit",
                             action: () => (context.isEditMode = true),
-                          },
-                          {
-                            icon: "fas fa-plus",
-                            action: () =>
-                              (context.isCreateYearModalOpen = true),
                           },
                         ],
                         (item, index) => (
@@ -209,11 +198,6 @@ export const AboutPage = () => {
               isLoading={context.isStudentLoading}
               editMode={context.isEditMode}
               onEditUser={() => {
-                context.editingUser = {
-                  unionId: getStudentList()[0]?.union_id || "",
-                  userId: getStudentList()[0]?.std_id || "",
-                  unionYear: context.year,
-                };
                 context.isEditModalOpen = true;
               }}
               onOpenEditModal={() => {

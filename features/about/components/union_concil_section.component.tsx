@@ -95,7 +95,15 @@ export const UnionConcilSection = (props: UnionConcilSectionProps) => {
                     onDelete={() => {
                       context.onDelete(user.union_id || "");
                     }}
-                    onEdit={props.onEditUser}
+                    onEdit={() => {
+                      context.editingUser = {
+                        unionId: user.union_id || "",
+                        userId: user.std_id,
+                        unionYear: context.year,
+                        positionId: user.std_position.position_id,
+                      };
+                      props.onEditUser();
+                    }}
                   />
                 ))}
                 {props.editMode && (
