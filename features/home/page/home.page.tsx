@@ -127,6 +127,7 @@ export const HomePage = () => {
                       "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
                     }
                     timeStamp={news.news_created_at}
+                    view={news.views}
                     onClick={() => router.push(`/news/${news.news_id}`)}
                   />
                 ))}

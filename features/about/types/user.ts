@@ -39,4 +39,5 @@ export interface Experience {
   news_updated_at: string;
   union_year: number;
   user_id: string;
+  views?: number;
 }

@@ -11,6 +11,7 @@ interface NewsCardProps {
   timeStamp?: string;
   topic: string;
   description: string;
+  view?: number;
   onClick: () => void;
 }
 
@@ -38,14 +39,22 @@ export const PreviewCard = (props: NewsCardProps) => {
             onClick={props.onClick}
             alt=""
           />
-          {props.timeStamp && (
-            <p className="caption1 mb-[8px]">
-              {dayjs(props.timeStamp)
-                .locale(i18n.language)
-                .add(i18n.language === "th" ? 543 : 0, "year")
-                .format("DD MMMM YYYY")}
-            </p>
-          )}
+          <div className="flex justify-between mb-[8px]">
+            {props.timeStamp && (
+              <p className="caption1">
+                {dayjs(props.timeStamp)
+                  .locale(i18n.language)
+                  .add(i18n.language === "th" ? 543 : 0, "year")
+                  .format("DD MMMM YYYY")}
+              </p>
+            )}
+            {props.view && (
+              <div className="flex space-x-[8px] items-center">
+                <i className="fas fa-eye text-gray-50 text-[15px]" />
+                <p className="caption1 text-gray-50">{props.view}</p>
+              </div>
+            )}
+          </div>
           <p
             className="topic2 mb-[16px] cursor-pointer"
             onClick={props.onClick}

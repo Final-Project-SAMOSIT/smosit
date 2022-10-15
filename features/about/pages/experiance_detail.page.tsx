@@ -120,18 +120,24 @@ export const ExperianceDetailPage = () => {
                 )}
               </div>
               <div className="w-1/2 border-b border-black mb-[21px]" />
-              <p className="button mb-[32px]">
-                {t("news_detail_page_post_at")}:{" "}
-                {i18n.language === "en" &&
-                  dayjs(context.experience?.news_created_at)
-                    .locale(i18n.language)
-                    .format("DD MMMM YYYY, h:mm a")}
-                {i18n.language === "th" &&
-                  dayjs(context.experience?.news_created_at)
-                    .locale(i18n.language)
-                    .add(i18n.language === "th" ? 543 : 0, "year")
-                    .format("DD MMMM YYYY, H:mm น.")}
-              </p>
+              <div className="flex justify-between mb-[32px]">
+                <p className="button">
+                  {t("news_detail_page_post_at")}:{" "}
+                  {i18n.language === "en" &&
+                    dayjs(context.experience?.news_created_at)
+                      .locale(i18n.language)
+                      .format("DD MMMM YYYY, h:mm a")}
+                  {i18n.language === "th" &&
+                    dayjs(context.experience?.news_created_at)
+                      .locale(i18n.language)
+                      .add(i18n.language === "th" ? 543 : 0, "year")
+                      .format("DD MMMM YYYY, H:mm น.")}
+                </p>
+                <div className="flex space-x-[4px] items-center">
+                  <i className="fas fa-eye text-[15px]" />
+                  <p className="caption1">{context.experience?.views}</p>
+                </div>
+              </div>
               <img
                 src={
                   context.experience?.news_img ||
@@ -165,6 +171,7 @@ export const ExperianceDetailPage = () => {
                       "https://i.pinimg.com/564x/ca/75/fd/ca75fdad84c47b3f53b09514007596b5.jpg"
                     }
                     timeStamp={experience.news_created_at}
+                    view={experience.views}
                     onClick={() => router.push(`/about/${experience.news_id}`)}
                   />
                 ))}

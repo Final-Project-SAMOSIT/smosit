@@ -264,6 +264,7 @@ export const AboutPage = () => {
                         }
                         topic={experience.news_title}
                         timeStamp={experience.news_created_at}
+                        view={experience.views}
                       />
                     ))}
                   </div>
