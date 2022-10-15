@@ -1,8 +1,9 @@
+import dayjs from "dayjs";
 import * as Yup from "yup";
 
 export const unionYearVotingInitValue = {
-  open_date: "",
-  end_date: "",
+  open_date: dayjs(new Date()).format("DD/MM/YYYY"),
+  end_date: dayjs(new Date()).format("DD/MM/YYYY"),
   union_year: new Date().getFullYear(),
 };
 export const unionYearVotingValidate = Yup.object().shape({

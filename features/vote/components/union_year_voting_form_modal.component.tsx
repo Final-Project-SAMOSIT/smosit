@@ -11,6 +11,8 @@ import {
   unionYearVotingValidate,
 } from "../form/union_year_voting.form";
 import _ from "lodash";
+import { Calendar } from "../../../core/components/input/calendar.component";
+import dayjs from "dayjs";
 
 export const UnionYearVotingFormSection = () => {
   //---------------------
@@ -86,7 +88,15 @@ export const UnionYearVotingFormSection = () => {
                   }}
                 />
               </div>
-              <i className="fas fa-calendar-alt text-gray-50 text-[25px]"></i>
+              <Calendar
+                onChange={(date) =>
+                  formik.setFieldValue(
+                    "open_date",
+                    dayjs(date).format("DD/MM/YYYY")
+                  )
+                }
+                value={dayjs(formik.values.open_date, "DD/MM/YYYY").toDate()}
+              />
             </div>
             <div className="flex items-center">
               <p className="button mr-[8px]">End:</p>
@@ -118,7 +128,15 @@ export const UnionYearVotingFormSection = () => {
                   }}
                 />
               </div>
-              <i className="fas fa-calendar-alt text-gray-50 text-[25px]"></i>
+              <Calendar
+                onChange={(date) =>
+                  formik.setFieldValue(
+                    "end_date",
+                    dayjs(date).format("DD/MM/YYYY")
+                  )
+                }
+                value={dayjs(formik.values.end_date, "DD/MM/YYYY").toDate()}
+              />
             </div>
           </div>
           <div className="flex justify-center space-x-[12px]">
