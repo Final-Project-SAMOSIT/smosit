@@ -76,10 +76,6 @@ export const Calendar = (props: CalendarProps) => {
 
   function onChange(date: Date) {
     props.onChange(date);
-
-    if (selectingMode === "date") {
-      setIsCalendarOpen(false);
-    }
   }
 
   //---------------------
@@ -176,6 +172,7 @@ export const Calendar = (props: CalendarProps) => {
                             .subtract(1, "month")
                             .toDate()
                         );
+                        setIsCalendarOpen(false);
                       }}
                     >
                       <p>{day}</p>
@@ -184,9 +181,17 @@ export const Calendar = (props: CalendarProps) => {
 
                   {_.map(currentMonthDaysList, (day) => (
                     <div
-                      className="w-[32px] h-[32px] rounded-full justify-center caption2 select-none cursor-pointer hover:bg-gray-30 flex items-center"
+                      className={classNames(
+                        "w-[32px] h-[32px] rounded-full justify-center caption2 select-none cursor-pointer flex items-center",
+                        {
+                          "bg-black text-white":
+                            dayjs(props.value).date() === day,
+                          "hover:bg-gray-30": dayjs(props.value).date() !== day,
+                        }
+                      )}
                       onClick={() => {
                         onChange(dayjs(props.value).set("date", day).toDate());
+                        setIsCalendarOpen(false);
                       }}
                     >
                       <p>{day}</p>
@@ -203,6 +208,7 @@ export const Calendar = (props: CalendarProps) => {
                             .add(1, "month")
                             .toDate()
                         );
+                        setIsCalendarOpen(false);
                       }}
                     >
                       <p>{day}</p>
