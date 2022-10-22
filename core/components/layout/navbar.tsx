@@ -64,10 +64,7 @@ export const Navbar = (props: NavbarProps) => {
         name: props.noTranslation
           ? "Project Form"
           : t("navbar_feature_home_project"),
-        route:
-          authContext.me?.roles.role_name === "Publisher"
-            ? "/manage/project"
-            : "/project",
+        route: "/document",
       },
     ];
   }
