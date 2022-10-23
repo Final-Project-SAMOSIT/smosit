@@ -24,7 +24,7 @@ class DocumentDocumentFormContext {
           solution: value.form_info.solution || " ",
           contact: value.form_info.contact || " ",
           tel: value.form_info.tel || " ",
-          form_type: "proposal",
+          form_type: "document",
         },
         project_name: value.project_name || " ",
         club_name: value.club_name || " ",
