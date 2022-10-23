@@ -26,8 +26,8 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
   //---------------------
   //   REF
   //---------------------
-  const ContentRef = useRef<HTMLDivElement>(null);
-  const ContainertRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const containertRef = useRef<HTMLDivElement>(null);
 
   //---------------------
   //   I18n
@@ -40,10 +40,10 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
-        ContainertRef.current?.style.setProperty("overflow", "unset");
+        containertRef.current?.style.setProperty("overflow", "unset");
       }, 200);
     } else {
-      ContainertRef.current?.style.setProperty("overflow", "hidden");
+      containertRef.current?.style.setProperty("overflow", "hidden");
     }
   }, [isOpen]);
 
@@ -56,13 +56,13 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
         <div
           className="bg-white border border-black rounded-[10px] overflow-y-hidden transform duration-200"
           style={{
-            height: isOpen ? ContentRef.current?.clientHeight : 67,
+            height: isOpen ? contentRef.current?.clientHeight : 67,
           }}
-          ref={ContainertRef}
+          ref={containertRef}
         >
           <div
             className="pt-[16px] px-[24px] pb-[32px] space-y-[18px]"
-            ref={ContentRef}
+            ref={contentRef}
           >
             <div
               className="flex justify-between cursor-pointer items-center"
@@ -113,9 +113,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                     height={30}
                     radius={6}
                     value={dayjs(formik.values.start_date).format("DD/MM/YYYY")}
-                    onChange={(e) =>
-                      formik.setFieldValue("start_date", e.target.value)
-                    }
+                    onChange={() => null}
                   />
                   <Calendar
                     value={formik.values.start_date}
