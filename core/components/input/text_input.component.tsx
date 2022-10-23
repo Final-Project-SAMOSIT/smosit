@@ -17,6 +17,7 @@ interface TextInputProps {
 
   height?: number;
   width?: number;
+  radius?: number;
 
   limitText?: number;
   showLimit?: boolean;
@@ -55,7 +56,10 @@ export const TextInput = (props: TextInputProps) => {
                 "text-center": props["text-center"],
                 "bg-gray-20 text-gray-50": props.disabled,
               })}
-              style={{ height: `${props.height}px` }}
+              style={{
+                height: `${props.height}px`,
+                borderRadius: props.radius || 10,
+              }}
               value={props.value}
               onChange={props.onChange}
               onKeyPress={props.onKeyPress}

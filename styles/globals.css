@@ -7,6 +7,11 @@
   src: url("../public/fonts/NotoSans-Regular.ttf");
 }
 
+@font-face {
+  font-family: "Noto Sans";
+  src: url("../public/fonts/NotoSansThai-Regular.ttf");
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
