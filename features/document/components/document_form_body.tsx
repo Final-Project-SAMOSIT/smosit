@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { TextInput } from "../../../core/components/input/text_input.component";
 import dayjs from "dayjs";
 import { Calendar } from "../../../core/components/input/calendar.component";
+const THBText = require("thai-baht-text");
 
 interface DocumentFormBodyProps {
   formik: FormikProps<typeof documentInitvalue>;
@@ -171,11 +172,13 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                     radius={6}
                     value={formik.values.cost.toString() || ""}
                     onChange={(e) => {
-                      formik.setFieldValue("cost", e.target.value);
-                      formik.setFieldValue(
-                        "cost_des_th",
-                        `${e.target.value} แต่ภาษาไทย`
-                      );
+                      if (Number(e.target.value) >= 0) {
+                        formik.setFieldValue("cost", e.target.value);
+                        formik.setFieldValue(
+                          "cost_des_th",
+                          THBText(Number(e.target.value))
+                        );
+                      }
                     }}
                   />
                   <p className="body">บาท</p>

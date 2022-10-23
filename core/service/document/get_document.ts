@@ -11,3 +11,9 @@ export const getDocumentList = (options?: {
   const qs = querystring.stringify(options || {});
   return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/allDocument?${qs}`);
 };
+
+export const getDocument = (id: string) => {
+  return appAxios().get(
+    `${publicRuntimeConfig.BACKEND_API}/getProjectApproved/${id}`
+  );
+};

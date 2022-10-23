@@ -12,12 +12,21 @@
   src: url("../public/fonts/NotoSansThai-Regular.ttf");
 }
 
+@font-face {
+  font-family: "TH Sarabun";
+  src: url("../public/fonts/THSarabun.ttf");
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
 
 textarea {
   resize: none;
+}
+
+.text-pdf {
+  font-family: "TH Sarabun";
 }
 
 @screen mobile {

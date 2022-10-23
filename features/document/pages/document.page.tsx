@@ -94,7 +94,13 @@ export const DocumentPage = () => {
                     <div className="flex justify-between flex-grow">
                       <p className="text-body">{document.solution || ""}</p>
                       <a
-                        href={`document/${document.form_type}/${document.form_info_id}`}
+                        href={`document/${document.form_type}/${
+                          document.form_info_id
+                        }/${
+                          document.form_type === "proposal"
+                            ? document.request_info[0]?.request_info_id
+                            : document.project_approved[0]?.project_id
+                        }`}
                       >
                         <p className="underline text-body select-none cursor-pointer">
                           see more
