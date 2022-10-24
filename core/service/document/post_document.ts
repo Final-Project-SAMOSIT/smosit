@@ -8,3 +8,10 @@ export const postDocument = (body: any) => {
     body
   );
 };
+
+export const postProposal = (body: any) => {
+  return appAxios().post(
+    `${publicRuntimeConfig.BACKEND_API}/createRequestApproved`,
+    body
+  );
+};

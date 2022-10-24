@@ -12,6 +12,8 @@ interface DropdownInputProps {
   topic?: string;
   error?: string;
   disabled?: boolean;
+  height?: number;
+  radius?: number;
   ["hide-error-text"]?: boolean;
 }
 
@@ -77,7 +79,7 @@ export const Dropdown = (props: DropdownInputProps) => {
 
             <div
               className={classNames(
-                "h-[40px] border bg-white flex items-center justify-between pr-[18px] pl-[20px]",
+                "border bg-white flex items-center justify-between pr-[18px] pl-[20px]",
                 {
                   "rounded-t-[10px]": isOpen,
                   "rounded-[10px]": !isOpen,
@@ -85,11 +87,20 @@ export const Dropdown = (props: DropdownInputProps) => {
                   "border-black": !error,
                 }
               )}
+              style={{
+                height: props.height || 40,
+                borderTopLeftRadius: props.radius || 10,
+                borderTopRightRadius: props.radius || 10,
+                borderBottomLeftRadius: isOpen ? 0 : props.radius || 10,
+                borderBottomRightRadius: isOpen ? 0 : props.radius || 10,
+              }}
               onClick={() => {
                 !props.disabled && setIsOpen(!isOpen);
               }}
             >
-              <p className="select-none body">{findValue(props.value)}</p>
+              <p className="select-none body truncate break-all">
+                {findValue(props.value)}
+              </p>
               <i
                 className={classNames(
                   "transform fa-solid fa-caret-down duration-150",

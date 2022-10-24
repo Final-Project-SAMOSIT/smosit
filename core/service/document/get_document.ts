@@ -17,3 +17,13 @@ export const getDocument = (id: string) => {
     `${publicRuntimeConfig.BACKEND_API}/getProjectApproved/${id}`
   );
 };
+
+export const getSubActivityType = () => {
+  return appAxios().get(
+    `${publicRuntimeConfig.BACKEND_API}/getSubActivityTypes`
+  );
+};
+
+export const getActivityType = () => {
+  return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getActivityTypes`);
+};

@@ -40,3 +40,14 @@ export type DocumentDocument = {
 };
 
 export type FormType = "proposal" | "document";
+
+export type SubActivity = {
+  sub_activity_id: string;
+  sub_activity_type: string;
+  activity_id: string;
+};
+
+export type Activity = {
+  activity_id: string;
+  activity_type: string;
+};

@@ -14,6 +14,8 @@ import {
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { DocumentFormHeader } from "../components/document_form_header";
 import { ProposalPDF } from "../components/proposal_pdf";
+import { ProposalFormHeader } from "../components/proposal_form_header";
+import { ProposalFormBody } from "../components/proposal_form_body";
 
 export const DocumentProposalFormPage = () => {
   //---------------------
@@ -69,6 +71,7 @@ export const DocumentProposalFormPage = () => {
     if (!authContext.isPermission(["Publisher", "Users"])) {
       router.push("401");
     } else {
+      context.preparation();
       if (router.query.project_id) {
         context.isEdit = true;
         context.FormPreparation(
@@ -96,8 +99,8 @@ export const DocumentProposalFormPage = () => {
                   <div className="h-[1px] w-[350px] bg-black" />
                 </div>
                 <div className="space-y-[24px]">
-                  {/* <DocumentFormHeader formik={formik} /> */}
-                  {/* <DocumentFormBody formik={formik} /> */}
+                  <ProposalFormHeader formik={formik} />
+                  <ProposalFormBody formik={formik} />
                 </div>
                 <div className="justify-center space-x-[24px] flex">
                   <Button
