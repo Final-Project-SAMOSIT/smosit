@@ -69,7 +69,6 @@ export const AboutPage = () => {
     context.modal = modalContext;
     context.t = t;
     context.preparationYear();
-    context.preparationStudentUnion();
     context.preparationExperience();
     context.preparationPositionOptions();
   }, []);

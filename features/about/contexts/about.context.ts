@@ -116,6 +116,7 @@ class AboutContext {
         this.yearList = _.map(resp.data.data, (year) => year.union_year);
         this.year = resp.data.data[resp.data.data.length - 1].union_year;
       }
+      this.preparationStudentUnion();
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal(
