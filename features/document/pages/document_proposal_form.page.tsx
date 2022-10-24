@@ -69,7 +69,7 @@ export const DocumentProposalFormPage = () => {
   useEffect(() => {
     context.modal = modal;
     if (!authContext.isPermission(["Publisher", "Users"])) {
-      router.push("401");
+      router.push("/401");
     } else {
       context.preparation();
       if (router.query.request_info_id) {

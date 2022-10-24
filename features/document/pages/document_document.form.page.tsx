@@ -68,7 +68,7 @@ export const DocumentDocumentFormPage = () => {
   useEffect(() => {
     context.modal = modal;
     if (!authContext.isPermission(["Publisher", "Users"])) {
-      router.push("401");
+      router.push("/401");
     } else {
       if (router.query.project_id) {
         context.isEdit = true;

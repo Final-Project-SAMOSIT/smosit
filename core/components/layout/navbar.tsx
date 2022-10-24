@@ -98,7 +98,7 @@ export const Navbar = (props: NavbarProps) => {
               className="laptop:h-[60px] h-[48px] mobile:mt-[8px] m-0 cursor-pointer"
               onClick={() => router.push("/")}
             />
-            <div className="laptop:flex space-x-[48px] hidden">
+            <div className="laptop:flex space-x-[32px] hidden">
               <div
                 className="cursor-pointer w-max flex flex-col space-y-[8px] group"
                 onClick={() => router.push("/")}
@@ -264,25 +264,31 @@ export const Navbar = (props: NavbarProps) => {
               </div>
               <div className="hidden laptop:block">
                 {authContext.me ? (
-                  <Button
-                    onClick={() => {
-                      modal.openModal(
-                        props.noTranslation
-                          ? "Logout"
-                          : t("modal_logout_title"),
-                        props.noTranslation
-                          ? "Are you sure you want to logout?"
-                          : t("modal_logout_message"),
-                        () => {
-                          authContext.logout();
+                  <div className="flex items-center divide-x-[1.5px] divide-black">
+                    <div className="px-[8px] flex items-center space-x-[8px]">
+                      <i className="fas fa-user text-[21px]" />
+                      <p className="button">{authContext.me.user_id}</p>
+                    </div>
+                    <div className="px-[8px]">
+                      <p
+                        className="cursor-pointer button"
+                        onClick={() =>
+                          modal.openModal(
+                            "logout",
+                            "Are you sure you want to logout?",
+                            () => {
+                              authContext.logout();
+                              setIsDropdownOpen(false);
+                            }
+                          )
                         }
-                      );
-                    }}
-                    title={
-                      props.noTranslation ? "logout" : t("navbar_logout_button")
-                    }
-                    widthCss="w-[137px]"
-                  ></Button>
+                      >
+                        {props.noTranslation
+                          ? "logout"
+                          : t("navbar_logout_button")}
+                      </p>
+                    </div>
+                  </div>
                 ) : (
                   <Button
                     onClick={() => {
