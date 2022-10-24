@@ -114,7 +114,7 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
               }
             )}
           ></i>
-          {formik.values.activity_type_id === "hour_count" && (
+          {formik.values.activity_type_id === "2" && (
             <Fragment>
               <p className="absolute top-[23.35%] left-[80.7%] w-[4%] text-center">
                 {_.find(
