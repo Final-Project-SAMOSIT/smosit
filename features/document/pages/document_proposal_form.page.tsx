@@ -48,7 +48,7 @@ export const DocumentProposalFormPage = () => {
         context.onUpdate(
           value,
           router.query.form_id?.toString() || "",
-          router.query.project_id?.toString() || ""
+          router.query.request_info_id?.toString() || ""
         );
       } else {
         context.onCreate(value);

@@ -12,3 +12,14 @@ export const patchDocument = (
     body
   );
 };
+
+export const patchProposal = (
+  body: any,
+  form_id: string,
+  request_info_id: string
+) => {
+  return appAxios().patch(
+    `${publicRuntimeConfig.BACKEND_API}/updateRequestApproved/${form_id}/${request_info_id}`,
+    body
+  );
+};

@@ -13,9 +13,8 @@ import classNames from "classnames";
 import { proposalInitvalue } from "../form/document_proposal.form";
 import dayjs from "dayjs";
 import { Calendar } from "../../../core/components/input/calendar.component";
-import _, { map } from "lodash";
+import _ from "lodash";
 import { documentProposalFormContext } from "../context/document_proposal_form.context";
-import { Activity, SubActivity } from "../types/document.type";
 import { Dropdown } from "../../../core/components/input/dropdown_input";
 const THBText = require("thai-baht-text");
 

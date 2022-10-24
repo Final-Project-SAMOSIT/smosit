@@ -12,6 +12,7 @@ import { Activity, SubActivity } from "../types/document.type";
 import _ from "lodash";
 import { postProposal } from "../../../core/service/document/post_document";
 import { Router } from "next/router";
+import { patchProposal } from "../../../core/service/document/patch_document";
 
 class DocumentProposalFormContext {
   modal?: ModalContextClass;
@@ -56,6 +57,38 @@ class DocumentProposalFormContext {
     );
   }
 
+  getProposalBody(value: typeof proposalInitvalue) {
+    return {
+      ...value,
+      request_info: {
+        ...value.request_info,
+        cost: Number(value.request_info.cost),
+      },
+      sub_activity:
+        value.activity_type_id === ""
+          ? []
+          : value.activity_type_id === "2"
+          ? _.filter(
+              value.sub_activity,
+              (item) => item.sub_activity_id !== "" && item.activity_hour !== 0
+            )
+          : [
+              {
+                ..._.find(
+                  this.subActivityList,
+                  (subActivity) =>
+                    subActivity.activity_id ===
+                    _.find(
+                      this.activityList,
+                      (activity) => activity.activity_type === "hour_not_count"
+                    )?.activity_id
+                ),
+                activity_hour: 0,
+              },
+            ],
+    };
+  }
+
   async onCreate(value: typeof proposalInitvalue) {
     try {
       const resp: AxiosResponse<{
@@ -68,35 +101,7 @@ class DocumentProposalFormContext {
             request_info_id: string;
           };
         }>;
-      }> = await postProposal({
-        ...value,
-        request_info: {
-          ...value.request_info,
-          cost: Number(value.request_info.cost),
-        },
-        sub_activity:
-          value.activity_type_id === "hour_count"
-            ? _.filter(
-                value.sub_activity,
-                (item) =>
-                  item.sub_activity_id !== "" && item.activity_hour !== 0
-              )
-            : [
-                {
-                  ..._.find(
-                    this.subActivityList,
-                    (subActivity) =>
-                      subActivity.activity_id ===
-                      _.find(
-                        this.activityList,
-                        (activity) =>
-                          activity.activity_type === "hour_not_count"
-                      )?.activity_id
-                  ),
-                  activity_hour: 0,
-                },
-              ],
-      });
+      }> = await postProposal(this.getProposalBody(value));
       Router.prototype.push(
         `document/proposal/${resp.data.data[0].request_info.form_info.form_info_id}/${resp.data.data[0].request_info.request_info_id}`
       );
@@ -167,9 +172,19 @@ class DocumentProposalFormContext {
   async onUpdate(
     value: typeof proposalInitvalue,
     form_id: string,
-    project_id: string
+    request_info_id: string
   ) {
     try {
+      const resp = await patchProposal(
+        this.getProposalBody(value),
+        form_id,
+        request_info_id
+      );
+      if (resp.status === 200) {
+        Router.prototype.push(
+          `document/proposal/${form_id}/${request_info_id}`
+        );
+      }
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการแก้ไขข้อมูล", err.message);
