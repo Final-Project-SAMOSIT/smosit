@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 import { Experience, Position, User } from "../types/user";
 import { ModalContextClass } from "../../../core/context/modal.context";
 import {
+  getAcceptedYear,
   getExperiences,
   getPosition,
   getStudentUnion,
@@ -109,10 +110,11 @@ class AboutContext {
   async preparationYear() {
     try {
       const resp: AxiosResponse<{ data: Array<{ union_year: number }> }> =
-        await getYears();
+        await getAcceptedYear();
       if (resp.status !== 204) {
         this.yearList = [];
         this.yearList = _.map(resp.data.data, (year) => year.union_year);
+        this.year = resp.data.data[resp.data.data.length - 1].union_year;
       }
     } catch (err: any) {
       console.log(err);

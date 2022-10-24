@@ -37,5 +37,13 @@ export const getPosition = () => {
 };
 
 export const getStudent = (id: string) => {
-  return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getStudentUnionInfo/${id}`);
+  return appAxios().get(
+    `${publicRuntimeConfig.BACKEND_API}/getStudentUnionInfo/${id}`
+  );
+};
+
+export const getAcceptedYear = () => {
+  return appAxios().get(
+    `${publicRuntimeConfig.BACKEND_API}/getAllStudentUnionYear`
+  );
 };

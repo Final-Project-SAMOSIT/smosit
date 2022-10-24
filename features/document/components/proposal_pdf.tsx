@@ -49,8 +49,8 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
   //---------------------
   useEffect(() => {
     setTimeout(() => {
-      // window.print();
-      // context.isPrinting = false;
+      window.print();
+      context.isPrinting = false;
     }, 300);
   }, []);
 
@@ -109,7 +109,8 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
               "fas fa-check absolute top-[22%] text-[16px]",
               {
                 "left-[40.5%]": formik.values.activity_type_id === "hour_count",
-                "left-[9.8%]": formik.values.activity_type_id === "hour_not_count",
+                "left-[9.8%]":
+                  formik.values.activity_type_id === "hour_not_count",
                 "opacity-0": formik.values.activity_type_id === "",
               }
             )}
