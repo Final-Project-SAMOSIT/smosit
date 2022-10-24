@@ -84,7 +84,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                   <TextInput
                     height={30}
                     radius={6}
-                    value={formik.values.form_info.form_no || ""}
+                    value={formik.values.form_info?.form_no || ""}
                     onChange={(e) =>
                       formik.setFieldValue("form_info.form_no", e.target.value)
                     }
@@ -97,7 +97,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                   <TextInput
                     height={30}
                     radius={6}
-                    value={formik.values.form_info.institution}
+                    value={formik.values.form_info?.institution || ""}
                     onChange={(e) =>
                       formik.setFieldValue(
                         "form_info.institution",
@@ -113,7 +113,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                   <TextInput
                     height={30}
                     radius={6}
-                    value={formik.values.form_info.solution}
+                    value={formik.values.form_info?.solution || ""}
                     onChange={(e) =>
                       formik.setFieldValue("form_info.solution", e.target.value)
                     }

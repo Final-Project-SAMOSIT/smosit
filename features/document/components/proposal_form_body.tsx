@@ -107,7 +107,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   <TextInput
                     height={30}
                     radius={6}
-                    value={formik.values.request_info.project_name}
+                    value={formik.values.request_info?.project_name}
                     onChange={(e) =>
                       formik.setFieldValue(
                         "request_info.project_name",
@@ -123,7 +123,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   <TextInput
                     height={30}
                     radius={6}
-                    value={formik.values.request_info.project_due_to || ""}
+                    value={formik.values.request_info?.project_due_to || ""}
                     onChange={(e) =>
                       formik.setFieldValue(
                         "request_info.project_due_to",
@@ -143,12 +143,12 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                       width={160}
                       radius={6}
                       value={dayjs(
-                        formik.values.request_info.start_date
+                        formik.values.request_info?.start_date
                       ).format("DD/MM/YYYY")}
                       onChange={() => null}
                     />
                     <Calendar
-                      value={formik.values.request_info.start_date}
+                      value={formik.values.request_info?.start_date}
                       onChange={(e) =>
                         formik.setFieldValue("request_info.start_date", e)
                       }
@@ -160,13 +160,13 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                       height={30}
                       width={160}
                       radius={6}
-                      value={dayjs(formik.values.request_info.end_date).format(
+                      value={dayjs(formik.values.request_info?.end_date).format(
                         "DD/MM/YYYY"
                       )}
                       onChange={() => null}
                     />
                     <Calendar
-                      value={formik.values.request_info.end_date}
+                      value={formik.values.request_info?.end_date}
                       onChange={(e) =>
                         formik.setFieldValue("request_info.end_date", e)
                       }
@@ -180,7 +180,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   <TextInput
                     height={30}
                     radius={6}
-                    value={formik.values.request_info.location}
+                    value={formik.values.request_info?.location}
                     onChange={(e) =>
                       formik.setFieldValue(
                         "request_info.location",
@@ -197,7 +197,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                     height={30}
                     width={149}
                     radius={6}
-                    value={formik.values.request_info.cost.toString() || ""}
+                    value={formik.values.request_info?.cost.toString() || ""}
                     onChange={(e) => {
                       if (Number(e.target.value) >= 0) {
                         formik.setFieldValue(
@@ -213,7 +213,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   />
                   <p className="body">บาท</p>
                   <p className="body">
-                    {formik.values.request_info.cost_des_th}
+                    {formik.values.request_info?.cost_des_th}
                   </p>
                 </div>
               </div>
@@ -225,7 +225,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   height={30}
                   width={239}
                   radius={6}
-                  value={formik.values.form_info.contact || ""}
+                  value={formik.values.form_info?.contact || ""}
                   onChange={(e) =>
                     formik.setFieldValue("form_info.contact", e.target.value)
                   }
@@ -243,17 +243,17 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                         className="w-[16px] h-[16px] border border-black flex items-center justify-center"
                         onClick={() => {
                           formik.setFieldValue(
-                            "activity_type",
-                            formik.values.activity_type ===
-                              activity.activity_type
+                            "activity_type_id",
+                            formik.values.activity_type_id ===
+                              activity.activity_id
                               ? ""
-                              : activity.activity_type
+                              : activity.activity_id
                           );
                           formik.setFieldValue("sub_activity", []);
                         }}
                       >
-                        {formik.values.activity_type ===
-                          activity.activity_type && (
+                        {formik.values.activity_type_id ===
+                          activity.activity_id && (
                           <i className="fas fa-check text-[12px]" />
                         )}
                       </div>
@@ -264,7 +264,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                       </p>
                     </div>
                     {activity.activity_type === "hour_count" &&
-                      formik.values.activity_type === "hour_count" && (
+                      formik.values.activity_type_id === "2" && (
                         <Fragment>
                           {_.map(
                             formik.values.sub_activity,

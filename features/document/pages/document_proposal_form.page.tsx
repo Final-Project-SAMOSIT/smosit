@@ -72,10 +72,10 @@ export const DocumentProposalFormPage = () => {
       router.push("401");
     } else {
       context.preparation();
-      if (router.query.project_id) {
+      if (router.query.request_info_id) {
         context.isEdit = true;
         context.FormPreparation(
-          router.query.project_id.toString(),
+          router.query.request_info_id.toString(),
           setInitValue
         );
       }

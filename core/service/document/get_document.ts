@@ -27,3 +27,9 @@ export const getSubActivityType = () => {
 export const getActivityType = () => {
   return appAxios().get(`${publicRuntimeConfig.BACKEND_API}/getActivityTypes`);
 };
+
+export const getProposal = (id: string) => {
+  return appAxios().get(
+    `${publicRuntimeConfig.BACKEND_API}/getRequestApproved/${id}`
+  );
+};

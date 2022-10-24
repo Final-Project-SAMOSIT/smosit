@@ -108,13 +108,13 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
             className={classNames(
               "fas fa-check absolute top-[22%] text-[16px]",
               {
-                "left-[40.5%]": formik.values.activity_type === "hour_count",
-                "left-[9.8%]": formik.values.activity_type === "hour_not_count",
-                "opacity-0": formik.values.activity_type === "",
+                "left-[40.5%]": formik.values.activity_type_id === "hour_count",
+                "left-[9.8%]": formik.values.activity_type_id === "hour_not_count",
+                "opacity-0": formik.values.activity_type_id === "",
               }
             )}
           ></i>
-          {formik.values.activity_type === "hour_count" && (
+          {formik.values.activity_type_id === "hour_count" && (
             <Fragment>
               <p className="absolute top-[23.35%] left-[80.7%] w-[4%] text-center">
                 {_.find(

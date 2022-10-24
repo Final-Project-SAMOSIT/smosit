@@ -18,7 +18,7 @@ export type ProposalInitvalue = {
     cost_des_th: string;
   };
   sub_activity: Array<{ sub_activity_id: string; activity_hour: number }>;
-  activity_type: "hour_count" | "hour_not_count" | "";
+  activity_type_id: string;
 };
 
 export const proposalInitvalue: ProposalInitvalue = {
@@ -39,7 +39,7 @@ export const proposalInitvalue: ProposalInitvalue = {
     cost_des_th: "",
   },
   sub_activity: [],
-  activity_type: "",
+  activity_type_id: "",
 };
 
 export const proposalValidationSchema = Yup.object().shape({});
