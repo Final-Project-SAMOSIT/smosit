@@ -80,7 +80,7 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
           <p className="absolute top-[11%] left-[26.5%] w-[27%]">
             {formik.values.form_info.solution}
           </p>
-          <p className="absolute top-[14.5%] left-[21.3%] w-[24%] text-center">
+          <p className="absolute top-[15.3%] left-[21.3%] w-[24%] text-center leading-[1.2vw] h-0">
             {formik.values.request_info.project_due_to}
           </p>
           <p className="absolute top-[14.5%] left-[53%] w-[33%] ">
