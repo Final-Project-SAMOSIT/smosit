@@ -102,9 +102,7 @@ class DocumentProposalFormContext {
           };
         }>;
       }> = await postProposal(this.getProposalBody(value));
-      Router.prototype.push(
-        `document/proposal/${resp.data.data[0].request_info.form_info.form_info_id}/${resp.data.data[0].request_info.request_info_id}`
-      );
+      Router.prototype.push(`document`);
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการสร้างเอกสาร", err.message);

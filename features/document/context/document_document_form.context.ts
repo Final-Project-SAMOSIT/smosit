@@ -45,7 +45,7 @@ class DocumentDocumentFormContext {
       });
 
       if (resp.status === 200) {
-        Router.prototype.push(`document/document/${resp.data.data.project_id}`);
+        Router.prototype.push(`document`);
       }
     } catch (err: any) {
       console.log(err);
