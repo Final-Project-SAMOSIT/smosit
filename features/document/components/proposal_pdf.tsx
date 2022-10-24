@@ -106,11 +106,10 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
           </p>
           <i
             className={classNames(
-              "fas fa-check absolute top-[22%] text-[16px]",
+              "fas fa-check absolute top-[22%] text-[1.5vw]",
               {
-                "left-[40.5%]": formik.values.activity_type_id === "hour_count",
-                "left-[9.8%]":
-                  formik.values.activity_type_id === "hour_not_count",
+                "left-[40.5%]": formik.values.activity_type_id === "2",
+                "left-[9.8%]": formik.values.activity_type_id === "1",
                 "opacity-0": formik.values.activity_type_id === "",
               }
             )}
