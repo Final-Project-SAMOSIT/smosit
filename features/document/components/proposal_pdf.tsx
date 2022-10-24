@@ -66,7 +66,7 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
             {formik.values.form_info.form_no}
           </p>
           <p className="absolute top-[7.5%] left-[64.7%] w-[25.1%]">
-            {formik.values.form_info.form_no}
+            {formik.values.form_info.institution}
           </p>
           <p className="absolute top-[9.3%] left-[61%] w-[4.3%] text-center">
             {dayjs(new Date()).locale("th").add(543, "year").format("D")}
