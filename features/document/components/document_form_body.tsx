@@ -66,7 +66,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
             ref={contentRef}
           >
             <div
-              className="flex justify-between cursor-pointer items-center"
+              className="flex items-center justify-between cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
               <p className="topic2">ข้อมูลส่วนเนื้อหาโครงการ</p>
@@ -109,19 +109,37 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
               </div>
               <div className="flex items-center">
                 <p className="w-[192px] body">วัน/เดือน/ปี ที่จัดโครงการ</p>
-                <div className="flex space-x-[16px]">
-                  <TextInput
-                    height={30}
-                    radius={6}
-                    value={dayjs(formik.values.start_date).format("DD/MM/YYYY")}
-                    onChange={() => null}
-                  />
-                  <Calendar
-                    value={formik.values.start_date}
-                    onChange={(e) => {
-                      formik.setFieldValue("start_date", e);
-                    }}
-                  />
+                <div className="flex-grow flex items-center space-x-[24px]">
+                  <div className="space-x-[8px] flex items-center">
+                    <p className="body">เริ่ม</p>
+                    <TextInput
+                      height={30}
+                      width={160}
+                      radius={6}
+                      value={dayjs(formik.values.start_date).format(
+                        "DD/MM/YYYY"
+                      )}
+                      onChange={() => null}
+                    />
+                    <Calendar
+                      value={formik.values.start_date}
+                      onChange={(e) => formik.setFieldValue("start_date", e)}
+                    />
+                  </div>
+                  <div className="space-x-[8px] flex items-center">
+                    <p className="body">สิ้นสุด</p>
+                    <TextInput
+                      height={30}
+                      width={160}
+                      radius={6}
+                      value={dayjs(formik.values.end_date).format("DD/MM/YYYY")}
+                      onChange={() => null}
+                    />
+                    <Calendar
+                      value={formik.values.end_date}
+                      onChange={(e) => formik.setFieldValue("end_date", e)}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="flex items-center">
