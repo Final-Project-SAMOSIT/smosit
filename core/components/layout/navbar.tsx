@@ -95,7 +95,7 @@ export const Navbar = (props: NavbarProps) => {
           >
             <img
               src="/images/logo.svg"
-              className="laptop:h-[60px] h-[48px] mobile:mt-[8px] m-0 cursor-pointer"
+              className="laptop:h-[60px] h-[36px] mobile:mt-[8px] m-0 cursor-pointer"
               onClick={() => router.push("/")}
             />
             <div className="laptop:flex space-x-[32px] hidden">
