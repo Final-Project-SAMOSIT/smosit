@@ -54,7 +54,11 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
         <div
           className="bg-white border border-black rounded-[10px] overflow-y-hidden transform duration-200"
           style={{
-            height: isOpen ? contentRef.current?.clientHeight : 67,
+            height: isOpen
+              ? contentRef.current?.clientHeight
+              : window.innerWidth <= 720
+              ? 56
+              : 67,
           }}
           ref={containertRef}
         >
@@ -63,7 +67,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
             ref={contentRef}
           >
             <div
-              className="flex justify-between cursor-pointer items-center"
+              className="flex items-center justify-between cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
               <p className="topic2">ข้อมูลส่วนหัวเรื่อง</p>
@@ -78,7 +82,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
               />
             </div>
             <div className="space-y-[14px]">
-              <div className="flex space-x-[24px]">
+              <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px]">
                 <p className="w-[168px] body">ส่วนงานที่รับผิดชอบ</p>
                 <div className="flex-grow">
                   <TextInput
@@ -94,7 +98,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
                   />
                 </div>
               </div>
-              <div className="flex space-x-[24px]">
+              <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px]">
                 <p className="w-[168px] body">หมายเลขโทรหน่วยงาน</p>
                 <div>
                   <TextInput
@@ -107,7 +111,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
                   />
                 </div>
               </div>
-              <div className="flex space-x-[24px]">
+              <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px]">
                 <p className="w-[168px] body">เลขที่หนังสือ / คำร้องขอ</p>
                 <div>
                   <TextInput
@@ -120,7 +124,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
                   />
                 </div>
               </div>
-              <div className="flex space-x-[24px]">
+              <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px]">
                 <p className="w-[168px] body">หัวข้อเรื่องที่ขออนุมัติ</p>
                 <div className="flex-grow">
                   <TextInput

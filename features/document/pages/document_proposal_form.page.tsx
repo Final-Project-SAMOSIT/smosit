@@ -91,12 +91,12 @@ export const DocumentProposalFormPage = () => {
         !context.isPrinting ? (
           <MainLayout>
             <div className="my-[64px] space-y-[48px]">
-              <div className="bg-gray-10 pt-[32px] pb-[48px] flex flex-col items-stretch space-y-[48px] px-[86px]">
+              <div className="bg-gray-10 pt-[32px] pb-[48px] flex flex-col items-stretch space-y-[48px] tablet:px-[24px] px-[12px] laptop:px-[86px]">
                 <div className="space-y-[16px] flex flex-col items-center">
                   <p className="text-center title">
                     แบบขออนุมัติโครงการและงบประมาณ
                   </p>
-                  <div className="h-[1px] w-[350px] bg-black" />
+                  <div className="h-[1px] w-[160px] tablet:w-[350px] bg-black" />
                 </div>
                 <div className="space-y-[24px]">
                   <ProposalFormHeader formik={formik} />
@@ -107,13 +107,13 @@ export const DocumentProposalFormPage = () => {
                     onClick={() => formik.submitForm()}
                     title="Save Draft"
                     widthCss="w-[137px]"
-                    heightCss="h-[52px]"
+                    heightCss="h-[40px] tablet:h-[52px]"
                   ></Button>
                   <Button
                     onClick={() => context.onPrint()}
                     title="Export"
                     widthCss="w-[137px]"
-                    heightCss="h-[52px]"
+                    heightCss="h-[40px] tablet:h-[52px]"
                   ></Button>
                 </div>
               </div>

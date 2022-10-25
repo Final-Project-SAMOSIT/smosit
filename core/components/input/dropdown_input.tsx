@@ -98,7 +98,7 @@ export const Dropdown = (props: DropdownInputProps) => {
                 !props.disabled && setIsOpen(!isOpen);
               }}
             >
-              <p className="select-none body truncate break-all">
+              <p className="break-all truncate select-none body">
                 {findValue(props.value)}
               </p>
               <i
@@ -124,7 +124,7 @@ export const Dropdown = (props: DropdownInputProps) => {
                 {_.map(getOption(), (option) => (
                   <div
                     className={classNames(
-                      "h-[40px] min-h-[40px] w-full bg-white flex items-center px-[20px] select-none",
+                      "min-h-fit laptop:min-h-[40px] py-[4px] w-full bg-white flex items-center px-[20px] select-none",
                       {
                         "hover:bg-gray-10 hover:font-bold text-black":
                           !option.disabled,

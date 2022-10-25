@@ -71,7 +71,9 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
         <div
           className="bg-white border border-black rounded-[10px] overflow-y-hidden transform duration-200"
           style={{
-            height: isOpen ? contentRef.current?.clientHeight : 67,
+            height: isOpen ? contentRef.current?.clientHeight : window.innerWidth <= 720
+            ? 56
+            : 67,
           }}
           ref={containertRef}
         >
@@ -95,8 +97,8 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
               />
             </div>
             <div className="space-y-[14px]">
-              <div className="flex space-x-[24px]">
-                <p className="w-[168px] body">เลขที่หนังสือ / คำร้องขอ</p>
+              <div className="flex flex-col items-start laptop:flex-row laptop:items-center">
+                <p className="w-[192px] body">เลขที่หนังสือ / คำร้องขอ</p>
                 <div>
                   <TextInput
                     height={30}
@@ -108,8 +110,8 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                   />
                 </div>
               </div>
-              <div className="flex space-x-[24px]">
-                <p className="w-[168px] body">หน่วยงาน</p>
+              <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
+                <p className="w-[192px] body">หน่วยงาน</p>
                 <div className="flex-grow flex items-center space-x-[8px]">
                   <div className="w-[480px]">
                     <TextInput
@@ -137,8 +139,8 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                   </p>
                 </div>
               </div>
-              <div className="flex space-x-[24px]">
-                <p className="w-[168px] body">หัวข้อเรื่องที่ขออนุมัติ</p>
+              <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
+                <p className="w-[192px] body">หัวข้อเรื่องที่ขออนุมัติ</p>
                 <div className="flex-grow flex items-center space-x-[8px]">
                   <div className="w-[480px]">
                     <TextInput

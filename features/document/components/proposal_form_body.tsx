@@ -93,7 +93,11 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
         <div
           className="bg-white border border-black rounded-[10px] overflow-y-hidden transform duration-200"
           style={{
-            height: isOpen ? contentRef.current?.clientHeight : 67,
+            height: isOpen
+              ? contentRef.current?.clientHeight
+              : window.innerWidth <= 720
+              ? 56
+              : 67,
           }}
           ref={containertRef}
         >
@@ -117,8 +121,8 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
               />
             </div>
             <div className="space-y-[14px]">
-              <div className="flex items-center space-x-[24px]">
-                <p className="w-[168px] body">ชื่อโครงการ</p>
+              <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
+                <p className="w-[192px] body">ชื่อโครงการ</p>
                 <div className="flex-grow flex space-x-[8px] items-center">
                   <div className="w-[620px]">
                     <TextInput
@@ -148,7 +152,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center">
+              <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">จุดประสงค์ (โดยสังเขป)</p>
                 <div className="flex flex-grow items-center space-x-[8px]">
                   <div className="w-[440px]">
@@ -182,11 +186,11 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center space-x-[24px]">
-                <p className="w-[168px] body">วัน/เดือน/ปี ที่จัดโครงการ</p>
-                <div className="flex-grow flex items-center space-x-[24px]">
+              <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
+                <p className="w-[192px] body">วัน/เดือน/ปี ที่จัดโครงการ</p>
+                <div className="flex-grow flex laptop:flex-row flex-col items-stretch laptop:space-y-0 space-y-[8px] laptop:items-center space-x-0 laptop:space-x-[24px]">
                   <div className="space-x-[8px] flex items-center">
-                    <p className="body">เริ่ม</p>
+                    <p className="body w-[34px] tablet:w-[48px]">เริ่ม</p>
                     <TextInput
                       height={30}
                       width={160}
@@ -204,7 +208,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                     />
                   </div>
                   <div className="space-x-[8px] flex items-center">
-                    <p className="body">สิ้นสุด</p>
+                    <p className="body w-[34px] tablet:w-[48px]">สิ้นสุด</p>
                     <TextInput
                       height={30}
                       width={160}
@@ -223,7 +227,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center space-x-[24px]">
+              <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[168px] body">สถานที่จัดโครงการ</p>
                 <div className="flex-grow flex space-x-[8px] items-center">
                   <div className="w-[620px]">
@@ -241,7 +245,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                           );
                           formik.setFieldError("request_info.location", "");
                         } else {
-                          formik.setFieldError( 
+                          formik.setFieldError(
                             "request_info.location",
                             "ข้อความยาวเกินกำหนด"
                           );
@@ -254,7 +258,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center">
+              <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">ค่าใช้จ่ายในโครงการ</p>
                 <div className="flex items-center space-x-[8px]">
                   <TextInput
@@ -282,7 +286,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
               <p className="w-[192px] body">หมายเลขโทรศัพท์ติดต่อ</p>
               <div>
                 <TextInput
@@ -299,7 +303,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
             </div>
             <div className="space-y-[14px]">
               <p className="subtitle">ประเภทของโครงการในการนับชั่วโมงกิจกรรม</p>
-              <div className="flex space-x-[32px]">
+              <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[32px]">
                 {_.map(context.activityList, (activity) => (
                   <div className="flex flex-col space-y-[14px] last:flex-grow">
                     <div className="flex space-x-[8px] items-center">
@@ -333,50 +337,72 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                           {_.map(
                             formik.values.sub_activity,
                             (subActivity, index) => (
-                              <div className="flex space-x-[14px] items-center">
-                                <div className="w-[340px]">
-                                  <Dropdown
-                                    onChange={(e) =>
+                              <div className="flex laptop:flex-row flex-col space-y-[8px] laptop:space-y-0 space-x-0 laptop:space-x-[14px] items-start laptop:items-center">
+                                <div className="laptop:w-[340px] w-full flex space-x-[16px] items-stretch laptop:items-center">
+                                  <div className="laptop:w-full tablet:w-full w-[204px]">
+                                    <Dropdown
+                                      onChange={(e) =>
+                                        formik.setFieldValue(
+                                          `sub_activity[${index}].sub_activity_id`,
+                                          e
+                                        )
+                                      }
+                                      height={30}
+                                      options={_.filter(
+                                        context.subActivityOptions,
+                                        (option) =>
+                                          _.find(
+                                            formik.values.sub_activity,
+                                            (sub) =>
+                                              sub.sub_activity_id ===
+                                              option.value
+                                          ) === undefined ||
+                                          option.value ===
+                                            subActivity.sub_activity_id
+                                      )}
+                                      value={
+                                        formik.values.sub_activity[index]
+                                          .sub_activity_id
+                                      }
+                                      placeholder="ประเภทของกิจกรรม"
+                                    />
+                                  </div>
+                                  <div
+                                    className="flex items-center justify-center rounded-full cursor-pointer laptop:hidden"
+                                    onClick={() =>
                                       formik.setFieldValue(
-                                        `sub_activity[${index}].sub_activity_id`,
-                                        e
+                                        "sub_activity",
+                                        _.filter(
+                                          formik.values.sub_activity,
+                                          (_s, subActivityIndex) =>
+                                            index !== subActivityIndex
+                                        )
                                       )
                                     }
-                                    height={30}
-                                    options={_.filter(
-                                      context.subActivityOptions,
-                                      (option) =>
-                                        _.find(
-                                          formik.values.sub_activity,
-                                          (sub) =>
-                                            sub.sub_activity_id === option.value
-                                        ) === undefined ||
-                                        option.value ===
-                                          subActivity.sub_activity_id
-                                    )}
-                                    value={
-                                      formik.values.sub_activity[index]
-                                        .sub_activity_id
-                                    }
-                                    placeholder="ประเภทของกิจกรรม"
-                                  />
+                                  >
+                                    <div className="w-[16px] h-[16px] border border-black rounded-full flex items-center justify-center">
+                                      <i className="fas fa-minus text-[8px] pl-[1px] pt-[1px]"></i>
+                                    </div>
+                                  </div>
                                 </div>
-                                <p className="body">จำนวน</p>
-                                <TextInput
-                                  onChange={(e) => {
-                                    formik.setFieldValue(
-                                      `sub_activity.${index}.activity_hour`,
-                                      Number(e.target.value)
-                                    );
-                                  }}
-                                  height={30}
-                                  width={86}
-                                  radius={8}
-                                  value={subActivity.activity_hour.toString()}
-                                />
-                                <p className="body">หน่วยชั่วโมง</p>
+                                <div className="flex space-x-[14px] items-center">
+                                  <p className="body">จำนวน</p>
+                                  <TextInput
+                                    onChange={(e) => {
+                                      formik.setFieldValue(
+                                        `sub_activity.${index}.activity_hour`,
+                                        Number(e.target.value)
+                                      );
+                                    }}
+                                    height={30}
+                                    width={86}
+                                    radius={8}
+                                    value={subActivity.activity_hour.toString()}
+                                  />
+                                  <p className="body">หน่วยชั่วโมง</p>
+                                </div>
                                 <div
-                                  className="flex items-center justify-center w-[16px] h-[16px] rounded-full border border-black cursor-pointer"
+                                  className="items-center justify-center w-[16px] h-[16px] rounded-full border border-black cursor-pointer laptop:flex hidden"
                                   onClick={() =>
                                     formik.setFieldValue(
                                       "sub_activity",
