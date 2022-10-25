@@ -84,7 +84,7 @@ export const Calendar = (props: CalendarProps) => {
   return (
     <Observer>
       {() => (
-        <div className="relative z-20">
+        <div className="relative">
           <i
             className="fas fa-calendar-alt text-gray-50 text-[25px] cursor-pointer"
             onClick={() =>
@@ -95,7 +95,7 @@ export const Calendar = (props: CalendarProps) => {
           />
           {isCalendarOpen && (
             <div
-              className="absolute top-full border bg-white border-gray-20 rounded-[10px] flex flex-col divide-y divide-gray-20 shadow-lg w-[264px]"
+              className="z-20 absolute top-full border right-0 bg-white border-gray-20 rounded-[10px] flex flex-col divide-y divide-gray-20 shadow-lg w-[264px]"
               ref={calendarRef}
             >
               <div className="p-[8px] grid grid-cols-7 gap-x-[4px]">

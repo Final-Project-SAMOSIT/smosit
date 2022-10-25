@@ -47,8 +47,8 @@ export const UnionYearVotingFormSection = () => {
   return (
     <Observer>
       {() => (
-        <div className="space-y-[48px]">
-          <div className="my-[24px]">
+        <div className="space-y-[32px] tablet:space-y-[48px]">
+          <div className="tablet:my-[24px] my-[12px] tablet:w-auto w-[300px]">
             <Dropdown
               onChange={(e) => formik.setFieldValue("union_year", Number(e))}
               options={context.creatableYearOptions}
@@ -57,36 +57,41 @@ export const UnionYearVotingFormSection = () => {
               disabled
             />
           </div>
-          <div className="h-[52px] flex space-x-[48px] mb-[56px]">
+          <div className="tablet:flex-row flex-col flex space-x-[0px] space-y-[16px] tablet:space-y-0 tablet:space-x-[48px] mb-[56px]">
             <div className="flex items-center">
-              <p className="button mr-[8px]">Start:</p>
+              <p className="button w-[52px]">Start:</p>
               <div className="mr-[16px]">
-                <TextInput
-                  height={40}
-                  width={124}
-                  value={formik.values.open_date}
-                  onChange={(e) => {
-                    if (e.target.value.length > 10) return;
+                <div className="tablet:w-[124px] w-auto">
+                  <TextInput
+                    height={40}
+                    value={formik.values.open_date}
+                    onChange={(e) => {
+                      if (e.target.value.length > 10) return;
 
-                    let formattedDate = _.replace(e.target.value, /\D|\//g, "");
-                    if (formattedDate.length >= 2) {
-                      const date = formattedDate.slice(0, 2);
+                      let formattedDate = _.replace(
+                        e.target.value,
+                        /\D|\//g,
+                        ""
+                      );
+                      if (formattedDate.length >= 2) {
+                        const date = formattedDate.slice(0, 2);
 
-                      formattedDate = `${
-                        Number(date) > 31 ? 31 : date
-                      }/${formattedDate.slice(2)}`;
-                    }
+                        formattedDate = `${
+                          Number(date) > 31 ? 31 : date
+                        }/${formattedDate.slice(2)}`;
+                      }
 
-                    if (formattedDate.length >= 5) {
-                      const month = Number(formattedDate.slice(3, 5));
-                      formattedDate = `${formattedDate.slice(0, 2)}/${
-                        month > 12 ? 12 : month
-                      }/${formattedDate.slice(5)}`;
-                    }
+                      if (formattedDate.length >= 5) {
+                        const month = Number(formattedDate.slice(3, 5));
+                        formattedDate = `${formattedDate.slice(0, 2)}/${
+                          month > 12 ? 12 : month
+                        }/${formattedDate.slice(5)}`;
+                      }
 
-                    formik.setFieldValue("open_date", formattedDate);
-                  }}
-                />
+                      formik.setFieldValue("open_date", formattedDate);
+                    }}
+                  />
+                </div>
               </div>
               <Calendar
                 onChange={(date) =>
@@ -99,34 +104,39 @@ export const UnionYearVotingFormSection = () => {
               />
             </div>
             <div className="flex items-center">
-              <p className="button mr-[8px]">End:</p>
+              <p className="button w-[52px]">End:</p>
               <div className="mr-[16px]">
-                <TextInput
-                  height={40}
-                  width={124}
-                  value={formik.values.end_date}
-                  onChange={(e) => {
-                    if (e.target.value.length > 10) return;
+                <div className="tablet:w-[124px] w-auto">
+                  <TextInput
+                    height={40}
+                    value={formik.values.end_date}
+                    onChange={(e) => {
+                      if (e.target.value.length > 10) return;
 
-                    let formattedDate = _.replace(e.target.value, /\D|\//g, "");
-                    if (formattedDate.length >= 2) {
-                      const date = formattedDate.slice(0, 2);
+                      let formattedDate = _.replace(
+                        e.target.value,
+                        /\D|\//g,
+                        ""
+                      );
+                      if (formattedDate.length >= 2) {
+                        const date = formattedDate.slice(0, 2);
 
-                      formattedDate = `${
-                        Number(date) > 31 ? 31 : date
-                      }/${formattedDate.slice(2)}`;
-                    }
+                        formattedDate = `${
+                          Number(date) > 31 ? 31 : date
+                        }/${formattedDate.slice(2)}`;
+                      }
 
-                    if (formattedDate.length >= 5) {
-                      const month = Number(formattedDate.slice(3, 5));
-                      formattedDate = `${formattedDate.slice(0, 2)}/${
-                        month > 12 ? 12 : month
-                      }/${formattedDate.slice(5)}`;
-                    }
+                      if (formattedDate.length >= 5) {
+                        const month = Number(formattedDate.slice(3, 5));
+                        formattedDate = `${formattedDate.slice(0, 2)}/${
+                          month > 12 ? 12 : month
+                        }/${formattedDate.slice(5)}`;
+                      }
 
-                    formik.setFieldValue("end_date", formattedDate);
-                  }}
-                />
+                      formik.setFieldValue("end_date", formattedDate);
+                    }}
+                  />
+                </div>
               </div>
               <Calendar
                 onChange={(date) =>
@@ -144,7 +154,7 @@ export const UnionYearVotingFormSection = () => {
               onClick={() => formik.submitForm()}
               title="Create"
               widthCss="w-[137px]"
-              heightCss="h-[52px]"
+              heightCss="tablet:h-[52px] h-[40px]"
             ></Button>
           </div>
         </div>

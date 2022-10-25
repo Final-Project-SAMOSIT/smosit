@@ -196,10 +196,6 @@ export const VotePage = () => {
                           icon: "fas fa-edit",
                           action: () => (context.isEditMode = true),
                         },
-                        {
-                          icon: "fas fa-plus",
-                          action: () => (context.isCreateYearModalOpen = true),
-                        },
                       ],
                       (item, index) => (
                         <div
@@ -243,8 +239,8 @@ export const VotePage = () => {
             )}
             {context.voteStatus !== "prepare" &&
               authContext.isPermission(["Publisher"]) && (
-                <div className="mb-[32px] grid grid-cols-2 gap-x-[64px]">
-                  <div className="w-full">
+                <div className="mb-[32px] grid tablet:grid-cols-2 grid-cols-1 gap-y-[16px] gap-x-[64px]">
+                  <div className="w-11/12 mx-auto laptop:w-full">
                     <Pie
                       data={{
                         labels:
@@ -275,7 +271,7 @@ export const VotePage = () => {
                             labels: {
                               pointStyle: "circle",
                               usePointStyle: true,
-                              padding: 64,
+                              padding: 24,
                             },
                           },
                         },
@@ -284,21 +280,21 @@ export const VotePage = () => {
                       height={450}
                     />
                   </div>
-                  <div className="w-full h-full justify-center space-y-[32px] flex flex-col">
-                    <p className="topic">
+                  <div className="w-full h-full justify-center tablet:space-y-[24px] space-y-[16px] laptop:space-y-[32px] flex flex-col">
+                    <p className="tablet:topic subheading1">
                       <span className="font-bold">Result:</span>{" "}
                       {context.voteDetail.voteCount || "0"} vote
                     </p>
                     <div>
-                      <p className="heading5">
+                      <p className="tablet:heading5 subheading2">
                         <span className="font-bold">Accept:</span>{" "}
                         {context.voteDetail.accept || "-"} Vote
                       </p>
-                      <p className="heading5">
+                      <p className="tablet:heading5 subheading2">
                         <span className="font-bold">Reject:</span>{" "}
                         {context.voteDetail.reject || "-"} Vote
                       </p>
-                      <p className="heading5">
+                      <p className="tablet:heading5 subheading2">
                         <span className="font-bold">No vote:</span>{" "}
                         {context.voteDetail.noVote || "-"} Vote
                       </p>
@@ -310,8 +306,8 @@ export const VotePage = () => {
                     <Button
                       onClick={() => context.onAcceptUnion()}
                       title="add to student union"
-                      widthCss="w-[381px]"
-                      heightCss="h-[52px]"
+                      widthCss="laptop:w-[381px] tablet:w-[240px] w-[196px] tablet:mx-0 mx-auto"
+                      heightCss="tablet:h-[52px] h-[40px]"
                       disabled={context.voteStatus !== "close"}
                     />
                   </div>
@@ -366,7 +362,7 @@ export const VotePage = () => {
                             )
                           }
                           title={_.replace(vote, "_", " ")}
-                          widthCss="w-[381px]"
+                          widthCss="tablet:w-[381px] w-[240px]"
                           heightCss="h-[52px]"
                         />
                       )
