@@ -111,11 +111,11 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                   />
                 </div>
               </div>
-              <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px] items-stretch laptop:items-center">
+              <div className="flex laptop:flex-row flex-col items-stretch laptop:items-center">
                 <p className="w-[192px] body">วัน/เดือน/ปี ที่จัดโครงการ</p>
                 <div className="flex-grow flex laptop:flex-row flex-col items-stretch laptop:space-y-0 space-y-[8px] laptop:items-center space-x-0 laptop:space-x-[24px]">
                   <div className="space-x-[8px] flex items-center">
-                    <p className="body w-[34px]">เริ่ม</p>
+                    <p className="body laptop:w-[48px] w-[34px]">เริ่ม</p>
                     <TextInput
                       height={30}
                       width={160}
@@ -131,7 +131,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                     />
                   </div>
                   <div className="space-x-[8px] flex items-center">
-                    <p className="body w-[34px]">สิ้นสุด</p>
+                    <p className="body laptop:w-[48px] w-[34px]">สิ้นสุด</p>
                     <TextInput
                       height={30}
                       width={160}

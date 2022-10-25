@@ -83,38 +83,59 @@ export const DocumentPage = () => {
                   <p className="heading6 w-[96px] tablet:w-[320px]">DATE</p>
                   <p className="heading6">TOPIC</p>
                 </div>
-                {_.map(context.documentList, (document) => (
-                  <div className="h-[50px] py-[14px] border-b-[1.5px] border-gray-40 flex w-full">
-                    <p className="text-body w-[96px] tablet:w-[320px]">
-                      {dayjs(document.created_date)
-                        .locale(i18n.language)
-                        .add(i18n.language === "th" ? 543 : 0, "year")
-                        .format("D/M/YYYY")}
-                    </p>
-                    <div className="flex justify-between flex-grow">
-                      <a
-                        href={`document/${document.form_type}/${
-                          document.form_info_id
-                        }/${
-                          document.form_type === "proposal"
-                            ? document.request_info[0]?.request_info_id
-                            : document.project_approved[0]?.project_id
-                        }`}
-                      >
-                        <p className="truncate cursor-pointer select-none text-body max-w-[158px] tablet:max-w-[264px]">
-                          {document.solution || ""}
+                {!authContext.me && (
+                  <p className="subheading2 my-[16px]">
+                    เข้าสู่ระบบเพื่อนดูประวัติการสร้างเอสาร
+                  </p>
+                )}
+                {_.size(context.documentList) > 0
+                  ? _.map(context.documentList, (document) => (
+                      <div className="h-[50px] py-[14px] border-b-[1.5px] border-gray-40 flex w-full">
+                        <p className="text-body w-[96px] tablet:w-[320px]">
+                          {dayjs(document.created_date)
+                            .locale(i18n.language)
+                            .add(i18n.language === "th" ? 543 : 0, "year")
+                            .format("D/M/YYYY")}
                         </p>
-                      </a>
+                        <div className="flex justify-between flex-grow">
+                          <a
+                            href={`document/${document.form_type}/${
+                              document.form_info_id
+                            }/${
+                              document.form_type === "proposal"
+                                ? document.request_info[0]?.request_info_id
+                                : document.project_approved[0]?.project_id
+                            }`}
+                          >
+                            <p className="truncate cursor-pointer select-none text-body max-w-[158px] tablet:max-w-[264px]">
+                              {document.solution || ""}
+                            </p>
+                          </a>
 
-                      <p
-                        className="underline text-body w-[56px] text-right cursor-pointer select-none break-all truncate"
-                        onClick={() => null}
-                      >
-                        delete
+                          <p
+                            className="underline text-body w-[56px] text-right cursor-pointer select-none break-all truncate"
+                            onClick={() =>
+                              modal.openModal(
+                                "ลบเอกสาร",
+                                "คุณต้องการจะลบเอกสารใช่หรือไม่?",
+                                () =>
+                                  context.onDelete(
+                                    document.form_info_id,
+                                    authContext.me?.user_id || ""
+                                  )
+                              )
+                            }
+                          >
+                            delete
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  : authContext.me && (
+                      <p className="subheading2 my-[16px]">
+                        There's no History
                       </p>
-                    </div>
-                  </div>
-                ))}
+                    )}
                 {context.isLoading && (
                   <div className="w-max mt-[24px]">
                     <Loading text="text-5xl" />

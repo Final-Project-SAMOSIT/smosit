@@ -4,6 +4,7 @@ import { ModalContextClass } from "../../../core/context/modal.context";
 import { getDocumentList } from "../../../core/service/document/get_document";
 import { AxiosResponse } from "axios";
 import { Document } from "../types/document.type";
+import { deleteDocument } from "../../../core/service/document/delete_document";
 
 class DocumentContextClass {
   modal?: ModalContextClass;
@@ -43,6 +44,16 @@ class DocumentContextClass {
       this.modal?.openModal("มีปัญหาในการเตรียมข้อมูลเอกสาร", err.message);
     } finally {
       this.isLoading = false;
+    }
+  }
+
+  async onDelete(id: string, userId: string) {
+    try {
+      await deleteDocument(id);
+      this.documentPreparation(userId);
+    } catch (err: any) {
+      console.log(err);
+      this.modal?.openModal("มีปัญหาในการลบเอกสาร", err.message);
     }
   }
 }
