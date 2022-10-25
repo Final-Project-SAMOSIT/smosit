@@ -51,6 +51,23 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
   const context = useContext(documentProposalFormContext);
 
   //---------------------
+  //   HANDLED
+  //---------------------
+  function mesureText(text: string): number {
+    const p = document.createElement("p");
+    p.className = "text-pdf w-max";
+    p.innerHTML = text;
+    p.id = "mesureText";
+
+    document.body.appendChild(p);
+    const elem = document.getElementById("mesureText");
+    const width = elem?.offsetWidth || 0;
+    console.log(width);
+    document.body.removeChild(p);
+    return width;
+  }
+
+  //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
@@ -85,7 +102,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
             ref={contentRef}
           >
             <div
-              className="flex justify-between cursor-pointer items-center"
+              className="flex items-center justify-between cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
               <p className="topic2">ข้อมูลส่วนเนื้อหาโครงการ</p>
@@ -102,34 +119,67 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
             <div className="space-y-[14px]">
               <div className="flex items-center space-x-[24px]">
                 <p className="w-[168px] body">ชื่อโครงการ</p>
-                <div className="flex-grow">
-                  <TextInput
-                    height={30}
-                    radius={6}
-                    value={formik.values.request_info?.project_name}
-                    onChange={(e) =>
-                      formik.setFieldValue(
-                        "request_info.project_name",
-                        e.target.value
-                      )
-                    }
-                  />
+                <div className="flex-grow flex space-x-[8px] items-center">
+                  <div className="w-[620px]">
+                    <TextInput
+                      height={30}
+                      radius={6}
+                      value={formik.values.request_info?.project_name}
+                      error={formik.errors.request_info?.project_name}
+                      hide-error-text
+                      onChange={(e) => {
+                        if (mesureText(e.target.value) <= 340) {
+                          formik.setFieldValue(
+                            "request_info.project_name",
+                            e.target.value
+                          );
+                          formik.setFieldError("request_info.project_name", "");
+                        } else {
+                          formik.setFieldError(
+                            "request_info.project_name",
+                            "ข้อความยาวเกินกำหนด"
+                          );
+                        }
+                      }}
+                    />
+                  </div>
+                  <p className="caption2 text-error">
+                    {formik.errors.request_info?.project_name}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center">
                 <p className="w-[192px] body">จุดประสงค์ (โดยสังเขป)</p>
-                <div className="flex-grow">
-                  <TextInput
-                    height={30}
-                    radius={6}
-                    value={formik.values.request_info?.project_due_to || ""}
-                    onChange={(e) =>
-                      formik.setFieldValue(
-                        "request_info.project_due_to",
-                        e.target.value
-                      )
-                    }
-                  />
+                <div className="flex flex-grow items-center space-x-[8px]">
+                  <div className="w-[440px]">
+                    <TextInput
+                      height={30}
+                      radius={6}
+                      value={formik.values.request_info?.project_due_to || ""}
+                      error={formik.errors.request_info?.project_due_to}
+                      hide-error-text
+                      onChange={(e) => {
+                        if (mesureText(e.target.value) <= 210) {
+                          formik.setFieldValue(
+                            "request_info.project_due_to",
+                            e.target.value
+                          );
+                          formik.setFieldError(
+                            "request_info.project_due_to",
+                            ""
+                          );
+                        } else {
+                          formik.setFieldError(
+                            "request_info.project_due_to",
+                            "ข้อความยาวเกินกำหนด"
+                          );
+                        }
+                      }}
+                    />
+                  </div>
+                  <p className="text-error caption2">
+                    {formik.errors.request_info?.project_due_to}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center space-x-[24px]">
@@ -175,18 +225,33 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
               </div>
               <div className="flex items-center space-x-[24px]">
                 <p className="w-[168px] body">สถานที่จัดโครงการ</p>
-                <div className="flex-grow">
-                  <TextInput
-                    height={30}
-                    radius={6}
-                    value={formik.values.request_info?.location}
-                    onChange={(e) =>
-                      formik.setFieldValue(
-                        "request_info.location",
-                        e.target.value
-                      )
-                    }
-                  />
+                <div className="flex-grow flex space-x-[8px] items-center">
+                  <div className="w-[620px]">
+                    <TextInput
+                      height={30}
+                      radius={6}
+                      value={formik.values.request_info?.location}
+                      error={formik.errors.request_info?.location}
+                      hide-error-text
+                      onChange={(e) => {
+                        if (mesureText(e.target.value) <= 315) {
+                          formik.setFieldValue(
+                            "request_info.location",
+                            e.target.value
+                          );
+                          formik.setFieldError("request_info.location", "");
+                        } else {
+                          formik.setFieldError( 
+                            "request_info.location",
+                            "ข้อความยาวเกินกำหนด"
+                          );
+                        }
+                      }}
+                    />
+                  </div>
+                  <p className="text-error caption2">
+                    {formik.errors.request_info?.location}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center">

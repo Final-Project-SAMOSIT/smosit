@@ -93,7 +93,7 @@ export const DocumentProposalFormPage = () => {
             <div className="my-[64px] space-y-[48px]">
               <div className="bg-gray-10 pt-[32px] pb-[48px] flex flex-col items-stretch space-y-[48px] px-[86px]">
                 <div className="space-y-[16px] flex flex-col items-center">
-                  <p className="title text-center">
+                  <p className="text-center title">
                     แบบขออนุมัติโครงการและงบประมาณ
                   </p>
                   <div className="h-[1px] w-[350px] bg-black" />

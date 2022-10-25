@@ -51,7 +51,7 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
     setTimeout(() => {
       window.print();
       context.isPrinting = false;
-    }, 300);
+    }, 500);
   }, []);
 
   //---------------------
@@ -60,7 +60,7 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
   return (
     <Observer>
       {() => (
-        <div className="relative text-[2.2vw] text-pdf font-medium">
+        <div className="relative text-[1.8vw] text-pdf font-medium">
           <img src="/images/proposal.jpg" className="w-full" alt="" />
           <p className="absolute top-[7.5%] left-[10.8%] w-[13.5%] text-center">
             {formik.values.form_info.form_no}
@@ -80,10 +80,10 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
           <p className="absolute top-[11%] left-[26.5%] w-[27%]">
             {formik.values.form_info.solution}
           </p>
-          <p className="absolute top-[15.3%] left-[21.3%] w-[24%] text-center leading-[1.2vw] h-0">
+          <p className="absolute bottom-[83.8%] left-[21.3%] w-[24%] text-center leading-[1.2vw]">
             {formik.values.request_info.project_due_to}
           </p>
-          <p className="absolute top-[14.5%] left-[53%] w-[33%] ">
+          <p className="absolute bottom-[83.8%] left-[53%] w-[40%] leading-[1.2vw]">
             {formik.values.request_info.project_name}
           </p>
           <p className="absolute top-[16.3%] left-[17.3%] w-[10.7%] text-center">
@@ -95,13 +95,13 @@ export const ProposalPDF = (props: ProposalPDFProps) => {
           <p className="absolute top-[16.3%] left-[48.2%] w-[7%] text-center">
             {getYear()}
           </p>
-          <p className="absolute top-[16.3%] left-[57.4%] w-[28.7%]">
+          <p className="absolute bottom-[82%] left-[57.4%] w-[37%] leading-[1.2vw]">
             {formik.values.request_info.location}
           </p>
           <p className="absolute top-[18%] left-[31.7%] w-[7%] text-center">
-            {formik.values.request_info.cost}
+            {formik.values.request_info.cost}.-
           </p>
-          <p className="absolute top-[18%] left-[43.7%] w-[27%] text-center">
+          <p className="absolute top-[18.7%] left-[43.7%] w-[27%] text-center leading-[1.4vw] h-0">
             {formik.values.request_info.cost_des_th}
           </p>
           <i

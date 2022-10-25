@@ -33,6 +33,23 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
   const { t, i18n } = useTranslation("document");
 
   //---------------------
+  //   HANDLED
+  //---------------------
+  function mesureText(text: string): number {
+    const p = document.createElement("p");
+    p.className = "text-pdf w-max";
+    p.innerHTML = text;
+    p.id = "mesureText";
+
+    document.body.appendChild(p);
+    const elem = document.getElementById("mesureText");
+    const width = elem?.offsetWidth || 0;
+    console.log(width);
+    document.body.removeChild(p);
+    return width;
+  }
+
+  //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
@@ -63,7 +80,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
             ref={contentRef}
           >
             <div
-              className="flex justify-between cursor-pointer items-center"
+              className="flex items-center justify-between cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
               <p className="topic2">ข้อมูลส่วนหัวเรื่อง</p>
@@ -93,31 +110,62 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
               </div>
               <div className="flex space-x-[24px]">
                 <p className="w-[168px] body">หน่วยงาน</p>
-                <div className="flex-grow">
-                  <TextInput
-                    height={30}
-                    radius={6}
-                    value={formik.values.form_info?.institution || ""}
-                    onChange={(e) =>
-                      formik.setFieldValue(
-                        "form_info.institution",
-                        e.target.value
-                      )
-                    }
-                  />
+                <div className="flex-grow flex items-center space-x-[8px]">
+                  <div className="w-[480px]">
+                    <TextInput
+                      height={30}
+                      radius={6}
+                      value={formik.values.form_info?.institution || ""}
+                      onChange={(e) => {
+                        if (mesureText(e.target.value) <= 221) {
+                          formik.setFieldValue(
+                            "form_info.institution",
+                            e.target.value
+                          );
+                          formik.setFieldError("form_info.institution", "");
+                        } else {
+                          formik.setFieldError(
+                            "form_info.institution",
+                            "ข้อความยาวเกินไป"
+                          );
+                        }
+                      }}
+                    />
+                  </div>
+                  <p className="text-error caption2">
+                    {formik.errors.form_info?.institution}
+                  </p>
                 </div>
               </div>
               <div className="flex space-x-[24px]">
                 <p className="w-[168px] body">หัวข้อเรื่องที่ขออนุมัติ</p>
-                <div className="flex-grow">
-                  <TextInput
-                    height={30}
-                    radius={6}
-                    value={formik.values.form_info?.solution || ""}
-                    onChange={(e) =>
-                      formik.setFieldValue("form_info.solution", e.target.value)
-                    }
-                  />
+                <div className="flex-grow flex items-center space-x-[8px]">
+                  <div className="w-[480px]">
+                    <TextInput
+                      height={30}
+                      radius={6}
+                      value={formik.values.form_info?.solution || ""}
+                      error={formik.errors.form_info?.solution}
+                      hide-error-text
+                      onChange={(e) => {
+                        if (mesureText(e.target.value) <= 238) {
+                          formik.setFieldValue(
+                            "form_info.solution",
+                            e.target.value
+                          );
+                          formik.setFieldError("form_info.solution", "");
+                        } else {
+                          formik.setFieldError(
+                            "form_info.solution",
+                            "ข้อความยาวเกินไป"
+                          );
+                        }
+                      }}
+                    />
+                  </div>
+                  <p className="text-error caption2">
+                    {formik.errors.form_info?.solution}
+                  </p>
                 </div>
               </div>
             </div>

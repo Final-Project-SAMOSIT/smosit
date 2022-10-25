@@ -34,7 +34,7 @@ export const DocumentPDF = (props: DocumentPDFProps) => {
     setTimeout(() => {
       window.print();
       context.isPrinting = false;
-    }, 300);
+    }, 500);
   }, []);
 
   //---------------------
