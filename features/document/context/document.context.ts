@@ -5,6 +5,7 @@ import { getDocumentList } from "../../../core/service/document/get_document";
 import { AxiosResponse } from "axios";
 import { Document } from "../types/document.type";
 import { deleteDocument } from "../../../core/service/document/delete_document";
+import { Role } from "../../../core/types/auth_types";
 
 class DocumentContextClass {
   modal?: ModalContextClass;
@@ -24,15 +25,23 @@ class DocumentContextClass {
     makeAutoObservable(this);
   }
 
-  async documentPreparation(userId: string | string[]) {
+  async documentPreparation(userId: string | string[], role: Role) {
     try {
       this.isLoading = true;
+      console.log(role);
       const resp: AxiosResponse<{ data: Array<Document> }> =
-        await getDocumentList({
-          user_id: userId.toString(),
-          skip: (this.currentPage - 1) * this.perPage,
-          take: this.perPage,
-        });
+        await getDocumentList(
+          role === "Publisher"
+            ? {
+                skip: (this.currentPage - 1) * this.perPage,
+                take: this.perPage,
+              }
+            : {
+                user_id: userId.toString(),
+                skip: (this.currentPage - 1) * this.perPage,
+                take: this.perPage,
+              }
+        );
 
       if (resp.status !== 204) {
         this.documentList = resp.data.data;
@@ -47,10 +56,10 @@ class DocumentContextClass {
     }
   }
 
-  async onDelete(id: string, userId: string) {
+  async onDelete(id: string, userId: string, role: Role) {
     try {
       await deleteDocument(id);
-      this.documentPreparation(userId);
+      this.documentPreparation(userId, role);
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการลบเอกสาร", err.message);

@@ -160,7 +160,12 @@ export const VotePage = () => {
             {context.voteStatus !== "open" &&
               authContext.isPermission(["Users"]) && (
                 <div className="flex items-center h-[320px]">
-                  <p className="caption1">There's no concil to vote</p>
+                  <p className="caption1">
+                    {context.voteStatus === "close" &&
+                      "Out of voting time. Please wait for the result."}
+                    {context.voteStatus === "prepare" &&
+                      "There's no concil to vote"}
+                  </p>
                 </div>
               )}
             {!context.isEditMode && authContext.isPermission(["Publisher"]) && (

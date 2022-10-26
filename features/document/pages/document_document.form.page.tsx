@@ -92,7 +92,7 @@ export const DocumentDocumentFormPage = () => {
               <div className="bg-gray-10 pt-[32px] pb-[48px] flex flex-col items-stretch space-y-[48px] tablet:px-[24px] px-[12px] laptop:px-[86px]">
                 <div className="space-y-[16px] flex flex-col items-center">
                   <p className="text-center title">
-                    แบบขออนุมัติโครงการและงบประมาณ
+                    แบบขออนุมัติขอจัดกิจกรรมนักศึกษา
                   </p>
                   <div className="h-[1px] w-[160px] tablet:w-[350px] bg-black" />
                 </div>

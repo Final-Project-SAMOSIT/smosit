@@ -228,8 +228,12 @@ export const Navbar = (props: NavbarProps) => {
                       className="w-full bg-white"
                       onClick={() => {
                         modal.openModal(
-                          "logout",
-                          "Are you sure you want to logout?",
+                          props.noTranslation
+                            ? "Logout"
+                            : t("modal_logout_title"),
+                          props.noTranslation
+                            ? "Are you sure you want to logout?"
+                            : t("modal_logout_message"),
                           () => {
                             authContext.logout();
                             setIsDropdownOpen(false);
@@ -274,8 +278,12 @@ export const Navbar = (props: NavbarProps) => {
                         className="cursor-pointer button"
                         onClick={() =>
                           modal.openModal(
-                            "logout",
-                            "Are you sure you want to logout?",
+                            props.noTranslation
+                              ? "Logout"
+                              : t("modal_logout_title"),
+                            props.noTranslation
+                              ? "Are you sure you want to logout?"
+                              : t("modal_logout_message"),
                             () => {
                               authContext.logout();
                               setIsDropdownOpen(false);

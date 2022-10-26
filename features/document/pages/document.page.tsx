@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { Observer } from "mobx-react-lite";
 import { documentContext } from "../context/document.context";
@@ -8,6 +8,7 @@ import { MainLayout } from "../../../core/components/layout/main_layout";
 import _ from "lodash";
 import dayjs from "dayjs";
 import Loading from "../../../core/components/utility/loading";
+import { Paginate } from "../../../core/components/table/paginate.component";
 
 export const DocumentPage = () => {
   //---------------------
@@ -40,7 +41,10 @@ export const DocumentPage = () => {
     context.modal = modal;
 
     if (authContext.isPermission(["Publisher", "Users"])) {
-      context.documentPreparation(authContext.me?.user_id || "");
+      context.documentPreparation(
+        authContext.me?.user_id || "",
+        authContext.me?.roles.role_name || "Users"
+      );
     }
   }, []);
 
@@ -78,7 +82,7 @@ export const DocumentPage = () => {
             </div>
             <div className="space-y-[24px] flex flex-col items-center">
               <p className="title">My History</p>
-              <div className="flex flex-col items-center w-full">
+              <div className="flex flex-col items-center justify-center w-full">
                 <div className="h-[50px] py-[14px] border-b-[1.5px] border-gray-40 flex w-full">
                   <p className="heading6 w-[96px] tablet:w-[320px]">DATE</p>
                   <p className="heading6">TOPIC</p>
@@ -88,8 +92,9 @@ export const DocumentPage = () => {
                     เข้าสู่ระบบเพื่อนดูประวัติการสร้างเอสาร
                   </p>
                 )}
-                {_.size(context.documentList) > 0
-                  ? _.map(context.documentList, (document) => (
+                {_.size(context.documentList) > 0 ? (
+                  <Fragment>
+                    {_.map(context.documentList, (document) => (
                       <div className="h-[50px] py-[14px] border-b-[1.5px] border-gray-40 flex w-full">
                         <p className="text-body w-[96px] tablet:w-[320px]">
                           {dayjs(document.created_date)
@@ -108,7 +113,9 @@ export const DocumentPage = () => {
                             }`}
                           >
                             <p className="truncate cursor-pointer select-none text-body max-w-[158px] tablet:max-w-[264px]">
-                              {document.solution || ""}
+                              {document.solution.trim() === ""
+                                ? document.form_type
+                                : document.solution}
                             </p>
                           </a>
 
@@ -121,7 +128,8 @@ export const DocumentPage = () => {
                                 () =>
                                   context.onDelete(
                                     document.form_info_id,
-                                    authContext.me?.user_id || ""
+                                    authContext.me?.user_id || "",
+                                    authContext.me?.roles.role_name || "Users"
                                   )
                               )
                             }
@@ -130,12 +138,26 @@ export const DocumentPage = () => {
                           </p>
                         </div>
                       </div>
-                    ))
-                  : authContext.me && (
-                      <p className="subheading2 my-[16px]">
-                        There's no History
-                      </p>
-                    )}
+                    ))}
+                    <div className="mt-[16px]">
+                      <Paginate
+                        onChangePage={(page) => {
+                          context.currentPage = page;
+                          context.documentPreparation(
+                            authContext.me?.user_id || "",
+                            authContext.me?.roles.role_name || "Users"
+                          );
+                        }}
+                        page={context.currentPage}
+                        totalPage={context.totalPage}
+                      />
+                    </div>
+                  </Fragment>
+                ) : (
+                  authContext.me && (
+                    <p className="subheading2 my-[16px]">There's no History</p>
+                  )
+                )}
                 {context.isLoading && (
                   <div className="w-max mt-[24px]">
                     <Loading text="text-5xl" />
