@@ -21,7 +21,7 @@ export const DocumentProposalFormPage = () => {
   //---------------------
   //   I18n
   //---------------------
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("document");
 
   //---------------------
   //   STATE
@@ -94,7 +94,7 @@ export const DocumentProposalFormPage = () => {
               <div className="bg-gray-10 pt-[32px] pb-[48px] flex flex-col items-stretch space-y-[48px] tablet:px-[24px] px-[12px] laptop:px-[86px]">
                 <div className="space-y-[16px] flex flex-col items-center">
                   <p className="text-center title">
-                    แบบขออนุมัติโครงการและงบประมาณ
+                    {t("document_proposal_label")}
                   </p>
                   <div className="h-[1px] w-[160px] tablet:w-[350px] bg-black" />
                 </div>
@@ -105,13 +105,13 @@ export const DocumentProposalFormPage = () => {
                 <div className="justify-center space-x-[24px] flex">
                   <Button
                     onClick={() => formik.submitForm()}
-                    title="Save Draft"
+                    title={t("document_save_button")}
                     widthCss="w-[137px]"
                     heightCss="h-[40px] tablet:h-[52px]"
                   ></Button>
                   <Button
                     onClick={() => context.onPrint()}
-                    title="Export"
+                    title={t("document_export_button")}
                     widthCss="w-[137px]"
                     heightCss="h-[40px] tablet:h-[52px]"
                   ></Button>

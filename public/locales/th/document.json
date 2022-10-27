@@ -1,0 +1,20 @@
+{
+    "document_title": "แบบบันทึกแผนโครงการ",
+    "document_document_label": "แบบขออนุมัติขอจัดกิจกรรมนักศึกษา",
+    "document_proposal_label": "แบบขออนุมัติโครงการ และงบประมาณ",
+    "document_history_label": "ประวัติ",
+    "document_history_table_header_date": "วันที่",
+    "document_history_table_header_user": "ผู้ใช้งาน",
+    "document_history_table_header_topic": "หัวข้อ",
+    "document_login_first": "เข้าสู่ระบบเพื่อนดูประวัติการสร้างเอสาร",
+    "document_delete_document_modal_title": "ลบเอกสาร",
+    "document_delete_document_modal_message": "คุณต้องการจะลบเอกสารใช่หรือไม่?",
+    "document_delete_button": "ลบเอกสาร",
+    "document_no_history_banner": "ยังไม่มีประวัติการสร้าง",
+
+    "document_save_button": "บันทึกแบบร่าง",
+    "document_export_button": "พิมพ์",
+    "document_": "",
+
+    "END": ""
+}
