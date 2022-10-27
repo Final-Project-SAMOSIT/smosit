@@ -12,8 +12,15 @@ interface UnionConcilSectionProps {
   studentList: Array<User>;
   addedUser: Array<User>;
   editMode?: boolean;
-  onEditUser: () => void;
+  onEditUser: (data: {
+    unionId: string;
+    userId: string;
+    unionYear: number;
+    positionId: string;
+  }) => void;
   onOpenEditModal: () => void;
+  onRemoveUser: (id: string) => void;
+  year?: number;
 }
 
 export const UnionConcilSection = (props: UnionConcilSectionProps) => {
@@ -69,9 +76,17 @@ export const UnionConcilSection = (props: UnionConcilSectionProps) => {
                   }
                   isEditable={props.editMode}
                   onDelete={() => {
+                    props.onRemoveUser(getStudentList()[0]?.std_id || "");
                     context.onDelete(getStudentList()[0]?.union_id || "");
                   }}
-                  onEdit={props.onEditUser}
+                  onEdit={() =>
+                    props.onEditUser({
+                      unionId: getStudentList()[0].union_id || "",
+                      userId: getStudentList()[0].std_id,
+                      unionYear: props.year || context.year,
+                      positionId: getStudentList()[0].std_position.position_id,
+                    })
+                  }
                 />
                 <div />
                 {_.map(_.slice(getStudentList(), 1), (user) => (
@@ -93,16 +108,28 @@ export const UnionConcilSection = (props: UnionConcilSectionProps) => {
                     position={user.std_position.position_name}
                     isEditable={props.editMode}
                     onDelete={() => {
-                      context.onDelete(user.union_id || "");
+                      props.onRemoveUser(user.std_id || "");
+                      if (
+                        _.findIndex(props.studentList, {
+                          std_id: user.std_id,
+                        }) !== -1
+                      ) {
+                        context.onDelete(user.union_id || "");
+                      }
                     }}
                     onEdit={() => {
                       context.editingUser = {
                         unionId: user.union_id || "",
                         userId: user.std_id,
-                        unionYear: context.year,
+                        unionYear: props.year || context.year,
                         positionId: user.std_position.position_id,
                       };
-                      props.onEditUser();
+                      props.onEditUser({
+                        unionId: user.union_id || "",
+                        userId: user.std_id,
+                        unionYear: props.year || context.year,
+                        positionId: user.std_position.position_id,
+                      });
                     }}
                   />
                 ))}

@@ -202,6 +202,16 @@ export const AboutPage = () => {
               onOpenEditModal={() => {
                 context.isEditModalOpen = true;
               }}
+              onRemoveUser={(id) => {
+                context.addedUser = _.filter(
+                  context.addedUser,
+                  (user) => user.std_id !== id
+                );
+                context.studentList = _.filter(
+                  context.studentList,
+                  (user) => user.std_id !== id
+                );
+              }}
             />
 
             {context.isEditMode ? (

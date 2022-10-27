@@ -125,7 +125,9 @@ export const DocumentPage = () => {
                           >
                             <p className="truncate cursor-pointer select-none text-body max-w-[158px] tablet:max-w-[264px]">
                               {document.solution.trim() === ""
-                                ? document.form_type /* TODO: language */
+                                ? t(
+                                    `document_${document.form_type}_label`
+                                  ) /* TODO: language */
                                 : document.solution}
                             </p>
                           </a>

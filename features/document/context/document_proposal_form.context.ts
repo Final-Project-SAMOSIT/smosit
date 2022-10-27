@@ -102,7 +102,7 @@ class DocumentProposalFormContext {
           };
         }>;
       }> = await postProposal(this.getProposalBody(value));
-      Router.prototype.push(`document`);
+      Router.prototype.push(`/document`);
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการสร้างเอกสาร", err.message);
@@ -180,7 +180,7 @@ class DocumentProposalFormContext {
       );
       if (resp.status === 200) {
         Router.prototype.push(
-          `document/proposal/${form_id}/${request_info_id}`
+          `/document/proposal/${form_id}/${request_info_id}`
         );
       }
     } catch (err: any) {

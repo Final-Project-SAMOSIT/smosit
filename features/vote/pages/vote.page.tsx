@@ -171,13 +171,6 @@ export const VotePage = () => {
                     context.unAcceptedYearOption.length !== 0 && (
                       <Fragment>
                         <Button
-                          onClick={() => context.deleteCurrentYear()}
-                          title={t("vote_delete_button")}
-                          widthCss="w-[137px]"
-                          heightCss="h-[52px]"
-                        />
-
-                        <Button
                           onClick={() => (context.isEditMode = true)}
                           title={t("about_page_student_union_manage_button", {
                             ns: "about",
@@ -338,17 +331,25 @@ export const VotePage = () => {
                 studentList={context.studentList}
                 isLoading={context.isStudentLoading}
                 editMode={context.isEditMode}
-                onEditUser={() => {
-                  context.editingUser = {
-                    unionId: getStudentList()[0]?.union_id || "",
-                    userId: getStudentList()[0]?.std_id || "",
-                    unionYear: context.year,
-                  };
+                onEditUser={(e) => {
+                  context.editingUser = e;
                   context.isEditModalOpen = true;
                 }}
                 onOpenEditModal={() => {
                   context.isEditModalOpen = true;
                 }}
+                onRemoveUser={(id) => {
+                  console.log(id, context.addedUser, context.studentList);
+                  context.addedUser = _.filter(
+                    context.addedUser,
+                    (user) => user.std_id !== id
+                  );
+                  context.studentList = _.filter(
+                    context.studentList,
+                    (user) => user.std_id !== id
+                  );
+                }}
+                year={context.year}
               />
             )}
             {authContext.isPermission(["Users"]) &&
@@ -372,7 +373,7 @@ export const VotePage = () => {
                               () => context.onVote(vote)
                             )
                           }
-                          title={`vote_${vote.toLowerCase()}`} /* TODO: add i18n here */
+                          title={t(`vote_${vote.toLowerCase()}`)}
                           widthCss="tablet:w-[381px] w-[240px]"
                           heightCss="h-[52px]"
                         />
