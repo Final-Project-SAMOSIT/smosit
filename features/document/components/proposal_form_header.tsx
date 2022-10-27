@@ -71,9 +71,11 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
         <div
           className="bg-white border border-black rounded-[10px] overflow-y-hidden transform duration-200"
           style={{
-            height: isOpen ? contentRef.current?.clientHeight : window.innerWidth <= 720
-            ? 56
-            : 67,
+            height: isOpen
+              ? contentRef.current?.clientHeight
+              : window.innerWidth <= 768
+              ? 56
+              : 67,
           }}
           ref={containertRef}
         >
@@ -112,8 +114,8 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">หน่วยงาน</p>
-                <div className="flex-grow flex items-center space-x-[8px]">
-                  <div className="w-[480px]">
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
+                  <div className="w-full laptop:w-[480px]">
                     <TextInput
                       height={30}
                       radius={6}
@@ -134,15 +136,15 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                       }}
                     />
                   </div>
-                  <p className="text-error caption2">
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
                     {formik.errors.form_info?.institution}
                   </p>
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">หัวข้อเรื่องที่ขออนุมัติ</p>
-                <div className="flex-grow flex items-center space-x-[8px]">
-                  <div className="w-[480px]">
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
+                  <div className="w-full laptop:w-[480px]">
                     <TextInput
                       height={30}
                       radius={6}
@@ -165,7 +167,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                       }}
                     />
                   </div>
-                  <p className="text-error caption2">
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
                     {formik.errors.form_info?.solution}
                   </p>
                 </div>

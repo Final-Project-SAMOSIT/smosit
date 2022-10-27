@@ -84,7 +84,10 @@ export const DocumentPage = () => {
               <p className="title">My History</p>
               <div className="flex flex-col items-center justify-center w-full">
                 <div className="h-[50px] py-[14px] border-b-[1.5px] border-gray-40 flex w-full">
-                  <p className="heading6 w-[96px] tablet:w-[320px]">DATE</p>
+                  <p className="heading6 w-[96px] tablet:w-[160px] ">DATE</p>
+                  <p className="heading6 w-[96px] tablet:w-[160px] tablet:block hidden">
+                    User
+                  </p>
                   <p className="heading6">TOPIC</p>
                 </div>
                 {!authContext.me && (
@@ -96,11 +99,15 @@ export const DocumentPage = () => {
                   <Fragment>
                     {_.map(context.documentList, (document) => (
                       <div className="h-[50px] py-[14px] border-b-[1.5px] border-gray-40 flex w-full">
-                        <p className="text-body w-[96px] tablet:w-[320px]">
+                        <p className="text-body w-[96px] tablet:w-[160px]">
                           {dayjs(document.created_date)
                             .locale(i18n.language)
                             .add(i18n.language === "th" ? 543 : 0, "year")
                             .format("D/M/YYYY")}
+                        </p>
+                        <p className="text-body w-[96px] tablet:w-[160px] tablet:block hidden">
+                          {document.project_approved[0]?.user_id ||
+                            document.request_info[0]?.user_id}
                         </p>
                         <div className="flex justify-between flex-grow">
                           <a
