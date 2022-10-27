@@ -1,0 +1,17 @@
+{
+    "vote_title": "การจัดการโหวต",
+    "vote_created_banner": "สโมสรนักศึกษาถูกสร้างไปแล้วในปีนี้",
+    "vote_not_vote_time_banner": "หมดเวลาการโหวตแล้ว โปรดรอผลการโหวต",
+    "vote_no_concil_to_vote": "ยังไม่มีสโมสรนักศึกษาใหม่",
+    "vote_delete_button": "ลบ",
+    "vote_accept": "ยอมรับ",
+    "vote_reject": "ปฏิเสธ",
+    "vote_no_vote": "ไม่ประสงค์คะแนน",
+    "vote_all_vote": "โหวตทั้งหมด",
+    "vote_result_title": "ผลการโหวต",
+    "vote_vote_unit": "โหวต",
+    "vote_result_consent_warning": "*ถ้าคุณยอมรับในผลโหวต โปรดเพิ่มข้อมูลในสโมสรนักศึกษา",
+    "vote_add_to_union_title": "เพิ่มในสโมสรนักศึกษา",
+    "vote_only_concil_warning": "* เนื่องจากมีผู้สมัครเพียงพรรคเดียวการลงคะแนนเสียงจะสามารถเลือกได้เพียง รับรอง ไม่รับรองหรือไม่ประสงค์ลงคะแนน",
+    "vote_voted": "คุณได้ทำการโหวตไปแล้ว"
+}

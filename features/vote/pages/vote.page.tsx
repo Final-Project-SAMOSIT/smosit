@@ -10,14 +10,12 @@ import { Observer } from "mobx-react-lite";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { voteContext } from "../context/vote.context";
 import { ModalContext } from "../../../core/context/modal.context";
-import { Dropdown } from "../../../core/components/input/dropdown_input";
 import { UnionConcilSection } from "../../about/components/union_concil_section.component";
 import { Button } from "../../../core/components/input/button.component";
 import { AuthContext } from "../../../core/context/auth.context";
 import _ from "lodash";
 import classNames from "classnames";
 import { useClickOutside } from "../../../core/libs/click_detector";
-import { UnionYearFormModal } from "../../about/components/union_year_form_modal.component";
 import { UserFormModal } from "../../about/components/user_form_modal.component";
 import { Position } from "../../about/types/user";
 import { UnionYearVotingFormSection } from "../components/union_year_voting_form_modal.component";
@@ -31,7 +29,7 @@ export const VotePage = () => {
   //---------------------
   //   I18n
   //---------------------
-  const { t, i18n } = useTranslation(["about", "vote"]);
+  const { t, i18n } = useTranslation(["vote", "about"]);
 
   //---------------------
   //   STATE
@@ -138,7 +136,7 @@ export const VotePage = () => {
               />
             )}
             <p className="heading2 border-b border-black w-max px-[16px] mb-[24px]">
-              Voting management
+              {t("vote_title")}
             </p>
             {context.unAcceptedYearOption.length === 0 &&
               authContext.isPermission(["Publisher"]) && (
@@ -148,9 +146,7 @@ export const VotePage = () => {
                     (option) =>
                       option.name === new Date().getFullYear().toString()
                   ) === -1 ? (
-                    <p className="caption1">
-                      Student union is created for this year
-                    </p>
+                    <p className="caption1">{t("vote_created_banner")}</p>
                   ) : (
                     <UnionYearVotingFormSection />
                   )}
@@ -162,9 +158,9 @@ export const VotePage = () => {
                 <div className="flex items-center h-[320px]">
                   <p className="caption1">
                     {context.voteStatus === "close" &&
-                      "Out of voting time. Please wait for the result."}
+                      t("vote_not_vote_time_banner")}
                     {context.voteStatus === "prepare" &&
-                      "There's no concil to vote"}
+                      t("vote_no_concil_to_vote")}
                   </p>
                 </div>
               )}
@@ -176,14 +172,16 @@ export const VotePage = () => {
                       <Fragment>
                         <Button
                           onClick={() => context.deleteCurrentYear()}
-                          title={"delete"}
+                          title={t("vote_delete_button")}
                           widthCss="w-[137px]"
                           heightCss="h-[52px]"
                         />
 
                         <Button
                           onClick={() => (context.isEditMode = true)}
-                          title={t("about_page_student_union_manage_button")}
+                          title={t("about_page_student_union_manage_button", {
+                            ns: "about",
+                          })}
                           widthCss="w-[137px]"
                           heightCss="h-[52px]"
                         />
@@ -238,7 +236,9 @@ export const VotePage = () => {
                 context.voteStatus === "close")) && (
               <div className="w-[137px] self-center mb-[32px] laptop:mb-[72px]">
                 <div className="rounded-[10px] border border-black h-[52px] w-[137px] flex items-center justify-center">
-                  <p className="button">{context.year}</p>
+                  <p className="button">
+                    {context.year + (i18n.language === "th" ? 543 : 0)}
+                  </p>
                 </div>
               </div>
             )}
@@ -250,8 +250,12 @@ export const VotePage = () => {
                       data={{
                         labels:
                           context.voteStatus === "close"
-                            ? ["Accept", "Reject", "No Vote"]
-                            : ["All Vote"],
+                            ? [
+                                t("vote_accept"),
+                                t("vote_reject"),
+                                t("vote_no_vote"),
+                              ]
+                            : [t("vote_all_vote")],
                         datasets: [
                           {
                             data:
@@ -287,30 +291,36 @@ export const VotePage = () => {
                   </div>
                   <div className="w-full h-full justify-center tablet:space-y-[24px] space-y-[16px] laptop:space-y-[32px] flex flex-col">
                     <p className="tablet:topic subheading1">
-                      <span className="font-bold">Result:</span>{" "}
-                      {context.voteDetail.voteCount || "0"} vote
+                      <span className="font-bold">
+                        {t("vote_result_title")}
+                      </span>
+                      {": "}
+                      {context.voteDetail.voteCount || "0"}{" "}
+                      {t("vote_vote_unit")}
                     </p>
                     <div>
                       <p className="tablet:heading5 subheading2">
-                        <span className="font-bold">Accept:</span>{" "}
-                        {context.voteDetail.accept || "-"} Vote
+                        <span className="font-bold">{t("vote_accept")}</span>
+                        {": "}
+                        {context.voteDetail.accept || "-"} {t("vote_vote_unit")}
                       </p>
                       <p className="tablet:heading5 subheading2">
-                        <span className="font-bold">Reject:</span>{" "}
-                        {context.voteDetail.reject || "-"} Vote
+                        <span className="font-bold">{t("vote_reject")}</span>
+                        {": "}
+                        {context.voteDetail.reject || "-"} {t("vote_vote_unit")}
                       </p>
                       <p className="tablet:heading5 subheading2">
-                        <span className="font-bold">No vote:</span>{" "}
-                        {context.voteDetail.noVote || "-"} Vote
+                        <span className="font-bold">{t("vote_no_vote")}</span>
+                        {": "}
+                        {context.voteDetail.noVote || "-"} {t("vote_vote_unit")}
                       </p>
                     </div>
                     <p className="caption2">
-                      *If you consent in result of voting, please add all
-                      information in Student Union.
+                      {t("vote_result_consent_warning")}
                     </p>
                     <Button
                       onClick={() => context.onAcceptUnion()}
-                      title="add to student union"
+                      title={t("vote_add_to_union_title")}
                       widthCss="laptop:w-[381px] tablet:w-[240px] w-[196px] tablet:mx-0 mx-auto"
                       heightCss="tablet:h-[52px] h-[40px]"
                       disabled={context.voteStatus !== "close"}
@@ -345,11 +355,7 @@ export const VotePage = () => {
               context.voteStatus === "open" &&
               (context.isVotable ? (
                 <div className="space-y-[64px] flex flex-col items-center">
-                  <p className="subtitle">
-                    * เนื่องจากมีผู้สมัครเพียงพรรคเดียว
-                    การลงคะแนนเสียงจะสามารถเลือกได้เพียง รับรอง ไม่รับรอง
-                    หรือไม่ประสงค์ลงคะแนน
-                  </p>
+                  <p className="subtitle">{t("vote_only_concil_warning")}</p>
                   <div className="space-y-[24px]">
                     {_.map<Vote>(
                       ["ACCEPT", "REJECT", "NO_VOTE"],
@@ -366,7 +372,7 @@ export const VotePage = () => {
                               () => context.onVote(vote)
                             )
                           }
-                          title={_.replace(vote, "_", " ")}
+                          title={`vote_${vote.toLowerCase()}`} /* TODO: add i18n here */
                           widthCss="tablet:w-[381px] w-[240px]"
                           heightCss="h-[52px]"
                         />
@@ -376,7 +382,7 @@ export const VotePage = () => {
                 </div>
               ) : (
                 <Button
-                  title="You have voted"
+                  title={t("vote_voted")}
                   onClick={() => null}
                   widthCss="w-[160px]"
                   heightCss="h-[52px]"
@@ -390,7 +396,9 @@ export const VotePage = () => {
                     context.addedUser = [];
                     context.isEditMode = false;
                   }}
-                  title={t("about_page_cancel_button")}
+                  title={t("about_page_cancel_button", {
+                    ns: "about",
+                  })}
                   widthCss="w-[137px]"
                   heightCss="h-[40px] laptop:h-[52px]"
                 />
@@ -403,7 +411,9 @@ export const VotePage = () => {
                       context.preparationYear();
                     });
                   }}
-                  title={t("about_page_save_button")}
+                  title={t("about_page_save_button", {
+                    ns: "about",
+                  })}
                   widthCss="w-[137px]"
                   heightCss="h-[40px] laptop:h-[52px]"
                 />

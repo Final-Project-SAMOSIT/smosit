@@ -1,0 +1,17 @@
+{
+    "vote_title": "Voting management",
+    "vote_created_banner": "Student union is created for this year",
+    "vote_not_vote_time_banner": "Out of voting time. Please wait for the result.",
+    "vote_no_concil_to_vote": "There's no concil to vote",
+    "vote_delete_button": "delete",
+    "vote_accept": "Accept",
+    "vote_reject": "Reject",
+    "vote_no_vote": "No Vote",
+    "vote_all_vote": "All Vote",
+    "vote_result_title": "Result",
+    "vote_vote_unit": "Vote",
+    "vote_result_consent_warning": "*If you consent in result of voting, please add all information in Student Union.",
+    "vote_add_to_union_title": "add to student union",
+    "vote_only_concil_warning": "* Due to there's only one student union, you can choose only accept, reject or no vote",
+    "vote_voted": "You have voted"
+}
