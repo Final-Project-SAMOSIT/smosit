@@ -74,6 +74,38 @@ export const Calendar = (props: CalendarProps) => {
     }
   }
 
+  function getMonthNum(month: string) {
+    switch (month) {
+      case "Jan":
+        return 1;
+      case "Feb":
+        return 2;
+      case "Mar":
+        return 3;
+      case "Apr":
+        return 4;
+      case "May":
+        return 5;
+      case "Jun":
+        return 6;
+      case "Jul":
+        return 7;
+      case "Aug":
+        return 8;
+      case "Sep":
+        return 9;
+      case "Oct":
+        return 10;
+      case "Nov":
+        return 11;
+      case "Dec":
+        return 12;
+
+      default:
+        return 1;
+    }
+  }
+
   function onChange(date: Date) {
     props.onChange(date);
   }
@@ -100,7 +132,7 @@ export const Calendar = (props: CalendarProps) => {
             >
               <div className="p-[8px] grid grid-cols-7 gap-x-[4px]">
                 <div
-                  className="caption1 cursor-pointer select-none col-span-5 pl-[4px] h-[32px] overflow-hidden"
+                  className="caption1 cursor-pointer select-none col-span-5 pl-[4px] h-[26px] laptop:h-[32px] overflow-hidden"
                   onClick={handleModeChange}
                 >
                   {_.map<Mode>(["date", "month", "year"], (mode: Mode) => (
@@ -109,8 +141,9 @@ export const Calendar = (props: CalendarProps) => {
                         "font-bold hover:bg-gray-30 p-[4px] rounded-[4px] transform duration-300",
                         {
                           "translate-y-[-0px]": selectingMode === "date",
-                          "translate-y-[-32px]": selectingMode === "month",
-                          "translate-y-[-64px] text-gray-50":
+                          "laptop:translate-y-[-32px] translate-y-[-26px]":
+                            selectingMode === "month",
+                          "laptop:translate-y-[-64px] translate-y-[-52px] text-gray-50":
                             selectingMode === "year",
                         }
                       )}
@@ -248,7 +281,7 @@ export const Calendar = (props: CalendarProps) => {
                                 dayjs(props.value)
                                   .set(
                                     "month",
-                                    Number(dayjs(value, "MMM").format("M")) - 1
+                                    getMonthNum(value.toString()) - 1
                                   )
                                   .toDate()
                               );
