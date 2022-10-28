@@ -29,7 +29,7 @@ class DocumentContextClass {
     try {
       this.isLoading = true;
       console.log(role);
-      const resp: AxiosResponse<{ data: Array<Document> }> =
+      const resp: AxiosResponse<{ data: Array<Document>; allItems: number }> =
         await getDocumentList(
           role === "Publisher"
             ? {
@@ -45,6 +45,7 @@ class DocumentContextClass {
 
       if (resp.status !== 204) {
         this.documentList = resp.data.data;
+        this.totalPage = Math.ceil(resp.data.allItems / 6);
       } else {
         this.documentList = [];
       }

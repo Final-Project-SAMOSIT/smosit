@@ -120,6 +120,8 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                       height={30}
                       radius={6}
                       value={formik.values.form_info?.institution || ""}
+                      error={formik.errors.form_info?.institution}
+                      hide-error-text
                       onChange={(e) => {
                         if (mesureText(e.target.value) <= 221) {
                           formik.setFieldValue(
