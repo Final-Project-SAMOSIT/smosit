@@ -95,7 +95,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
           style={{
             height: isOpen
               ? contentRef.current?.clientHeight
-              : window.innerWidth <= 720
+              : window.innerWidth <= 768
               ? 56
               : 67,
           }}
@@ -123,8 +123,8 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
             <div className="space-y-[14px]">
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">ชื่อโครงการ</p>
-                <div className="flex-grow flex space-x-[8px] items-center">
-                  <div className="w-[620px]">
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
+                  <div className="laptop:w-[620px] w-full">
                     <TextInput
                       height={30}
                       radius={6}
@@ -181,7 +181,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                       }}
                     />
                   </div>
-                  <p className="text-error caption2">
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
                     {formik.errors.request_info?.project_due_to}
                   </p>
                 </div>
@@ -228,9 +228,9 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[168px] body">สถานที่จัดโครงการ</p>
-                <div className="flex-grow flex space-x-[8px] items-center">
-                  <div className="w-[620px]">
+                <p className="w-[192px] body">สถานที่จัดโครงการ</p>
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
+                  <div className="laptop:w-[620px] w-full">
                     <TextInput
                       height={30}
                       radius={6}
@@ -253,7 +253,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                       }}
                     />
                   </div>
-                  <p className="text-error caption2">
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
                     {formik.errors.request_info?.location}
                   </p>
                 </div>

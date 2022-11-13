@@ -92,7 +92,7 @@ export const DocumentDocumentFormPage = () => {
               <div className="bg-gray-10 pt-[32px] pb-[48px] flex flex-col items-stretch space-y-[48px] tablet:px-[24px] px-[12px] laptop:px-[86px]">
                 <div className="space-y-[16px] flex flex-col items-center">
                   <p className="text-center title">
-                    แบบขออนุมัติขอจัดกิจกรรมนักศึกษา
+                    {t("document_document_label")}
                   </p>
                   <div className="h-[1px] w-[160px] tablet:w-[350px] bg-black" />
                 </div>
@@ -103,13 +103,13 @@ export const DocumentDocumentFormPage = () => {
                 <div className="justify-center space-x-[24px] flex">
                   <Button
                     onClick={() => formik.submitForm()}
-                    title="Save Draft"
+                    title={t("document_save_button")}
                     widthCss="w-[137px]"
                     heightCss="h-[40px] tablet:h-[52px]"
                   ></Button>
                   <Button
                     onClick={() => context.onPrint()}
-                    title="Export"
+                    title={t("document_export_button")}
                     widthCss="w-[137px]"
                     heightCss="h-[40px] tablet:h-[52px]"
                   ></Button>

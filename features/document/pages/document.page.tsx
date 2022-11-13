@@ -22,11 +22,11 @@ export const DocumentPage = () => {
   const documentMetaData = [
     {
       name: "proposal",
-      label: "แบบขออนุมัติโครงการ และงบประมาณ",
+      label: t("document_proposal_label"),
     },
     {
       name: "document",
-      label: "แบบขออนุมัติขอจัดกิจกรรมนักศึกษา",
+      label: t("document_document_label"),
     },
   ];
 
@@ -58,7 +58,7 @@ export const DocumentPage = () => {
           <div className="my-[64px] space-y-[48px]">
             <div className="bg-gray-10 pt-[32px] pb-[48px] flex flex-col items-stretch space-y-[48px]">
               <div className="space-y-[8px] tablet:space-y-[16px] flex flex-col items-center">
-                <p className="text-center title">แบบบันทึกแผนโครงการ</p>
+                <p className="text-center title">{t("document_title")}</p>
                 <div className="h-[1px] w-[160px] tablet:w-[350px] bg-black" />
               </div>
               <div className="flex flex-col items-center justify-around space-y-[24px] tablet:space-y-0 tablet:flex-row">
@@ -81,26 +81,37 @@ export const DocumentPage = () => {
               </div>
             </div>
             <div className="space-y-[24px] flex flex-col items-center">
-              <p className="title">My History</p>
+              <p className="title">{t("document_history_label")}</p>
               <div className="flex flex-col items-center justify-center w-full">
                 <div className="h-[50px] py-[14px] border-b-[1.5px] border-gray-40 flex w-full">
-                  <p className="heading6 w-[96px] tablet:w-[320px]">DATE</p>
-                  <p className="heading6">TOPIC</p>
+                  <p className="heading6 w-[96px] tablet:w-[160px] ">
+                    {t("document_history_table_header_date")}
+                  </p>
+                  <p className="heading6 w-[96px] tablet:w-[160px] tablet:block hidden">
+                    {t("document_history_table_header_user")}
+                  </p>
+                  <p className="heading6">
+                    {t("document_history_table_header_topic")}
+                  </p>
                 </div>
                 {!authContext.me && (
                   <p className="subheading2 my-[16px]">
-                    เข้าสู่ระบบเพื่อนดูประวัติการสร้างเอสาร
+                    {t("document_login_first")}
                   </p>
                 )}
                 {_.size(context.documentList) > 0 ? (
                   <Fragment>
                     {_.map(context.documentList, (document) => (
                       <div className="h-[50px] py-[14px] border-b-[1.5px] border-gray-40 flex w-full">
-                        <p className="text-body w-[96px] tablet:w-[320px]">
+                        <p className="text-body w-[96px] tablet:w-[160px]">
                           {dayjs(document.created_date)
                             .locale(i18n.language)
                             .add(i18n.language === "th" ? 543 : 0, "year")
                             .format("D/M/YYYY")}
+                        </p>
+                        <p className="text-body w-[96px] tablet:w-[160px] tablet:block hidden">
+                          {document.project_approved[0]?.user_id ||
+                            document.request_info[0]?.user_id}
                         </p>
                         <div className="flex justify-between flex-grow">
                           <a
@@ -114,7 +125,9 @@ export const DocumentPage = () => {
                           >
                             <p className="truncate cursor-pointer select-none text-body max-w-[158px] tablet:max-w-[264px]">
                               {document.solution.trim() === ""
-                                ? document.form_type
+                                ? t(
+                                    `document_${document.form_type}_label`
+                                  ) /* TODO: language */
                                 : document.solution}
                             </p>
                           </a>
@@ -123,8 +136,8 @@ export const DocumentPage = () => {
                             className="underline text-body w-[56px] text-right cursor-pointer select-none break-all truncate"
                             onClick={() =>
                               modal.openModal(
-                                "ลบเอกสาร",
-                                "คุณต้องการจะลบเอกสารใช่หรือไม่?",
+                                t("document_delete_document_modal_title"),
+                                t("document_delete_document_modal_message"),
                                 () =>
                                   context.onDelete(
                                     document.form_info_id,
@@ -134,7 +147,7 @@ export const DocumentPage = () => {
                               )
                             }
                           >
-                            delete
+                            {t("document_delete_button")}
                           </p>
                         </div>
                       </div>
@@ -155,7 +168,9 @@ export const DocumentPage = () => {
                   </Fragment>
                 ) : (
                   authContext.me && (
-                    <p className="subheading2 my-[16px]">There's no History</p>
+                    <p className="subheading2 my-[16px]">
+                      {t("document_no_history_banner")}
+                    </p>
                   )
                 )}
                 {context.isLoading && (

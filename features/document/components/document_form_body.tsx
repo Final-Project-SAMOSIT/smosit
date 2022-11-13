@@ -36,6 +36,23 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
   const { t, i18n } = useTranslation("document");
 
   //---------------------
+  //   HANDLED
+  //---------------------
+  function mesureText(text: string): number {
+    const p = document.createElement("p");
+    p.className = "text-pdf w-max";
+    p.innerHTML = text;
+    p.id = "mesureText";
+
+    document.body.appendChild(p);
+    const elem = document.getElementById("mesureText");
+    const width = elem?.offsetWidth || 0;
+    console.log(width);
+    document.body.removeChild(p);
+    return width;
+  }
+
+  //---------------------
   //   EFFECT
   //---------------------
   useEffect(() => {
@@ -60,7 +77,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
           style={{
             height: isOpen
               ? contentRef.current?.clientHeight
-              : window.innerWidth <= 720
+              : window.innerWidth <= 768
               ? 56
               : 67,
           }}
@@ -88,28 +105,51 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
             <div className="space-y-[14px]">
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">ชื่อโครงการ</p>
-                <div className="flex-grow">
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
                     radius={6}
                     value={formik.values.project_name || ""}
-                    onChange={(e) =>
-                      formik.setFieldValue("project_name", e.target.value)
-                    }
+                    error={formik.errors.project_name}
+                    hide-error-text
+                    onChange={(e) => {
+                      if (mesureText(e.target.value) <= 179) {
+                        formik.setFieldValue("project_name", e.target.value);
+                        formik.setFieldError("project_name", "");
+                      } else {
+                        formik.setFieldError(
+                          "project_name",
+                          "ข้อความยาวเกินไป"
+                        );
+                      }
+                    }}
                   />
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
+                    {formik.errors.project_name}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">ชื่อชมรม</p>
-                <div className="flex-grow">
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
                     radius={6}
                     value={formik.values.club_name || ""}
-                    onChange={(e) =>
-                      formik.setFieldValue("club_name", e.target.value)
-                    }
+                    error={formik.errors.club_name}
+                    hide-error-text
+                    onChange={(e) => {
+                      if (mesureText(e.target.value) <= 192) {
+                        formik.setFieldValue("club_name", e.target.value);
+                        formik.setFieldError("club_name", "");
+                      } else {
+                        formik.setFieldError("club_name", "ข้อความยาวเกินไป");
+                      }
+                    }}
                   />
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
+                    {formik.errors.club_name}
+                  </p>
                 </div>
               </div>
               <div className="flex laptop:flex-row flex-col items-stretch laptop:items-center">
@@ -149,41 +189,77 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">สถานที่</p>
-                <div className="flex-grow">
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
                     radius={6}
                     value={formik.values.location || ""}
-                    onChange={(e) =>
-                      formik.setFieldValue("location", e.target.value)
-                    }
+                    error={formik.errors.location}
+                    hide-error-text
+                    onChange={(e) => {
+                      if (mesureText(e.target.value) <= 119) {
+                        formik.setFieldValue("location", e.target.value);
+                        formik.setFieldError("location", "");
+                      } else {
+                        formik.setFieldError("location", "ข้อความยาวเกินไป");
+                      }
+                    }}
                   />
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
+                    {formik.errors.location}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">จุดประสงค์ (โดยสังเขป)</p>
-                <div className="flex-grow">
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
                     radius={6}
                     value={formik.values.project_purpose || ""}
-                    onChange={(e) =>
-                      formik.setFieldValue("project_purpose", e.target.value)
-                    }
+                    error={formik.errors.project_purpose}
+                    hide-error-text
+                    onChange={(e) => {
+                      if (mesureText(e.target.value) <= 179) {
+                        formik.setFieldValue("project_purpose", e.target.value);
+                        formik.setFieldError("project_purpose", "");
+                      } else {
+                        formik.setFieldError(
+                          "project_purpose",
+                          "ข้อความยาวเกินไป"
+                        );
+                      }
+                    }}
                   />
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
+                    {formik.errors.project_purpose}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
                 <p className="w-[192px] body">ลักษณะกิจกรรม (โดยสังเขป)</p>
-                <div className="flex-grow">
+                <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
                     radius={6}
                     value={formik.values.about_project || ""}
-                    onChange={(e) =>
-                      formik.setFieldValue("about_project", e.target.value)
-                    }
+                    error={formik.errors.about_project}
+                    hide-error-text
+                    onChange={(e) => {
+                      if (mesureText(e.target.value) <= 230) {
+                        formik.setFieldValue("about_project", e.target.value);
+                        formik.setFieldError("about_project", "");
+                      } else {
+                        formik.setFieldError(
+                          "about_project",
+                          "ข้อความยาวเกินไป"
+                        );
+                      }
+                    }}
                   />
+                  <p className="text-error caption2 laptop:w-[121px] w-auto">
+                    {formik.errors.about_project}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">

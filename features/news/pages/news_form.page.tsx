@@ -19,7 +19,7 @@ export const NewsFormPage = () => {
   //---------------------
   //   i18n
   //---------------------
-  const { t } = useTranslation("news");
+  const { t, i18n } = useTranslation(["news"]);
 
   //---------------------
   //   CONTEXT
@@ -261,7 +261,13 @@ export const NewsFormPage = () => {
                 disabled={isYearDisabled()}
               />
             </div>
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center space-x-[16px]">
+              <Button
+                onClick={() => router.back()}
+                title={i18n.language === "th" ? "ยกเลิก" : "Cancel"}
+                heightCss="h-[40px] laptop:h-[52px]"
+                widthCss="w-[137px]"
+              ></Button>
               <Button
                 onClick={() => formik.submitForm()}
                 title={t("news_form_publish_button")}
