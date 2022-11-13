@@ -36,7 +36,6 @@ class AuthContextClass {
         const resp = await getMe();
         if (resp.status === 200) {
           this.me = resp.data.userDetail;
-          console.log("success");
         } else {
           this.me = null;
         }

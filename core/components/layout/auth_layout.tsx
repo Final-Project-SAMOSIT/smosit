@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/auth.context";
 import { ModalContext } from "../../context/modal.context";
 import { useTranslation } from "next-i18next";
 import Loading from "../utility/loading";
+import { useRouter } from "next/router";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -19,6 +20,11 @@ export const AuthLayout = (props: AuthLayoutProps) => {
   //---------------------
   //   CONTEXT
   //---------------------
+  const router = useRouter();
+
+  //---------------------
+  //   CONTEXT
+  //---------------------
   const context = useContext(AuthContext);
   const modal = useContext(ModalContext);
 
@@ -28,7 +34,16 @@ export const AuthLayout = (props: AuthLayoutProps) => {
   useEffect(() => {
     context.t = t;
     context.modal = modal;
-    context.Me();
+    async function fetch() {
+      await context.Me();
+      if (
+        context.me?.roles.role_name === "Admin" &&
+        router.asPath !== "/users"
+      ) {
+        router.push("/users");
+      }
+    }
+    fetch();
   }, []);
 
   //---------------------

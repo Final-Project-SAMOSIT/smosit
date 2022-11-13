@@ -12,6 +12,7 @@ import { useClickOutside } from "../../libs/click_detector";
 
 interface NavbarProps {
   noTranslation?: boolean;
+  lite?: boolean;
 }
 
 export const Navbar = (props: NavbarProps) => {
@@ -98,55 +99,59 @@ export const Navbar = (props: NavbarProps) => {
               className="laptop:h-[60px] h-[36px] mobile:mt-[8px] m-0 cursor-pointer"
               onClick={() => router.push("/")}
             />
-            <div className="laptop:flex space-x-[32px] hidden">
-              <div
-                className="cursor-pointer w-max flex flex-col space-y-[8px] group"
-                onClick={() => router.push("/")}
-                key={`nav_home_link_button`}
-              >
-                <p className="heading5">
-                  {props.noTranslation ? "Home" : t("navbar_feature_home_name")}
-                </p>
-                <div
-                  className={classNames([
-                    "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black transition-all duration-300",
-                    {
-                      "w-[calc(100%-12px)]": router.asPath === "/",
-                    },
-                    {
-                      "w-0": router.asPath !== "/",
-                    },
-                  ])}
-                ></div>
-              </div>
-
-              {_.map(getFeatures(), (feature) => (
+            {!props.lite && (
+              <div className="laptop:flex space-x-[32px] hidden">
                 <div
                   className="cursor-pointer w-max flex flex-col space-y-[8px] group"
-                  onClick={() => router.push(feature.route)}
-                  key={`nav_${feature.name}_link_button`}
+                  onClick={() => router.push("/")}
+                  key={`nav_home_link_button`}
                 >
-                  <p className="heading5">{feature.name}</p>
+                  <p className="heading5">
+                    {props.noTranslation
+                      ? "Home"
+                      : t("navbar_feature_home_name")}
+                  </p>
                   <div
                     className={classNames([
                       "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black transition-all duration-300",
                       {
-                        "w-[calc(100%-12px)]":
-                          feature.name ===
-                          (props.noTranslation
-                            ? "Home"
-                            : t("navbar_feature_home_name"))
-                            ? router.asPath === "/"
-                            : _.includes(router.asPath, feature.route),
+                        "w-[calc(100%-12px)]": router.asPath === "/",
                       },
                       {
-                        "w-0": !_.includes(router.asPath, feature.route),
+                        "w-0": router.asPath !== "/",
                       },
                     ])}
                   ></div>
                 </div>
-              ))}
-            </div>
+
+                {_.map(getFeatures(), (feature) => (
+                  <div
+                    className="cursor-pointer w-max flex flex-col space-y-[8px] group"
+                    onClick={() => router.push(feature.route)}
+                    key={`nav_${feature.name}_link_button`}
+                  >
+                    <p className="heading5">{feature.name}</p>
+                    <div
+                      className={classNames([
+                        "group-hover:w-[calc(100%-12px)] mx-[6px] h-[1px] bg-black transition-all duration-300",
+                        {
+                          "w-[calc(100%-12px)]":
+                            feature.name ===
+                            (props.noTranslation
+                              ? "Home"
+                              : t("navbar_feature_home_name"))
+                              ? router.asPath === "/"
+                              : _.includes(router.asPath, feature.route),
+                        },
+                        {
+                          "w-0": !_.includes(router.asPath, feature.route),
+                        },
+                      ])}
+                    ></div>
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="flex space-x-[16px] items-center relative">
               <div className="flex space-x-[4px] body laptop:heading6">
                 <p
