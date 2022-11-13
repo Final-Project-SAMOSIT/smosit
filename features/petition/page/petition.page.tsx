@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Observer } from "mobx-react-lite";
 import { MainLayout } from "../../../core/components/layout/main_layout";
 import { Button } from "../../../core/components/input/button.component";
@@ -33,6 +39,11 @@ export const PetitionPage = () => {
   const context = useContext(petitionContext);
   const authContext = useContext(AuthContext);
   const modal = useContext(ModalContext);
+
+  //---------------------
+  //   REF
+  //---------------------
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   //---------------------
   //   REF
@@ -89,6 +100,10 @@ export const PetitionPage = () => {
     }));
   }
 
+  function onDeleteImage() {
+    formik.setFieldValue("petition_img", "");
+  }
+
   //---------------------
   //   EFFECT
   //---------------------
@@ -98,8 +113,8 @@ export const PetitionPage = () => {
     if (!authContext.isPermission(["Users"])) {
       router.push("/401");
     } else {
-    context.preparationForm();
-    context.preparationPetition(authContext.me?.user_id || "");
+      context.preparationForm();
+      context.preparationPetition(authContext.me?.user_id || "");
     }
   }, []);
 
@@ -176,6 +191,58 @@ export const PetitionPage = () => {
                   showLimit
                 />
               </div>
+
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  if (e.target?.files) {
+                    context.onUploadImage(e.target?.files[0], (url) => {
+                      formik.setFieldValue("petition_img", url);
+                    });
+                  }
+                }}
+                ref={fileInputRef}
+              />
+              <p className="heading6">
+                {t("petition_form_upload_image_title")}
+              </p>
+              {formik.values.petition_img ? (
+                <div className="w-full aspect-[3/1] relative">
+                  <img
+                    src={formik.values.petition_img}
+                    className="w-full aspect-[3/1] object-contain bg-black mb-[18px]"
+                    alt=""
+                  />
+                  <i
+                    className="absolute bottom-[28px] text-[14px] right-[14px] fas fa-trash-alt text-gray-50 bg-white py-[9px] px-[11px] rounded-[8px] cursor-pointer"
+                    onClick={onDeleteImage}
+                  />
+                </div>
+              ) : (
+                <Fragment>
+                  <div
+                    className={classNames(
+                      "w-full aspect-[3/1] rounded-[10px] border border-dashed p-[16px] tablet:p-0 flex flex-col items-center justify-center tablet:space-y-[36px] space-y-[24px] laptop:space-y-[48px] tablet:mt-[24px] mt-[16px] laptop:mt-[36px] cursor-pointer bg-white",
+                      {
+                        "border-error": formik.errors.petition_img,
+                        "border-dark-50": !formik.errors.petition_img,
+                      }
+                    )}
+                    onClick={() => fileInputRef?.current?.click()}
+                  >
+                    <i className="fa-solid fa-file-image text-gray-40 text-[72px]" />
+                    <p className="caption2 select-none">Support: jpg, png</p>
+                  </div>
+                  {formik.errors.petition_img && (
+                    <p className="caption2 text-error min-h-[21px] mt-[8px]">
+                      {formik.errors.petition_img}
+                    </p>
+                  )}
+                </Fragment>
+              )}
+
               <div className="flex justify-center w-full">
                 <Button
                   onClick={() => formik.submitForm()}

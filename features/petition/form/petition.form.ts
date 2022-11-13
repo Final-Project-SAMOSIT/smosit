@@ -6,6 +6,7 @@ export const petitionFormInit = {
   petition_details: "",
   type_id: "",
   status_id: "1",
+  petition_img: "",
 };
 
 export const petitionValidate = Yup.object().shape({

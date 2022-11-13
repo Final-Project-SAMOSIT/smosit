@@ -9,6 +9,8 @@ import { postPetition } from "../../../core/service/petition/post_petition";
 import { FormikProps } from "formik";
 import { Petition } from "../types/petetion_type";
 import { ModalContextClass } from "../../../core/context/modal.context";
+import { AxiosResponse } from "axios";
+import { postUploadFile } from "../../../core/service/news/post_news";
 
 class PetitionContext {
   topic: string;
@@ -98,6 +100,20 @@ class PetitionContext {
           err.message
         );
       }
+    }
+  }
+
+  async onUploadImage(file: File, onUploaded: (url: string) => void) {
+    try {
+      const formData = new FormData();
+      formData.append("photo", file);
+      const resp: AxiosResponse<{ data: string }> = await postUploadFile(
+        formData
+      );
+      onUploaded(resp.data.data);
+    } catch (err: any) {
+      console.log(err);
+      this.modal?.openModal(this.t("modal_news_form_upload_fail"), err.message);
     }
   }
 }

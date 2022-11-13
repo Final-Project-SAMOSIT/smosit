@@ -6,6 +6,7 @@ export interface Petition {
   status_id: string;
   type_id: string;
   user_id: string;
+  petition_img: string;
   status: {
     status_id: string;
     status_name: PetitionStatus;
