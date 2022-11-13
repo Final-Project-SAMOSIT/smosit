@@ -43,7 +43,7 @@ export const UserPage = () => {
               <p className="heading6 tablet:w-[160px] w-[160px] laptop:w-[240px]">
                 ไอดีผู้ใช้งาน
               </p>
-              <p className="heading6 tablet:w-[240px] hidden tablet:block laptop:w-[320px]">
+              <p className="heading6 tablet:w-[296px] hidden tablet:block laptop:w-[320px]">
                 ชื่อผู้ใช้งาน
               </p>
               <p className="heading6 w-[119px] pr-[8px]">สิทธิ์</p>
@@ -58,7 +58,7 @@ export const UserPage = () => {
                   <p className="body tablet:w-[160px] w-[160px] laptop:w-[240px]">
                     {user.user_id}
                   </p>
-                  <p className="body lap tablet:w-[240px] top:w-[320px] hidden tablet:block">
+                  <p className="body lap tablet:w-[296px] top:w-[320px] hidden tablet:block">
                     {i18n.language === "th" ? user.name_th : user.name_en}
                   </p>
                   <div className="w-[119px] pr-[8px]">
