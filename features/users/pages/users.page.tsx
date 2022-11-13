@@ -40,9 +40,13 @@ export const UserPage = () => {
 
           <div className="flex flex-col w-max">
             <div className="flex pb-[32px] border-b border-gray-40">
-              <p className="heading6 w-[240px]">ไอดีผู้ใช้งาน</p>
-              <p className="heading6 w-[320px]">ชื่อผู้ใช้งาน</p>
-              <p className="heading6 w-[160px]">สิทธิ์</p>
+              <p className="heading6 tablet:w-[160px] w-[160px] laptop:w-[240px]">
+                ไอดีผู้ใช้งาน
+              </p>
+              <p className="heading6 tablet:w-[240px] hidden tablet:block laptop:w-[320px]">
+                ชื่อผู้ใช้งาน
+              </p>
+              <p className="heading6 w-[119px] pr-[8px]">สิทธิ์</p>
             </div>
             {context.isLoading ? (
               <div className="flex justify-center my-[16px]">
@@ -51,11 +55,13 @@ export const UserPage = () => {
             ) : (
               _.map(context.userList, (user) => (
                 <div className="flex border-b border-gray-40 h-[50px] items-center">
-                  <p className="body w-[240px]">{user.user_id}</p>
-                  <p className="body w-[320px]">
+                  <p className="body tablet:w-[160px] w-[160px] laptop:w-[240px]">
+                    {user.user_id}
+                  </p>
+                  <p className="body lap tablet:w-[240px] top:w-[320px] hidden tablet:block">
                     {i18n.language === "th" ? user.name_th : user.name_en}
                   </p>
-                  <div className="w-[119px]">
+                  <div className="w-[119px] pr-[8px]">
                     <Dropdown
                       onChange={(e) =>
                         context.onChangeUserRole(user.user_id, e.toString())
