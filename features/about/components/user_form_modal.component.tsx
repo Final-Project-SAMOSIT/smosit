@@ -7,7 +7,7 @@ import _ from "lodash";
 import { userFormContext } from "../contexts/user_form.context";
 import { ModalContext } from "../../../core/context/modal.context";
 import { Dropdown } from "../../../core/components/input/dropdown_input";
-import { positionMap, UserInfo } from "../types/user";
+import { Position, positionMap, UserInfo } from "../types/user";
 import { useTranslation } from "next-i18next";
 import { Button } from "../../../core/components/input/button.component";
 import classNames from "classnames";

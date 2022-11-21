@@ -91,7 +91,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
               className="flex items-center justify-between cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <p className="topic2">ข้อมูลส่วนเนื้อหาโครงการ</p>
+              <p className="topic2">{t("document_body_topic")}</p>
               <i
                 className={classNames(
                   "fas fa-caret-down text-[22px] transform duration-200",
@@ -104,7 +104,9 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
             </div>
             <div className="space-y-[14px]">
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">ชื่อโครงการ</p>
+                <p className="w-[192px] body">
+                  {t("document_document_proposal_name")}
+                </p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
@@ -119,7 +121,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                       } else {
                         formik.setFieldError(
                           "project_name",
-                          "ข้อความยาวเกินไป"
+                          t("document_document_error_too_long_text")
                         );
                       }
                     }}
@@ -130,7 +132,9 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">ชื่อชมรม</p>
+                <p className="w-[192px] body">
+                  {t("document_document_club_name")}
+                </p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
@@ -143,7 +147,10 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                         formik.setFieldValue("club_name", e.target.value);
                         formik.setFieldError("club_name", "");
                       } else {
-                        formik.setFieldError("club_name", "ข้อความยาวเกินไป");
+                        formik.setFieldError(
+                          "club_name",
+                          t("document_document_error_too_long_text")
+                        );
                       }
                     }}
                   />
@@ -153,10 +160,14 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                 </div>
               </div>
               <div className="flex laptop:flex-row flex-col items-stretch laptop:items-center">
-                <p className="w-[192px] body">วัน/เดือน/ปี ที่จัดโครงการ</p>
+                <p className="w-[192px] body">
+                  {t("document_document_organize_date")}
+                </p>
                 <div className="flex-grow flex laptop:flex-row flex-col items-stretch laptop:space-y-0 space-y-[8px] laptop:items-center space-x-0 laptop:space-x-[24px]">
                   <div className="space-x-[8px] flex items-center">
-                    <p className="body laptop:w-[48px] w-[34px]">เริ่ม</p>
+                    <p className="body laptop:w-[48px] w-[34px]">
+                      {t("document_document_organize_start_date")}
+                    </p>
                     <TextInput
                       height={30}
                       width={160}
@@ -172,7 +183,9 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                     />
                   </div>
                   <div className="space-x-[8px] flex items-center">
-                    <p className="body laptop:w-[48px] w-[34px]">สิ้นสุด</p>
+                    <p className="body laptop:w-[48px] w-[34px]">
+                      {t("document_document_organize_end_date")}
+                    </p>
                     <TextInput
                       height={30}
                       width={160}
@@ -188,7 +201,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">สถานที่</p>
+                <p className="w-[192px] body">{t("document_document_place")}</p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
@@ -201,7 +214,10 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                         formik.setFieldValue("location", e.target.value);
                         formik.setFieldError("location", "");
                       } else {
-                        formik.setFieldError("location", "ข้อความยาวเกินไป");
+                        formik.setFieldError(
+                          "location",
+                          t("document_document_error_too_long_text")
+                        );
                       }
                     }}
                   />
@@ -211,7 +227,9 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">จุดประสงค์ (โดยสังเขป)</p>
+                <p className="w-[192px] body">
+                  {t("document_document_brief_purpose")}
+                </p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
@@ -226,7 +244,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                       } else {
                         formik.setFieldError(
                           "project_purpose",
-                          "ข้อความยาวเกินไป"
+                          t("document_document_error_too_long_text")
                         );
                       }
                     }}
@@ -237,7 +255,9 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">ลักษณะกิจกรรม (โดยสังเขป)</p>
+                <p className="w-[192px] body">
+                  {t("document_document_brief_activity_detail")}
+                </p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
@@ -252,7 +272,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                       } else {
                         formik.setFieldError(
                           "about_project",
-                          "ข้อความยาวเกินไป"
+                          t("document_document_error_too_long_text")
                         );
                       }
                     }}
@@ -263,7 +283,7 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">ค่าใช้จ่ายในโครงการ</p>
+                <p className="w-[192px] body">{t("document_document_cost")}</p>
                 <div className="flex items-center space-x-[8px]">
                   <TextInput
                     height={30}
@@ -280,12 +300,14 @@ export const DocumentFormBody = (props: DocumentFormBodyProps) => {
                       }
                     }}
                   />
-                  <p className="body">บาท</p>
+                  <p className="body">{t("document_document_cost_unit")}</p>
                   <p className="body">{formik.values.cost_des_th}</p>
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">หมายเลขโทรศัพท์ติดต่อ</p>
+                <p className="w-[192px] body">
+                  {t("document_document_contact_no")}
+                </p>
                 <div>
                   <TextInput
                     height={30}

@@ -18,7 +18,7 @@ import { ModalContext } from "../../../core/context/modal.context";
 import { AuthContext } from "../../../core/context/auth.context";
 import Loading from "../../../core/components/utility/loading";
 import { UserFormModal } from "../components/user_form_modal.component";
-import { Position, positionMap } from "../types/user";
+import { Position, positionMap, User } from "../types/user";
 import classNames from "classnames";
 import { useClickOutside } from "../../../core/libs/click_detector";
 import { UnionYearFormModal } from "../components/union_year_form_modal.component";
@@ -62,6 +62,30 @@ export const AboutPage = () => {
     return [...context.studentList, ...context.addedUser];
   }
 
+  function getPositionOptions() {
+    const allowedPosition = _.filter(context.positionOptions, (option) => {
+      if (option.name === "President") {
+        return (
+          _.findIndex(
+            getStudentList(),
+            (student: User) =>
+              student.std_position.position_name === "President"
+          ) === -1
+        );
+      } else if (option.name === "Vice President") {
+        return (
+          _.findIndex(
+            getStudentList(),
+            (student: User) =>
+              student.std_position.position_name === "Vice President"
+          ) === -1
+        );
+      }
+      return true;
+    });
+
+    return allowedPosition;
+  }
   //---------------------
   //   EFFECT
   //---------------------
@@ -84,7 +108,7 @@ export const AboutPage = () => {
             {context.isCreateYearModalOpen && <UnionYearFormModal />}
             {context.isEditModalOpen && (
               <UserFormModal
-                positionOptions={context.positionOptions}
+                positionOptions={getPositionOptions()}
                 onClose={() => {
                   context.isEditModalOpen = false;
                   context.editingUser = {

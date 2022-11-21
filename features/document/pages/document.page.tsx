@@ -114,7 +114,16 @@ export const DocumentPage = () => {
                             document.request_info[0]?.user_id}
                         </p>
                         <div className="flex justify-between flex-grow">
+                          <p className="truncate cursor-pointer select-none text-body max-w-[158px] tablet:max-w-[264px]">
+                            {document.solution.trim() === ""
+                              ? t(
+                                  `document_${document.form_type}_label`
+                                ) /* TODO: language */
+                              : document.solution}
+                          </p>
+
                           <a
+                            className="underline text-body w-[56px] text-right cursor-pointer select-none break-all truncate"
                             href={`document/${document.form_type}/${
                               document.form_info_id
                             }/${
@@ -123,15 +132,8 @@ export const DocumentPage = () => {
                                 : document.project_approved[0]?.project_id
                             }`}
                           >
-                            <p className="truncate cursor-pointer select-none text-body max-w-[158px] tablet:max-w-[264px]">
-                              {document.solution.trim() === ""
-                                ? t(
-                                    `document_${document.form_type}_label`
-                                  ) /* TODO: language */
-                                : document.solution}
-                            </p>
+                            {t("document_edit_button")}
                           </a>
-
                           <p
                             className="underline text-body w-[56px] text-right cursor-pointer select-none break-all truncate"
                             onClick={() =>

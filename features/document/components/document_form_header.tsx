@@ -87,7 +87,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
               className="flex items-center justify-between cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <p className="topic2">ข้อมูลส่วนหัวเรื่อง</p>
+              <p className="topic2">{t("document_header_topic")}</p>
               <i
                 className={classNames(
                   "fas fa-caret-down text-[22px] transform duration-200",
@@ -100,7 +100,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
             </div>
             <div className="space-y-[14px]">
               <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px]">
-                <p className="w-[168px] body">ส่วนงานที่รับผิดชอบ</p>
+                <p className="w-[168px] body">{t("document_document_institution")}</p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
@@ -118,7 +118,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
                       } else {
                         formik.setFieldError(
                           "form_info.institution",
-                          "ข้อความยาวเกินไป"
+                          t("document_document_error_too_long_text")
                         );
                       }
                     }}
@@ -129,7 +129,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
                 </div>
               </div>
               <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px]">
-                <p className="w-[168px] body">หมายเลขโทรหน่วยงาน</p>
+                <p className="w-[168px] body">{t("document_document_institution_tel")}</p>
                 <div>
                   <TextInput
                     height={30}
@@ -142,7 +142,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
                 </div>
               </div>
               <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px]">
-                <p className="w-[168px] body">เลขที่หนังสือ / คำร้องขอ</p>
+                <p className="w-[168px] body">{t("document_document_bookno_request")}</p>
                 <div>
                   <TextInput
                     height={30}
@@ -155,7 +155,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
                 </div>
               </div>
               <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[24px]">
-                <p className="w-[168px] body">หัวข้อเรื่องที่ขออนุมัติ</p>
+                <p className="w-[168px] body">{t("document_document_topic")}</p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <TextInput
                     height={30}
@@ -173,7 +173,7 @@ export const DocumentFormHeader = (props: DocumentFormHeaderProps) => {
                       } else {
                         formik.setFieldError(
                           "form_info.solution",
-                          "ข้อความยาวเกินไป"
+                          t("document_document_error_too_long_text")
                         );
                       }
                     }}

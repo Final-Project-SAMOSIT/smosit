@@ -17,7 +17,7 @@ import _ from "lodash";
 import classNames from "classnames";
 import { useClickOutside } from "../../../core/libs/click_detector";
 import { UserFormModal } from "../../about/components/user_form_modal.component";
-import { Position } from "../../about/types/user";
+import { Position, User } from "../../about/types/user";
 import { UnionYearVotingFormSection } from "../components/union_year_voting_form_modal.component";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -66,6 +66,31 @@ export const VotePage = () => {
     ];
   }
 
+  function getPositionOptions() {
+    const allowedPosition = _.filter(context.positionOptions, (option) => {
+      if (option.name === "President") {
+        return (
+          _.findIndex(
+            getStudentList(),
+            (student: User) =>
+              student.std_position.position_name === "President"
+          ) === -1
+        );
+      } else if (option.name === "Vice President") {
+        return (
+          _.findIndex(
+            getStudentList(),
+            (student: User) =>
+              student.std_position.position_name === "Vice President"
+          ) === -1
+        );
+      }
+      return true;
+    });
+
+    return allowedPosition;
+  }
+
   //---------------------
   //   EFFECTS
   //---------------------
@@ -99,7 +124,7 @@ export const VotePage = () => {
           <div className="flex flex-col pb-[24px] mt-[32px] laptop:mt-[132px] mb-[72px] laptop:mb-[210px] items-center relative">
             {context.isEditModalOpen && (
               <UserFormModal
-                positionOptions={context.positionOptions}
+                positionOptions={getPositionOptions()}
                 onClose={() => {
                   context.isEditModalOpen = false;
                   context.editingUser = {

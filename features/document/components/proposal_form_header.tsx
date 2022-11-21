@@ -87,7 +87,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
               className="flex items-center justify-between cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <p className="topic2">ข้อมูลส่วนหัวเรื่อง</p>
+              <p className="topic2">{t("document_header_topic")}</p>
               <i
                 className={classNames(
                   "fas fa-caret-down text-[22px] transform duration-200",
@@ -100,7 +100,9 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
             </div>
             <div className="space-y-[14px]">
               <div className="flex flex-col items-start laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">เลขที่หนังสือ / คำร้องขอ</p>
+                <p className="w-[192px] body">
+                  {t("document_proposal_book_no")}
+                </p>
                 <div>
                   <TextInput
                     height={30}
@@ -113,7 +115,9 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">หน่วยงาน</p>
+                <p className="w-[192px] body">
+                  {t("document_proposal_institution")}
+                </p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <div className="w-full laptop:w-[480px]">
                     <TextInput
@@ -132,7 +136,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                         } else {
                           formik.setFieldError(
                             "form_info.institution",
-                            "ข้อความยาวเกินไป"
+                            t("document_document_error_too_long_text")
                           );
                         }
                       }}
@@ -144,7 +148,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">หัวข้อเรื่องที่ขออนุมัติ</p>
+                <p className="w-[192px] body">{t("document_proposal_topic")}</p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <div className="w-full laptop:w-[480px]">
                     <TextInput
@@ -163,7 +167,7 @@ export const ProposalFormHeader = (props: ProposalFormHeaderProps) => {
                         } else {
                           formik.setFieldError(
                             "form_info.solution",
-                            "ข้อความยาวเกินไป"
+                            t("document_document_error_too_long_text")
                           );
                         }
                       }}

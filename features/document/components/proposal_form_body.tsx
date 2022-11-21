@@ -109,7 +109,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
               className="flex items-center justify-between cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <p className="topic2">ข้อมูลส่วนเนื้อหาโครงการ</p>
+              <p className="topic2">{t("document_body_topic")}</p>
               <i
                 className={classNames(
                   "fas fa-caret-down text-[22px] transform duration-200",
@@ -122,7 +122,9 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
             </div>
             <div className="space-y-[14px]">
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">ชื่อโครงการ</p>
+                <p className="w-[192px] body">
+                  {t("document_proposal_proposal_name")}
+                </p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <div className="laptop:w-[620px] w-full">
                     <TextInput
@@ -141,7 +143,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                         } else {
                           formik.setFieldError(
                             "request_info.project_name",
-                            "ข้อความยาวเกินกำหนด"
+                            t("document_document_error_too_long_text")
                           );
                         }
                       }}
@@ -153,7 +155,9 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">จุดประสงค์ (โดยสังเขป)</p>
+                <p className="w-[192px] body">
+                  {t("document_proposal_brief_purpose")}
+                </p>
                 <div className="flex flex-grow items-center space-x-[8px]">
                   <div className="w-[440px]">
                     <TextInput
@@ -175,7 +179,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                         } else {
                           formik.setFieldError(
                             "request_info.project_due_to",
-                            "ข้อความยาวเกินกำหนด"
+                            t("document_document_error_too_long_text")
                           );
                         }
                       }}
@@ -187,10 +191,14 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">วัน/เดือน/ปี ที่จัดโครงการ</p>
+                <p className="w-[192px] body">
+                  {t("document_proposal_organize_date")}
+                </p>
                 <div className="flex-grow flex laptop:flex-row flex-col items-stretch laptop:space-y-0 space-y-[8px] laptop:items-center space-x-0 laptop:space-x-[24px]">
                   <div className="space-x-[8px] flex items-center">
-                    <p className="body w-[34px] tablet:w-[48px]">เริ่ม</p>
+                    <p className="body w-[34px] tablet:w-[48px]">
+                      {t("document_proposal_organize_start_date")}
+                    </p>
                     <TextInput
                       height={30}
                       width={160}
@@ -208,7 +216,9 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                     />
                   </div>
                   <div className="space-x-[8px] flex items-center">
-                    <p className="body w-[34px] tablet:w-[48px]">สิ้นสุด</p>
+                    <p className="body w-[34px] tablet:w-[48px]">
+                      {t("document_proposal_organize_end_date")}
+                    </p>
                     <TextInput
                       height={30}
                       width={160}
@@ -228,7 +238,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">สถานที่จัดโครงการ</p>
+                <p className="w-[192px] body">{t("document_proposal_place")}</p>
                 <div className="flex-grow flex space-x-0 space-y-[4px] laptop:space-y-0 laptop:space-x-[8px] items-start laptop:items-center laptop:flex-row flex-col">
                   <div className="laptop:w-[620px] w-full">
                     <TextInput
@@ -247,7 +257,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                         } else {
                           formik.setFieldError(
                             "request_info.location",
-                            "ข้อความยาวเกินกำหนด"
+                            t("document_document_error_too_long_text")
                           );
                         }
                       }}
@@ -259,7 +269,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                 </div>
               </div>
               <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-                <p className="w-[192px] body">ค่าใช้จ่ายในโครงการ</p>
+                <p className="w-[192px] body">{t("document_proposal_cost")}</p>
                 <div className="flex items-center space-x-[8px]">
                   <TextInput
                     height={30}
@@ -279,7 +289,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                       }
                     }}
                   />
-                  <p className="body">บาท</p>
+                  <p className="body">{t("document_proposal_cost_unit")}</p>
                   <p className="body">
                     {formik.values.request_info?.cost_des_th}
                   </p>
@@ -287,7 +297,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
               </div>
             </div>
             <div className="flex flex-col items-stretch laptop:flex-row laptop:items-center">
-              <p className="w-[192px] body">หมายเลขโทรศัพท์ติดต่อ</p>
+              <p className="w-[192px] body">{t("document_proposal_tel_no")}</p>
               <div>
                 <TextInput
                   height={30}
@@ -302,7 +312,9 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
               </div>
             </div>
             <div className="space-y-[14px]">
-              <p className="subtitle">ประเภทของโครงการในการนับชั่วโมงกิจกรรม</p>
+              <p className="subtitle">
+                {t("document_proposal_proposal_type_title")}
+              </p>
               <div className="flex laptop:flex-row flex-col space-x-0 laptop:space-x-[32px]">
                 {_.map(context.activityList, (activity) => (
                   <div className="flex flex-col space-y-[14px] last:flex-grow">
@@ -327,8 +339,8 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                       </div>
                       <p className="body">
                         {activity.activity_type === "hour_count"
-                          ? "กิจกรรมเลือกเข้าร่วม"
-                          : "กิจกรรมที่ไม่นับหน่วยชั่วโมง"}
+                          ? t("document_proposal_count_hour_type")
+                          : t("document_proposal_uncount_type")}
                       </p>
                     </div>
                     {activity.activity_type === "hour_count" &&
@@ -364,7 +376,9 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                                         formik.values.sub_activity[index]
                                           .sub_activity_id
                                       }
-                                      placeholder="ประเภทของกิจกรรม"
+                                      placeholder={t(
+                                        "document_proposal_hour_type_placeholder"
+                                      )}
                                     />
                                   </div>
                                   <div
@@ -386,7 +400,9 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                                   </div>
                                 </div>
                                 <div className="flex space-x-[14px] items-center">
-                                  <p className="body">จำนวน</p>
+                                  <p className="body">
+                                    {t("document_proposal_hour")}
+                                  </p>
                                   <TextInput
                                     onChange={(e) => {
                                       formik.setFieldValue(
@@ -399,7 +415,9 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                                     radius={8}
                                     value={subActivity.activity_hour.toString()}
                                   />
-                                  <p className="body">หน่วยชั่วโมง</p>
+                                  <p className="body">
+                                    {t("document_proposal_hour_unit")}
+                                  </p>
                                 </div>
                                 <div
                                   className="items-center justify-center w-[16px] h-[16px] rounded-full border border-black cursor-pointer laptop:flex hidden"
