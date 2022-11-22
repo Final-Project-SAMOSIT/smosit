@@ -111,9 +111,9 @@ class NewsFormContext {
       )?.news_type_name;
 
       if (typeName === "News") {
-        Router.prototype.push(`/news/${resp.data.data.news_id}`);
+        Router.prototype.push(`/en/news/${resp.data.data.news_id}`);
       } else if (typeName === "Experience") {
-        Router.prototype.push(`/about/${resp.data.data.news_id}`);
+        Router.prototype.push(`/en/about/${resp.data.data.news_id}`);
       } else {
         Router.prototype.back();
       }
@@ -143,9 +143,9 @@ class NewsFormContext {
       )?.news_type_name;
 
       if (typeName === "News") {
-        Router.prototype.push(`/news/${resp.data.data.news_id}`);
+        Router.prototype.push(`/en/news/${resp.data.data.news_id}`);
       } else if (typeName === "Experience") {
-        Router.prototype.push(`/about/${resp.data.data.news_id}`);
+        Router.prototype.push(`/en/about/${resp.data.data.news_id}`);
       } else {
         Router.prototype.back();
       }

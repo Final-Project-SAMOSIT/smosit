@@ -45,10 +45,10 @@ class VoteContext {
     userId: string;
     unionYear: number;
   } = {
-    unionId: "",
-    userId: "",
-    unionYear: 0,
-  };
+      unionId: "",
+      userId: "",
+      unionYear: 0,
+    };
   positionOptions: Array<{ name: string; value: string }> = [];
   unAcceptedYearOption: Array<{ name: string; value: string }> = [];
   voteStatus: "open" | "close" | "prepare" = "prepare";
@@ -308,7 +308,7 @@ class VoteContext {
   async onAcceptUnion() {
     try {
       await patchUnion(this.year);
-      Router.prototype.push("/about");
+      Router.prototype.push("/en/about");
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal("มีปัญหาในการเพิ่ม", err.message);

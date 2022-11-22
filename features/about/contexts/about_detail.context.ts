@@ -73,7 +73,7 @@ class ExperienceDetailContext {
   async onDelete(id: string | number) {
     try {
       await deleteNews(id);
-      Router.prototype.push("/about");
+      Router.prototype.push("/en/about");
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal(

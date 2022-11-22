@@ -55,23 +55,23 @@ class AuthContextClass {
         Cookies.set("SMOSIT_TOKEN", resp.data?.data?.token?.token, {
           expires: 3,
         });
-        Router.prototype.push("/");
+        Router.prototype.push("/en");
       } else {
-        Router.prototype.push("/403");
+        Router.prototype.push("/en/403");
       }
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal(
         this.t("modal_login_error_title"),
         err.message,
-        () => Router.prototype.push("/403")
+        () => Router.prototype.push("/en/403")
       );
     }
   }
 
   logout() {
     Cookies.remove("SMOSIT_TOKEN");
-    Router.prototype.push("/");
+    Router.prototype.push("/en");
   }
 
   isPermission(roles: Array<Role>): boolean {

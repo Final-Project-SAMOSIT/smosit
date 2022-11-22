@@ -61,7 +61,7 @@ class NewsDetailContext {
   async onDelete(id: string | number) {
     try {
       await deleteNews(id);
-      Router.prototype.push("/news");
+      Router.prototype.push("/en/news");
     } catch (err: any) {
       console.log(err);
       this.modal?.openModal(
