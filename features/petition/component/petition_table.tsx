@@ -130,11 +130,13 @@ const PetitionRow = (props: PetitionRowProps) => {
   //---------------------
   return (
     <div
-      className="col-span-full grid grid-cols-6 laptop:grid-cols-10 gap-x-[16px] duration-300 transform border-b border-gray-40 overflow-y-hidden"
+      className="col-span-full grid grid-cols-6 laptop:grid-cols-10 gap-x-[16px] duration-300 transform border-b border-gray-40 relative"
       style={{
         height: (isShow ? (detailRef.current?.clientHeight || 0) + 48 : 0) + 51,
         paddingBottom: isShow ? 24 : 0,
         WebkitOverflowScrolling: "touch",
+        msOverflowY: 'hidden',
+        overflowY: 'hidden'
       }}
     >
       <div className="col-span-2 col-start-2 min-h-[50px] laptop:flex items-center hidden">
