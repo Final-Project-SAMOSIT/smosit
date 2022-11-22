@@ -130,7 +130,7 @@ const PetitionRow = (props: PetitionRowProps) => {
   //---------------------
   return (
     <div
-      className="col-span-full grid grid-cols-6 laptop:grid-cols-10 gap-x-[16px] duration-300 transform border-b border-gray-40 relative"
+      className="col-span-full grid grid-cols-6 laptop:grid-cols-10 gap-x-[16px] duration-300 inset-0 transform border-b border-gray-40 relative"
       style={{
         height: (isShow ? (detailRef.current?.clientHeight || 0) + 48 : 0) + 51,
         paddingBottom: isShow ? 24 : 0,
