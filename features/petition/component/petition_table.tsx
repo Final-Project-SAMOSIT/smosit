@@ -132,7 +132,7 @@ const PetitionRow = (props: PetitionRowProps) => {
     <div
       className="col-span-full grid grid-cols-6 laptop:grid-cols-10 gap-x-[16px] duration-300 inset-0 transform border-b border-gray-40 relative"
       style={{
-        height: (isShow ? (detailRef.current?.clientHeight || 0) + 48 : 0) + 51,
+        height: (isShow || window.innerWidth < 768 ? (detailRef.current?.clientHeight || 0) + 48 : 0) + 51,
         paddingBottom: isShow ? 24 : 0,
         WebkitOverflowScrolling: "touch",
         msOverflowY: 'hidden',
@@ -163,7 +163,7 @@ const PetitionRow = (props: PetitionRowProps) => {
           {t(`petition_status_${getSimpleText(petition.status.status_name)}`)}
         </p>
       </div>
-      <div className="col-span-1 min-h-[50px] flex items-center">
+      <div className="col-span-1 min-h-[50px] items-center hidden tablet:flex">
         <i
           className={classNames(
             "fa-solid fa-angle-right p-[4px] cursor-pointer transition-all duration-150",
