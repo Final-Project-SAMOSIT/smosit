@@ -134,6 +134,7 @@ const PetitionRow = (props: PetitionRowProps) => {
       style={{
         height: (isShow ? (detailRef.current?.clientHeight || 0) + 48 : 0) + 51,
         paddingBottom: isShow ? 24 : 0,
+        WebkitOverflowScrolling: "touch",
       }}
     >
       <div className="col-span-2 col-start-2 min-h-[50px] laptop:flex items-center hidden">
@@ -427,23 +428,23 @@ const PetitionRow = (props: PetitionRowProps) => {
                 )}
                 {(petition.status.status_name === "Reject" ||
                   petition.status.status_name === "Done") && (
-                  <Fragment>
-                    <Button
-                      onClick={() =>
-                        modalContext.openModal(
-                          t("petition_modal_delete_peition_title"),
-                          t("petition_modal_delete_peition_message"),
-                          () => {
-                            context.onDelete(petition.petition_id);
-                          }
-                        )
-                      }
-                      title={t("petition_status_delete")}
-                      widthCss="w-[72px] laptop:w-[96px]"
-                      heightCss="h-[32px] laptop:h-[40px]"
-                    />
-                  </Fragment>
-                )}
+                    <Fragment>
+                      <Button
+                        onClick={() =>
+                          modalContext.openModal(
+                            t("petition_modal_delete_peition_title"),
+                            t("petition_modal_delete_peition_message"),
+                            () => {
+                              context.onDelete(petition.petition_id);
+                            }
+                          )
+                        }
+                        title={t("petition_status_delete")}
+                        widthCss="w-[72px] laptop:w-[96px]"
+                        heightCss="h-[32px] laptop:h-[40px]"
+                      />
+                    </Fragment>
+                  )}
                 {petition.status.status_name === "Approve" && (
                   <Fragment>
                     <Button
