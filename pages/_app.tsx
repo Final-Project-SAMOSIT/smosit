@@ -7,6 +7,7 @@ import { configure } from "mobx";
 import { AuthLayout } from "../core/components/layout/auth_layout";
 import { ModalLayout } from "../core/components/layout/modal_layout";
 import "../styles/editor.css";
+import Head from "next/head";
 
 configure({
   enforceActions: "never",
@@ -14,6 +15,10 @@ configure({
 function MyApp({ Component, pageProps }: any) {
   return (
     <Fragment>
+      <Head>
+        <meta name="viewport" content="width=device-width, height=device-height" />
+        <title>Samo SIT</title>
+      </Head>
       <ModalLayout>
         <AuthLayout>
           <Component {...pageProps} />
