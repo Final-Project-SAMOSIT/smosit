@@ -91,6 +91,7 @@ export const AboutPage = () => {
   //---------------------
   useEffect(() => {
     context.modal = modalContext;
+    context.t = t
     async function fetch() {
       await context.preparationYear();
       context.preparationStudentUnion();
