@@ -36,6 +36,12 @@
   "document_proposal_hour_type_placeholder": "Activity Type",
   "document_proposal_hour": "",
   "document_proposal_hour_unit": "hour(s)",
+  "ด้านพัฒนาทักษะทางวิชาการและวิชาชีพ": "Academic and Professional Skills Development",
+  "ด้านกีฬาและการส่งเสริมสุขภาพ": "Sports and health promotion",
+  "ด้านบำเพ็ญประโยชน์และรักษาสิ่งแวดล้อม": "Serving benefits and preserving the environment",
+  "ด้านทำนุบำรุงศิลปะและวัฒนธรรม": "Preserving arts and culture",
+  "ด้านนันทนาการและการพัฒนาบุคลิกภาพ": "Recreation and Personality development",
+  "ด้านความภูมิใจ ความรัก ความผูกพันมหาวิทยาลัย": "Pride, love, relationship with the university",
 
   "====================DOCUMENT_DOCUMENT====================": "",
   "document_document_institution": "Institution",

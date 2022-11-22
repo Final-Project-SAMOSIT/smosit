@@ -91,10 +91,13 @@ export const AboutPage = () => {
   //---------------------
   useEffect(() => {
     context.modal = modalContext;
-    context.t = t;
-    context.preparationYear();
-    context.preparationExperience();
-    context.preparationPositionOptions();
+    async function fetch() {
+      await context.preparationYear();
+      context.preparationStudentUnion();
+      context.preparationExperience();
+      context.preparationPositionOptions();
+    }
+    fetch()
   }, []);
 
   //---------------------

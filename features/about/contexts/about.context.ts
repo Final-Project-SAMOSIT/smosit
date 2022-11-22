@@ -42,11 +42,11 @@ class AboutContext {
     unionYear: number;
     positionId?: string;
   } = {
-    userId: "",
-    unionId: "",
-    unionYear: 0,
-    positionId: "",
-  };
+      userId: "",
+      unionId: "",
+      unionYear: 0,
+      positionId: "",
+    };
   addedUser: Array<User> = [];
   isCreateYearModalOpen: boolean = false;
   //-------------------
@@ -112,9 +112,10 @@ class AboutContext {
       const resp: AxiosResponse<{ data: Array<{ union_year: number }> }> =
         await getAcceptedYear();
       if (resp.status !== 204) {
-        this.yearList = [];
         this.yearList = _.map(resp.data.data, (year) => year.union_year);
-        this.year = resp.data.data[resp.data.data.length - 1].union_year;
+        this.year = this.yearList[this.yearList.length - 1]
+      } else {
+        this.yearList = [];
       }
       this.preparationStudentUnion();
     } catch (err: any) {

@@ -96,8 +96,8 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
             height: isOpen
               ? contentRef.current?.clientHeight
               : window.innerWidth <= 768
-              ? 56
-              : 67,
+                ? 56
+                : 67,
           }}
           ref={containertRef}
         >
@@ -334,8 +334,8 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                       >
                         {formik.values.activity_type_id ===
                           activity.activity_id && (
-                          <i className="fas fa-check text-[12px]" />
-                        )}
+                            <i className="fas fa-check text-[12px]" />
+                          )}
                       </div>
                       <p className="body">
                         {activity.activity_type === "hour_count"
@@ -360,7 +360,7 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                                         )
                                       }
                                       height={30}
-                                      options={_.filter(
+                                      options={_.map(_.filter(
                                         context.subActivityOptions,
                                         (option) =>
                                           _.find(
@@ -370,8 +370,8 @@ export const ProposalFormBody = (props: ProposalFormBodyProps) => {
                                               option.value
                                           ) === undefined ||
                                           option.value ===
-                                            subActivity.sub_activity_id
-                                      )}
+                                          subActivity.sub_activity_id
+                                      ), (option) => ({ name: t(option.name), value: option.value }))}
                                       value={
                                         formik.values.sub_activity[index]
                                           .sub_activity_id

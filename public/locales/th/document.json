@@ -12,7 +12,6 @@
   "document_delete_document_modal_message": "คุณต้องการจะลบเอกสารใช่หรือไม่?",
   "document_delete_button": "ลบ",
   "document_no_history_banner": "ยังไม่มีประวัติการสร้าง",
-
   "document_save_button": "บันทึกแบบร่าง",
   "document_export_button": "พิมพ์",
   "document_header_topic": "ข้อมูลส่วนหัวเรื่อง",
@@ -36,7 +35,13 @@
   "document_proposal_hour_type_placeholder": "ประเภทของกิจกรรม",
   "document_proposal_hour": "จำนวน",
   "document_proposal_hour_unit": "หน่วยชั่วโมง",
-
+  "ด้านพัฒนาทักษะทางวิชาการและวิชาชีพ": "ด้านพัฒนาทักษะทางวิชาการและวิชาชีพ",
+  "ด้านกีฬาและการส่งเสริมสุขภาพ": "ด้านกีฬาและการส่งเสริมสุขภาพ",
+  "ด้านบำเพ็ญประโยชน์และรักษาสิ่งแวดล้อม": "ด้านบำเพ็ญประโยชน์และรักษาสิ่งแวดล้อม",
+  "ด้านทำนุบำรุงศิลปะและวัฒนธรรม": "ด้านทำนุบำรุงศิลปะและวัฒนธรรม",
+  "ด้านนันทนาการและการพัฒนาบุคลิกภาพ": "ด้านนันทนาการและการพัฒนาบุคลิกภาพ",
+  "ด้านความภูมิใจ ความรัก ความผูกพันมหาวิทยาลัย": "ด้านความภูมิใจ ความรัก ความผูกพันมหาวิทยาลัย",
+  
   "====================DOCUMENT_DOCUMENT====================": "",
   "document_document_institution": "ส่วนงานที่รับผิดชอบ",
   "document_document_institution_tel": "หมายเลขโทรหน่วยงาน",
@@ -53,7 +58,6 @@
   "document_document_cost": "ค่าใช้จ่ายในโครงการ",
   "document_document_cost_unit": "บาท",
   "document_document_contact_no": "หมายเลขโทรศัพท์ติดต่อ",
-
   "document_document_error_too_long_text": "ข้อความยาวเกินไป",
   "END": ""
 }

@@ -109,12 +109,14 @@ export const DocumentProposalFormPage = () => {
                     widthCss="w-[137px]"
                     heightCss="h-[40px] tablet:h-[52px]"
                   ></Button>
-                  <Button
-                    onClick={() => context.onPrint()}
-                    title={t("document_export_button")}
-                    widthCss="w-[137px]"
-                    heightCss="h-[40px] tablet:h-[52px]"
-                  ></Button>
+                  <div className="laptop:block hidden">
+                    <Button
+                      onClick={() => context.onPrint()}
+                      title={t("document_export_button")}
+                      widthCss="w-[137px]"
+                      heightCss="h-[40px] tablet:h-[52px]"
+                    ></Button>
+                  </div>
                 </div>
               </div>
             </div>
